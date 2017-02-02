@@ -1,0 +1,55 @@
+version: '2'
+services:
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy:0.4.0
+    container_name: work-competition-nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./docker/conf/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
+
+  mysql:
+    image: mysql:5.7
+    container_name: work-competition-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_USER=work-competition
+      - MYSQL_DATABASE=work-competition
+      - MYSQL_PASSWORD=work-competition
+    volumes:
+      - /var/docker/mysql/work-competiton:/var/lib/mysql
+
+  adminer:
+    image: clue/adminer
+    container_name: work-competition-adminer
+    environment:
+      - VIRTUAL_HOST=dev.adminer.work-competition.fr
+    depends_on:
+      - mysql
+
+  php:
+    image: idci/php:5.6-fpm
+    container_name: work-competition-php
+    build:
+      context: docker/build/php5.6
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 5689:5672
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx:1.10
+    container_name: work-competition-nginx
+    environment:
+      - VIRTUAL_HOST=dev.work-competition.fr
+    volumes_from:
+      - php
+    volumes:
+      - ./docker/conf/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
