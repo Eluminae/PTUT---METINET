@@ -8,19 +8,26 @@ use AppBundle\Models\UtcDate;
 
 class Realisation
 {
+    private $id;
     private $leftAt;
     private $name;
     private $file;
     private $campaign;
     private $candidates;
 
-    public function __construct(UtcDate $leftAt, string $name, File $file, Campaign $campaign, array $candidates)
+    public function __construct(string $id, UtcDate $leftAt, string $name, File $file, Campaign $campaign, array $candidates)
     {
+        $this->id = $id;
         $this->leftAt = $leftAt;
         $this->name = $name;
         $this->file = $file;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getLeftAt()

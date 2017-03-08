@@ -6,19 +6,28 @@ use AppBundle\Models\UtcDate;
 
 class Campaign
 {
+    private $id;
     private $endDate;
     private $beginningDate;
     private $name;
     private $category;
-    private $jurors;
+    private $description;
+    private $imageUrl;
 
-    public function __construct(UtcDate $endDate, UtcDate $beginningDate, string $name, string $category, array $jurors)
+    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $category, string $description, string $imageUrl)
     {
+        $this->id = $id;
         $this->endDate = $endDate;
         $this->beginningDate = $beginningDate;
         $this->name = $name;
         $this->category = $category;
-        $this->jurors = $jurors;
+        $this->description = $description;
+        $this->imageUrl = $imageUrl;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getEndDate()
@@ -41,8 +50,13 @@ class Campaign
         return $this->category;
     }
 
-    public function getJurors()
+    public function getDescription()
     {
-        return $this->jurors;
+        return $this->description;
+    }
+
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
     }
 }
