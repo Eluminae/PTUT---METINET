@@ -4,7 +4,7 @@ namespace AppBundle\Dtos;
 
 class RealisationRegistration
 {
-    public $identity;
+    public $identities;
     public $name;
     public $file;
 }
