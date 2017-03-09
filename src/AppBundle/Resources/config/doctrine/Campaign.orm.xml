@@ -7,8 +7,8 @@
     <entity name="AppBundle\Models\Campaign" table="campaign">
         <id name="id" type="string" columns="id" />
         <field name="name" type="string" column="name" />
-        <field name="category" type="string" column="category" />
         <field name="description" type="string" column="description" />
+        <field name="imageUrl" type="string" column="image_url" />
 
         <one-to-one field="endDate" target-entity="UtcDate" >
             <cascade><cascade-remove /></cascade>
