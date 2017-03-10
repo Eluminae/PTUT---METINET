@@ -10,6 +10,9 @@ security:
                     admin:
                         password: admin
                         roles: 'ROLE_ADMIN'
+                    juror_admin:
+                        password: juroradmin
+                        roles: 'ROLE_JURORADMIN'
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
 
@@ -26,14 +29,16 @@ security:
                 path:   /admin/logout
                 target: /
 
+        juror_admin:
+            http_basic: ~
+            pattern: ^/juror-admin/
+            logout:
+                path:   /juror-admin/logout
+                target: /
+
         main:
             anonymous: ~
-            # activate different ways to authenticate
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
     access_control:
         - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/juror-admin/, roles: ROLE_JURORADMIN }

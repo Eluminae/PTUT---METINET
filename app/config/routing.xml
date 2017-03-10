@@ -19,4 +19,16 @@
     <route id="public.admin.home" path="/admin/">
         <default key="_controller">AppBundle:Admin:index</default>
     </route>
+
+    <route id="public.juror_admin.login" path="/juror-admin/login/">
+        <default key="_controller">AppBundle:JurorAdmin:login</default>
+    </route>
+
+    <route id="public.juror_admin.logout" path="/juror-admin/logout/">
+        <default key="_controller">AppBundle:JurorAdmin:logout</default>
+    </route>
+
+    <route id="public.juror_admin.home" path="/juror-admin/">
+        <default key="_controller">AppBundle:JurorAdmin:index</default>
+    </route>
 </routes>
