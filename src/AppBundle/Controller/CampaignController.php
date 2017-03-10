@@ -5,10 +5,13 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class CampaignController extends Controller
 {
-    public function homeAction(Request $request)
+    public function listAction(Request $request)
     {
-        return $this->render('AppBundle:default:home.html.twig');
+    }
+
+    public function createAction(Request $request)
+    {
     }
 }
