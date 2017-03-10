@@ -6,11 +6,13 @@
 
     <entity name="AppBundle\Models\Juror" table="juror">
         <id name="id" type="string" columns="id" />
-        <field name="password" type="string" column="password" />
-
         <one-to-one field="identity" target-entity="Identity" >
             <cascade><cascade-remove /></cascade>
             <join-column name="identity_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+        </one-to-one>
+        <one-to-one field="password" target-entity="Password" >
+            <cascade><cascade-remove /></cascade>
+            <join-column name="password_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
     </entity>
 </doctrine-mapping>

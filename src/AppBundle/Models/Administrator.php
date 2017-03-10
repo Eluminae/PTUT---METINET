@@ -3,6 +3,7 @@
 namespace AppBundle\Models;
 
 use AppBundle\Models\Identity;
+use AppBundle\Models\Password;
 
 class Administrator
 {
@@ -10,7 +11,7 @@ class Administrator
     private $identity;
     private $password;
 
-    public function __construct(string $id, Identity $identity, string $password)
+    public function __construct(string $id, Identity $identity, Password $password)
     {
         $this->id = $id;
         $this->identity = $identity;

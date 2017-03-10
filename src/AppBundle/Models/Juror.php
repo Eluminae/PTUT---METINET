@@ -4,6 +4,7 @@ namespace AppBundle\Models;
 
 use AppBundle\Models\Campaign;
 use AppBundle\Models\Identity;
+use AppBundle\Models\Password;
 
 class Juror
 {
@@ -12,7 +13,7 @@ class Juror
     private $password;
     private $campaign;
 
-    public function __construct(string $id, Identity $identity, string $password, Campaign $campaign)
+    public function __construct(string $id, Identity $identity, Password $password, Campaign $campaign)
     {
         $this->id = $id;
         $this->identity = $identity;
