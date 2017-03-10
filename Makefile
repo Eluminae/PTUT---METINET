@@ -4,8 +4,8 @@ mysql_container_name =  work-competition-mysql
 
 .PHONY: pac mod bash composer-update dump command
 
-pac:
-	docker exec -it $(php_container_name) php app/console $(cmd)
+pbc:
+	docker exec -it $(php_container_name) php bin/console $(cmd)
 
 bash:
 	docker exec -it $(php_container_name) bash
