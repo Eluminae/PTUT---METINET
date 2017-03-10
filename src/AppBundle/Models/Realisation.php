@@ -2,6 +2,7 @@
 
 namespace AppBundle\Models;
 
+use AppBundle\Dtos\RealisationRegistration;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\File;
 use AppBundle\Models\UtcDate;
