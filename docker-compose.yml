@@ -33,7 +33,7 @@ services:
     image: idci/php:7.0-fpm
     container_name: work-competition-php
     build:
-      context: docker/build/php5.6
+      context: docker/build/php7.0
     volumes:
       - ./:/var/www/html
     ports:
