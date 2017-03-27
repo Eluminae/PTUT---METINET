@@ -4,7 +4,6 @@ namespace AppBundle\Repositories;
 
 use Doctrine\ORM\EntityRepository;
 
-class OrmCampaignRepository extends EntityRepository
+class OrmRealisationRepository extends EntityRepository
 {
-	
 }

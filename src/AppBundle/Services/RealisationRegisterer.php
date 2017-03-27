@@ -6,6 +6,7 @@ use AppBundle\Dtos\RealisationRegistration;
 use AppBundle\Models\Identity;
 use AppBundle\Models\Realisation;
 use AppBundle\Models\UtcDate;
+use AppBundle\Repositories\OrmCampaignRepository;
 
 class RealisationRegisterer
 {
@@ -23,23 +24,21 @@ class RealisationRegisterer
             new UtcDate(uniqid(), new \DateTimeImmutable('now')),
             $realisationRegistration->name,
             new File(uniqid(), 'zip', $realisationRegistration->file),
-            $this->campaingRepository->getOneById($this->campaignId)
-            $this->createCandidatesFromIdentities($realisationRegistration->identities)
+            $this->campaingRepository->findOneById($this->campaignId),
+            $this->createCandidateFromIdentity($realisationRegistration->identity)
         );
     }
 
-    private function createCandidatesFromIdentities($identities)
-    {
-        $candidates = array();
-
-        foreach ($candidates as $candidate) {
-            $candidates[] = new Identity(
+    private function createCandidateFromIdentity($identity)
+    {   
+        $candidates = array(
+            new Identity(
                 uniqid(),
-                $candidate->firstName,
-                $candidate->lastName,
-                $candidate->email
-            );
-        }
+                $identity->firstName,
+                $identity->lastName,
+                $identity->email
+            )
+        );
 
         return $candidates;
     }
