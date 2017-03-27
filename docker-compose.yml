@@ -30,7 +30,7 @@ services:
       - mysql
 
   php:
-    image: idci/php:5.6-fpm
+    image: idci/php:7.0-fpm
     container_name: work-competition-php
     build:
       context: docker/build/php5.6
