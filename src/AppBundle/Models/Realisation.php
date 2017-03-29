@@ -4,7 +4,7 @@ namespace AppBundle\Models;
 
 use AppBundle\Dtos\RealisationRegistration;
 use AppBundle\Models\Campaign;
-use AppBundle\Models\File;
+use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Models\UtcDate;
 
 class Realisation
