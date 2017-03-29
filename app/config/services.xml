@@ -15,8 +15,18 @@
             <argument>AppBundle:Realisation</argument>
         </service>
 
+        <service id="app.identity.repository" class="AppBundle\Repositories\OrmIdentityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument>AppBundle:Identity</argument>
+        </service>
+        
+        <service id="app.campaign.registerer" class="AppBundle\Services\CampaignRegisterer">
+            <argument type="service" id="app.identity.repository" />
+        </service>
+
         <service id="app.realisation.registerer" class="AppBundle\Services\RealisationRegisterer">
             <argument type="service" id="app.campaign.repository" />
         </service>
+
     </services>
 </container>

@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-6">
+        {{ form_start(campaignRegistrationForm, {'action': path('public.campaign.register') }) }}
+
+        {{ form_end(campaignRegistrationForm) }}
+    </div>
+{% endblock %}

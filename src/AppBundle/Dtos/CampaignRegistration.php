@@ -8,5 +8,6 @@ class CampaignRegistration
     public $beginningDate;
     public $name;
     public $description;
-    public $imageUrl;
+    public $image;
+    public $creator;
 }
