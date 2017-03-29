@@ -7,6 +7,7 @@
     <entity name="AppBundle\Models\Realisation" table="realisation" repository-class="AppBundle\Repositories\OrmRealisationRepository">
         <id name="id" type="string" columns="id" />
         <field name="name" type="string" column="name" />
+        <field name="file" type="string" column="file" />
 
         <one-to-one field="leftAt" target-entity="UtcDate" >
             <cascade><cascade-remove /></cascade>
@@ -15,10 +16,6 @@
         <one-to-one field="campaign" target-entity="Campaign" >
             <cascade><cascade-remove /></cascade>
             <join-column name="campaign_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
-        <one-to-one field="file" target-entity="File" >
-            <cascade><cascade-remove /></cascade>
-            <join-column name="file_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
     </entity>
 </doctrine-mapping>
