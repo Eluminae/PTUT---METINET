@@ -9,19 +9,21 @@ use AppBundle\Models\UtcDate;
 
 class Realisation
 {
+    const filePath = 'realisationFiles';
+
     private $id;
     private $leftAt;
     private $name;
-    private $file;
+    private $fileName;
     private $campaign;
     private $candidates;
 
-    public function __construct(string $id, UtcDate $leftAt, string $name, File $file, Campaign $campaign, array $candidates)
+    public function __construct(string $id, UtcDate $leftAt, string $name, string $fileName, Campaign $campaign, array $candidates)
     {
         $this->id = $id;
         $this->leftAt = $leftAt;
         $this->name = $name;
-        $this->file = $file;
+        $this->fileName = $fileName;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
     }
@@ -41,9 +43,14 @@ class Realisation
         return $this->name;
     }
 
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
     public function getFile()
     {
-        return $this->file;
+        return File(sprintf('%s/%s', $self::filePath, $this->fileName));
     }
 
     public function getCampaign()

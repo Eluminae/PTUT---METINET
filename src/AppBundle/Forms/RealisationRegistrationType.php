@@ -15,11 +15,12 @@ class RealisationRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('identities', CollectionType::class, array(
-                'entry_type' => IdentityRegistrationType::class
-            ))
-            ->add('name', TextType::class)
+            // ->add('identities', CollectionType::class, array(
+            //     'entry_type' => IdentityRegistrationType::class
+            // ))
+            ->add('identity', IdentityRegistrationType::class)
             ->add('file', FileType::class)
+            ->add('name', TextType::class)
             ->add('submit', SubmitType::class)
         ;
     }

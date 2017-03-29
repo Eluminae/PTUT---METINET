@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="AppBundle\Models\Mark" table="mark">
+    <entity name="AppBundle\Models\Mark" table="wc_mark">
         <id name="id" type="string" columns="id" />
         <field name="format" type="string" column="format" />
         <field name="value" type="string" column="value" />
