@@ -12,16 +12,16 @@ class Realisation
     private $id;
     private $leftAt;
     private $name;
-    private $file;
+    private $fileName;
     private $campaign;
     private $candidates;
 
-    public function __construct(string $id, UtcDate $leftAt, string $name, File $file, Campaign $campaign, array $candidates)
+    public function __construct(string $id, UtcDate $leftAt, string $name, string $fileName, Campaign $campaign, array $candidates)
     {
         $this->id = $id;
         $this->leftAt = $leftAt;
         $this->name = $name;
-        $this->file = $file;
+        $this->fileName = $fileName;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
     }
@@ -41,9 +41,9 @@ class Realisation
         return $this->name;
     }
 
-    public function getFile()
+    public function getFileName()
     {
-        return $this->file;
+        return $this->fileName;
     }
 
     public function getCampaign()

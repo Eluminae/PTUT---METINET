@@ -17,7 +17,6 @@
 
         <service id="app.realisation.registerer" class="AppBundle\Services\RealisationRegisterer">
             <argument type="service" id="app.campaign.repository" />
-            <argument type="service" id="app.file.factory" />
         </service>
     </services>
 </container>

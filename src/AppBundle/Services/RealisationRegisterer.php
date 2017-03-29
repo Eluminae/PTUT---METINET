@@ -13,12 +13,10 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class RealisationRegisterer
 {
     private $campaingRepository;
-    private $fileFactory;
 
-    public function __construct(OrmCampaignRepository $campaingRepository, FileFactory $fileFactory)
+    public function __construct(OrmCampaignRepository $campaingRepository)
     {
         $this->campaingRepository = $campaingRepository;
-        $this->fileFactory = $fileFactory;
     }
 
     public function create(RealisationRegistration $realisationRegistration, $campaignId)
@@ -28,20 +26,25 @@ class RealisationRegisterer
             throw new Exception('PAS DE CAMPAGNE');
         }
 
-        $realisationFile = $this->fileFactory->createRealisationFile($realisationRegistration, $campaignId);
+        $file = $realisationRegistration->file;
+        $fileName = sprintf('%s.%s', md5(uniqid()), $file->guessExtension());
+        $file->move(
+            'realisationFiles',
+            $fileName
+        );
 
         return new Realisation(
             uniqid(),
             new UtcDate(uniqid(), new \DateTimeImmutable('now')),
             $realisationRegistration->name,
-            $realisationFile,
+            $fileName,
             $campaign,
             $this->createCandidateFromIdentity($realisationRegistration->identity)
         );
     }
 
     private function createCandidateFromIdentity($identity)
-    {   
+    {
         $candidates = array(
             new Identity(
                 uniqid(),

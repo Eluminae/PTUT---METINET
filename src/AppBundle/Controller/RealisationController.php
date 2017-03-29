@@ -17,24 +17,9 @@ class RealisationController extends Controller
     {
     }
 
-    public function registerAction(Request $request)
+    public function registerAction(Request $request, string $campaignId)
     {
         $form = $this->createForm(RealisationRegistrationType::class, new RealisationRegistration());
-
-        $campaign = new Campaign(
-            1,
-            new UtcDate(
-                1, 
-                \DateTimeImmutable::createFromFormat('Y-m-d','2017-01-25')
-                ),
-            new UtcDate(
-                1, 
-                \DateTimeImmutable::createFromFormat('Y-m-d','2017-05-25')
-                ),
-            'Campagne test',
-            'Courte description',
-            'http://www.ensiacet.fr/_resources/Images/Formations/Ingenieur/D%25C3%25A9partements/Chimie/Verrerie%2520chimie-%2520Glass%2520factory%2520chemistry%2520-%2520jpgphotographie.com.jpg'
-        );
 
         if ($request->isMethod('post')) {
 
@@ -44,18 +29,20 @@ class RealisationController extends Controller
 
                 $realisationRegistration = $form->getData();
 
-                $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaign->getId());
-                
-                $this->get('app.realisation.repository')->persist($realisation);
-                $this->get('app.realisation.repository')->flush();
+                $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaignId);
 
-                return new RedirectResponse('/');
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($realisation);
+                $em->flush();
+
+                return $this->redirect("/");
             }
         }
 
+        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
         return $this->render(
             'AppBundle:Realisation:realisationRegistration.html.twig', [
-                'realisationRegistrationForm' => $form->createView(), 
+                'realisationRegistrationForm' => $form->createView(),
                 'campaign' => $campaign
             ]
         );

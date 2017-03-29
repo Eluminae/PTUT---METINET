@@ -4,17 +4,23 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="AppBundle\Models\Realisation" table="realisation" repository-class="AppBundle\Repositories\OrmRealisationRepository">
+    <entity name="AppBundle\Models\Realisation" table="wc_realisation" repository-class="AppBundle\Repositories\OrmRealisationRepository">
         <id name="id" type="string" columns="id" />
         <field name="name" type="string" column="name" />
-        <field name="file" type="string" column="file" />
+        <field name="fileName" type="string" column="fileName" />
 
         <one-to-one field="leftAt" target-entity="UtcDate" >
-            <cascade><cascade-remove /></cascade>
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove />
+            </cascade>
             <join-column name="left_at_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
         <one-to-one field="campaign" target-entity="Campaign" >
-            <cascade><cascade-remove /></cascade>
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove />
+            </cascade>
             <join-column name="campaign_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
     </entity>
