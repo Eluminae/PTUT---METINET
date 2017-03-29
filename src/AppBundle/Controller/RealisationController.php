@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use AppBundle\Forms\RealisationRegistrationType;
 use AppBundle\Dtos\RealisationRegistration;
@@ -43,9 +44,10 @@ class RealisationController extends Controller
 
                 $realisationRegistration = $form->getData();
 
-                // register the realisation
+                $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaign->getId());
                 
-                $this->get('app.realisation.registerer')->create($realisationRegistration, $campaign->getId());
+                $this->get('app.realisation.repository')->persist($realisation);
+                $this->get('app.realisation.repository')->flush();
 
                 return new RedirectResponse('/');
             }

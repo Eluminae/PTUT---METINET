@@ -20,6 +20,7 @@ class RealisationRegistrationType extends AbstractType
             // ))
             ->add('identity', IdentityRegistrationType::class)
             ->add('file', FileType::class)
+            ->add('name', TextType::class)
             ->add('submit', SubmitType::class)
         ;
     }
