@@ -22,4 +22,9 @@ class UtcDate
     {
         return $this->date;
     }
+
+    public function __tostring()
+    {
+        return date_format($this->date, 'Y-m-d H:i:s');
+    }
 }
