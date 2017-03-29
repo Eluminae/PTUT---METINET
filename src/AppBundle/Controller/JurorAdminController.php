@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class JurorController extends Controller implements UserManagerInterface
+class JurorAdminController extends Controller implements UserManagerInterface
 {
     public function indexAction()
     {

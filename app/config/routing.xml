@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <routes xmlns="http://symfony.com/schema/routing"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
+    <!-- @todo : Need to be refactor to homepage -->
     <route id="public.homepage" path="/">
         <default key="_controller">AppBundle:Default:home</default>
     </route>
 
+    <!-- Register invitation -->
+    <route id="public.register.invitation" path="/register/invitation/{invitationToken}">
+        <default key="_controller">AppBundle:Register:registerFromInvitation</default>
+    </route>
+
+    <!-- Administrator's routes -->
     <route id="public.admin.login" path="/admin/login/">
         <default key="_controller">AppBundle:Admin:login</default>
     </route>
@@ -20,6 +27,7 @@
         <default key="_controller">AppBundle:Admin:index</default>
     </route>
 
+    <!-- Juror administrator's routes -->
     <route id="public.juror_admin.login" path="/juror-admin/login/">
         <default key="_controller">AppBundle:JurorAdmin:login</default>
     </route>
@@ -32,6 +40,20 @@
         <default key="_controller">AppBundle:JurorAdmin:index</default>
     </route>
 
+    <!-- Juror's routes -->
+    <route id="public.juror.login" path="/juror/login/">
+        <default key="_controller">AppBundle:Juror:login</default>
+    </route>
+
+    <route id="public.juror.logout" path="/juror/logout/">
+        <default key="_controller">AppBundle:Juror:logout</default>
+    </route>
+
+    <route id="public.juror.home" path="/juror/">
+        <default key="_controller">AppBundle:Juror:index</default>
+    </route>
+
+    <!-- Need to be sort -->
     <route id="public.realisation.list" path="/realisation/list">
         <default key="_controller">AppBundle:Realisation:list</default>
     </route>

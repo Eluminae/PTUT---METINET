@@ -4,17 +4,15 @@ security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory:
-                users:
-                    admin:
-                        password: admin
-                        roles: 'ROLE_ADMIN'
-                    juror_admin:
-                        password: juroradmin
-                        roles: 'ROLE_JURORADMIN'
+        admin:
+            id: security.admin_provider
+#        juror_admin:
+#            id: security.juror_admin_provider
+#        juror:
+#            id: security.juror_provider
+
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle/Repositories/OrmAdministrator: bcrypt
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -23,22 +21,44 @@ security:
             security: false
 
         admin:
-            http_basic: ~
-            pattern: ^/admin/
+            anonymous: ~
+            context: work-competition
+            pattern: ^/admin
+            provider: admin
+            form_login:
+                login_path: public.admin.login
+                check_path: public.admin.login
             logout:
-                path:   /admin/logout
-                target: /
-
-        juror_admin:
-            http_basic: ~
-            pattern: ^/juror-admin/
-            logout:
-                path:   /juror-admin/logout
-                target: /
+                path: /signout
+            access_denied_url: public.admin.login
 
         main:
             anonymous: ~
 
+    role_hierarchy:
+        ROLE_JUROR: [ROLE_USER]
+        ROLE_JUROR_ADMIN: [ROLE_JUROR]
+        ROLE_ADMIN: [ROLE_JUROR_ADMIN]
+
     access_control:
-        - { path: ^/admin/, roles: ROLE_ADMIN }
-        - { path: ^/juror-admin/, roles: ROLE_JURORADMIN }
+        -
+            path: ^/admin
+            role: IS_AUTHENTICATED_ANONYMOUSLY
+        -
+            path: ^/admin/login
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+        -
+            path: ^/juror-admin
+            roles: ROLE_JUROR_ADMIN
+        -
+            path: ^/juror-admin/login
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+        -
+            path: ^/juror-admin
+            role: IS_AUTHENTICATED_ANONYMOUSLY
+        -
+            path: ^/juror
+            role: ROLE_JUROR
+        -
+            path: ^/juror/login
+            role: IS_AUTHENTICATED_ANONYMOUSLY

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
@@ -18,5 +18,27 @@
         <service id="app.realisation.registerer" class="AppBundle\Services\RealisationRegisterer">
             <argument type="service" id="app.campaign.repository" />
         </service>
+
+        <service id="security.admin_provider" alias="app.administrator.repository"/>
+        <service id="app.administrator.repository" alias="app.administrator.orm.repository"/>
+        <service id="app.administrator.orm.repository" class="AppBundle\Repositories\OrmAdministratorRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:Administrator</argument>
+        </service>
+
+        <service id="security.juror_admin_provider" alias="app.juror_administrator.repository"/>
+        <service id="app.juror_administrator.repository" alias="app.juror_administrator.orm.repository"/>
+        <service id="app.juror_administrator.orm.repository" class="AppBundle\Repositories\OrmJurorAdministrator">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:JurorAdministrator</argument>
+        </service>
+
+        <service id="security.juror_provider" alias="app.juror.repository"/>
+        <service id="app.juror.repository" alias="app.juror.orm.repository"/>
+        <service id="app.juror.orm.repository" class="AppBundle\Repositories\OrmJurorRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:Juror</argument>
+        </service>
+
     </services>
 </container>
