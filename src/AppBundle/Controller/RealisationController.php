@@ -13,12 +13,28 @@ use AppBundle\Models\UtcDate;
 
 class RealisationController extends Controller
 {
-    public function listAction(Request $request)
+    public function listForCampaignAction(Request $request, string $campaignId)
     {
+        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
+        if (null === $campaign) {
+            throw new \Exception(sprintf('Campaign %s not found.', $campaignId));
+        }
+
+        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaignId);
+        return $this->render(
+            'AppBundle:Realisation:listForCampaign.html.twig', [
+                'realisations' => $realisations,
+            ]
+        );
     }
 
     public function registerAction(Request $request, string $campaignId)
     {
+        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
+        if (null === $campaign) {
+            throw new \Exception(sprintf('Campaign %s not found.', $campaignId));
+        }
+
         $form = $this->createForm(RealisationRegistrationType::class, new RealisationRegistration());
 
         if ($request->isMethod('post')) {
@@ -36,7 +52,6 @@ class RealisationController extends Controller
             }
         }
 
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
         return $this->render(
             'AppBundle:Realisation:realisationRegistration.html.twig', [
                 'realisationRegistrationForm' => $form->createView(),
