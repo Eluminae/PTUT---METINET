@@ -9,6 +9,8 @@ use AppBundle\Models\UtcDate;
 
 class Realisation
 {
+    const filePath = 'realisationFiles';
+
     private $id;
     private $leftAt;
     private $name;
@@ -44,6 +46,11 @@ class Realisation
     public function getFileName()
     {
         return $this->fileName;
+    }
+
+    public function getFile()
+    {
+        return File(sprintf('%s/%s', $self::filePath, $this->fileName));
     }
 
     public function getCampaign()

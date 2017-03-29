@@ -22,11 +22,8 @@ class RealisationController extends Controller
         $form = $this->createForm(RealisationRegistrationType::class, new RealisationRegistration());
 
         if ($request->isMethod('post')) {
-
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $realisationRegistration = $form->getData();
 
                 $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaignId);

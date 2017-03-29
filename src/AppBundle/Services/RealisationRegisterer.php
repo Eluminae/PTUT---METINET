@@ -29,7 +29,7 @@ class RealisationRegisterer
         $file = $realisationRegistration->file;
         $fileName = sprintf('%s.%s', md5(uniqid()), $file->guessExtension());
         $file->move(
-            'realisationFiles',
+            Realisation::filePath,
             $fileName
         );
 
@@ -45,14 +45,14 @@ class RealisationRegisterer
 
     private function createCandidateFromIdentity($identity)
     {
-        $candidates = array(
+        $candidates = [
             new Identity(
                 uniqid(),
                 $identity['firstName'],
                 $identity['lastName'],
                 $identity['email']
             )
-        );
+        ];
 
         return $candidates;
     }
