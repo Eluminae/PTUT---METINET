@@ -32,12 +32,24 @@
         <default key="_controller">AppBundle:JurorAdmin:index</default>
     </route>
 
+    <route id="public.realisation.list" path="/realisation/list">
+        <default key="_controller">AppBundle:Realisation:list</default>
+    </route>
+
     <route id="public.realisation.list_for_campaign" path="/realisation/list-for-campaign/{campaignId}">
         <default key="_controller">AppBundle:Realisation:listForCampaign</default>
     </route>
 
     <route id="public.realisation.register" path="/realisation/register/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>
+    </route>
+
+    <route id="public.realisation.show" path="/realisation/show/{realisationId}">
+        <default key="_controller">AppBundle:Realisation:show</default>
+    </route>
+
+    <route id="public.realisation.delete" path="/realisation/delete/{realisationId}">
+        <default key="_controller">AppBundle:Realisation:delete</default>
     </route>
 
     <route id="public.campaign.home" path="/campaign/{campaignId}">
