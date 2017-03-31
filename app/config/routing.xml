@@ -32,15 +32,16 @@
         <default key="_controller">AppBundle:JurorAdmin:index</default>
     </route>
 
-     <route id="public.campaign.register" path="/campaign/register">
-        <default key="_controller">AppBundle:Campaign:registration</default>
-    </route>
-
     <route id="public.realisation.register" path="/campaign/register-realisation/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>
     </route>
 
-    <route id="public.campaign.home" path="/campaign/{campaignId}">
-        <default key="_controller">AppBundle:Realisation:register</default>
+    <route id="public.campaign.create" path="/campaign/create">
+        <default key="_controller">AppBundle:Campaign:create</default>
     </route>
+
+    <route id="public.campaign.home" path="/campaign/{campaignId}">
+        <default key="_controller">AppBundle:Campaign:show</default>
+    </route>
+
 </routes>

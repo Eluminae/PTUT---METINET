@@ -2,7 +2,7 @@
 
 namespace AppBundle\Dtos;
 
-class CampaignRegistration
+class CampaignCreation
 {
     public $endDate;
     public $beginningDate;

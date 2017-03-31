@@ -20,7 +20,7 @@
             <argument>AppBundle:Identity</argument>
         </service>
         
-        <service id="app.campaign.registerer" class="AppBundle\Services\CampaignRegisterer">
+        <service id="app.campaign.creator" class="AppBundle\Services\CampaignCreator">
             <argument type="service" id="app.identity.repository" />
         </service>
 

@@ -2,14 +2,14 @@
 
 namespace AppBundle\Services;
 
-use AppBundle\Dtos\CampaignRegistration;
+use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\Identity;
 use AppBundle\Models\UtcDate;
 use AppBundle\Repositories\OrmIdentityRepository;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-class CampaignRegisterer
+class CampaignCreator
 {
     private $identityRepository;
 
@@ -18,9 +18,9 @@ class CampaignRegisterer
         $this->identityRepository = $identityRepository;
     }
 
-    public function create(CampaignRegistration $campaignRegistration, $userId)
+    public function create(CampaignCreation $campaignCreation, $userId)
     {
-        $file = $campaignRegistration->image;
+        $file = $campaignCreation->image;
         $fileName = sprintf('%s.%s', md5(uniqid()), $file->guessExtension());
         $file->move(
             Campaign::filePath,
@@ -31,10 +31,10 @@ class CampaignRegisterer
 
         return new Campaign(
             uniqid(),
-            new UtcDate(uniqid(), \DateTimeImmutable::createFromMutable($campaignRegistration->endDate)),
-            new UtcDate(uniqid(), \DateTimeImmutable::createFromMutable($campaignRegistration->beginningDate)),
-            $campaignRegistration->name,
-            $campaignRegistration->description,
+            new UtcDate(uniqid(), \DateTimeImmutable::createFromMutable($campaignCreation->endDate)),
+            new UtcDate(uniqid(), \DateTimeImmutable::createFromMutable($campaignCreation->beginningDate)),
+            $campaignCreation->name,
+            $campaignCreation->description,
             $fileName,
             $user
         );

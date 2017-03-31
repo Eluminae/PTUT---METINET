@@ -5,42 +5,60 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
-use AppBundle\Forms\CampaignRegistrationType;
-use AppBundle\Dtos\CampaignRegistration;
+use AppBundle\Forms\CampaignCreationType;
+use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\UtcDate;
 
 class CampaignController extends Controller
 {
+	public function showAction(Request $request)
+	{
+		$campaignId = $request->get('campaignId');
+
+		$campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
+
+		if ($campaign === null) {
+			throw new Exception("Pas de campage avec cet id");
+		}
+
+		return $this->render(
+            'AppBundle:Campaign:showCampaign.html.twig', [
+                'campaign' => $campaign
+            ]
+        );
+	}
+
     public function listAction(Request $request)
     {
     }
 
-    public function registrationAction(Request $request)
+    public function createAction(Request $request)
     {
-    	$form = $this->createForm(CampaignRegistrationType::class, new CampaignRegistration());
+    	$form = $this->createForm(CampaignCreationType::class, new CampaignCreation());
 
-        if ($request->isMethod('post')) {
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $campaignRegistration = $form->getData();
+        
+    	$form->handleRequest($request);
+    	if ($form->isSubmitted() && $form->isValid()) {
+    		$campaignCreation = $form->getData();
 
-                $userId = 1;
+    		$userId = 1;
 
-                $campaign = $this->get('app.campaign.registerer')->create($campaignRegistration, $userId);
+    		$campaign = $this->get('app.campaign.creator')->create($campaignCreation, $userId);
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($campaign);
-                $em->flush();
+    		$em = $this->getDoctrine()->getManager();
+    		$em->persist($campaign);
+    		$em->flush();
 
-                return $this->redirect("/");
-            }
-        }
+    		return $this->redirect("/");
+    	}
+        
 
         return $this->render(
-            'AppBundle:Campaign:campaignRegistration.html.twig', [
-                'campaignRegistrationForm' => $form->createView()
+            'AppBundle:Campaign:campaignCreation.html.twig', [
+                'campaignCreationForm' => $form->createView()
             ]
         );
     }
