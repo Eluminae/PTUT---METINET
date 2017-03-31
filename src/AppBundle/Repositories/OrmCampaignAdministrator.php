@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class OrmJurorAdministrator extends EntityRepository implements UserProviderInterface
+class OrmCampaignAdministrator extends EntityRepository implements UserProviderInterface
 {
 
     /**

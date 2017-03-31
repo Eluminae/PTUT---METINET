@@ -5,7 +5,7 @@
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <!-- todo attr columns andd on-update are not found in the DTD :/ -->
-    <entity name="AppBundle\Models\Administrator" table="wc_administrator" repository-class="AppBundle\Repositories\OrmJurorAdministrator">
+    <entity name="AppBundle\Models\Administrator" table="wc_administrator" repository-class="AppBundle\Repositories\OrmAdministratorRepository">
         <id name="id" type="string" columns="id" />
         <one-to-one field="identity" target-entity="Identity" >
             <cascade><cascade-remove /></cascade>

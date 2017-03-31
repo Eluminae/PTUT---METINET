@@ -6,8 +6,8 @@ security:
     providers:
         admin:
             id: security.admin_provider
-#        juror_admin:
-#            id: security.juror_admin_provider
+#        campaign_admin:
+#            id: security.campaign_admin_provider
 #        juror:
 #            id: security.juror_provider
 
@@ -37,8 +37,8 @@ security:
 
     role_hierarchy:
         ROLE_JUROR: [ROLE_USER]
-        ROLE_JUROR_ADMIN: [ROLE_JUROR]
-        ROLE_ADMIN: [ROLE_JUROR_ADMIN]
+        ROLE_CAMPAIGN_ADMIN: [ROLE_JUROR]
+        ROLE_ADMIN: [ROLE_CAMPAIGN_ADMIN]
 
     access_control:
         -
@@ -48,13 +48,13 @@ security:
             path: ^/admin/login
             roles: IS_AUTHENTICATED_ANONYMOUSLY
         -
-            path: ^/juror-admin
-            roles: ROLE_JUROR_ADMIN
+            path: ^/campaign-admin
+            roles: ROLE_CAMPAIGN_ADMIN
         -
-            path: ^/juror-admin/login
+            path: ^/campaign-admin/login
             roles: IS_AUTHENTICATED_ANONYMOUSLY
         -
-            path: ^/juror-admin
+            path: ^/campaign-admin
             role: IS_AUTHENTICATED_ANONYMOUSLY
         -
             path: ^/juror
