@@ -26,11 +26,11 @@
             <argument>AppBundle:Administrator</argument>
         </service>
 
-        <service id="security.juror_admin_provider" alias="app.juror_administrator.repository"/>
-        <service id="app.juror_administrator.repository" alias="app.juror_administrator.orm.repository"/>
-        <service id="app.juror_administrator.orm.repository" class="AppBundle\Repositories\OrmJurorAdministrator">
+        <service id="security.campaign_admin_provider" alias="app.campaign_administrator.repository"/>
+        <service id="app.campaign_administrator.repository" alias="app.campaign_administrator.orm.repository"/>
+        <service id="app.campaign_administrator.orm.repository" class="AppBundle\Repositories\OrmCampaignAdministrator">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>AppBundle:JurorAdministrator</argument>
+            <argument>AppBundle:CampaignAdministrator</argument>
         </service>
 
         <service id="security.juror_provider" alias="app.juror.repository"/>

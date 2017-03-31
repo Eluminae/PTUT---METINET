@@ -27,17 +27,17 @@
         <default key="_controller">AppBundle:Admin:index</default>
     </route>
 
-    <!-- Juror administrator's routes -->
-    <route id="public.juror_admin.login" path="/juror-admin/login/">
-        <default key="_controller">AppBundle:JurorAdmin:login</default>
+    <!-- Campaign administrator's routes -->
+    <route id="public.campaign_admin.login" path="/campaign-admin/login/">
+        <default key="_controller">AppBundle:CampaignAdmin:login</default>
     </route>
 
-    <route id="public.juror_admin.logout" path="/juror-admin/logout/">
-        <default key="_controller">AppBundle:JurorAdmin:logout</default>
+    <route id="public.campaign_admin.logout" path="/campaign-admin/logout/">
+        <default key="_controller">AppBundle:CampaignAdmin:logout</default>
     </route>
 
-    <route id="public.juror_admin.home" path="/juror-admin/">
-        <default key="_controller">AppBundle:JurorAdmin:index</default>
+    <route id="public.campaign_admin.home" path="/campaign-admin/">
+        <default key="_controller">AppBundle:CampaignAdmin:index</default>
     </route>
 
     <!-- Juror's routes -->

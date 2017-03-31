@@ -6,7 +6,7 @@ use AppBundle\Models\Identity;
 use AppBundle\Models\Password;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class JurorAdministrator implements UserInterface
+class CampaignAdministrator implements UserInterface
 {
     private $id;
     private $identity;
