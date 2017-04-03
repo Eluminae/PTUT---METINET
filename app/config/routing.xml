@@ -78,7 +78,7 @@
         <default key="_controller">AppBundle:Campaign:show</default>
     </route>
 
-    <route id="public.realisation.show" path="/realisation/show/{realisationId}">
+    <route id="public.realisation.show" path="/realisation/{realisationId}">
         <default key="_controller">AppBundle:Realisation:show</default>
     </route>
 
