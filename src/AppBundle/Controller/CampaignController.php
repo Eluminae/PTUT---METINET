@@ -33,6 +33,13 @@ class CampaignController extends Controller
 
     public function listAction(Request $request)
     {
+        $campaigns = $this->get('app.campaign.repository')->findAll();
+
+        return $this->render(
+            'AppBundle:Campaign:listCampaign.html.twig', [
+                'campaigns' => $campaigns
+            ]
+        );
     }
 
     public function createAction(Request $request)
@@ -44,7 +51,7 @@ class CampaignController extends Controller
     	if ($form->isSubmitted() && $form->isValid()) {
     		$campaignCreation = $form->getData();
 
-    		$userId = 1;
+    		$userId = $this->getUser()->getIdentity()->getId();
 
     		$campaign = $this->get('app.campaign.creator')->create($campaignCreation, $userId);
 
