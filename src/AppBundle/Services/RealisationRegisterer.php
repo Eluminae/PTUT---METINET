@@ -7,7 +7,6 @@ use AppBundle\Models\Identity;
 use AppBundle\Models\Realisation;
 use AppBundle\Models\UtcDate;
 use AppBundle\Repositories\OrmCampaignRepository;
-use AppBundle\Services\FileFactory;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class RealisationRegisterer

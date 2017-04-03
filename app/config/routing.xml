@@ -66,6 +66,18 @@
         <default key="_controller">AppBundle:Realisation:register</default>
     </route>
 
+    <route id="public.campaign.create" path="/campaign/create">
+        <default key="_controller">AppBundle:Campaign:create</default>
+    </route>
+
+    <route id="public.campaign.home" path="/campaigns">
+        <default key="_controller">AppBundle:Campaign:list</default>
+    </route>
+
+    <route id="public.campaign.show" path="/campaign/{campaignId}">
+        <default key="_controller">AppBundle:Campaign:show</default>
+    </route>
+
     <route id="public.realisation.show" path="/realisation/show/{realisationId}">
         <default key="_controller">AppBundle:Realisation:show</default>
     </route>
@@ -74,7 +86,9 @@
         <default key="_controller">AppBundle:Realisation:delete</default>
     </route>
 
-    <route id="public.campaign.home" path="/campaign/{campaignId}">
+    <route id="public.campaign.home" path="/campaign/{campaignId}/register-realisation">
         <default key="_controller">AppBundle:Realisation:register</default>
     </route>
+
+
 </routes>
