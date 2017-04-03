@@ -19,8 +19,11 @@ class Invitation
     /** @var string */
     private $email;
 
+    /** @var string */
+    private $role;
+
     /** @var Campaign */
-    private $assignedCampaign;
+    private $assignedCampaign = null;
 
     /**
      * @param int $id
@@ -49,7 +52,7 @@ class Invitation
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -63,9 +66,25 @@ class Invitation
     }
 
     /**
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole(string $role)
+    {
+        $this->role = $role;
+    }
+
+    /**
      * @return Campaign
      */
-    public function getAssignedCampaign(): Campaign
+    public function getAssignedCampaign()
     {
         return $this->assignedCampaign;
     }

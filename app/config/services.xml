@@ -19,6 +19,8 @@
             <argument type="service" id="app.campaign.repository" />
         </service>
 
+        <service id="app.uuid.generator" class="AppBundle\Services\UuidGenerator" />
+
         <service id="security.admin_provider" alias="app.administrator.repository"/>
         <service id="app.administrator.repository" alias="app.administrator.orm.repository"/>
         <service id="app.administrator.orm.repository" class="AppBundle\Repositories\OrmAdministratorRepository">
@@ -38,6 +40,16 @@
         <service id="app.juror.orm.repository" class="AppBundle\Repositories\OrmJurorRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>AppBundle:Juror</argument>
+        </service>
+
+        <service class="AppBundle\Services\UserRegisterer" id="app.services.user_registerer">
+            <argument type="service">
+                <service class="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface">
+                    <factory service="security.encoder_factory" method="getEncoder" class="Symfony\Component\Security\Core\Encoder\EncoderFactory" />
+                    <argument>AppBundle\Models\Customer</argument>
+                </service>
+            </argument>
+            <argument type="service" id="app.uuid.generator"/>
         </service>
 
     </services>

@@ -5,6 +5,7 @@ namespace AppBundle\Models;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\Identity;
 use AppBundle\Models\Password;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class Juror implements UserInterface
@@ -12,14 +13,14 @@ class Juror implements UserInterface
     private $id;
     private $identity;
     private $password;
-    private $campaign;
+    /** @var ArrayCollection */
+    private $campaigns;
 
-    public function __construct(string $id, Identity $identity, Password $password, Campaign $campaign)
+    public function __construct(string $id, Identity $identity, Password $password)
     {
         $this->id = $id;
         $this->identity = $identity;
         $this->password = $password;
-        $this->campaign = $campaign;
     }
 
     public function getId()
@@ -35,11 +36,6 @@ class Juror implements UserInterface
     public function getPassword()
     {
         return $this->password;
-    }
-
-    public function getCampaign()
-    {
-        return $this->campaign;
     }
 
     /**
@@ -94,5 +90,29 @@ class Juror implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @param \AppBundle\Models\Campaign $campaign
+     */
+    public function addCampaign(Campaign $campaign)
+    {
+        $this->campaigns[] = $campaign;
+    }
+
+    /**
+     * @param \AppBundle\Models\Campaign $campaign
+     */
+    public function removeCampaign(Campaign $campaign)
+    {
+        $this->campaigns->removeElement($campaign);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCampaigns()
+    {
+        return $this->campaigns;
     }
 }

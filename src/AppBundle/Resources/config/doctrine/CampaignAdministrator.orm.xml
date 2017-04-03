@@ -5,7 +5,7 @@
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="AppBundle\Models\CampaignAdministrator" table="wc_campaign_administrator" repository-class="AppBundle\Repositories\OrmCampaignAdministrator">
-        <id name="id" type="string" columns="id" />
+        <id name="id" type="string" column="id" />
         <one-to-one field="identity" target-entity="Identity" >
             <cascade><cascade-remove /></cascade>
             <join-column name="identity_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>

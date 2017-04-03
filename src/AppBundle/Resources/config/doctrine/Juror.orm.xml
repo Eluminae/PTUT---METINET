@@ -5,7 +5,7 @@
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="AppBundle\Models\Juror" table="wc_juror" repository-class="AppBundle\Repositories\OrmJurorRepository">
-        <id name="id" type="string" columns="id" />
+        <id name="id" type="string" column="id" />
         <one-to-one field="identity" target-entity="Identity" >
             <cascade><cascade-remove /></cascade>
             <join-column name="identity_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
@@ -14,5 +14,16 @@
             <cascade><cascade-remove /></cascade>
             <join-column name="password_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
+        <many-to-many field="campaign" target-entity="AppBundle\Models\Campaign">
+            <join-table name="wc_juror_campaign">
+                <join-columns>
+                    <join-column name="juror_id" referenced-column-name="id"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="campaign_id" referenced-column-name="id"/>
+                </inverse-join-columns>
+            </join-table>
+            <!--<join-column name="address_id" referenced-column-name="id" />-->
+        </many-to-many>
     </entity>
 </doctrine-mapping>

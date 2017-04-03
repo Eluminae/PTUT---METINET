@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <!-- @todo : Need to be refactor to homepage -->
+    <!-- todo : Need to be refactor to homepage -->
     <route id="public.homepage" path="/">
         <default key="_controller">AppBundle:Default:home</default>
     </route>
@@ -28,7 +28,7 @@
     </route>
 
     <route id="admin.invite.user" path="/admin/invite/user">
-        <default key="_controller">AppBundle:Register:createInvitation</default>
+        <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>
     </route>
 
     <!-- Campaign administrator's routes -->
@@ -42,6 +42,10 @@
 
     <route id="campaign_admin.home" path="/campaign-admin/">
         <default key="_controller">AppBundle:CampaignAdmin:index</default>
+    </route>
+
+    <route id="campaign_admin.invite.juror" path="/campaign-admin/{campaignId}/invite">
+        <default key="_controller">AppBundle:Register:createInvitationForJuror</default>
     </route>
 
     <!-- Juror's routes -->

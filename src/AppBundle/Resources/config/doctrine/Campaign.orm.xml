@@ -5,11 +5,12 @@
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="AppBundle\Models\Campaign" table="wc_campaign" repository-class="AppBundle\Repositories\OrmCampaignRepository">
-        <id name="id" type="string" columns="id" />
+        <id name="id" type="string" column="id" />
         <field name="name" type="string" column="name" />
         <field name="description" type="string" column="description" />
         <field name="imageUrl" type="string" column="image_url" />
 
+        <!-- todo : why the datetime is not simply store in an column? -->
         <one-to-one field="endDate" target-entity="UtcDate" >
             <cascade><cascade-remove /></cascade>
             <join-column name="end_date_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>

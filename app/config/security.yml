@@ -23,7 +23,8 @@ security:
         admin:
             anonymous: ~
             context: work-competition
-            pattern: ^/admin
+            # Todo debug false pattern !!! /!\
+            pattern: ^/test-admin
             provider: admin
             form_login:
                 login_path: public.admin.login
