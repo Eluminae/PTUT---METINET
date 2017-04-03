@@ -9,7 +9,7 @@ class CampaignAdminController extends Controller implements UserManagerInterface
 {
     public function indexAction()
     {
-
+        
     }
 
     public function loginAction(Request $request)

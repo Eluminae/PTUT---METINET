@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <a href="/campaigns/create">Ajouter</a>
+
+    <table>
+        <thead>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>date de début</th>
+            <th>date de fin</th>
+            <th>Créateur</th>
+        </thead>
+        <tbody>
+            {% for campaign in campaigns %}
+            <tr>
+                <a href="/admin/campaigns/{{ campaign.id }}">
+                    <td>{{ campaign.name }}</td>
+                    <td>{{ campaign.description }}</td>
+                    <td>{{ campaign.beginningDate }}</td>
+                    <td>{{ campaign.endDate }}</td>
+                    <td>{{ campaign.creator.id }}</td>
+                    <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
+                    <td>
+                        <a href="/admin/campaigns/delete/{{ campaign.id }}">Delete</a>
+                        <a href="/admin/campaigns/modify/{{ campaign.id }}">Modify</a>
+                    </td>
+                </a>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
