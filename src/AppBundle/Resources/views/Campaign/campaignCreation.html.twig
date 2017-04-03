@@ -1,9 +1,0 @@
-{% extends '::base.html.twig' %}
-
-{% block body %}
-    <div class="col-md-6">
-        {{ form_start(campaignCreationForm, {'action': path('public.campaign.create') }) }}
-
-        {{ form_end(campaignCreationForm) }}
-    </div>
-{% endblock %}
