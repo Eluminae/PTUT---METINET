@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <routes xmlns="http://symfony.com/schema/routing"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
+    <!-- @todo : Need to be refactor to homepage -->
     <route id="public.homepage" path="/">
         <default key="_controller">AppBundle:Default:home</default>
     </route>
 
+    <!-- Register invitation -->
+    <route id="public.register.invitation" path="/register/invitation/{invitationToken}">
+        <default key="_controller">AppBundle:Register:registerFromInvitation</default>
+    </route>
+
+    <!-- Administrator's routes -->
     <route id="public.admin.login" path="/admin/login/">
         <default key="_controller">AppBundle:Admin:login</default>
     </route>
@@ -20,19 +27,42 @@
         <default key="_controller">AppBundle:Admin:index</default>
     </route>
 
-    <route id="public.juror_admin.login" path="/juror-admin/login/">
-        <default key="_controller">AppBundle:JurorAdmin:login</default>
+    <!-- Campaign administrator's routes -->
+    <route id="public.campaign_admin.login" path="/campaign-admin/login/">
+        <default key="_controller">AppBundle:CampaignAdmin:login</default>
     </route>
 
-    <route id="public.juror_admin.logout" path="/juror-admin/logout/">
-        <default key="_controller">AppBundle:JurorAdmin:logout</default>
+    <route id="public.campaign_admin.logout" path="/campaign-admin/logout/">
+        <default key="_controller">AppBundle:CampaignAdmin:logout</default>
     </route>
 
-    <route id="public.juror_admin.home" path="/juror-admin/">
-        <default key="_controller">AppBundle:JurorAdmin:index</default>
+    <route id="public.campaign_admin.home" path="/campaign-admin/">
+        <default key="_controller">AppBundle:CampaignAdmin:index</default>
     </route>
 
-    <route id="public.realisation.register" path="/campaign/register-realisation/{campaignId}">
+    <!-- Juror's routes -->
+    <route id="public.juror.login" path="/juror/login/">
+        <default key="_controller">AppBundle:Juror:login</default>
+    </route>
+
+    <route id="public.juror.logout" path="/juror/logout/">
+        <default key="_controller">AppBundle:Juror:logout</default>
+    </route>
+
+    <route id="public.juror.home" path="/juror/">
+        <default key="_controller">AppBundle:Juror:index</default>
+    </route>
+
+    <!-- Need to be sort -->
+    <route id="public.realisation.list" path="/realisation/list">
+        <default key="_controller">AppBundle:Realisation:list</default>
+    </route>
+
+    <route id="public.realisation.list_for_campaign" path="/realisation/list-for-campaign/{campaignId}">
+        <default key="_controller">AppBundle:Realisation:listForCampaign</default>
+    </route>
+
+    <route id="public.realisation.register" path="/realisation/register/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>
     </route>
 
@@ -47,5 +77,18 @@
     <route id="public.campaign.show" path="/campaign/{campaignId}">
         <default key="_controller">AppBundle:Campaign:show</default>
     </route>
+
+    <route id="public.realisation.show" path="/realisation/show/{realisationId}">
+        <default key="_controller">AppBundle:Realisation:show</default>
+    </route>
+
+    <route id="public.realisation.delete" path="/realisation/delete/{realisationId}">
+        <default key="_controller">AppBundle:Realisation:delete</default>
+    </route>
+
+    <route id="public.campaign.home" path="/campaign/{campaignId}/register-realisation">
+        <default key="_controller">AppBundle:Realisation:register</default>
+    </route>
+
 
 </routes>

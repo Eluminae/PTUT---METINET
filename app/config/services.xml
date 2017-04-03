@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="security.admin_provider" alias="app.administrator.repository"/>
+        <service id="app.administrator.repository" alias="app.administrator.orm.repository"/>
+        <service id="app.administrator.orm.repository" class="AppBundle\Repositories\OrmAdministratorRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:Administrator</argument>
+        </service>
+
+        <service id="security.campaign_admin_provider" alias="app.campaign_administrator.repository"/>
+        <service id="app.campaign_administrator.repository" alias="app.campaign_administrator.orm.repository"/>
+        <service id="app.campaign_administrator.orm.repository" class="AppBundle\Repositories\OrmCampaignAdministrator">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:CampaignAdministrator</argument>
+        </service>
+
+        <service id="security.juror_provider" alias="app.juror.repository"/>
+        <service id="app.juror.repository" alias="app.juror.orm.repository"/>
+        <service id="app.juror.orm.repository" class="AppBundle\Repositories\OrmJurorRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:Juror</argument>
+        </service>
+
         <service id="app.campaign.repository" class="AppBundle\Repositories\OrmCampaignRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
             <argument>AppBundle:Campaign</argument>
@@ -28,5 +49,6 @@
             <argument type="service" id="app.campaign.repository" />
         </service>
 
+        
     </services>
 </container>

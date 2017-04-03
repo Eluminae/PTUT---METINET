@@ -48,9 +48,9 @@ class Realisation
         return $this->fileName;
     }
 
-    public function getFile()
+    public function getFilePath()
     {
-        return File(sprintf('%s/%s', $self::filePath, $this->fileName));
+        return sprintf('%s/%s', self::filePath, $this->fileName);
     }
 
     public function getCampaign()

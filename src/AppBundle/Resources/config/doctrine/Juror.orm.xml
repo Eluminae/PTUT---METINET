@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="AppBundle\Models\Juror" table="wc_juror">
+    <entity name="AppBundle\Models\Juror" table="wc_juror" repository-class="AppBundle\Repositories\OrmJurorRepository">
         <id name="id" type="string" columns="id" />
         <one-to-one field="identity" target-entity="Identity" >
             <cascade><cascade-remove /></cascade>
