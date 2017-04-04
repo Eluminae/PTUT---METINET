@@ -66,16 +66,22 @@
         <default key="_controller">AppBundle:Realisation:register</default>
     </route>
 
-    <route id="public.campaign.create" path="/campaign/create">
-        <default key="_controller">AppBundle:Campaign:create</default>
+    <route id="public.campaign.create" path="admin/campaigns/create">
+        <default key="_controller">AppBundle:Administration/Campaign:create</default>
     </route>
 
     <route id="public.campaign.home" path="/campaigns">
         <default key="_controller">AppBundle:Campaign:list</default>
     </route>
+    <route id="public.admin.campaign.home" path="/admin/campaigns">
+        <default key="_controller">AppBundle:Administration/Campaign:list</default>
+    </route>
 
     <route id="public.campaign.show" path="/campaign/{campaignId}">
         <default key="_controller">AppBundle:Campaign:show</default>
+    </route>
+    <route id="public.admin.campaign.show" path="/admin/campaign/{campaignId}">
+        <default key="_controller">AppBundle:Administration/Campaign:show</default>
     </route>
 
     <route id="public.realisation.show" path="/realisation/{realisationId}">

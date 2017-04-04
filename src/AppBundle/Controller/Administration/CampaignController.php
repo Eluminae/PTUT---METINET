@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Administration;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class CampaignController extends Controller
 		}
 
 		return $this->render(
-            'AppBundle:Campaign:showCampaign.html.twig', [
+            'AppBundle:CampaignAdmin:showCampaign.html.twig', [
                 'campaign' => $campaign
             ]
         );
@@ -36,8 +36,36 @@ class CampaignController extends Controller
         $campaigns = $this->get('app.campaign.repository')->findAll();
 
         return $this->render(
-            'AppBundle:Campaign:listCampaign.html.twig', [
+            'AppBundle:CampaignAdmin:listCampaign.html.twig', [
                 'campaigns' => $campaigns
+            ]
+        );
+    }
+
+    public function createAction(Request $request)
+    {
+    	$form = $this->createForm(CampaignCreationType::class, new CampaignCreation());
+
+        
+    	$form->handleRequest($request);
+    	if ($form->isSubmitted() && $form->isValid()) {
+    		$campaignCreation = $form->getData();
+
+    		$userId = $this->getUser()->getIdentity()->getId();
+
+    		$campaign = $this->get('app.campaign.creator')->create($campaignCreation, $userId);
+
+    		$em = $this->getDoctrine()->getManager();
+    		$em->persist($campaign);
+    		$em->flush();
+
+    		return $this->redirect("/");
+    	}
+        
+
+        return $this->render(
+            'AppBundle:CampaignAdmin:campaignCreation.html.twig', [
+                'campaignCreationForm' => $form->createView()
             ]
         );
     }

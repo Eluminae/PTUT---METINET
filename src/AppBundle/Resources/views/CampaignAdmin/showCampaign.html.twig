@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-6">
+        {{ dump(campaign) }}
+
+        <a href="/admin/campaigns/delete/{{ campaign.id }}">Delete</a>
+        <a href="/admin/campaigns/modify/{{ campaign.id }}">Modify</a>
+        
+    </div>
+{% endblock %}
