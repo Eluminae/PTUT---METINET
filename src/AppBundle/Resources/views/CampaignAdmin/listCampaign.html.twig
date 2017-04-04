@@ -1,9 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-
-    <a href="{{ path('admin.campaign.create') }}">Ajouter</a>
-
+    <h1>Campaign list</h1>
     <table>
         <thead>
             <th>Nom</th>
@@ -29,4 +27,5 @@
             {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('admin.campaign.create') }}">Add campaign</a>
 {% endblock %}
