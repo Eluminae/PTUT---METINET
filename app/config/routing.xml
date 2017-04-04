@@ -28,6 +28,27 @@
     </route>
 
     <!-- Campaign administrator's routes -->
+    <route id="admin.campaign.create" path="admin/campaigns/create">
+        <default key="_controller">AppBundle:Administration/Campaign:create</default>
+    </route>
+
+    <route id="admin.campaign.list" path="/admin/campaigns">
+        <default key="_controller">AppBundle:Administration/Campaign:list</default>
+    </route>
+
+    <route id="admin.campaign.show" path="/admin/campaigns/{campaignId}">
+        <default key="_controller">AppBundle:Administration/Campaign:show</default>
+    </route>
+
+    <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaignId}">
+        <default key="_controller">AppBundle:Administration/Campaign:delete</default>
+    </route>
+
+    <route id="admin.campaign.update" path="/admin/campaigns/update/{campaignId}">
+        <default key="_controller">AppBundle:Administration/Campaign:update</default>
+    </route>
+    
+    <!-- Campaign administrator login's routes -->
     <route id="public.campaign_admin.login" path="/campaign-admin/login/">
         <default key="_controller">AppBundle:CampaignAdmin:login</default>
     </route>
@@ -54,47 +75,39 @@
     </route>
 
     <!-- Need to be sort -->
-    <route id="public.realisation.list" path="/realisation/list">
-        <default key="_controller">AppBundle:Realisation:list</default>
-    </route>
 
     <route id="public.realisation.list_for_campaign" path="/realisation/list-for-campaign/{campaignId}">
         <default key="_controller">AppBundle:Realisation:listForCampaign</default>
     </route>
 
+    <!-- Campaign routes -->
+    <route id="public.campaign.show" path="/campaigns/{campaignId}">
+        <default key="_controller">AppBundle:Campaign:show</default>
+    </route>
+
+    <route id="public.campaign.list" path="/campaigns">
+        <default key="_controller">AppBundle:Campaign:list</default>
+    </route>
+
+    <!-- Realisation Administrator routes -->
+    <route id="admin.realisation.show" path="/admin/realisations/{realisationId}">
+        <default key="_controller">AppBundle:Administration/Realisation:show</default>
+    </route>
+
+    <route id="admin.realisation.delete" path="/admin/realisations/delete/{realisationId}">
+        <default key="_controller">AppBundle:Administration/Realisation:delete</default>
+    </route>
+
+    <route id="admin.realisation.list" path="/admin/realisations">
+        <default key="_controller">AppBundle:Administration/Realisation:list</default>
+    </route>
+
+    <route id="admin.realisation.create" path="/admin/realisations/create/{campaignId}">
+        <default key="_controller">AppBundle:Administration/Realisation:create</default>
+    </route>
+
+    <!-- Realisation routes -->
     <route id="public.realisation.register" path="/realisation/register/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>
     </route>
-
-    <route id="public.campaign.create" path="admin/campaigns/create">
-        <default key="_controller">AppBundle:Administration/Campaign:create</default>
-    </route>
-
-    <route id="public.campaign.home" path="/campaigns">
-        <default key="_controller">AppBundle:Campaign:list</default>
-    </route>
-    <route id="public.admin.campaign.home" path="/admin/campaigns">
-        <default key="_controller">AppBundle:Administration/Campaign:list</default>
-    </route>
-
-    <route id="public.campaign.show" path="/campaign/{campaignId}">
-        <default key="_controller">AppBundle:Campaign:show</default>
-    </route>
-    <route id="public.admin.campaign.show" path="/admin/campaign/{campaignId}">
-        <default key="_controller">AppBundle:Administration/Campaign:show</default>
-    </route>
-
-    <route id="public.realisation.show" path="/realisation/{realisationId}">
-        <default key="_controller">AppBundle:Realisation:show</default>
-    </route>
-
-    <route id="public.realisation.delete" path="/realisation/delete/{realisationId}">
-        <default key="_controller">AppBundle:Realisation:delete</default>
-    </route>
-
-    <route id="public.campaign.home" path="/campaign/{campaignId}/register-realisation">
-        <default key="_controller">AppBundle:Realisation:register</default>
-    </route>
-
-
 </routes>
