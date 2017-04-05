@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'AppBundle::layoutAdmin.html.twig' %}
 
 {% block body %}
     <h1>Campaign</h1>
@@ -7,5 +7,6 @@
 	<a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
 	<a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
 	<a href="{{ path('admin.realisation.create', {'campaignId': campaign.id}) }}">Add realisation</a>
+	<a href="{{ path('admin.campaign.list') }}">Back to list</a>
     </div>
 {% endblock %}

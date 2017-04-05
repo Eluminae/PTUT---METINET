@@ -23,7 +23,10 @@
 
     </head>
     <body>
+        {% block header %}{% endblock %}
+        {% block nav %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        {% block footer %}{% endblock %}
     </body>
 </html>

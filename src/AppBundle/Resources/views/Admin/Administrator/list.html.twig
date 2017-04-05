@@ -1,0 +1,26 @@
+{% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Administrator list</h1>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+        </thead>
+        <tbody>
+            {% for administrator in administrators %}
+            <tr>
+                <td><a href="{{ path('admin.administrator.show', {'administratorId': administrator.id}) }}">{{ administrator.id }}</a></td>
+                    <td>{{ administrator.identity.lastName }}</td>
+                    <td>{{ administrator.identity.firstName }}</td>
+                    <td>{{ administrator.identity.email }}</td>
+                    <td>
+                        <a href="{{ path('admin.administrator.delete', {'administratorId': administrator.id}) }}">Delete</a>
+		    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

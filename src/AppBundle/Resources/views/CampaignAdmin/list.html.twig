@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'AppBundle::layoutAdmin.html.twig' %}
 
 {% block body %}
     <h1>Campaign list</h1>
@@ -17,7 +17,7 @@
                     <td>{{ campaign.description }}</td>
                     <td>{{ campaign.beginningDate }}</td>
                     <td>{{ campaign.endDate }}</td>
-                    <td>{{ campaign.creator.id }}</td>
+                    <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                     <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
                     <td>
                         <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>

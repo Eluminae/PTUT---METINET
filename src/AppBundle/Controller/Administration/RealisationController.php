@@ -18,7 +18,7 @@ class RealisationController extends Controller
     {
         $realisations = $this->get('app.realisation.repository')->findAll();
         return $this->render(
-            'AppBundle:RealisationAdmin:list.html.twig', [
+            'AppBundle:Admin:Realisation/list.html.twig', [
                 'realisations' => $realisations,
             ]
         );
@@ -32,7 +32,7 @@ class RealisationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:RealisationAdmin:show.html.twig', [
+            'AppBundle:Admin:Realisation/show.html.twig', [
                 'realisation' => $realisation,
             ]
         );
@@ -49,7 +49,7 @@ class RealisationController extends Controller
         $em->remove($realisation);
         $em->flush();
 
-        return $this->redirect("/");
+        return $this->redirectToRoute('admin.realisation.list');
     }
 
     public function createAction(Request $request, string $campaignId)
@@ -71,7 +71,7 @@ class RealisationController extends Controller
             $em->persist($realisation);
             $em->flush();
 
-            return $this->redirect("/");
+            return $this->redirectToRoute('admin.realisation.list');
         }
 
         return $this->render(
@@ -80,5 +80,10 @@ class RealisationController extends Controller
                 'campaign' => $campaign
             ]
         );
+    }
+
+    public function updateAction(Request $request)
+    {
+        // todo
     }
 }
