@@ -14,10 +14,8 @@ use AppBundle\Models\UtcDate;
 
 class CampaignController extends Controller
 {
-	public function showAction(Request $request)
+    public function showAction(Request $request, string $campaignId)
 	{
-		$campaignId = $request->get('campaignId');
-
 		$campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
 
 		if ($campaign === null) {
@@ -25,7 +23,7 @@ class CampaignController extends Controller
 		}
 
 		return $this->render(
-            'AppBundle:CampaignAdmin:showCampaign.html.twig', [
+            'AppBundle:CampaignAdmin:show.html.twig', [
                 'campaign' => $campaign
             ]
         );
@@ -36,7 +34,7 @@ class CampaignController extends Controller
         $campaigns = $this->get('app.campaign.repository')->findAll();
 
         return $this->render(
-            'AppBundle:CampaignAdmin:listCampaign.html.twig', [
+            'AppBundle:CampaignAdmin:list.html.twig', [
                 'campaigns' => $campaigns
             ]
         );
@@ -46,25 +44,22 @@ class CampaignController extends Controller
     {
     	$form = $this->createForm(CampaignCreationType::class, new CampaignCreation());
 
-        
     	$form->handleRequest($request);
     	if ($form->isSubmitted() && $form->isValid()) {
     		$campaignCreation = $form->getData();
 
-    		$userId = $this->getUser()->getIdentity()->getId();
-
+            $userId = $this->getUser()->getIdentity()->getId();
     		$campaign = $this->get('app.campaign.creator')->create($campaignCreation, $userId);
 
     		$em = $this->getDoctrine()->getManager();
     		$em->persist($campaign);
     		$em->flush();
 
-    		return $this->redirect("/");
+            return $this->redirectToRoute('admin.campaign.list');
     	}
         
-
         return $this->render(
-            'AppBundle:CampaignAdmin:campaignCreation.html.twig', [
+            'AppBundle:CampaignAdmin:create.html.twig', [
                 'campaignCreationForm' => $form->createView()
             ]
         );
@@ -81,7 +76,7 @@ class CampaignController extends Controller
         $em->remove($campaign);
         $em->flush();
 
-        return $this->redirect("/");
+        return $this->redirectToRoute('admin.campaign.list');
     }
 
     public function updateAction(Request $request)

@@ -16,7 +16,7 @@
                 <td>{{ campaign.description }}</td>
                 <td>{{ campaign.beginningDate }}</td>
                 <td>{{ campaign.endDate }}</td>
-                <td>{{ campaign.creator.id }}</td>
+                <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                 <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
             </tr>
             {% endfor %}

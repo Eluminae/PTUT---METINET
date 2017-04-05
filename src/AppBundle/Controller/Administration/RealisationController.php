@@ -49,7 +49,7 @@ class RealisationController extends Controller
         $em->remove($realisation);
         $em->flush();
 
-        return $this->redirect("/");
+        return $this->redirectToRoute('admin.realisation.list');
     }
 
     public function createAction(Request $request, string $campaignId)
@@ -71,7 +71,7 @@ class RealisationController extends Controller
             $em->persist($realisation);
             $em->flush();
 
-            return $this->redirect("/");
+            return $this->redirectToRoute('admin.realisation.list');
         }
 
         return $this->render(

@@ -1,0 +1,10 @@
+{% extends 'AppBundle::layoutAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Administrator</h1>
+    <div class="col-md-6">
+        {{ dump(administrator) }}
+	<a href="{{ path('admin.administrator.delete', {'administratorId': administrator.id}) }}">Delete</a>
+	<a href="{{ path('admin.administrator.list') }}">Back to list</a>
+    </div>
+{% endblock %}
