@@ -1,41 +1,10 @@
 {% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
 
 {% block body %}
-    <div class="wc-title-banner">
-        <h2>Campaign list</h2>
-    </div>
-
-
-    <table>
-        <thead>
-            <th>Nom</th>
-            <th>Description</th>
-            <th>date de début</th>
-            <th>date de fin</th>
-            <th>Créateur</th>
-        </thead>
-        <tbody>
-            {% for campaign in campaigns %}
-            <tr>
-                <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
-                    <td>{{ campaign.description }}</td>
-                    <td>{{ campaign.beginningDate }}</td>
-                    <td>{{ campaign.endDate }}</td>
-                    <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
-                    <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
-                    <td>
-                        <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
-                        <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
-		    </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ path('admin.campaign.create') }}">Add campaign</a>
-
-
     <div class="admin page-wrap">
-        <p class="wc-admin-welcome"></p>
+        <div class="wc-title-banner">
+            <h2>Campaign list</h2>
+        </div>
         <div class="wc-container">
             <div class="col-sm-12">
                 <div class="wc-admin-block">
@@ -80,6 +49,34 @@
                         </div>
 
                     </div>
+
+
+                    <table>
+                        <thead>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>date de début</th>
+                        <th>date de fin</th>
+                        <th>Créateur</th>
+                        </thead>
+                        <tbody>
+                        {% for campaign in campaigns %}
+                            <tr>
+                                <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
+                                <td>{{ campaign.description }}</td>
+                                <td>{{ campaign.beginningDate }}</td>
+                                <td>{{ campaign.endDate }}</td>
+                                <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
+                                <td>
+                                    <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
+                                    <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{{ path('admin.campaign.create') }}">Add campaign</a>
 
                 </div>
             </div>
