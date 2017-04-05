@@ -81,4 +81,9 @@ class RealisationController extends Controller
             ]
         );
     }
+
+    public function updateAction(Request $request)
+    {
+        // todo
+    }
 }

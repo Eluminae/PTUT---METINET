@@ -72,7 +72,16 @@ class CampaignController extends Controller
 
     public function deleteAction(Request $request)
     {
-        // todo
+        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
+        if (null === $campaign) {
+            throw new \Exception(sprintf('Campaign %s not found.', $campaignId));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($campaign);
+        $em->flush();
+
+        return $this->redirect("/");
     }
 
     public function updateAction(Request $request)
