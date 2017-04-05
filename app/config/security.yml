@@ -7,7 +7,7 @@ security:
         administrator:
             id: security.administrator_provider
         campaign_admin:
-            id: security.campaign_admin_provider
+            id: security.campaign_administrator_provider
         juror:
             id: security.juror_provider
 
