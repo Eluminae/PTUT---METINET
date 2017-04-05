@@ -23,7 +23,7 @@ class CampaignAdministratorController extends Controller
 		}
 
 		return $this->render(
-            'AppBundle:CampaignAdministratorAdmin:show.html.twig', [
+            'AppBundle:Admin:CampaignAdministrator/show.html.twig', [
                 'campaignAdministrator' => $campaignAdministrator
             ]
         );
@@ -34,7 +34,7 @@ class CampaignAdministratorController extends Controller
         $campaignAdministrators = $this->get('app.campaign_administrator.repository')->findAll();
 
         return $this->render(
-            'AppBundle:CampaignAdministratorAdmin:list.html.twig', [
+            'AppBundle:Admin:CampaignAdministrator/list.html.twig', [
                 'campaignAdministrators' => $campaignAdministrators
             ]
         );
@@ -59,7 +59,7 @@ class CampaignAdministratorController extends Controller
     	}
 
         return $this->render(
-            'AppBundle:CampaignAdministratorAdmin:campaignAdministrator.html.twig', [
+            'AppBundle:Admin:CampaignAdministrator/campaignAdministrator.html.twig', [
                 'campaignAdministratorCreationForm' => $form->createView()
             ]
         );

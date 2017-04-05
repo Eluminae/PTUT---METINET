@@ -18,7 +18,7 @@ class RealisationController extends Controller
     {
         $realisations = $this->get('app.realisation.repository')->findAll();
         return $this->render(
-            'AppBundle:RealisationAdmin:list.html.twig', [
+            'AppBundle:Admin:Realisation/list.html.twig', [
                 'realisations' => $realisations,
             ]
         );
@@ -32,7 +32,7 @@ class RealisationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:RealisationAdmin:show.html.twig', [
+            'AppBundle:Admin:Realisation/show.html.twig', [
                 'realisation' => $realisation,
             ]
         );

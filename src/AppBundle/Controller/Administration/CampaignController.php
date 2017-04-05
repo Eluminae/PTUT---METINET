@@ -23,7 +23,7 @@ class CampaignController extends Controller
 		}
 
 		return $this->render(
-            'AppBundle:CampaignAdmin:show.html.twig', [
+            'AppBundle:Admin:Campaign/show.html.twig', [
                 'campaign' => $campaign
             ]
         );
@@ -34,7 +34,7 @@ class CampaignController extends Controller
         $campaigns = $this->get('app.campaign.repository')->findAll();
 
         return $this->render(
-            'AppBundle:CampaignAdmin:list.html.twig', [
+            'AppBundle:Admin:Campaign/list.html.twig', [
                 'campaigns' => $campaigns
             ]
         );
@@ -59,7 +59,7 @@ class CampaignController extends Controller
     	}
         
         return $this->render(
-            'AppBundle:CampaignAdmin:create.html.twig', [
+            'AppBundle:Admin:Campaign/create.html.twig', [
                 'campaignCreationForm' => $form->createView()
             ]
         );

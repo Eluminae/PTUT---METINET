@@ -23,7 +23,7 @@ class AdministratorController extends Controller
 		}
 
 		return $this->render(
-            'AppBundle:AdministratorAdmin:show.html.twig', [
+            'AppBundle:Admin:Administrator/show.html.twig', [
                 'administrator' => $administrator
             ]
         );
@@ -34,7 +34,7 @@ class AdministratorController extends Controller
         $administrators = $this->get('app.administrator.repository')->findAll();
 
         return $this->render(
-            'AppBundle:AdministratorAdmin:list.html.twig', [
+            'AppBundle:Admin:Administrator/list.html.twig', [
                 'administrators' => $administrators
             ]
         );
@@ -59,7 +59,7 @@ class AdministratorController extends Controller
     	}
 
         return $this->render(
-            'AppBundle:AdministratorAdmin:administrator.html.twig', [
+            'AppBundle:Admin:Administrator/administrator.html.twig', [
                 'administratorCreationForm' => $form->createView()
             ]
         );
