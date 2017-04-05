@@ -25,7 +25,7 @@ class CampaignController extends Controller
 		}
 
 		return $this->render(
-            'AppBundle:Campaign:showCampaign.html.twig', [
+            'AppBundle:Default:Campaign/showCampaign.html.twig', [
                 'campaign' => $campaign
             ]
         );
@@ -36,7 +36,7 @@ class CampaignController extends Controller
         $campaigns = $this->get('app.campaign.repository')->findAll();
 
         return $this->render(
-            'AppBundle:Campaign:listCampaign.html.twig', [
+            'AppBundle:Default:Campaign/listCampaign.html.twig', [
                 'campaigns' => $campaigns
             ]
         );

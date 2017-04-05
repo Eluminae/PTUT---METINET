@@ -22,7 +22,7 @@ class RealisationController extends Controller
 
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaignId);
         return $this->render(
-            'AppBundle:Realisation:listForCampaign.html.twig', [
+            'AppBundle:Default:Realisation/listForCampaign.html.twig', [
 
                 'realisations' => $realisations,
             ]
@@ -52,7 +52,7 @@ class RealisationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Realisation:realisationRegistration.html.twig', [
+            'AppBundle:Default:Realisation/realisationRegistration.html.twig', [
                 'realisationRegistrationForm' => $form->createView(),
                 'campaign' => $campaign
             ]
