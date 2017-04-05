@@ -125,6 +125,9 @@ height: 43px;
 padding: 29px 29px;
 margin: 0 18px;
 }
+.logoGreyHover{
+  background: url('../img/logoWhite.png') !important;
+}
 .logoGrey:hover{
     background: url('../img/logoWhite.png');
     background-size: cover;
