@@ -76,14 +76,14 @@ border: none;
 .ulHome {
   padding: 0;
 }
-.ulHome > a{
+.ulHome > li > a{
 color: #333;
 }
-.ulHome > a:hover{
+.ulHome > li > a:hover{
 color: white;
 }
 
-.ulHome > a:nth-child(even) > div{
+.ulHome > li > a:nth-child(even) > div{
   background-color: rgba(0,0,0,0.04);
 }
 
@@ -124,6 +124,9 @@ color: white;
 height: 43px;
 padding: 29px 29px;
 margin: 0 18px;
+}
+.logoGreyHover{
+  background: url('../img/logoWhite.png') !important;
 }
 .logoGrey:hover{
     background: url('../img/logoWhite.png');

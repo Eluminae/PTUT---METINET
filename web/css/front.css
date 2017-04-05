@@ -29,6 +29,13 @@ margin: 15px;
 font-size: 18px;
 }
 
+.wc-btn:hover {
+  background-color: #f55c08;
+
+  -webkit-transition: width 2s ease-in-out; /* Safari */
+  transition: width 2s ease-in-out;
+}
+
 /* ---------- CONNEXION.HTML ---------- */
 
 .connexion{

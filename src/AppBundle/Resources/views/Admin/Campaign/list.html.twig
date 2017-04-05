@@ -1,31 +1,86 @@
 {% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Campaign list</h1>
-    <table>
-        <thead>
-            <th>Nom</th>
-            <th>Description</th>
-            <th>date de début</th>
-            <th>date de fin</th>
-            <th>Créateur</th>
-        </thead>
-        <tbody>
-            {% for campaign in campaigns %}
-            <tr>
-                <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
-                    <td>{{ campaign.description }}</td>
-                    <td>{{ campaign.beginningDate }}</td>
-                    <td>{{ campaign.endDate }}</td>
-                    <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
-                    <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
-                    <td>
-                        <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
-                        <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
-		    </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ path('admin.campaign.create') }}">Add campaign</a>
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Campaign list</h2>
+        </div>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    <div class="row no-margin">
+                        <p class="col-sm-12 wc-admin-subtitle">Gestion des campagnes</p>
+
+                    </div>
+                    <div class="wc-admin-row">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="wc-admin-p">Nom de la campagne</th>
+
+                                    <th class="wc-admin-p">Date de début</th>
+                                    <th class="wc-admin-p">Date de fin</th>
+                                    <th class="wc-admin-p"><a href="admin-addCampaign.html"><button type="button" class="btn-admin-form btn-add" name="button">Ajouter</button></a></th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>MaCampagne</td>
+                                    <td>12/02/2017</td>
+                                    <td>24/02/2017</td>
+                                    <td>  <button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></td>
+                                </tr>
+                                <tr>
+                                    <td>MaCampagne</td>
+                                    <td>12/02/2017</td>
+                                    <td>24/02/2017</td>
+                                    <td>  <button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></td>
+                                </tr>
+                                <tr>
+                                    <td>MaCampagne</td>
+                                    <td>12/02/2017</td>
+                                    <td>24/02/2017</td>
+                                    <td>  <button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                    <table>
+                        <thead>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>date de début</th>
+                        <th>date de fin</th>
+                        <th>Créateur</th>
+                        </thead>
+                        <tbody>
+                        {% for campaign in campaigns %}
+                            <tr>
+                                <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
+                                <td>{{ campaign.description }}</td>
+                                <td>{{ campaign.beginningDate }}</td>
+                                <td>{{ campaign.endDate }}</td>
+                                <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
+                                <td>
+                                    <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
+                                    <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{{ path('admin.campaign.create') }}">Add campaign</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- +++++++++ END admin-settings CONTAINER ++++++++++ -->
 {% endblock %}

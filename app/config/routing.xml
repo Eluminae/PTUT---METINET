@@ -141,7 +141,11 @@
     </route>
 
     <!-- Realisation routes -->
-    <route id="public.realisation.register" path="/realisation/register/{campaignId}">
+    <route id="public.realisation.register" path="/realisations/register/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>
+    </route>
+
+    <route id="public.realisation.list" path="/realisations/{campaignId}">
+        <default key="_controller">AppBundle:Realisation:listForCampaign</default>
     </route>
 </routes>
