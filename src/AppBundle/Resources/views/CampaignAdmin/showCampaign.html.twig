@@ -1,11 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    <h1>Campaign</h1>
     <div class="col-md-6">
         {{ dump(campaign) }}
-
-        <a href="/admin/campaigns/delete/{{ campaign.id }}">Delete</a>
-        <a href="/admin/campaigns/modify/{{ campaign.id }}">Modify</a>
-        
+	<a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
+	<a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
+	<a href="{{ path('admin.realisation.create', {'campaignId': campaign.id}) }}">Add realisation</a>
     </div>
 {% endblock %}

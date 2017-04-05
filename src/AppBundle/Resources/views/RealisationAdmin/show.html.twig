@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Realisation</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Left at</th>
+            <th>File</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+                <td><a href="{{ path('admin.campaign.show', {'campaignId': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
+            <td>{{ realisation.leftAt }}</td>
+            <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
+            <td><a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}">Delete</a></td>
+        </tr>
+    </table>
+{% endblock %}

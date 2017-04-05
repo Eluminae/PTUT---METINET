@@ -1,9 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-
-    <a href="/admin/campaigns/create">Ajouter</a>
-
+    <h1>Campaign list</h1>
     <table>
         <thead>
             <th>Nom</th>
@@ -15,20 +13,19 @@
         <tbody>
             {% for campaign in campaigns %}
             <tr>
-                <a href="/admin/campaigns/{{ campaign.id }}">
-                    <td>{{ campaign.name }}</td>
+                <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
                     <td>{{ campaign.description }}</td>
                     <td>{{ campaign.beginningDate }}</td>
                     <td>{{ campaign.endDate }}</td>
                     <td>{{ campaign.creator.id }}</td>
                     <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
                     <td>
-                        <a href="/admin/campaigns/delete/{{ campaign.id }}">Delete</a>
-                        <a href="/admin/campaigns/modify/{{ campaign.id }}">Modify</a>
-                    </td>
-                </a>
+                        <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
+                        <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
+		    </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('admin.campaign.create') }}">Add campaign</a>
 {% endblock %}

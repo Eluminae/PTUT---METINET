@@ -69,4 +69,14 @@ class CampaignController extends Controller
             ]
         );
     }
+
+    public function deleteAction(Request $request)
+    {
+        // todo
+    }
+
+    public function updateAction(Request $request)
+    {
+        // todo
+    }
 }
