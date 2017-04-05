@@ -2,11 +2,12 @@
 
 namespace AppBundle\Dtos;
 
-class CampaignRegistration
+class CampaignCreation
 {
     public $endDate;
     public $beginningDate;
     public $name;
     public $description;
-    public $imageUrl;
+    public $image;
+    public $creator;
 }

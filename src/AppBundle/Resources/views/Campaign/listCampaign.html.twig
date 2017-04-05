@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <table>
+        <thead>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>date de début</th>
+            <th>date de fin</th>
+            <th>Créateur</th>
+        </thead>
+        <tbody>
+            {% for campaign in campaigns %}
+            <tr>
+                <td>{{ campaign.name }}</td>
+                <td>{{ campaign.description }}</td>
+                <td>{{ campaign.beginningDate }}</td>
+                <td>{{ campaign.endDate }}</td>
+                <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -5,24 +5,42 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="app.campaign.repository" class="AppBundle\Repositories\OrmCampaignRepository">
+        <service id="security.admin_provider" alias="app.administrator.repository"/>
+        <service id="app.administrator.repository" alias="app.administrator.orm.repository"/>
+        <service id="app.administrator.orm.repository" class="AppBundle\Repositories\OrmAdministratorRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:Administrator</argument>
+        </service>
+
+        <service id="security.campaign_admin_provider" alias="app.campaign_administrator.repository"/>
+        <service id="app.campaign_administrator.repository" alias="app.campaign_administrator.orm.repository"/>
+        <service id="app.campaign_administrator.orm.repository" class="AppBundle\Repositories\OrmCampaignAdministrator">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:CampaignAdministrator</argument>
+        </service>
+
+        <service id="security.juror_provider" alias="app.juror.repository"/>
+        <service id="app.juror.repository" alias="app.juror.orm.repository"/>
+        <service id="app.juror.orm.repository" class="AppBundle\Repositories\OrmJurorRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:Juror</argument>
+        </service>
+
+        <service id="app.campaign.repository" class="AppBundle\Repositories\OrmCampaignRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
             <argument>AppBundle:Campaign</argument>
         </service>
 
         <service id="app.realisation.repository" class="AppBundle\Repositories\OrmRealisationRepository">
-            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
             <argument>AppBundle:Realisation</argument>
         </service>
 
         <service id="app.realisation.registerer" class="AppBundle\Services\RealisationRegisterer">
-            <argument type="service" id="app.campaign.repository"/>
-            <argument type="service" id="app.uuid.generator"/>
+            <argument type="service" id="app.campaign.repository" />
         </service>
 
-        <service id="app.uuid.generator" class="AppBundle\Services\UuidGenerator"/>
-
-        <service id="security.administrator_provider" alias="app.administrator.repository"/>
+        <service id="security.admin_provider" alias="app.administrator.repository"/>
         <service id="app.administrator.repository" alias="app.administrator.orm.repository"/>
         <service id="app.administrator.orm.repository" class="AppBundle\Repositories\OrmAdministratorRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
@@ -53,6 +71,29 @@
             </argument>
             <argument type="service" id="app.uuid.generator"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+
+        <service id="app.campaign.repository" class="AppBundle\Repositories\OrmCampaignRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument>AppBundle:Campaign</argument>
+        </service>
+
+        <service id="app.realisation.repository" class="AppBundle\Repositories\OrmRealisationRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument>AppBundle:Realisation</argument>
+        </service>
+
+        <service id="app.identity.repository" class="AppBundle\Repositories\OrmIdentityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument>AppBundle:Identity</argument>
+        </service>
+
+        <service id="app.campaign.creator" class="AppBundle\Services\CampaignCreator">
+            <argument type="service" id="app.identity.repository" />
+        </service>
+
+        <service id="app.realisation.registerer" class="AppBundle\Services\RealisationRegisterer">
+            <argument type="service" id="app.campaign.repository" />
         </service>
     </services>
 </container>

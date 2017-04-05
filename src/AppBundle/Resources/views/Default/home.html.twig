@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header>
+    </header>
+    <nav class="navHome">
+        <ul class="ulHome" >
+            <a href="{{ path('public.homepage') }}">
+                <div class="navIcon">
+                    <div class="logoGrey"></div>
+                </div>
+            </a>
+            <a href="{{ path('public.campaign.list') }}">
+                <div class="navIcon">
+                    <i class="fa fa-book fa-3x navI"></i>
+                </div>
+            </a>
+            <a href="">
+                <div class="navIcon">
+                    <i class="fa fa-trophy fa-3x navI"></i>
+                </div>
+            </a>
+            <a href="">
+            <div class="navIcon">
+                    <i class="fa fa-lock fa-3x navI"></i>
+                </div>
+            </a>
+        </ul>
+    </nav>
+    <div class="col-sm-12 no-padding">
+        <!-- ++++++++++ HERE START HOME CONTAINER ++++++++++ -->
+        <div class="home page-wrap">
+            <img alt="Logo" class="logoSansFond" src="{{ asset('img/logoSansFond.png') }}" />
+            <h1 class="slogan">Participez à des concours<br/>dans de multiples disciplines</h1>
+            <button class="wc-btn">Voir les concours</button>
+        </div>
+        <!-- +++++++++ END HOME CONTAINER ++++++++++ -->
+        <div class="wc-footer">
+            <div class="col-sm-1 footer-empty">
+            </div>
+            <footer class="col-sm-11 footer-container">
+                <div class="col-sm-5">
+                    <h3>WORK Competition</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus faucibus n
+                        ac habitasse platea dictumst. Duis fermentum purus ac quam finibu
+                    </p>
+                </div>
+                <div class="col-sm-offset-4 col-sm-3">
+                    <ul>
+                        <li>
+                            Work Competition - 2017
+                        </li>
+                        <li>
+                            A propos
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </div><!-- @whitespace
+		-->{% endblock %}
+
