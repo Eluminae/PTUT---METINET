@@ -10,11 +10,10 @@
             <cascade><cascade-remove /></cascade>
             <join-column name="identity_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
-        <one-to-one field="password" target-entity="Password" >
-            <cascade><cascade-remove /></cascade>
-            <join-column name="password_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
-        <many-to-many field="campaign" target-entity="AppBundle\Models\Campaign">
+        <field name="password" type="string" column="password"/>
+        <field name="salt" type="string" column="salt"/>
+        <field name="role" type="string" column="role"/>
+        <many-to-many field="campaigns" target-entity="AppBundle\Models\Campaign">
             <join-table name="wc_juror_campaign">
                 <join-columns>
                     <join-column name="juror_id" referenced-column-name="id"/>
@@ -23,7 +22,6 @@
                     <join-column name="campaign_id" referenced-column-name="id"/>
                 </inverse-join-columns>
             </join-table>
-            <!--<join-column name="address_id" referenced-column-name="id" />-->
         </many-to-many>
     </entity>
 </doctrine-mapping>

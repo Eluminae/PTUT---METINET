@@ -6,29 +6,30 @@
 
     <services>
         <service id="app.campaign.repository" class="AppBundle\Repositories\OrmCampaignRepository">
-            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>AppBundle:Campaign</argument>
         </service>
 
         <service id="app.realisation.repository" class="AppBundle\Repositories\OrmRealisationRepository">
-            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>AppBundle:Realisation</argument>
         </service>
 
         <service id="app.realisation.registerer" class="AppBundle\Services\RealisationRegisterer">
-            <argument type="service" id="app.campaign.repository" />
+            <argument type="service" id="app.campaign.repository"/>
+            <argument type="service" id="app.uuid.generator"/>
         </service>
 
-        <service id="app.uuid.generator" class="AppBundle\Services\UuidGenerator" />
+        <service id="app.uuid.generator" class="AppBundle\Services\UuidGenerator"/>
 
-        <service id="security.admin_provider" alias="app.administrator.repository"/>
+        <service id="security.administrator_provider" alias="app.administrator.repository"/>
         <service id="app.administrator.repository" alias="app.administrator.orm.repository"/>
         <service id="app.administrator.orm.repository" class="AppBundle\Repositories\OrmAdministratorRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>AppBundle:Administrator</argument>
         </service>
 
-        <service id="security.campaign_admin_provider" alias="app.campaign_administrator.repository"/>
+        <service id="security.campaign_administrator_provider" alias="app.campaign_administrator.repository"/>
         <service id="app.campaign_administrator.repository" alias="app.campaign_administrator.orm.repository"/>
         <service id="app.campaign_administrator.orm.repository" class="AppBundle\Repositories\OrmCampaignAdministrator">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
@@ -42,15 +43,16 @@
             <argument>AppBundle:Juror</argument>
         </service>
 
-        <service class="AppBundle\Services\UserRegisterer" id="app.services.user_registerer">
+        <service id="app.services.user_registerer" class="AppBundle\Services\UserRegisterer">
             <argument type="service">
                 <service class="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface">
-                    <factory service="security.encoder_factory" method="getEncoder" class="Symfony\Component\Security\Core\Encoder\EncoderFactory" />
-                    <argument>AppBundle\Models\Customer</argument>
+                    <factory service="security.encoder_factory" method="getEncoder"
+                             class="Symfony\Component\Security\Core\Encoder\EncoderFactory"/>
+                    <argument>AppBundle\Models\Administrator</argument>
                 </service>
             </argument>
             <argument type="service" id="app.uuid.generator"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
-
     </services>
 </container>

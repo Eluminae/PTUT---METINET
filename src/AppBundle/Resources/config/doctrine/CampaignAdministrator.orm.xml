@@ -6,13 +6,12 @@
 
     <entity name="AppBundle\Models\CampaignAdministrator" table="wc_campaign_administrator" repository-class="AppBundle\Repositories\OrmCampaignAdministrator">
         <id name="id" type="string" column="id" />
+        <field name="password" type="string" column="password"/>
+        <field name="salt" type="string" column="salt"/>
+        <field name="role" type="string" column="role"/>
         <one-to-one field="identity" target-entity="Identity" >
             <cascade><cascade-remove /></cascade>
             <join-column name="identity_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
-        <one-to-one field="password" target-entity="Password" >
-            <cascade><cascade-remove /></cascade>
-            <join-column name="password_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
     </entity>
 </doctrine-mapping>

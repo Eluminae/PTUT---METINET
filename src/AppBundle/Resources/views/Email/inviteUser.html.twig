@@ -6,9 +6,9 @@
     {% if invitation.assignedCampaign is not empty %}
         rejoindre la camapgne : {{ invitation.assignedCampaign.name }}.
         {% set link = path('') %}
-    {% elseif invitation.role == 'admin' %}
+    {% elseif invitation.role == 'Administrator' %}
         collaborer en tant qu'administrateur.
-    {% elseif invitation.role == 'campaign-admin' %}
+    {% elseif invitation.role == 'CampaignAdministrator' %}
         collaborer en tant qu'administrateur de campagne.
     {% endif %}
 </p>

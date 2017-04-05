@@ -11,6 +11,7 @@ use AppBundle\Models\Invitation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class RegisterController extends Controller
 {
@@ -39,24 +40,32 @@ class RegisterController extends Controller
     }
 
     /**
+     * @param Request    $request
      * @param Invitation $invitation
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
      *
      * @ParamConverter("invitation", options={"mapping": {"invitationToken": "invitationToken"}})
      */
     public function registerFromInvitationAction(Request $request, Invitation $invitation)
     {
-        // todo : Handle assignations to multiples camapaigns invitations without juror account
+        $userRegisterer = $this->get('app.services.user_registerer');
 
         $userRegistrationDto = new UserRegistration();
         $userRegistrationDto->email = $invitation->getEmail();
         $userRegistrationDto->role = $invitation->getRole();
+        dump($invitation->getRole());
+        $userRegistrationDto->userObjectType = $userRegisterer->determineDataFromRole(
+            $invitation->getRole(),
+            'object'
+        );
 
-        $form = $this->createForm(SignUpType::class, new UserRegistration());
+        $form = $this->createForm(SignUpType::class, $userRegistrationDto);
 
-
-
+        // todo : Handle assignations to multiples camapaigns invitations without juror account
         // todo !!!!
 //        if ($invitation->getAssignedCampaign()) {
 //            /** @var Juror $userTypeEntity */
@@ -68,18 +77,32 @@ class RegisterController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $userSignUp = $form->getData();
 
-            $this->get('app.services.user_registerer')->signUp($userSignUp);
+            $savedUser = $userRegisterer->signUp($userSignUp);
+            $provider = $userRegisterer->determineDataFromRole($userRegistrationDto->role, 'provider');
+
+            $token = new UsernamePasswordToken(
+                $savedUser,
+                null,
+                $provider,
+                $savedUser->getRoles()
+            );
+
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_'.$provider, serialize($token));
+
+            $this->addFlash('success', 'Inscription enregistré');
         }
 
-
-
-        return $this->render('@App/Juror/registerFromInvitation.html.twig', ['form' => $form->createView(), 'email' => $invitation->getEmail()]);
+        return $this->render(
+            '@App/Juror/registerFromInvitation.html.twig',
+            ['form' => $form->createView(), 'email' => $invitation->getEmail()]
+        );
     }
 
     private function invitationFormHandler(Request $request, bool $isAdmin, Campaign $campaign = null)
     {
         $invitation = new Invitation();
-        $invitation->setInvitationToken($this->get('app.uudi.generator')->generateUuid());
+        $invitation->setInvitationToken($this->get('app.uuid.generator')->generateUuid());
 
         if ($campaign) {
             $invitation->setAssignedCampaign($campaign);

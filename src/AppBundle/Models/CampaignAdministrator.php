@@ -11,12 +11,16 @@ class CampaignAdministrator implements UserInterface
     private $id;
     private $identity;
     private $password;
+    private $salt;
+    private $role;
 
-    public function __construct(string $id, Identity $identity, Password $password)
+    public function __construct(string $id, Identity $identity, string $password, string $salt, string $role)
     {
         $this->id = $id;
         $this->identity = $identity;
         $this->password = $password;
+        $this->salt = $salt;
+        $this->role = $role;
     }
 
     public function getId()
@@ -52,7 +56,7 @@ class CampaignAdministrator implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return [$this->role];
     }
 
     /**
@@ -64,7 +68,7 @@ class CampaignAdministrator implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return $this->salt;
     }
 
     /**
@@ -74,7 +78,7 @@ class CampaignAdministrator implements UserInterface
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->identity->getEmail();
     }
 
     /**
@@ -87,6 +91,4 @@ class CampaignAdministrator implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
-
-
 }

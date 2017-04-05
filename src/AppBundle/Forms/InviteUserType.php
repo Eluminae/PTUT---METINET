@@ -25,8 +25,8 @@ class InviteUserType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'Administrateur' => 'Administrator',
-                        'Administrateur de campagne' => 'CampaignAdministrator',
+                        'Administrateur' => 'ROLE_ADMIN',
+                        'Administrateur de campagne' => 'ROLE_CAMPAIGN_ADMIN',
                     ],
                 ]
             );

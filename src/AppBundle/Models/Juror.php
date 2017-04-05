@@ -13,26 +13,39 @@ class Juror implements UserInterface
     private $id;
     private $identity;
     private $password;
+    private $salt;
+    private $role;
     /** @var ArrayCollection */
     private $campaigns;
 
-    public function __construct(string $id, Identity $identity, Password $password)
+    public function __construct(string $id, Identity $identity, string $password, string $salt, string $role)
     {
         $this->id = $id;
         $this->identity = $identity;
         $this->password = $password;
+        $this->salt = $salt;
+        $this->role = $role;
     }
 
+    /**
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return \AppBundle\Models\Identity
+     */
     public function getIdentity()
     {
         return $this->identity;
     }
 
+    /**
+     * @return string
+     */
     public function getPassword()
     {
         return $this->password;
@@ -56,7 +69,7 @@ class Juror implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return [$this->role];
     }
 
     /**
@@ -68,7 +81,7 @@ class Juror implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return $this->salt;
     }
 
     /**
@@ -78,7 +91,7 @@ class Juror implements UserInterface
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        $this->identity->getEmail();
     }
 
     /**

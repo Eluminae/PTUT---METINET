@@ -9,12 +9,15 @@ use AppBundle\Models\UtcDate;
 use AppBundle\Repositories\OrmCampaignRepository;
 use AppBundle\Services\FileFactory;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\File;
 
 class RealisationRegisterer
 {
     private $campaingRepository;
+    /** @var UuidGenerator */
+    private $uuidGenerator;
 
-    public function __construct(OrmCampaignRepository $campaingRepository)
+    public function __construct(OrmCampaignRepository $campaingRepository, UuidGenerator $uuidGenerator)
     {
         $this->campaingRepository = $campaingRepository;
     }
@@ -26,16 +29,17 @@ class RealisationRegisterer
             throw new Exception('PAS DE CAMPAGNE');
         }
 
+        /** @var File $file */
         $file = $realisationRegistration->file;
-        $fileName = sprintf('%s.%s', md5(uniqid()), $file->guessExtension());
+        $fileName = sprintf('%s.%s', $this->uuidGenerator->generateUuid(), $file->guessExtension());
         $file->move(
             Realisation::filePath,
             $fileName
         );
 
         return new Realisation(
-            uniqid(),
-            new UtcDate(uniqid(), new \DateTimeImmutable('now')),
+            $this->uuidGenerator->generateUuid(),
+            new UtcDate($this->uuidGenerator->generateUuid(), new \DateTimeImmutable('now')),
             $realisationRegistration->name,
             $fileName,
             $campaign,
@@ -47,7 +51,7 @@ class RealisationRegisterer
     {
         $candidates = [
             new Identity(
-                uniqid(),
+                $this->uuidGenerator->generateUuid(),
                 $identity['firstName'],
                 $identity['lastName'],
                 $identity['email']
