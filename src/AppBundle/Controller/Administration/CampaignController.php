@@ -70,7 +70,7 @@ class CampaignController extends Controller
         );
     }
 
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request, string $campaignId)
     {
         $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
         if (null === $campaign) {
