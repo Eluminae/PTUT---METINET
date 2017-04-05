@@ -2,7 +2,7 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\Campaign;
+use AppBundle\Models\campaigns;
 use AppBundle\Models\Identity;
 use AppBundle\Models\Password;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,14 +12,14 @@ class Juror implements UserInterface
     private $id;
     private $identity;
     private $password;
-    private $campaign;
+    private $campaigns;
 
-    public function __construct(string $id, Identity $identity, Password $password, Campaign $campaign)
+    public function __construct(string $id, Identity $identity, Password $password, array $campaigns)
     {
         $this->id = $id;
         $this->identity = $identity;
         $this->password = $password;
-        $this->campaign = $campaign;
+        $this->campaigns = $campaigns;
     }
 
     public function getId()
@@ -37,9 +37,9 @@ class Juror implements UserInterface
         return $this->password;
     }
 
-    public function getCampaign()
+    public function getCampaigns()
     {
-        return $this->campaign;
+        return $this->campaigns;
     }
 
     /**

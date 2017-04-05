@@ -14,5 +14,15 @@
             <cascade><cascade-remove /></cascade>
             <join-column name="password_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
+        <many-to-many field="campaigns" target-entity="Campaign" >
+            <join-table name="wc_campaign">
+                <join-columns>
+                    <join-column  name="juror_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column  name="campaign_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 </doctrine-mapping>

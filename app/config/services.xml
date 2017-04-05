@@ -49,6 +49,11 @@
             <argument type="service" id="app.campaign.repository" />
         </service>
 
+        <service id="app.invitation.juror" class="AppBundle\Services\JurorInvitationSender">
+            <argument type="service" id="app.identity.repository" />
+            <argument type="service" id="app.juror.repository" />
+        </service>
+
         
     </services>
 </container>

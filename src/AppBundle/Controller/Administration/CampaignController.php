@@ -83,4 +83,28 @@ class CampaignController extends Controller
     {
         // todo
     }
+
+    public function addJurorAction(Request $request)
+    {
+        $form = $this->createForm(AddJurorToCapaignType::class, new AddJurorToCapaign());
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $addingJuror = $form->getData();
+
+            $juror = $this->get('app.invitation.juror')->send($addingJuror);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($juror);
+            $em->flush();
+
+            return $this->redirectToRoute('admin.campaign.list');
+        }
+
+        return $this->render(
+            'AppBundle:Admin:Campaign/addJuror.html.twig', [
+                'addJurorToCapaignForm' => $form->createView()
+            ]
+        );
+    }
 }
