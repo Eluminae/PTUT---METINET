@@ -5,6 +5,7 @@ namespace AppBundle\Models;
 use AppBundle\Models\campaigns;
 use AppBundle\Models\Identity;
 use AppBundle\Models\Password;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class Juror implements UserInterface
@@ -12,34 +13,42 @@ class Juror implements UserInterface
     private $id;
     private $identity;
     private $password;
+    private $salt;
+    private $role;
+    /** @var ArrayCollection */
     private $campaigns;
 
-    public function __construct(string $id, Identity $identity, Password $password, array $campaigns)
+    public function __construct(string $id, Identity $identity, string $password, string $salt, string $role)
     {
         $this->id = $id;
         $this->identity = $identity;
         $this->password = $password;
-        $this->campaigns = $campaigns;
+        $this->salt = $salt;
+        $this->role = $role;
     }
 
+    /**
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return \AppBundle\Models\Identity
+     */
     public function getIdentity()
     {
         return $this->identity;
     }
 
+    /**
+     * @return string
+     */
     public function getPassword()
     {
         return $this->password;
-    }
-
-    public function getCampaigns()
-    {
-        return $this->campaigns;
     }
 
     /**
@@ -60,7 +69,7 @@ class Juror implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return [$this->role];
     }
 
     /**
@@ -72,7 +81,7 @@ class Juror implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return $this->salt;
     }
 
     /**
@@ -82,7 +91,7 @@ class Juror implements UserInterface
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        $this->identity->getEmail();
     }
 
     /**
@@ -94,5 +103,29 @@ class Juror implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @param \AppBundle\Models\Campaign $campaign
+     */
+    public function addCampaign(Campaign $campaign)
+    {
+        $this->campaigns[] = $campaign;
+    }
+
+    /**
+     * @param \AppBundle\Models\Campaign $campaign
+     */
+    public function removeCampaign(Campaign $campaign)
+    {
+        $this->campaigns->removeElement($campaign);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCampaigns()
+    {
+        return $this->campaigns;
     }
 }

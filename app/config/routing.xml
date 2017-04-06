@@ -16,19 +16,23 @@
 
     <!-- Administrator's routes -->
     <route id="public.admin.login" path="/admin/login">
-        <default key="_controller">AppBundle:Admin:login</default>
+        <default key="_controller">AppBundle:Administration/Admin:login</default>
     </route>
 
     <route id="public.admin.logout" path="/admin/logout">
-        <default key="_controller">AppBundle:Admin:logout</default>
+        <default key="_controller">AppBundle:Administration/Admin:logout</default>
     </route>
 
     <route id="public.admin.home" path="/admin">
         <default key="_controller">AppBundle:Administration/Admin:index</default>
     </route>
 
-    <!-- CampaignAdministrator campaignAdministrator's routes -->
-    <route id="admin.campaign_administrator.create" path="admin/campaign-administrators/create">
+    <route id="admin.invite.user" path="/admin/invite/user">
+        <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>
+    </route>
+
+    <!-- Administrator campaignAdministrator's routes -->
+    <route id="admin.campaign_administrator.create" path="/admin/campaign-administrators/create">
         <default key="_controller">AppBundle:Administration/CampaignAdministrator:create</default>
     </route>
 
@@ -45,7 +49,7 @@
     </route>
 
     <!-- Administrator administrator's routes -->
-    <route id="admin.administrator.create" path="admin/administrators/create">
+    <route id="admin.administrator.create" path="/admin/administrators/create">
         <default key="_controller">AppBundle:Administration/Administrator:create</default>
     </route>
 
@@ -62,7 +66,7 @@
     </route>
 
     <!-- Campaign administrator's routes -->
-    <route id="admin.campaign.create" path="admin/campaigns/create">
+    <route id="admin.campaign.create" path="/admin/campaigns/create">
         <default key="_controller">AppBundle:Administration/Campaign:create</default>
     </route>
 
@@ -141,7 +145,11 @@
     </route>
 
     <!-- Realisation routes -->
-    <route id="public.realisation.register" path="/realisation/register/{campaignId}">
+    <route id="public.realisation.register" path="/realisations/register/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>
+    </route>
+
+    <route id="public.realisation.list" path="/realisations/{campaignId}">
+        <default key="_controller">AppBundle:Realisation:listForCampaign</default>
     </route>
 </routes>

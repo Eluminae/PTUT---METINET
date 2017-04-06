@@ -5,7 +5,7 @@
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="AppBundle\Models\Realisation" table="wc_realisation" repository-class="AppBundle\Repositories\OrmRealisationRepository">
-        <id name="id" type="string" columns="id" />
+        <id name="id" type="string" column="id" />
         <field name="name" type="string" column="name" />
         <field name="fileName" type="string" column="fileName" />
 

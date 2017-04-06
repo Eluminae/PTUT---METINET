@@ -1,9 +1,0 @@
-{% extends 'AppBundle::layoutAdmin.html.twig' %}
-
-{% block body %}
-    <div class="col-md-6">
-        {{ form_start(campaignCreationForm, {'action': path('admin.campaign.create') }) }}
-
-        {{ form_end(campaignCreationForm) }}
-    </div>
-{% endblock %}
