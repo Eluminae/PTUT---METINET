@@ -9,6 +9,7 @@
 namespace AppBundle\Repositories;
 
 
+use AppBundle\Models\Administrator;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -17,7 +18,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class OrmAdministratorRepository extends EntityRepository implements UserProviderInterface
 {
-
     /**
      * Loads the user for the given username.
      *
@@ -32,7 +32,20 @@ class OrmAdministratorRepository extends EntityRepository implements UserProvide
      */
     public function loadUserByUsername($username)
     {
-        // TODO: Implement loadUserByUsername() method.
+        $query = $this->createQueryBuilder('a')
+            ->join('a.identity', 'i')
+            ->where('i.email = :email')
+            ->setParameter('email', $username)
+            ->setMaxResults(1)
+            ->getQuery();
+
+        $user = $query->getResult();
+
+        if (count($user) < 1) {
+            throw new UsernameNotFoundException();
+        }
+
+        return $user[0];
     }
 
     /**
@@ -46,12 +59,18 @@ class OrmAdministratorRepository extends EntityRepository implements UserProvide
      * @param UserInterface $user
      *
      * @return UserInterface
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      *
      * @throws UnsupportedUserException if the account is not supported
      */
     public function refreshUser(UserInterface $user)
     {
-        // TODO: Implement refreshUser() method.
+        if (!$this->supportsClass(get_class($user))) {
+
+            throw new UnsupportedUserException();
+        }
+
+        return $this->loadUserByUsername($user->getUsername());
     }
 
     /**
@@ -60,9 +79,10 @@ class OrmAdministratorRepository extends EntityRepository implements UserProvide
      * @param string $class
      *
      * @return bool
+     * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
      */
     public function supportsClass($class)
     {
-        // TODO: Implement supportsClass() method.
+        return (Administrator::class === $class);
     }
 }
