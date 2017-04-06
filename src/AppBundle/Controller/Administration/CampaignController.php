@@ -100,7 +100,7 @@ class CampaignController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Admin:Campaign/addJuror.html.twig', [
+            'AppBundle:Admin:Campaign/inviteJuror.html.twig', [
                 'addJurorToCapaignForm' => $form->createView()
             ]
         );

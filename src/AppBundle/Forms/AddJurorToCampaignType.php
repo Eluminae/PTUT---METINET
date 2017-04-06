@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AddJurorToCampaign extends AbstractType
+class AddJurorToCampaignType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -41,8 +41,8 @@
         </service>
 
         <service id="app.juror.invitation" class="AppBundle\Services\JurorInvitationSender">
-            <argument type="service" id="app.identity.repository" />
             <argument type="service" id="app.juror.repository" />
+            <argument type="service" id="app.identity.repository" />
         </service>
 
         <service id="app.services.user_registerer" class="AppBundle\Services\UserRegisterer">
