@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use AppBundle\Dtos\AddJurorToCampaign;
+use AppBundle\Forms\AddJurorToCampaignType;
 
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Dtos\CampaignCreation;
@@ -86,17 +88,13 @@ class CampaignController extends Controller
 
     public function addJurorAction(Request $request)
     {
-        $form = $this->createForm(AddJurorToCapaignType::class, new AddJurorToCapaign());
+        $form = $this->createForm(AddJurorToCampaignType::class, new AddJurorToCampaign());
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $addingJuror = $form->getData();
 
-            $juror = $this->get('app.invitation.juror')->send($addingJuror);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($juror);
-            $em->flush();
+            $this->get('app.juror.invitation')->send($addingJuror);
 
             return $this->redirectToRoute('admin.campaign.list');
         }
