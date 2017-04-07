@@ -22,14 +22,14 @@ class CampaignController extends Controller
 			throw new Exception("Pas de campage avec cet id");
 		}
 
-        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+		$realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
-        return $this->render(
-            'AppBundle:Admin:Campaign/show.html.twig', [
-                'campaign' => $campaign,
-                'realisations' =>$realisations
-            ]
-        );
+		return $this->render(
+		    'AppBundle:Admin:Campaign/show.html.twig', [
+			'campaign' => $campaign,
+			'realisations' =>$realisations
+		    ]
+		);
 	}
 
     public function listAction(Request $request)
