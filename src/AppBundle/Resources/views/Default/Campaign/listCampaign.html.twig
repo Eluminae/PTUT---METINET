@@ -5,20 +5,24 @@
         <div class="competitions page-wrap">
             <div class="wc-title-banner">
                 <h2>Compétitions</h2>
-	    </div>
-	    {% for campaign in campaigns %}
-		<div class="col-sm-3" >
-		    <div class="wc-project-competitionPage">
-			<a href="{{ path('public.campaign.show', {'campaignId': campaign.id}) }}">
-			    <img src="campaignImages/{{ campaign.imageName }}" class="wc-picture-competitionPage" />
-			</a>
-			<div class="wc-info-competitionPage">
-			    <p class="wc-name-competitionPage">{{ campaign.name }}</p>
-			    <p class="wc-category-competitionPage">Catégorie</p>
-			    <p class="wc-desc-competitionPage">{{ campaign.description }}</p>
-			</div>
-		    </div>
-		</div>
-	    {% endfor %}
-	</div>
+            </div>
+                {% for campaign in campaigns %}
+
+                    <div class="col-sm-3" >
+                        <div class="wc-project-competitionPage">
+                            <a href="">
+                                <img src="campaignImages/{{ campaign.imageName }}" />
+                            </a>
+                            <div class="wc-info-competitionPage">
+                                <a href=""><p class="wc-name-competitionPage">{{ campaign.name }}</p></a>
+                                <!--path('admin.campaign.show', {'campaignId': realisation.campaign.id-->
+                                <p class="wc-category-competitionPage">{{ campaign.description }}</p>
+                                <p class="wc-desc-competitionPage">{{ campaign.endDate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+        </div>
+        <!-- +++++++++ END COMPETITION CONTAINER ++++++++++ -->
 {% endblock %}

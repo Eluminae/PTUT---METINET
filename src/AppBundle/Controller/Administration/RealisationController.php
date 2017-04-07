@@ -65,7 +65,7 @@ class RealisationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $realisationRegistration = $form->getData();
 
-            $realisation = $this->get('app.realisationAdmin.registerer')->create($realisationRegistration, $campaignId);
+            $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaignId);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($realisation);
@@ -75,8 +75,8 @@ class RealisationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Realisation:realisationRegistration.html.twig', [
-                'realisationRegistrationForm' => $form->createView(),
+            'AppBundle:Admin:Realisation/create.html.twig', [
+                'realisationCreationForm' => $form->createView(),
                 'campaign' => $campaign
             ]
         );
