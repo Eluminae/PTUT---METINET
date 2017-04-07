@@ -26,17 +26,17 @@
                                 </thead>
                                 {% for campaign in campaigns %}
                                     <tr>
-                                        <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
+                                        <td><a href="{{ path('admin.campaign.show', {'campaign': campaign.id}) }}">{{ campaign.name }}</a></td>
                                         <!--<td>{{ campaign.description }}</td>-->
                                         <td>{{ campaign.beginningDate }}</td>
                                         <td>{{ campaign.endDate }}</td>
                                         <!-- <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                                             <td><img src="campaignImages/{{ campaign.imageName }}" /></td>-->
                                             <td>
-                                                <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                                <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
                                             </td>
                                             <td>
-                                                <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></a>
+                                                <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></a>
                                             </td>
                                     </tr>
                                 {% endfor %}

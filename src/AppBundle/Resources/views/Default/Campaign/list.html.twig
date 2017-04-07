@@ -10,11 +10,11 @@
 
                 <div class="col-sm-3" >
                     <div class="wc-project-competitionPage">
-                        <a href="{{ path('public.campaign.show', { 'campaignId': campaign.id }) }}">
+                        <a href="{{ path('public.campaign.show', { 'campaign': campaign.id }) }}">
                             <img src="campaignImages/{{ campaign.imageName }}" />
                         </a>
                     <div class="wc-info-competitionPage">
-                        <a href="{{ path('public.campaign.show', { 'campaignId': campaign.id }) }}"><p class="wc-name-competitionPage">{{ campaign.name }}</p></a>
+                        <a href="{{ path('public.campaign.show', { 'campaign': campaign.id }) }}"><p class="wc-name-competitionPage">{{ campaign.name }}</p></a>
                         <!--path('admin.campaign.show', {'campaignId': realisation.campaign.id-->
                         <p class="wc-category-competitionPage">{{ campaign.description }}</p>
                         <p class="wc-desc-competitionPage">{{ campaign.endDate }}</p>

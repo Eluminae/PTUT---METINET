@@ -9,17 +9,24 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use AppBundle\Dtos\AddJurorToCampaign;
 use AppBundle\Forms\AddJurorToCampaignType;
 
-use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Dtos\CampaignCreation;
+use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\UtcDate;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CampaignController extends Controller
 {
-    public function showAction(Request $request, string $campaignId)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-
         if ($campaign === null) {
             throw new Exception("Pas de campage avec cet id");
         }
@@ -73,13 +80,16 @@ class CampaignController extends Controller
         );
     }
 
-    public function deleteAction(Request $request, string $campaignId)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-        if (null === $campaign) {
-            throw new \Exception(sprintf('Campaign %s not found.', $campaignId));
-        }
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();

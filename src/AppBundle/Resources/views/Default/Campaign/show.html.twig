@@ -1,0 +1,40 @@
+{% extends 'AppBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Campaign</h2>
+        </div>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    <div class="wc-admin-row">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Nom de la campagne</td>
+                                        <td>Description</td>
+                                        <td>Début</td>
+                                        <td>Fin</td>
+                                        <td>Créateur</td>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>{{ campaign.name }}</td>
+                                    <td>{{ campaign.description }}</td>
+                                    <td>{{ campaign.beginningDate }}</td>
+                                    <td>{{ campaign.endDate }}</td>
+                                    <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                </tr>
+                            </table>
+                            <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
+                            <a href="{{ path('public.realisation.register', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Déposer une réalisation</a>
+                            <a href="{{ path('public.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

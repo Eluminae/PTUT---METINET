@@ -29,9 +29,9 @@
                                 </tr>
                             </table>
                             <a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Inviter un juré</a>
-                            <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
-                            <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
-                            <a href="{{ path('admin.realisation.create', {'campaignId': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
+                            <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
+                            <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
+                            <a href="{{ path('admin.realisation.create', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
                             <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
                             <table class="table table-striped">
                                 <thead>
@@ -44,11 +44,11 @@
                                 </thead>
                                 {% for realisation in realisations %}
                                 <tr>
-                                    <td><a href="{{ path('admin.realisation.show', {'realisationId': realisation.id}) }}">{{ realisation.name }}</a></td>
+                                    <td><a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a></td>
                                     <td><a href="{{ asset(realisation.filePath) }}">Télécharger</a></td>
                                     <td>{{ realisation.candidates }}</td>
                                     <td>
-                                        <a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
                                     </td>
                                 </tr>
                                 {% endfor %}

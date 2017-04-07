@@ -71,15 +71,15 @@
         <default key="_controller">AppBundle:Administration/Campaign:list</default>
     </route>
 
-    <route id="admin.campaign.show" path="/admin/campaigns/{campaignId}">
+    <route id="admin.campaign.show" path="/admin/campaigns/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:show</default>
     </route>
 
-    <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaignId}">
+    <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:delete</default>
     </route>
 
-    <route id="admin.campaign.update" path="/admin/campaigns/update/{campaignId}">
+    <route id="admin.campaign.update" path="/admin/campaigns/update/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
@@ -104,12 +104,12 @@
         <default key="_controller">AppBundle:Register:createInvitationForJuror</default>
     </route>
 
-    <route id="public.realisation.list_for_campaign" path="/realisation/list-for-campaign/{campaignId}">
-        <default key="_controller">AppBundle:Realisation:listForCampaign</default>
-    </route>
+    <!-- <route id="public.realisation.list_for_campaign" path="/realisations/list-for-campaign/{campaign}"> -->
+    <!--     <default key="_controller">AppBundle:Realisation:listForCampaign</default> -->
+    <!-- </route> -->
 
     <!-- Campaign routes -->
-    <route id="public.campaign.show" path="/campaigns/{campaignId}">
+    <route id="public.campaign.show" path="/campaigns/{campaign}">
         <default key="_controller">AppBundle:Campaign:show</default>
     </route>
 
@@ -117,16 +117,12 @@
         <default key="_controller">AppBundle:Campaign:list</default>
     </route>
 
-    <route id="public.campaign.show" path="/campaigns/{campaignId}">
+    <route id="public.campaign.show" path="/campaigns/{campaign}">
         <default key="_controller">AppBundle:Campaign:show</default>
     </route>
 
     <!-- Realisation Administrator routes -->
-    <route id="admin.realisation.show" path="/admin/realisations/{realisationId}">
-        <default key="_controller">AppBundle:Administration/Realisation:show</default>
-    </route>
-
-    <route id="admin.realisation.delete" path="/admin/realisations/delete/{realisationId}">
+    <route id="admin.realisation.delete" path="/admin/realisations/delete/{realisation}">
         <default key="_controller">AppBundle:Administration/Realisation:delete</default>
     </route>
 
@@ -134,20 +130,33 @@
         <default key="_controller">AppBundle:Administration/Realisation:list</default>
     </route>
 
-    <route id="admin.realisation.create" path="/admin/realisations/create/{campaignId}">
+    <route id="admin.realisation.create" path="/admin/realisations/create/{campaign}">
         <default key="_controller">AppBundle:Administration/Realisation:create</default>
     </route>
 
+    <route id="admin.realisation.show" path="/admin/realisations/{realisation}">
+        <default key="_controller">AppBundle:Administration/Realisation:show</default>
+    </route>
+
     <!-- Realisation routes -->
-    <route id="public.realisation.register" path="/realisation/register/{campaignId}">
+    <route id="public.realisation.register" path="/realisation/register/{campaign}">
         <default key="_controller">AppBundle:Realisation:register</default>
     </route>
 
-    <route id="public.realisation.list" path="/realisations/{campaignId}">
+    <route id="public.realisation.list" path="/realisations/campaigns/{campaign}">
         <default key="_controller">AppBundle:Realisation:listForCampaign</default>
+    </route>
+
+    <route id="public.realisation.show" path="/realisations/{realisation}">
+        <default key="_controller">AppBundle:Realisation:show</default>
     </route>
 
     <route id="public.juror.home" path="/juror">
         <default key="_controller">AppBundle:Juror:index</default>
+    </route>
+
+    <!-- Mark routes -->
+    <route id="juror.mark.grade" path="/juror/realisations/grade/{realisation}">
+        <default key="_controller">AppBundle:Realisation:grade</default>
     </route>
 </routes>

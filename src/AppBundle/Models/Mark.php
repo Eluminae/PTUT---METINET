@@ -2,37 +2,30 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\Juror;
+use AppBundle\Models\Identity;
 use AppBundle\Models\Realisation;
 use AppBundle\Models\UtcDate;
 
 class Mark
 {
     private $id;
-    private $format;
     private $date;
     private $value;
-    private $juror;
+    private $identity;
     private $realisation;
 
-    public function __construct(string $id, string $format, UtcDate $date, $value, Juror $juror, Realisation $realisation)
+    public function __construct(string $id, UtcDate $date, $value, Identity $identity, Realisation $realisation)
     {
         $this->id = $id;
-        $this->format = $format;
         $this->date = $date;
         $this->value = $value;
-        $this->juror = $juror;
+        $this->identity = $identity;
         $this->realisation = $realisation;
     }
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getFormat()
-    {
-        return $this->format;
     }
 
     public function getDate()
@@ -45,9 +38,9 @@ class Mark
         return $this->value;
     }
 
-    public function getJuror()
+    public function getIdentity()
     {
-        return $this->juror;
+        return $this->identity;
     }
 
     public function getRealisation()

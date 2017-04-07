@@ -1,8 +1,8 @@
 {% extends 'AppBundle:Default:layout.html.twig' %}
 
 {% block body %}
-    <div class="col-md-6">
-        {{ form_start(realisationRegistrationForm, {'action': path('public.realisation.register', {'campaignId': campaign.id}) }) }}
+    <div class="page-wrap">
+        {{ form_start(realisationRegistrationForm)  }}
         <div class="form-group">
             {{ form_label(realisationRegistrationForm.identity.firstName) }}
             {{ form_widget(realisationRegistrationForm.identity.firstName, { 'attr': { 'class': 'form-control' } }) }}
@@ -13,7 +13,6 @@
             {{ form_label(realisationRegistrationForm.identity.email) }}
             {{ form_widget(realisationRegistrationForm.identity.email, { 'attr': { 'class': 'form-control' } }) }}
         </div>
-
         {{ form_end(realisationRegistrationForm) }}
     </div>
 {% endblock %}

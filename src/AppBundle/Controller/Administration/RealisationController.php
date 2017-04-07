@@ -2,14 +2,16 @@
 
 namespace AppBundle\Controller\Administration;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use AppBundle\Forms\RealisationRegistrationType;
 use AppBundle\Dtos\RealisationRegistration;
+use AppBundle\Forms\RealisationRegistrationType;
 use AppBundle\Models\Campaign;
+use AppBundle\Models\Realisation;
 use AppBundle\Models\UtcDate;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 
 class RealisationController extends Controller
 {
@@ -23,13 +25,16 @@ class RealisationController extends Controller
         );
     }
 
-    public function showAction(Request $request, string $realisationId)
+    /**
+     * @param Request  $request
+     * @param Realisation $realisation
+     *
+     * @ParamConverter("realisation", class="AppBundle:Realisation")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction(Request $request, Realisation $realisation)
     {
-        $realisation = $this->get('app.realisation.repository')->findOneById($realisationId);
-        if (null === $realisation) {
-            throw new \Exception(sprintf('Realisation %s not found.', $realisationId));
-        }
-
         return $this->render(
             'AppBundle:Admin:Realisation/show.html.twig', [
                 'realisation' => $realisation,
@@ -37,13 +42,16 @@ class RealisationController extends Controller
         );
     }
 
-    public function deleteAction(Request $request, string $realisationId)
+    /**
+     * @param Request  $request
+     * @param Realisation $realisation
+     *
+     * @ParamConverter("realisation", class="AppBundle:Realisation")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(Request $request, Realisation $realisation)
     {
-        $realisation = $this->get('app.realisation.repository')->findOneById($realisationId);
-        if (null === $realisation) {
-            throw new \Exception(sprintf('Realisation %s not found.', $realisationId));
-        }
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($realisation);
         $em->flush();
@@ -51,13 +59,16 @@ class RealisationController extends Controller
         return $this->redirectToRoute('admin.realisation.list');
     }
 
-    public function createAction(Request $request, string $campaignId)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function createAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-        if (null === $campaign) {
-            throw new \Exception(sprintf('Campaign %s not found.', $campaignId));
-        }
-
         $form = $this->createForm(RealisationRegistrationType::class, new RealisationRegistration());
 
         $form->handleRequest($request);

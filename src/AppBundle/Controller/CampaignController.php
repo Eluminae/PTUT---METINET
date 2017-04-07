@@ -7,25 +7,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Dtos\CampaignCreation;
+use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\UtcDate;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CampaignController extends Controller
 {
-    public function showAction(Request $request)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction(Request $request, Campaign $campaign)
     {
-        $campaignId = $request->get('campaignId');
-
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-
-        if ($campaign === null) {
-            throw new Exception("Pas de campage avec cet id");
-        }
-
         return $this->render(
-            'AppBundle:Default:Campaign/showCampaign.html.twig', [
+            'AppBundle:Default:Campaign/show.html.twig', [
                 'campaign' => $campaign
             ]
         );
@@ -36,7 +37,7 @@ class CampaignController extends Controller
         $campaigns = $this->get('app.campaign.repository')->findAll();
 
         return $this->render(
-            'AppBundle:Default:Campaign/listCampaign.html.twig', [
+            'AppBundle:Default:Campaign/list.html.twig', [
                 'campaigns' => $campaigns
             ]
         );
