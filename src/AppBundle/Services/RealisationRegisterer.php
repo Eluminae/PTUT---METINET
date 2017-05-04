@@ -19,6 +19,7 @@ class RealisationRegisterer
     public function __construct(OrmCampaignRepository $campaingRepository, UuidGenerator $uuidGenerator)
     {
         $this->campaingRepository = $campaingRepository;
+        $this->uuidGenerator = $uuidGenerator;
     }
 
     public function create(RealisationRegistration $realisationRegistration, $campaignId)

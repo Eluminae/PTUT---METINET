@@ -17,66 +17,36 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="wc-admin-p">Nom de la campagne</th>
-
-                                    <th class="wc-admin-p">Date de début</th>
-                                    <th class="wc-admin-p">Date de fin</th>
-                                    <th class="wc-admin-p"><a href="admin-addCampaign.html"><button type="button" class="btn-admin-form btn-add" name="button">Ajouter</button></a></th>
-
+                                    <td>Nom</td>
+                                    <td>Début</td>
+                                    <td>Fin</td>
+                                    <td>
+                                        <a href="{{ path('admin.campaign.create') }}"><button type="button" class="btn-admin-form btn-modify" name="button">Ajouter</button></a>
+                                    </td>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                {% for campaign in campaigns %}
                                 <tr>
-                                    <td>MaCampagne</td>
-                                    <td>12/02/2017</td>
-                                    <td>24/02/2017</td>
-                                    <td>  <button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></td>
+                                    <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
+                                    <!--<td>{{ campaign.description }}</td>-->
+                                    <td>{{ campaign.beginningDate }}</td>
+                                    <td>{{ campaign.endDate }}</td>
+                                   <!-- <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                    <td><img src="campaignImages/{{ campaign.imageName }}" /></td>-->
+                                    <td>
+                                        <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></a>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>MaCampagne</td>
-                                    <td>12/02/2017</td>
-                                    <td>24/02/2017</td>
-                                    <td>  <button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></td>
-                                </tr>
-                                <tr>
-                                    <td>MaCampagne</td>
-                                    <td>12/02/2017</td>
-                                    <td>24/02/2017</td>
-                                    <td>  <button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></td>
-                                </tr>
-                                </tbody>
+                                {% endfor %}
                             </table>
                         </div>
 
                     </div>
 
-
-                    <table>
-                        <thead>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>date de début</th>
-                        <th>date de fin</th>
-                        <th>Créateur</th>
-                        </thead>
-                        <tbody>
-                        {% for campaign in campaigns %}
-                            <tr>
-                                <td><a href="{{ path('admin.campaign.show', {'campaignId': campaign.id}) }}">{{ campaign.name }}</a></td>
-                                <td>{{ campaign.description }}</td>
-                                <td>{{ campaign.beginningDate }}</td>
-                                <td>{{ campaign.endDate }}</td>
-                                <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
-                                <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
-                                <td>
-                                    <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
-                                    <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <a href="{{ path('admin.campaign.create') }}">Add campaign</a>
+                   <!-- <a href="{{ path('admin.campaign.create') }}">Add campaign</a>-->
 
                 </div>
             </div>

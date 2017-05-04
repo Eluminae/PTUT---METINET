@@ -1,85 +1,28 @@
 {% extends 'AppBundle:Default:layout.html.twig' %}
 
 {% block body %}
-
     <div class="col-sm-12 no-padding">
-        <!-- ++++++++++ HERE START COMPETITION CONTAINER ++++++++++ -->
-
         <div class="competitions page-wrap">
             <div class="wc-title-banner">
                 <h2>Compétitions</h2>
             </div>
-
-            <table>
-                <thead>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>date de début</th>
-                <th>date de fin</th>
-                <th>Créateur</th>
-                </thead>
-                <tbody>
                 {% for campaign in campaigns %}
-                    <tr>
-                        <td>{{ campaign.name }}</td>
-                        <td>{{ campaign.description }}</td>
-                        <td>{{ campaign.beginningDate }}</td>
-                        <td>{{ campaign.endDate }}</td>
-                        <td>{{ campaign.creator.id }}</td>
-                        <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
 
-            <div class="col-sm-3" >
-                <div class="wc-project-competitionPage">
-                    <a href="">
-                        <img alt="" class="wc-picture-competitionPage" src="{{ asset('img/random.png') }}" />
-                    </a>
-                    <div class="wc-info-competitionPage">
-                        <p class="wc-name-competitionPage">Nom du projet</p>
-                        <p class="wc-category-competitionPage">Catégorie</p>
-                        <p class="wc-desc-competitionPage">Description</p>
+                    <div class="col-sm-3" >
+                        <div class="wc-project-competitionPage">
+                            <a href="">
+                                <img src="campaignImages/{{ campaign.imageName }}" />
+                            </a>
+                            <div class="wc-info-competitionPage">
+                                <a href=""><p class="wc-name-competitionPage">{{ campaign.name }}</p></a>
+                                <!--path('admin.campaign.show', {'campaignId': realisation.campaign.id-->
+                                <p class="wc-category-competitionPage">{{ campaign.description }}</p>
+                                <p class="wc-desc-competitionPage">{{ campaign.endDate }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-3" >
-                <div class="wc-project-competitionPage">
-                    <a href="">
-                        <img alt="" class="wc-picture-competitionPage" src="{{ asset('img/random.png') }}" />
-                    </a>
-                    <div class="wc-info-competitionPage">
-                        <p class="wc-name-competitionPage">Nom du projet</p>
-                        <p class="wc-category-competitionPage">Catégorie</p>
-                        <p class="wc-desc-competitionPage">Description</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3" >
-                <div class="wc-project-competitionPage">
-                    <a href="">
-                        <img alt="" class="wc-picture-competitionPage" src="{{ asset('img/random.png') }}" />
-                    </a>
-                    <div class="wc-info-competitionPage">
-                        <p class="wc-name-competitionPage">Nom du projet</p>
-                        <p class="wc-category-competitionPage">Catégorie</p>
-                        <p class="wc-desc-competitionPage">Description</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3" >
-                <div class="wc-project-competitionPage">
-                    <a href="">
-                        <img alt="" class="wc-picture-competitionPage" src="{{ asset('img/random.png') }}" />
-                    </a>
-                    <div class="wc-info-competitionPage">
-                        <p class="wc-name-competitionPage">Nom du projet</p>
-                        <p class="wc-category-competitionPage">Catégorie</p>
-                        <p class="wc-desc-competitionPage">Description</p>
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
+
         </div>
         <!-- +++++++++ END COMPETITION CONTAINER ++++++++++ -->
 {% endblock %}
