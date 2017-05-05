@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Administration;
+namespace AppBundle\Controller\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

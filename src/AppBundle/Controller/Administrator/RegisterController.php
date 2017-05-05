@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Administration;
+namespace AppBundle\Controller\Administrator;
 
 use AppBundle\Dtos\UserRegistration;
 use AppBundle\Forms\InviteUserType;
