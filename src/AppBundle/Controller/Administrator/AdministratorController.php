@@ -5,7 +5,6 @@ namespace AppBundle\Controller\Administrator;
 use AppBundle\Forms\SignInType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Controller\Administrator\UserManagerInterface;
 
 class AdministratorController extends Controller
 {
