@@ -5,59 +5,55 @@
     </header>
 {% endblock %}
 
-
-
-
-
 {% block nav %}
     <nav class="navHome">
-        <ul class="ulHome" >
+        <ul class="ulHome">
 
             <li>
-            <a href="">
-                <div class="navIcon">
-                    <div class="logoGrey"></div>
-                </div>
-            </a>
-
-            </li>
-            <li>
-            <a href="{{ path('admin.campaign.list') }}">
-                <div class="navIcon">
-                    <i class="fa fa-cogs fa-3x navI"></i>
-                </div>
-            </a>
-            </li>
-            <li>
-            <a href="">
-                <div class="navIcon">
-                    <i class="fa fa-check-square fa-3x navI"></i>
-                </div>
-            </a>
+                <a href="">
+                    <div class="navIcon">
+                        <div class="logoGrey"></div>
+                    </div>
+                </a>
 
             </li>
             <li>
-            <a href="">
-                <div class="navIcon">
-                    <i class="fa fa-users fa-3x navI"></i>
-                </div>
-            </a>
+                <a href="{{ path('admin.campaign.list') }}">
+                    <div class="navIcon">
+                        <i class="fa fa-cogs fa-3x navI"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <div class="navIcon">
+                        <i class="fa fa-check-square fa-3x navI"></i>
+                    </div>
+                </a>
 
             </li>
             <li>
-            <a href="">
-                <div class="navIcon">
-                    <i class="fa fa-user fa-3x navI"></i>
-                </div>
-            </a>
+                <a href="">
+                    <div class="navIcon">
+                        <i class="fa fa-users fa-3x navI"></i>
+                    </div>
+                </a>
 
             </li>
             <li>
-            <a href="{{ path('public.admin.logout') }}">
-                <div class="navIcon">
-                    <i class="fa fa-power-off fa-3x navI"></i>
-                </div>
-            </a>
+                <a href="">
+                    <div class="navIcon">
+                        <i class="fa fa-user fa-3x navI"></i>
+                    </div>
+                </a>
+
+            </li>
+            <li>
+                <a href="/logout">
+                    <div class="navIcon">
+                        <i class="fa fa-power-off fa-3x navI"></i>
+                    </div>
+                </a>
 
             </li>
         </ul>
