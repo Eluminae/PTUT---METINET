@@ -15,7 +15,7 @@ class AdminController extends Controller
         $administrators = $this->get('app.administrator.repository')->findAll();
         $jurors = $this->get('app.juror.repository')->findAll();
 
-		return $this->render('AppBundle:Admin:index.html.twig', [
+        return $this->render('AppBundle:Admin:index.html.twig', [
             'campaignAdministrators' => $campaignAdministrators,
             'administrators' => $administrators,
             'jurors' => $jurors

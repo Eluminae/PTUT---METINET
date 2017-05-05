@@ -31,7 +31,8 @@ class OrmCampaignAdministrator extends EntityRepository implements UserProviderI
             ->where('i.email = :email')
             ->setParameter('email', $username)
             ->setMaxResults(1)
-            ->getQuery();
+            ->getQuery()
+        ;
 
         $user = $query->getResult();
 

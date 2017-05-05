@@ -1,36 +1,36 @@
 {% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
 
 {% block body %}
-<div class="admin page-wrap">
-    <div class="wc-title-banner">
-        <h2>Realisation</h2>
-    </div>
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Realisation</h2>
+        </div>
 
-    <div class="wc-container">
-        <div class="col-sm-12">
-            <div class="wc-admin-block">
-                <div class="wc-admin-row">
-                    <div class="row">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Name</th>
-                                <th>Left at</th>
-                                <th>File</th>
-                                <th>Delete</th>
-                            </tr>
-                            <tr>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    <div class="wc-admin-row">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Left at</th>
+                                    <th>File</th>
+                                    <th>Delete</th>
+                                </tr>
+                                <tr>
                                     <td><a href="{{ path('admin.campaign.show', {'campaignId': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
-                                <td>{{ realisation.leftAt }}</td>
-                                <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
-                                <td>
-                                    <a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
-                                </td>
-                            </tr>
-                        </table>
-                   </div>
+                                    <td>{{ realisation.leftAt }}</td>
+                                    <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
+                                    <td>
+                                        <a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

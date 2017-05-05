@@ -1,13 +1,13 @@
 {% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
 
 {% block body %}
-<div class="admin page-wrap">
-    <div class="wc-title-banner">
-        <h2>Création réalisations</h2>
-    </div>
-    <div class="wc-container">
-        <div class="col-sm-12">
-            <div class="wc-admin-block">
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Création réalisations</h2>
+        </div>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
                     {{ form_start(realisationCreationForm) }}
 
 
@@ -26,8 +26,8 @@
 
                     {{ form_widget(realisationCreationForm.submit, {'attr': {'class': 'btn-admin-form', 'value': 'valider'}}) }}
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

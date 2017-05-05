@@ -67,10 +67,10 @@ class RegisterController extends Controller
 
         // todo : Handle assignations to multiples camapaigns invitations without juror account
         // todo !!!!
-//        if ($invitation->getAssignedCampaign()) {
-//            /** @var Juror $userTypeEntity */
-//            $userTypeEntity->addCampaign($invitation->getAssignedCampaign());
-//        }
+        //        if ($invitation->getAssignedCampaign()) {
+        //            /** @var Juror $userTypeEntity */
+        //            $userTypeEntity->addCampaign($invitation->getAssignedCampaign());
+        //        }
 
         $form->handleRequest($request);
 

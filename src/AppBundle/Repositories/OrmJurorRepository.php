@@ -2,7 +2,6 @@
 
 namespace AppBundle\Repositories;
 
-
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -31,7 +30,8 @@ class OrmJurorRepository extends EntityRepository implements UserProviderInterfa
             ->where('i.email = :email')
             ->setParameter('email', $username)
             ->setMaxResults(1)
-            ->getQuery();
+            ->getQuery()
+        ;
 
         $user = $query->getResult();
 

@@ -15,19 +15,19 @@ use AppBundle\Models\UtcDate;
 class AdministratorController extends Controller
 {
     public function showAction(Request $request, string $administratorId)
-	{
-		$administrator = $this->get('app.administrator.repository')->findOneById($administratorId);
+    {
+        $administrator = $this->get('app.administrator.repository')->findOneById($administratorId);
 
-		if ($administrator === null) {
-			throw new Exception("Pas de campage avec cet id");
-		}
+        if ($administrator === null) {
+            throw new Exception("Pas de campage avec cet id");
+        }
 
-		return $this->render(
+        return $this->render(
             'AppBundle:Admin:Administrator/show.html.twig', [
                 'administrator' => $administrator
             ]
         );
-	}
+    }
 
     public function listAction(Request $request)
     {
@@ -42,21 +42,21 @@ class AdministratorController extends Controller
 
     public function createAction(Request $request)
     {
-    	$form = $this->createForm(AdministratorCreationType::class, new AdministratorCreation());
+        $form = $this->createForm(AdministratorCreationType::class, new AdministratorCreation());
 
-    	$form->handleRequest($request);
-    	if ($form->isSubmitted() && $form->isValid()) {
-    		$administratorCreation = $form->getData();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $administratorCreation = $form->getData();
 
-    		$userId = $this->getUser()->getIdentity()->getId();
-    		$administrator = $this->get('app.administrator.creator')->create($administratorCreation, $userId);
+            $userId = $this->getUser()->getIdentity()->getId();
+            $administrator = $this->get('app.administrator.creator')->create($administratorCreation, $userId);
 
-    		$em = $this->getDoctrine()->getManager();
-    		$em->persist($administrator);
-    		$em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($administrator);
+            $em->flush();
 
             return $this->redirectToRoute('admin.administrator.list');
-    	}
+        }
 
         return $this->render(
             'AppBundle:Admin:Administrator/administrator.html.twig', [
