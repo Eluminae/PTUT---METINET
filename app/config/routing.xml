@@ -11,7 +11,7 @@
 
     <!-- Register invitation -->
     <route id="public.register.invitation" path="/register/invitation/{invitationToken}">
-        <default key="_controller">AppBundle:Administrator/Register:registerFromInvitation</default>
+        <default key="_controller">AppBundle:Register:registerFromInvitation</default>
     </route>
 
     <!-- User management's routes -->
@@ -85,7 +85,7 @@
 
     <!-- Need to be sort -->
     <route id="admin.juror.invite" path="/admin/juror/invitation/{campaign}">
-        <default key="_controller">AppBundle:Administrator/Register:createInvitationForJuror</default>
+        <default key="_controller">AppBundle:Register:createInvitationForJuror</default>
     </route>
 
     <route id="public.realisation.list_for_campaign" path="/realisation/list-for-campaign/{campaignId}">
