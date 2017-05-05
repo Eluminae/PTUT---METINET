@@ -59,6 +59,11 @@ class Campaign
         return $this->imageName;
     }
 
+    public function getImagePath()
+    {
+        return sprintf('%s/%s', self::filePath, $this->imageName);
+    }
+
     public function getCreator()
     {
         return $this->creator;

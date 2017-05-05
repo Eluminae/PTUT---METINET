@@ -18,7 +18,6 @@
                                         <td>Début</td>
                                         <td>Fin</td>
                                         <td>Créateur</td>
-                                        <td>Image</td>
                                     </tr>
                                 </thead>
                                 <tr>
@@ -27,7 +26,6 @@
                                     <td>{{ campaign.beginningDate }}</td>
                                     <td>{{ campaign.endDate }}</td>
                                     <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
-                                    <td><img src="campaignImages/{{ campaign.imageName }}" /></td>
                                 </tr>
                             </table>
                             <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
@@ -44,14 +42,14 @@
                                     </tr>
                                 </thead>
                                 {% for realisation in realisations %}
-                                    <tr>
-                                        <td><a href="{{ path('admin.realisation.show', {'realisationId': realisation.id}) }}">{{ realisation.name }}</a></td>
+                                <tr>
+                                    <td><a href="{{ path('admin.realisation.show', {'realisationId': realisation.id}) }}">{{ realisation.name }}</a></td>
                                     <td><a href="{{ asset(realisation.filePath) }}">Télécharger</a></td>
-                                        <td>{{ realisation.candidates }}</td>
-                                        <td>
-                                            <a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
-                                        </td>
-                                    </tr>
+                                    <td>{{ realisation.candidates }}</td>
+                                    <td>
+                                        <a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                    </td>
+                                </tr>
                                 {% endfor %}
                             </table>
                         </div>
@@ -60,4 +58,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
