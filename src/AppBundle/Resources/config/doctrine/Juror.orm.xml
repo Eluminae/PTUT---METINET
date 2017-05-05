@@ -6,14 +6,17 @@
 
     <entity name="AppBundle\Models\Juror" table="wc_juror" repository-class="AppBundle\Repositories\OrmJurorRepository">
         <id name="id" type="string" column="id" />
-        <one-to-one field="identity" target-entity="Identity" >
-            <cascade><cascade-remove /></cascade>
-            <join-column name="identity_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+        <one-to-one field="identity" target-entity="Identity">
+            <cascade>
+                <cascade-remove/>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="identity_id" referenced-column-name="id" on-delete="CASCADE"/>
         </one-to-one>
         <field name="password" type="string" column="password"/>
         <field name="salt" type="string" column="salt"/>
         <field name="role" type="string" column="role"/>
-        <many-to-many field="campaigns" target-entity="AppBundle\Models\Campaign">
+        <many-to-many field="campaigns" inversed-by="jurors" target-entity="AppBundle\Models\Campaign">
             <join-table name="wc_juror_campaign">
                 <join-columns>
                     <join-column name="juror_id" referenced-column-name="id"/>

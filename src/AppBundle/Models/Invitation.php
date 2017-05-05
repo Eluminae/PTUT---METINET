@@ -22,8 +22,8 @@ class Invitation
     /** @var string */
     private $role;
 
-    /** @var Campaign */
-    private $assignedCampaign = null;
+    /** @var ArrayCollection */
+    private $assignedCampaigns;
 
     /**
      * @param int $id
@@ -84,16 +84,24 @@ class Invitation
     /**
      * @return Campaign
      */
-    public function getAssignedCampaign()
+    public function getAssignedCampaigns()
     {
-        return $this->assignedCampaign;
+        return $this->assignedCampaigns;
     }
 
     /**
      * @param Campaign $assignedCampaign
      */
-    public function setAssignedCampaign(Campaign $assignedCampaign)
+    public function addAssignedCampaign(Campaign $assignedCampaign)
     {
-        $this->assignedCampaign = $assignedCampaign;
+        $this->assignedCampaign[] = $assignedCampaign;
+    }
+
+    /**
+     * @param \AppBundle\Models\Campaign $campaign
+     */
+    public function removeAssignedCampaign(Campaign $campaign)
+    {
+        $this->assignedCampaigns->removeElement($campaign);
     }
 }

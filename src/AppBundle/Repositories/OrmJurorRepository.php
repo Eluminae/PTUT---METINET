@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use AppBundle\Models\Campaign;
 
 class OrmJurorRepository extends EntityRepository implements UserProviderInterface
 {
@@ -46,6 +47,18 @@ class OrmJurorRepository extends EntityRepository implements UserProviderInterfa
 
         return $user[0];
     }
+
+    // public function findByCampaign(Campaign $campaign)
+    // {
+    //     $query = $this->createQueryBuilder('j')
+    //         ->join('j.campaign', 'jc')
+    //         ->where('jc.campaign_id = :campaign_id')
+    //         ->setParameter('campaign_id', $campaign->getId())
+    //         ->getQuery();
+
+    //     $jurors = $query->getResult();
+    //     return $jurors;
+    // }
 
     /**
      * Refreshes the user for the account interface.

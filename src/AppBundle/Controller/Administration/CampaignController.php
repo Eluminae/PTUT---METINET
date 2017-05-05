@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use AppBundle\Dtos\AddJurorToCampaign;
+use AppBundle\Forms\AddJurorToCampaignType;
 
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Dtos\CampaignCreation;
@@ -22,14 +24,17 @@ class CampaignController extends Controller
 			throw new Exception("Pas de campage avec cet id");
 		}
 
-		$realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+        
+        $jurors = $campaign->getJurors();
 
 		return $this->render(
-		    'AppBundle:Admin:Campaign/show.html.twig', [
-			'campaign' => $campaign,
-			'realisations' =>$realisations
-		    ]
-		);
+            'AppBundle:Admin:Campaign/show.html.twig', [
+                'campaign' => $campaign,
+                'jurors' => $jurors,
+                'realisations' =>$realisations
+            ]
+        );
 	}
 
     public function listAction(Request $request)

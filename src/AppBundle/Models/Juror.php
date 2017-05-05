@@ -2,7 +2,7 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\Campaign;
+use AppBundle\Models\campaigns;
 use AppBundle\Models\Identity;
 use AppBundle\Models\Password;
 use Doctrine\Common\Collections\ArrayCollection;

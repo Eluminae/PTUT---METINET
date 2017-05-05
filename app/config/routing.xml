@@ -11,7 +11,7 @@
 
     <!-- Register invitation -->
     <route id="public.register.invitation" path="/register/invitation/{invitationToken}">
-        <default key="_controller">AppBundle:Register:registerFromInvitation</default>
+        <default key="_controller">AppBundle:Administration/Register:registerFromInvitation</default>
     </route>
 
     <!-- Administrator's routes -->
@@ -27,11 +27,7 @@
         <default key="_controller">AppBundle:Administration/Admin:index</default>
     </route>
 
-    <route id="admin.invite.user" path="/admin/invite/user">
-        <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>
-    </route>
-
-    <!-- Administrator campaignAdministrator's routes -->
+    <!-- CampaignAdministrator campaignAdministrator's routes -->
     <route id="admin.campaign_administrator.create" path="/admin/campaign-administrators/create">
         <default key="_controller">AppBundle:Administration/CampaignAdministrator:create</default>
     </route>
@@ -84,6 +80,10 @@
 
     <route id="admin.campaign.update" path="/admin/campaigns/update/{campaignId}">
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
+    </route>
+
+    <route id="admin.juror.invite" path="/admin/juror/invitation/{campaign}">
+        <default key="_controller">AppBundle:Administration/Register:createInvitationForJuror</default>
     </route>
     
     <!-- Campaign administrator login's routes -->
@@ -149,11 +149,7 @@
     </route>
 
     <!-- Realisation routes -->
-    <route id="public.realisation.register" path="/realisations/register/{campaignId}">
+    <route id="public.realisation.register" path="/realisation/register/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>
-    </route>
-
-    <route id="public.realisation.list" path="/realisations/{campaignId}">
-        <default key="_controller">AppBundle:Realisation:listForCampaign</default>
     </route>
 </routes>

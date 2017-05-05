@@ -15,6 +15,8 @@ class Campaign
     private $description;
     private $imageName;
     private $creator;
+    /** @var ArrayCollection */
+    private $jurors;
 
     public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator)
     {
@@ -60,5 +62,10 @@ class Campaign
     public function getCreator()
     {
         return $this->creator;
+    }
+
+    public function getJurors()
+    {
+        return $this->jurors;
     }
 }

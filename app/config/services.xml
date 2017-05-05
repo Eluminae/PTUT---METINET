@@ -41,6 +41,11 @@
             <argument>AppBundle:Juror</argument>
         </service>
 
+        <service id="app.juror.invitation" class="AppBundle\Services\JurorInvitationSender">
+            <argument type="service" id="app.juror.repository" />
+            <argument type="service" id="app.identity.repository" />
+        </service>
+
         <service id="app.services.user_registerer" class="AppBundle\Services\UserRegisterer">
             <argument type="service">
                 <service class="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface">
