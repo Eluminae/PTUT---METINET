@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: corentinbouix
- * Date: 29/03/2017
- * Time: 11:51
- */
 
 namespace AppBundle\Repositories;
 

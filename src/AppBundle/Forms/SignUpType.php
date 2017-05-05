@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: corentinbouix
- * Date: 03/04/2017
- * Time: 11:38
- */
 
 namespace AppBundle\Forms;
 

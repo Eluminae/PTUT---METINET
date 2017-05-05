@@ -1,9 +1,16 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
-
+    encoders:
+        Symfony\Component\Security\Core\User\User: bcrypt
+        AppBundle\Models\Administrator: bcrypt
+        AppBundle\Models\CampaignAdministrator: bcrypt
+        AppBundle\Models\Juror: bcrypt
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        chain_provider:
+            chain:
+                providers: [administrator, campaign_admin, juror]
         administrator:
             id: security.administrator_provider
         campaign_admin:
@@ -11,56 +18,22 @@ security:
         juror:
             id: security.juror_provider
 
-    encoders:
-        Symfony\Component\Security\Core\User\User: bcrypt
-        AppBundle\Models\Administrator: bcrypt
-        AppBundle\Models\CampaignAdministrator: bcrypt
-        AppBundle\Models\Juror: bcrypt
-
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        admin:
-            anonymous: ~
-            context: work-competition
-            pattern: ^/admin
-            provider: administrator
-            form_login:
-                login_path: public.admin.login
-                check_path: public.admin.login
-            logout:
-                path: /admin/logout
-            access_denied_url: public.admin.login
-
-        campaign_admin:
-            anonymous: ~
-            context: work-competition
-            pattern: ^/camapaign-admin
-            provider: campaign_admin
-            form_login:
-                login_path: public.campaign_admin.login
-                check_path: public.campaign_admin.login
-            logout:
-                path: /campaign-admin/logout
-            access_denied_url: public.campaign_admin.login
-
-        juror:
-            anonymous: ~
-            context: work-competition
-            pattern: ^/juror
-            provider: juror
-            form_login:
-                login_path: public.juror.login
-                check_path: public.juror.login
-            logout:
-                path: /juror/logout
-            access_denied_url: public.juror.login
-
         main:
             anonymous: ~
+            pattern: ^/
+            provider: chain_provider
+            form_login:
+                login_path: public.login
+                check_path: public.login
+            logout:
+                path: /logout
+            access_denied_url: public.login
 
     role_hierarchy:
         ROLE_JUROR: [ROLE_USER]
@@ -69,10 +42,7 @@ security:
 
     access_control:
         -
-            path: ^/admin/login
-            roles: IS_AUTHENTICATED_ANONYMOUSLY
-        -
-            path: ^/campaign-admin/login
+            path: ^/login
             roles: IS_AUTHENTICATED_ANONYMOUSLY
         -
             path: ^/juror
@@ -83,6 +53,3 @@ security:
         -
             path: ^/campaign-admin
             roles: ROLE_CAMPAIGN_ADMIN
-        -
-            path: ^/juror/login
-            roles: IS_AUTHENTICATED_ANONYMOUSLY
