@@ -11,16 +11,16 @@
 
     <!-- Register invitation -->
     <route id="public.register.invitation" path="/register/invitation/{invitationToken}">
-        <default key="_controller">AppBundle:Register:registerFromInvitation</default>
+        <default key="_controller">AppBundle:Administration/Register:registerFromInvitation</default>
     </route>
 
     <!-- Administrator's routes -->
     <route id="public.admin.login" path="/admin/login">
-        <default key="_controller">AppBundle:Admin:login</default>
+        <default key="_controller">AppBundle:Administration/Admin:login</default>
     </route>
 
     <route id="public.admin.logout" path="/admin/logout">
-        <default key="_controller">AppBundle:Admin:logout</default>
+        <default key="_controller">AppBundle:Administration/Admin:logout</default>
     </route>
 
     <route id="public.admin.home" path="/admin">
@@ -82,8 +82,8 @@
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
-    <route id="admin.juror.invite" path="/admin/juror/invitation/{campaignId}">
-        <default key="_controller">AppBundle:Administration/Campaign:addJuror</default>
+    <route id="admin.juror.invite" path="/admin/juror/invitation/{campaign}">
+        <default key="_controller">AppBundle:Administration/Register:createInvitationForJuror</default>
     </route>
     
     <!-- Campaign administrator login's routes -->

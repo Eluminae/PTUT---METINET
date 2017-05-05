@@ -24,9 +24,12 @@ class CampaignController extends Controller
 			throw new Exception("Pas de campage avec cet id");
 		}
 
+        $jurors = $campaign->getJurors();
+
 		return $this->render(
             'AppBundle:Admin:Campaign/show.html.twig', [
-                'campaign' => $campaign
+                'campaign' => $campaign,
+                'jurors' => $jurors
             ]
         );
 	}
@@ -84,25 +87,5 @@ class CampaignController extends Controller
     public function updateAction(Request $request)
     {
         // todo
-    }
-
-    public function addJurorAction(Request $request)
-    {
-        $form = $this->createForm(AddJurorToCampaignType::class, new AddJurorToCampaign());
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $addingJuror = $form->getData();
-
-            $this->get('app.juror.invitation')->send($addingJuror);
-
-            return $this->redirectToRoute('admin.campaign.list');
-        }
-
-        return $this->render(
-            'AppBundle:Admin:Campaign/inviteJuror.html.twig', [
-                'addJurorToCapaignForm' => $form->createView()
-            ]
-        );
     }
 }

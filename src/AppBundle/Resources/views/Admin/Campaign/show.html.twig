@@ -7,7 +7,12 @@
 	<a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}">Delete</a>
 	<a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}">Modify</a>
 	<a href="{{ path('admin.realisation.create', {'campaignId': campaign.id}) }}">Add realisation</a>
-	<a href="{{ path('admin.juror.invite', {'campaignId': campaign.id}) }}">Add juror</a>
+	<a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}">Add juror</a>
 	<a href="{{ path('admin.campaign.list') }}">Back to list</a>
+
+	{% for juror in jurors %}
+		<p>{{ dump(juror) }}</p><br />
+	{% endfor %}
     </div>
+	}
 {% endblock %}
