@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Administrator;
+namespace AppBundle\Controller\Administration;
 
 use AppBundle\Forms\SignInType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

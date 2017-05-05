@@ -1,13 +1,14 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller:Administration;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class JurorController extends Controller
+class CampaignAdminController extends Controller
 {
     public function indexAction()
     {
+
     }
 }

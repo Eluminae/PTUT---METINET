@@ -21,41 +21,41 @@
 
     <!-- Administrator's routes -->
     <route id="public.admin.home" path="/admin">
-        <default key="_controller">AppBundle:Administrator/Administrator:index</default>
+        <default key="_controller">AppBundle:Administration/Administrator:index</default>
     </route>
 
     <!-- CampaignAdministrator campaignAdministrator's routes -->
     <route id="admin.campaign_administrator.create" path="/admin/campaign-administrators/create">
-        <default key="_controller">AppBundle:Administrator/CampaignAdministrator:create</default>
+        <default key="_controller">AppBundle:Administration/CampaignAdministrator:create</default>
     </route>
 
     <route id="admin.campaign_administrator.list" path="/admin/campaign-administrators">
-        <default key="_controller">AppBundle:Administrator/CampaignAdministrator:list</default>
+        <default key="_controller">AppBundle:Administration/CampaignAdministrator:list</default>
     </route>
 
     <route id="admin.campaign_administrator.show" path="/admin/campaign-administrators/{campaignAdministratorId}">
-        <default key="_controller">AppBundle:Administrator/CampaignAdministrator:show</default>
+        <default key="_controller">AppBundle:Administration/CampaignAdministrator:show</default>
     </route>
 
     <route id="admin.campaign_administrator.delete" path="/admin/campaign-administrators/delete/{campaignAdministratorId}">
-        <default key="_controller">AppBundle:Administrator/CampaignAdministrator:delete</default>
+        <default key="_controller">AppBundle:Administration/CampaignAdministrator:delete</default>
     </route>
 
     <!-- Administrator administrator's routes -->
     <route id="admin.administrator.create" path="/admin/administrators/create">
-        <default key="_controller">AppBundle:Administrator/Administrator:create</default>
+        <default key="_controller">AppBundle:Administration/Administrator:create</default>
     </route>
 
     <route id="admin.administrator.list" path="/admin/administrators">
-        <default key="_controller">AppBundle:Administrator/Administrator:list</default>
+        <default key="_controller">AppBundle:Administration/Administrator:list</default>
     </route>
 
     <route id="admin.administrator.show" path="/admin/administrators/{administratorId}">
-        <default key="_controller">AppBundle:Administrator/Administrator:show</default>
+        <default key="_controller">AppBundle:Administration/Administrator:show</default>
     </route>
 
     <route id="admin.administrator.delete" path="/admin/administrators/delete/{administratorId}">
-        <default key="_controller">AppBundle:Administrator/Administrator:delete</default>
+        <default key="_controller">AppBundle:Administration/Administrator:delete</default>
     </route>
 
     <!-- Campaign administrator's routes -->
@@ -64,23 +64,39 @@
     </route>
 
     <route id="admin.campaign.create" path="/admin/campaigns/create">
-        <default key="_controller">AppBundle:Administrator/Campaign:create</default>
+        <default key="_controller">AppBundle:Administration/Campaign:create</default>
     </route>
 
     <route id="admin.campaign.list" path="/admin/campaigns">
-        <default key="_controller">AppBundle:Administrator/Campaign:list</default>
+        <default key="_controller">AppBundle:Administration/Campaign:list</default>
     </route>
 
     <route id="admin.campaign.show" path="/admin/campaigns/{campaignId}">
-        <default key="_controller">AppBundle:Administrator/Campaign:show</default>
+        <default key="_controller">AppBundle:Administration/Campaign:show</default>
     </route>
 
     <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaignId}">
-        <default key="_controller">AppBundle:Administrator/Campaign:delete</default>
+        <default key="_controller">AppBundle:Administration/Campaign:delete</default>
     </route>
 
     <route id="admin.campaign.update" path="/admin/campaigns/update/{campaignId}">
-        <default key="_controller">AppBundle:Administrator/Campaign:update</default>
+        <default key="_controller">AppBundle:Administration/Campaign:update</default>
+    </route>
+
+    <route id="admin.juror.list" path="/admin/jurors">
+        <default key="_controller">AppBundle:Administration/Juror:list</default>
+    </route>
+
+    <route id="admin.juror.show" path="/admin/jurors/{jurorId}">
+        <default key="_controller">AppBundle:Administration/Juror:show</default>
+    </route>
+
+    <route id="admin.juror.delete" path="/admin/jurors/delete/{jurorId}">
+        <default key="_controller">AppBundle:Administration/Juror:delete</default>
+    </route>
+
+    <route id="admin.juror.update" path="/admin/jurors/update/{jurorId}">
+        <default key="_controller">AppBundle:Administration/Juror:update</default>
     </route>
 
     <!-- Need to be sort -->
@@ -107,19 +123,19 @@
 
     <!-- Realisation Administrator routes -->
     <route id="admin.realisation.show" path="/admin/realisations/{realisationId}">
-        <default key="_controller">AppBundle:Administrator/Realisation:show</default>
+        <default key="_controller">AppBundle:Administration/Realisation:show</default>
     </route>
 
     <route id="admin.realisation.delete" path="/admin/realisations/delete/{realisationId}">
-        <default key="_controller">AppBundle:Administrator/Realisation:delete</default>
+        <default key="_controller">AppBundle:Administration/Realisation:delete</default>
     </route>
 
     <route id="admin.realisation.list" path="/admin/realisations">
-        <default key="_controller">AppBundle:Administrator/Realisation:list</default>
+        <default key="_controller">AppBundle:Administration/Realisation:list</default>
     </route>
 
     <route id="admin.realisation.create" path="/admin/realisations/create/{campaignId}">
-        <default key="_controller">AppBundle:Administrator/Realisation:create</default>
+        <default key="_controller">AppBundle:Administration/Realisation:create</default>
     </route>
 
     <!-- Realisation routes -->
