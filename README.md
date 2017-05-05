@@ -6,7 +6,7 @@ Rules
 - Please rebase on dev branch before pull request
 - Merge dev into master when all code have been tested
 
-## Docker commands
+## Docker install commands
 
 Require docker and docker-compose.
 ```bash
@@ -23,3 +23,13 @@ The defaults access are :
 User     : work-competition
 Password : work-competition
 Database : work-competition
+
+To setup database
+```bash
+$ make pbc cmd="doctrine:schema:update --force"
+```
+
+To import default admin user
+```bash
+$ make mysql-import path=dumps/initial-admin-user.sql
+```
