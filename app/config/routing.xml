@@ -28,7 +28,7 @@
     </route>
 
     <!-- CampaignAdministrator campaignAdministrator's routes -->
-    <route id="admin.campaign_administrator.create" path="admin/campaign-administrators/create">
+    <route id="admin.campaign_administrator.create" path="/admin/campaign-administrators/create">
         <default key="_controller">AppBundle:Administration/CampaignAdministrator:create</default>
     </route>
 
@@ -45,7 +45,7 @@
     </route>
 
     <!-- Administrator administrator's routes -->
-    <route id="admin.administrator.create" path="admin/administrators/create">
+    <route id="admin.administrator.create" path="/admin/administrators/create">
         <default key="_controller">AppBundle:Administration/Administrator:create</default>
     </route>
 
@@ -62,7 +62,7 @@
     </route>
 
     <!-- Campaign administrator's routes -->
-    <route id="admin.campaign.create" path="admin/campaigns/create">
+    <route id="admin.campaign.create" path="/admin/campaigns/create">
         <default key="_controller">AppBundle:Administration/Campaign:create</default>
     </route>
 
