@@ -17,6 +17,7 @@
 
         <service id="app.realisation.registerer" class="AppBundle\Services\RealisationRegisterer">
             <argument type="service" id="app.campaign.repository" />
+            <argument type="service" id="app.uuid.generator" />
         </service>
 
         <service id="security.administrator_provider" alias="app.administrator.repository"/>

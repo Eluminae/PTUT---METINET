@@ -24,12 +24,15 @@ class CampaignController extends Controller
 			throw new Exception("Pas de campage avec cet id");
 		}
 
+        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+        
         $jurors = $campaign->getJurors();
 
 		return $this->render(
             'AppBundle:Admin:Campaign/show.html.twig', [
                 'campaign' => $campaign,
-                'jurors' => $jurors
+                'jurors' => $jurors,
+                'realisations' =>$realisations
             ]
         );
 	}

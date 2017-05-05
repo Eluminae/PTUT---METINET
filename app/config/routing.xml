@@ -127,6 +127,10 @@
         <default key="_controller">AppBundle:Campaign:list</default>
     </route>
 
+    <route id="public.campaign.show" path="/campaigns/{campaignId}">
+        <default key="_controller">AppBundle:Campaign:show</default>
+    </route>
+
     <!-- Realisation Administrator routes -->
     <route id="admin.realisation.show" path="/admin/realisations/{realisationId}">
         <default key="_controller">AppBundle:Administration/Realisation:show</default>
