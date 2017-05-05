@@ -13,15 +13,15 @@
                         <div class="row">
                             <table class="table table-striped">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Left at</th>
-                                    <th>File</th>
-                                    <th>Delete</th>
+                                    <th>Nom</th>
+                                    <th>Déposé à</th>
+                                    <th>Fichier</th>
+                                    <th>Action</th>
                                 </tr>
                                 <tr>
                                     <td><a href="{{ path('admin.campaign.show', {'campaignId': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
                                     <td>{{ realisation.leftAt }}</td>
-                                    <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
+                                    <td><a href="{{ asset(realisation.filePath) }}">Télécharger</a></td>
                                     <td>
                                         <a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
                                     </td>
