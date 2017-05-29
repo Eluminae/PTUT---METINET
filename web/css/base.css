@@ -133,7 +133,7 @@ margin: 0 18px;
 .logoGreyHover{
   background: url('../img/logoWhite.png') !important;
 }
-.logoGrey:hover{
+.navIcon:hover .logoGrey{
     background: url('../img/logoWhite.png');
     background-size: cover;
     background-repeat: no-repeat;
