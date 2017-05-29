@@ -21,6 +21,8 @@
                         {{ form_widget(realisationCreationForm.file, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'file'}}) }}
 
                         {{ form_widget(realisationCreationForm.submit, {'attr': {'class': 'btn-admin-form', 'value': 'valider'}}) }}
+
+                        {{ form_errors(realisationCreationForm) }}
                     {{ form_end(realisationCreationForm) }}
                 </div>
             </div>

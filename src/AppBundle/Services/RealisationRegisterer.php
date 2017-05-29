@@ -29,22 +29,25 @@ class RealisationRegisterer
             throw new Exception('PAS DE CAMPAGNE');
         }
 
+        $realisation = new Realisation(
+            $this->uuidGenerator->generateUuid(),
+            new UtcDate($this->uuidGenerator->generateUuid(), new \DateTimeImmutable('now')),
+            $realisationRegistration->name,
+            $campaign,
+            $this->createCandidateFromIdentity($realisationRegistration->identity)
+        );
+
         /** @var File $file */
         $file = $realisationRegistration->file;
-        $fileName = sprintf('%s.%s', $this->uuidGenerator->generateUuid(), $file->guessExtension());
+        $fileName = sprintf('%s_%s.%s', $campaignId, $realisation->getId(), $file->guessExtension());
         $file->move(
             Realisation::filePath,
             $fileName
         );
 
-        return new Realisation(
-            $this->uuidGenerator->generateUuid(),
-            new UtcDate($this->uuidGenerator->generateUuid(), new \DateTimeImmutable('now')),
-            $realisationRegistration->name,
-            $fileName,
-            $campaign,
-            $this->createCandidateFromIdentity($realisationRegistration->identity)
-        );
+        $realisation->setFileName($fileName);
+
+        return $realisation;
     }
 
     private function createCandidateFromIdentity($identity)
