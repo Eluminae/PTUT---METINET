@@ -35,7 +35,11 @@
                                     {% endfor %}
                                 </tbody>
                             </table>
-                            <a href="{{ path('admin.juror.list') }}"><button type="button" class="btn-admin-form btn-modify">Liste de juré</button></a>
+                            <div class="row">
+                                <a class="col-md-4" href="{{ path('admin.juror.list') }}"><button type="button" class="btn-admin-form btn-modify">Jurés</button></a>
+                                <a class="col-md-4" href="{{ path('admin.administrator.list') }}"><button type="button" class="btn-admin-form btn-modify">Administrateurs</button></a>
+                                <a class="col-md-4" href="{{ path('admin.campaign_administrator.list') }}"><button type="button" class="btn-admin-form btn-modify">Administrateurs de campaigne</button></a>
+                            </div>
                         </div>
                     </div>
                 </div>
