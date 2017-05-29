@@ -26,7 +26,7 @@ class JurorController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Administration:Juror/show.html.twig', [
+            'AppBundle:Admin:Juror/show.html.twig', [
                 'juror' => $juror,
             ]
         );
