@@ -2,7 +2,6 @@
 
 namespace AppBundle\Repositories;
 
-
 use AppBundle\Models\Administrator;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -31,7 +30,8 @@ class OrmAdministratorRepository extends EntityRepository implements UserProvide
             ->where('i.email = :email')
             ->setParameter('email', $username)
             ->setMaxResults(1)
-            ->getQuery();
+            ->getQuery()
+        ;
 
         $user = $query->getResult();
 

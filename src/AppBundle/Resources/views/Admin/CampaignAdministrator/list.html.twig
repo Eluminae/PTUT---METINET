@@ -1,38 +1,38 @@
 {% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
 
 {% block body %}
-<div class="admin page-wrap">
-    <div class="wc-title-banner">
-        <h2>Campaign administrator list</h2>
-    </div>
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Campaign administrator list</h2>
+        </div>
 
-    <div class="wc-container">
-        <div class="col-sm-12">
-            <div class="wc-admin-block">
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
 
-                <table>
-                    <thead>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Email</th>
-                    </thead>
-                    <tbody>
-                        {% for campaignAdministrator in campaignAdministrators %}
-                        <tr>
-                            <td><a href="{{ path('admin.campaign_administrator.show', {'campaignAdministratorId': campaignAdministrator.id}) }}">{{ campaignAdministrator.id }}</a></td>
-                                <td>{{ campaignAdministrator.identity.lastName }}</td>
-                                <td>{{ campaignAdministrator.identity.firstName }}</td>
-                                <td>{{ campaignAdministrator.identity.email }}</td>
-                                <td>
-                                    <a href="{{ path('admin.campaign_administrator.delete', {'campaignAdministratorId': campaignAdministrator.id}) }}">Delete</a>
-                        </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    <table>
+                        <thead>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Email</th>
+                        </thead>
+                        <tbody>
+                            {% for campaignAdministrator in campaignAdministrators %}
+                                <tr>
+                                    <td><a href="{{ path('admin.campaign_administrator.show', {'campaignAdministratorId': campaignAdministrator.id}) }}">{{ campaignAdministrator.id }}</a></td>
+                                    <td>{{ campaignAdministrator.identity.lastName }}</td>
+                                    <td>{{ campaignAdministrator.identity.firstName }}</td>
+                                    <td>{{ campaignAdministrator.identity.email }}</td>
+                                    <td>
+                                        <a href="{{ path('admin.campaign_administrator.delete', {'campaignAdministratorId': campaignAdministrator.id}) }}">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

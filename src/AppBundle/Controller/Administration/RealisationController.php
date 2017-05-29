@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Config\Definition\Exception\Exception;
-
 use AppBundle\Forms\RealisationRegistrationType;
 use AppBundle\Dtos\RealisationRegistration;
 use AppBundle\Models\Campaign;

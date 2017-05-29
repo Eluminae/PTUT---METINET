@@ -36,7 +36,7 @@ class RegisterController extends Controller
     {
         $form = $this->invitationFormHandler($request, false, $campaign);
 
-        return $this->render('@App/CampaignAdmin/inviteJuror.html.twig', ['form' => $form->createView()]);
+        return $this->render('@App/Admin/Campaign/inviteJuror.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -67,10 +67,10 @@ class RegisterController extends Controller
 
         // todo : Handle assignations to multiples camapaigns invitations without juror account
         // todo !!!!
-//        if ($invitation->getAssignedCampaign()) {
-//            /** @var Juror $userTypeEntity */
-//            $userTypeEntity->addCampaign($invitation->getAssignedCampaign());
-//        }
+        //        if ($invitation->getAssignedCampaign()) {
+        //            /** @var Juror $userTypeEntity */
+        //            $userTypeEntity->addCampaign($invitation->getAssignedCampaign());
+        //        }
 
         $form->handleRequest($request);
 
@@ -94,7 +94,7 @@ class RegisterController extends Controller
         }
 
         return $this->render(
-            '@App/Juror/registerFromInvitation.html.twig',
+            '@App/Admin/Juror/registerFromInvitation.html.twig',
             ['form' => $form->createView(), 'email' => $invitation->getEmail()]
         );
     }
@@ -105,10 +105,14 @@ class RegisterController extends Controller
         $invitation->setInvitationToken($this->get('app.uuid.generator')->generateUuid());
 
         if ($campaign) {
-            $invitation->setAssignedCampaign($campaign);
+            $invitation->addAssignedCampaign($campaign);
         }
 
         $form = $this->createForm(InviteUserType::class, $invitation, ['isAdmin' => $isAdmin]);
+
+        if (!$isAdmin) {
+            $invitation->setRole('ROLE_JUROR');
+        }
 
         $form->handleRequest($request);
 
@@ -134,7 +138,7 @@ class RegisterController extends Controller
                 ->setBody(
                     $this->renderView(
                         '@App/Email/inviteUser.html.twig',
-                        ['invitation' => $invitation]
+                        ['invitation' => $invitation, 'campaign' => $campaign]
                     ),
                     'text/html'
                 );

@@ -11,7 +11,7 @@
 
     <!-- Register invitation -->
     <route id="public.register.invitation" path="/register/invitation/{invitationToken}">
-        <default key="_controller">AppBundle:Administration/Register:registerFromInvitation</default>
+        <default key="_controller">AppBundle:Register:registerFromInvitation</default>
     </route>
 
     <!-- User management's routes -->
@@ -21,7 +21,7 @@
 
     <!-- Administrator's routes -->
     <route id="public.admin.home" path="/admin">
-        <default key="_controller">AppBundle:Administration/Admin:index</default>
+        <default key="_controller">AppBundle:Administration/Administrator:index</default>
     </route>
 
     <!-- CampaignAdministrator campaignAdministrator's routes -->
@@ -83,9 +83,25 @@
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
+    <route id="admin.juror.list" path="/admin/jurors">
+        <default key="_controller">AppBundle:Administration/Juror:list</default>
+    </route>
+
+    <route id="admin.juror.show" path="/admin/jurors/{jurorId}">
+        <default key="_controller">AppBundle:Administration/Juror:show</default>
+    </route>
+
+    <route id="admin.juror.delete" path="/admin/jurors/delete/{jurorId}">
+        <default key="_controller">AppBundle:Administration/Juror:delete</default>
+    </route>
+
+    <route id="admin.juror.update" path="/admin/jurors/update/{jurorId}">
+        <default key="_controller">AppBundle:Administration/Juror:update</default>
+    </route>
+
     <!-- Need to be sort -->
     <route id="admin.juror.invite" path="/admin/juror/invitation/{campaign}">
-        <default key="_controller">AppBundle:Administration/Register:createInvitationForJuror</default>
+        <default key="_controller">AppBundle:Register:createInvitationForJuror</default>
     </route>
 
     <route id="public.realisation.list_for_campaign" path="/realisation/list-for-campaign/{campaignId}">

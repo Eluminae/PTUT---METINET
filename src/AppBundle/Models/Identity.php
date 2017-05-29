@@ -40,8 +40,6 @@ class Identity
         return $this->firstName;
     }
 
-
-
     public function getEmail()
     {
         return $this->email;

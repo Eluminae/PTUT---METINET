@@ -1,44 +1,44 @@
 {% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
 
 {% block body %}
-<div class="admin page-wrap">
-    <div class="wc-title-banner">
-        <h2>Administrator list</h2>
-    </div>
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Administrator list</h2>
+        </div>
 
-    <div class="wc-container">
-        <div class="col-sm-12">
-            <div class="wc-admin-block">
-                <div class="wc-admin-row">
-                    <div class="row">
-                        <table class="table table-striped">
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    <div class="wc-admin-row">
+                        <div class="row">
+                            <table class="table table-striped">
 
 
-                            <thead>
-                                <th>Id</th>
-                                <th>Nom</th>
-                                <th>Prenom</th>
-                                <th>Email</th>
-                            </thead>
-                            <tbody>
-                                {% for administrator in administrators %}
-                                <tr>
-                                    <td><a href="{{ path('admin.administrator.show', {'administratorId': administrator.id}) }}">{{ administrator.id }}</a></td>
-                                        <td>{{ administrator.identity.lastName }}</td>
-                                        <td>{{ administrator.identity.firstName }}</td>
-                                        <td>{{ administrator.identity.email }}</td>
+                                <thead>
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>Email</th>
+                                </thead>
+                                <tbody>
+                                    {% for administrator in administrators %}
+                                        <tr>
+                                            <td><a href="{{ path('admin.administrator.show', {'administratorId': administrator.id}) }}">{{ administrator.id }}</a></td>
+                                            <td>{{ administrator.identity.lastName }}</td>
+                                            <td>{{ administrator.identity.firstName }}</td>
+                                            <td>{{ administrator.identity.email }}</td>
 
-                                    <td>
-                                        <a href="{{ path('admin.administrator.delete', {'administratorId': administrator.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                            <td>
+                                                <a href="{{ path('admin.administrator.delete', {'administratorId': administrator.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
