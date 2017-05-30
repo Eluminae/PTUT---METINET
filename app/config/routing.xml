@@ -138,6 +138,10 @@
         <default key="_controller">AppBundle:Administration/Realisation:create</default>
     </route>
 
+    <route id="admin.realisation.download" path="/admin/realisations/download/{realisationId}">
+        <default key="_controller">AppBundle:Administration/Realisation:download</default>
+    </route>
+
     <!-- Realisation routes -->
     <route id="public.realisation.register" path="/realisation/register/{campaignId}">
         <default key="_controller">AppBundle:Realisation:register</default>

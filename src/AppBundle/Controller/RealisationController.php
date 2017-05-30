@@ -52,9 +52,9 @@ class RealisationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Default:Realisation/realisationRegistration.html.twig', [
+            'AppBundle:Default:Realisation/create.html.twig', [
                 'realisationRegistrationForm' => $form->createView(),
-                'campaign' => $campaign
+                'campaign' => $campaign,
             ]
         );
     }

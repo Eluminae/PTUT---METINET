@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\All;
 
 class RealisationRegistrationType extends AbstractType
 {
@@ -21,15 +20,15 @@ class RealisationRegistrationType extends AbstractType
             // ))
             ->add('identity', IdentityRegistrationType::class)
             ->add('file', FileType::class, array(
+                'required' => true,
                 'constraints' => array(
-                    new All(array('constraints' => array(
                     new File([
                         'mimeTypes' => array(
                             'application/pdf', 
                             'application/x-pdf',
                             'image/bmp',
-                            //'image/jpeg',
-                            //'image/pjpeg',
+                            'image/jpeg',
+                            'image/pjpeg',
                             'image/png',
                             'image/x-compressed',
                             'image/x-zip-compressed',
@@ -38,7 +37,7 @@ class RealisationRegistrationType extends AbstractType
                         ),
                         'mimeTypesMessage' => 'Bad file extension',
                     ])
-                ))))
+                )
             ))
             ->add('name', TextType::class)
             ->add('submit', SubmitType::class)

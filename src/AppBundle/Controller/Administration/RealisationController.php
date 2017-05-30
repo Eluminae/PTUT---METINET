@@ -76,7 +76,7 @@ class RealisationController extends Controller
         return $this->render(
             'AppBundle:Admin:Realisation/create.html.twig', [
                 'realisationCreationForm' => $form->createView(),
-                'campaign' => $campaign
+                'campaign' => $campaign,
             ]
         );
     }
@@ -84,5 +84,15 @@ class RealisationController extends Controller
     public function updateAction(Request $request)
     {
         // todo
+    }
+
+    public function downloadAction(Request $request, string $realisationId)
+    {
+        $realisation = $this->get('app.realisation.repository')->findOneById($realisationId);
+        if (null === $realisation) {
+            throw new \Exception(sprintf('Realisation %s not found.', $realisationId));
+        }
+
+        return $this->file($realisation->getFilePath());
     }
 }
