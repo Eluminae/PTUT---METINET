@@ -57,14 +57,19 @@
     </nav>
 {% endblock %}
 
+{% block flashBag %}
+    {% if app.session.flashbag.peekAll|length > 0 %}
+        {% for type, messages in app.session.flashbag.all %}
+            {% for message in messages %}
+                <div class="page-wrap-alert alert alert-{{ type ? type : '' }}">
+                    {{ message|trans({}, domain|default('messages')) }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
 {% block footer %}
-    <nav>
-        TODO : Debug Only
-        <a href="{{ path('admin.administrator.list') }}">Administrators</a> |
-        <a href="{{ path('admin.campaign_administrator.list') }}">Campaign Administrators</a> |
-        <a href="{{ path('admin.campaign.list') }}">Campaigns</a> |
-        <a href="{{ path('admin.realisation.list') }}">Realisations</a>
-    </nav>
     <div class="wc-footer">
         <div class="col-sm-1 footer-empty">
         </div>
