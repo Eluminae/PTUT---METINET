@@ -28,6 +28,7 @@
                                     <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                                 </tr>
                             </table>
+                            <a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Inviter un juré</a>
                             <a href="{{ path('admin.campaign.delete', {'campaignId': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
                             <a href="{{ path('admin.campaign.update', {'campaignId': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
                             <a href="{{ path('admin.realisation.create', {'campaignId': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
