@@ -14,6 +14,8 @@ use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\UtcDate;
 
+use ZipArchive;
+
 class CampaignController extends Controller
 {
     public function showAction(Request $request, string $campaignId)
@@ -90,5 +92,30 @@ class CampaignController extends Controller
     public function updateAction(Request $request)
     {
         // todo
+    }
+
+    public function downloadAction(Request $request, string $campaignId)
+    {
+        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
+        if (null === $campaign) {
+            throw new \Exception(sprintf('Realisation %s not found.', $campaignId));
+        }
+
+        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+
+        $files = array();
+        foreach ($realisations as $realisation) {
+            $files[] = $realisation->getFilePath();
+        }
+
+        $zip = new ZipArchive();
+        $zipName = $campaign->getName().'_'.$campaign->getId().'.zip';
+        $zip->open($zipName, ZipArchive::CREATE);
+        foreach ($files as $file) {
+            $zip->addFromString(basename($file), file_get_contents($file));
+        }
+        $zip->close();
+
+        return $this->file($zipName);
     }
 }

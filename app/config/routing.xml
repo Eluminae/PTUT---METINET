@@ -83,6 +83,10 @@
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
+    <route id="admin.campaign.download" path="/admin/campaigns/download/{campaignId}">
+        <default key="_controller">AppBundle:Administration/Campaign:download</default>
+    </route>
+
     <route id="admin.juror.list" path="/admin/jurors">
         <default key="_controller">AppBundle:Administration/Juror:list</default>
     </route>
