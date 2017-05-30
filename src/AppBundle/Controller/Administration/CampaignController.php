@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Administration;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -14,42 +15,61 @@ use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\UtcDate;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use ZipArchive;
 
 class CampaignController extends Controller
 {
-    public function showAction(Request $request, string $campaignId)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param string $campaignId
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     */
+    public function showAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-
-        if ($campaign === null) {
-            throw new Exception("Pas de campage avec cet id");
-        }
-
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         $jurors = $campaign->getJurors();
 
         return $this->render(
-            'AppBundle:Admin:Campaign/show.html.twig', [
+            'AppBundle:Admin:Campaign/show.html.twig',
+            [
                 'campaign' => $campaign,
                 'jurors' => $jurors,
-                'realisations' =>$realisations
+                'realisations' => $realisations,
             ]
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction(Request $request)
     {
-        $campaigns = $this->get('app.campaign.repository')->findAll();
+        $campaignsNeedReview = $this->get('app.campaign.repository')->findByReview(false);
+        $campaignsApproved = $this->get('app.campaign.repository')->findByReview(true);
 
         return $this->render(
-            'AppBundle:Admin:Campaign/list.html.twig', [
-                'campaigns' => $campaigns
+            'AppBundle:Admin:Campaign/list.html.twig',
+            [
+                'campaignsNeedReview' => $campaignsNeedReview,
+                'campaignsApproved' => $campaignsApproved,
             ]
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
+     */
     public function createAction(Request $request)
     {
         $form = $this->createForm(CampaignCreationType::class, new CampaignCreation());
@@ -69,38 +89,53 @@ class CampaignController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Admin:Campaign/create.html.twig', [
-                'campaignCreationForm' => $form->createView()
+            'AppBundle:Admin:Campaign/create.html.twig',
+            [
+                'campaignCreationForm' => $form->createView(),
             ]
         );
     }
 
-    public function deleteAction(Request $request, string $campaignId)
+    /**
+     * @param Request $request
+     * @param string  $campaignId
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
+     */
+    public function deleteAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-        if (null === $campaign) {
-            throw new \Exception(sprintf('Campaign %s not found.', $campaignId));
-        }
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();
 
+        $this->addFlash('success', 'La campagne a bien été supprimé');
+
         return $this->redirectToRoute('admin.campaign.list');
     }
 
-    public function updateAction(Request $request)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     */
+    public function updateAction(Request $request, Campaign $campaign)
     {
         // todo
     }
 
-    public function downloadAction(Request $request, string $campaignId)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     */
+    public function downloadAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-        if (null === $campaign) {
-            throw new \Exception(sprintf('Realisation %s not found.', $campaignId));
-        }
-
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         $files = array();
@@ -117,5 +152,29 @@ class CampaignController extends Controller
         $zip->close();
 
         return $this->file($zipName);
+    }
+
+    /**
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @throws \LogicException
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws \InvalidArgumentException
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function approveAction(Campaign $campaign)
+    {
+        if (!in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
+            throw new AccessDeniedException("Sorry, you're not a administrator.");
+        }
+
+        $campaign->approveCampaign();
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash('success', 'La campagne a bien été approuvé');
+
+        return $this->redirectToRoute('admin.campaign.list');
     }
 }

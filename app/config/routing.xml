@@ -80,11 +80,15 @@
         <default key="_controller">AppBundle:Administration/Campaign:show</default>
     </route>
 
-    <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaignId}">
+    <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:delete</default>
     </route>
 
-    <route id="admin.campaign.update" path="/admin/campaigns/update/{campaignId}">
+    <route id="admin.campaign.approve" path="/admin/campaigns/approve/{campaign}">
+        <default key="_controller">AppBundle:Administration/Campaign:approve</default>
+    </route>
+
+    <route id="admin.campaign.update" path="/admin/campaigns/update/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
