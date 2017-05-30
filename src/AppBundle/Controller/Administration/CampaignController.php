@@ -109,7 +109,7 @@ class CampaignController extends Controller
         }
 
         $zip = new ZipArchive();
-        $zipName = $campaign->getName().'_'.$campaign->getId().'.zip';
+        $zipName = 'realisationZipFiles/'.$campaign->getName().'_'.$campaign->getId().'.zip';
         $zip->open($zipName, ZipArchive::CREATE);
         foreach ($files as $file) {
             $zip->addFromString(basename($file), file_get_contents($file));
