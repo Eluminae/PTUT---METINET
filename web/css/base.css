@@ -186,3 +186,9 @@ footer > div > h3 {
 ul > li {
 	list-style: none;
 }
+
+/* ---------- THUMBNAILS --------- */
+
+.wc-img-thumb {
+	width: 100px;
+}

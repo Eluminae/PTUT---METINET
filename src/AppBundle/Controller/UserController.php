@@ -51,7 +51,7 @@ class UserController extends Controller
         $userDto->firstName = $currentUserIdentity->getFirstName();
         $userDto->lastName = $currentUserIdentity->getLastName();
 
-        $form = $this->createForm(SignUpType::class, $userDto, ['edit' => true]);
+        $form = $this->createForm(SignUpType::class, $userDto);
 
         $form->handleRequest($request);
 

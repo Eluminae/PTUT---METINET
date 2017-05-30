@@ -8,14 +8,12 @@
 {% block nav %}
     <nav class="navHome">
         <ul class="ulHome">
-
             <li>
-                <a href="">
+                <a href="{{ path('public.admin.home') }}">
                     <div class="navIcon">
                         <div class="logoGrey"></div>
                     </div>
                 </a>
-
             </li>
             <li>
                 <a href="{{ path('admin.campaign.list') }}" title="Gestion des campagnes">
@@ -54,12 +52,10 @@
                         <i class="fa fa-power-off fa-3x navI"></i>
                     </div>
                 </a>
-
             </li>
         </ul>
     </nav>
 {% endblock %}
-
 
 {% block footer %}
     <nav>
