@@ -8,24 +8,22 @@
 {% block nav %}
     <nav class="navHome">
         <ul class="ulHome">
-
             <li>
-                <a href="">
+                <a href="{{ path('public.admin.home') }}">
                     <div class="navIcon">
                         <div class="logoGrey"></div>
                     </div>
                 </a>
-
             </li>
             <li>
-                <a href="{{ path('admin.campaign.list') }}">
+                <a href="{{ path('admin.campaign.list') }}" title="Gestion des campagnes">
                     <div class="navIcon">
                         <i class="fa fa-cogs fa-3x navI"></i>
                     </div>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="" title="Notation">
                     <div class="navIcon">
                         <i class="fa fa-check-square fa-3x navI"></i>
                     </div>
@@ -33,7 +31,7 @@
 
             </li>
             <li>
-                <a href="">
+                <a href="" title="Gestion des utilisateurs">
                     <div class="navIcon">
                         <i class="fa fa-users fa-3x navI"></i>
                     </div>
@@ -41,7 +39,7 @@
 
             </li>
             <li>
-                <a href="">
+                <a href="{{ path('user.profile.edit') }}" title="Voir et éditer son compte">
                     <div class="navIcon">
                         <i class="fa fa-user fa-3x navI"></i>
                     </div>
@@ -49,44 +47,41 @@
 
             </li>
             <li>
-                <a href="/logout">
+                <a href="/logout" title="Déconnexion">
                     <div class="navIcon">
                         <i class="fa fa-power-off fa-3x navI"></i>
                     </div>
                 </a>
-
             </li>
         </ul>
     </nav>
 {% endblock %}
 
+{% block flashBag %}
+    {% if app.session.flashbag.peekAll|length > 0 %}
+        {% for type, messages in app.session.flashbag.all %}
+            {% for message in messages %}
+                <div class="page-wrap-alert alert alert-{{ type ? type : '' }}">
+                    {{ message|trans({}, domain|default('messages')) }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
 
 {% block footer %}
-    <nav>
-        <a href="{{ path('admin.administrator.list') }}">Administrators</a> |
-        <a href="{{ path('admin.campaign_administrator.list') }}">Campaign Administrators</a> |
-        <a href="{{ path('admin.campaign.list') }}">Campaigns</a> |
-        <a href="{{ path('admin.realisation.list') }}">Realisations</a>
-    </nav>
     <div class="wc-footer">
         <div class="col-sm-1 footer-empty">
         </div>
         <footer class="col-sm-11 footer-container">
             <div class="col-sm-6 padding-60">
-                <h3>WORK Competition</h3>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus faucibus n
-                ac habitasse platea dictumst. Duis fermentum purus ac quam finibu
-                </p>
+                <h3>Work Competition</h3>
+                <p>Propulsé par Eddie Barraco, Corentin Bouix, Alan Ridard, Anthony Visocchi</p>
             </div>
             <div class="col-sm-offset-3 col-sm-3">
                 <ul>
-                    <li>
-                        Work Competition - 2017
-                    </li>
-                    <li>
-                        A propos
-                    </li>
+                    <li>Work Competition - 2017</li>
+                    <li>A propos</li>
                 </ul>
             </div>
         </footer>

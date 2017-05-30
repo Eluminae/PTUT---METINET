@@ -57,7 +57,6 @@ class RegisterController extends Controller
         $userRegistrationDto = new UserRegistration();
         $userRegistrationDto->email = $invitation->getEmail();
         $userRegistrationDto->role = $invitation->getRole();
-        dump($invitation->getRole());
         $userRegistrationDto->userObjectType = $userRegisterer->determineDataFromRole(
             $invitation->getRole(),
             'object'
@@ -77,6 +76,7 @@ class RegisterController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $userSignUp = $form->getData();
 
+            $userRegisterer->verifyEmail($userSignUp->email);
             $savedUser = $userRegisterer->signUp($userSignUp);
             $provider = $userRegisterer->determineDataFromRole($userRegistrationDto->role, 'provider');
 
@@ -146,7 +146,7 @@ class RegisterController extends Controller
             $this->get('mailer')->send($message);
 
             if ($invitationRepository->findOneByEmail($email)) {
-                $this->addFlash('error', 'Une nouvelle invitation a été envoyé à l\'adresse email');
+                $this->addFlash('success', 'Une nouvelle invitation a été envoyé à l\'adresse email');
             } else {
                 $this->addFlash(
                     'success',

@@ -31,8 +31,10 @@ security:
             form_login:
                 login_path: public.login
                 check_path: public.login
+                default_target_path: /admin
             logout:
                 path: /logout
+                target: /
             access_denied_url: public.login
 
     role_hierarchy:

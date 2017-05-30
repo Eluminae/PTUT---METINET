@@ -32,7 +32,7 @@ class InviteUserType extends AbstractType
             );
         }
 
-        $builder->add('submit', SubmitType::class, ['label' => 'Inviter']);
+        $builder->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
