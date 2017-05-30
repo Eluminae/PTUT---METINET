@@ -1,10 +1,23 @@
-PTUT-Metinet
-============
+#PTUT-Metinet
 
-Rules
--
+## Rules
+
 - Please rebase on dev branch before pull request
 - Merge dev into master when all code have been tested
+
+## Users
+
+### Administrator
+- admin@admin.fr
+- admin
+
+### Camapign Administrator
+- campaign-admin@admin.fr
+- campaignadmin
+
+### Juror
+- juror@admin.fr
+- juror
 
 ## Docker install commands
 

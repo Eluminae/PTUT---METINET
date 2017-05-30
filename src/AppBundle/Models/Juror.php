@@ -52,6 +52,14 @@ class Juror implements UserInterface
     }
 
     /**
+     * @param string $password
+     */
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+    }
+
+    /**
      * Returns the roles granted to the user.
      *
      * <code>
@@ -82,6 +90,14 @@ class Juror implements UserInterface
     public function getSalt()
     {
         return $this->salt;
+    }
+
+    /**
+     * @param string $salt
+     */
+    public function setSalt(string $salt)
+    {
+        $this->salt = $salt;
     }
 
     /**

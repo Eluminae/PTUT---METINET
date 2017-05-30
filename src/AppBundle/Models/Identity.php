@@ -40,8 +40,24 @@ class Identity
         return $this->firstName;
     }
 
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
     }
 }

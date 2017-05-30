@@ -3,7 +3,7 @@
 {% block body %}
     <div class="admin page-wrap">
         <div class="wc-title-banner">
-            <h2>Bonjour, </h2>
+            <h2>Bonjour, {{ app.user.identity.firstName ~ ' ' ~ app.user.identity.lastName }}</h2>
         </div>
 
         <div class="wc-container">
