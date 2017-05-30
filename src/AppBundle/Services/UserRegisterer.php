@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -172,9 +173,14 @@ class UserRegisterer
         ];
 
         foreach ($userRepositories as $repository) {
-            $user = $repository->loadUserByUsername($newEmail);
-            if ($user) {
-                throw new \Exception('There is already one user with the email '.$newEmail);
+            try {
+                $user = $repository->loadUserByUsername($newEmail);
+
+                if ($user) {
+                    throw new \Exception('There is already one user with the email '.$newEmail);
+                }
+            } catch (UsernameNotFoundException $e) {
+                continue;
             }
         }
 
