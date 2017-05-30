@@ -9,6 +9,6 @@ class DefaultController extends Controller
 {
     public function homeAction(Request $request)
     {
-        return $this->render('AppBundle:default:home.html.twig');
+        return $this->render('AppBundle:Default:home.html.twig');
     }
 }

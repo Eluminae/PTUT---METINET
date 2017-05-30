@@ -1,20 +1,22 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
-
+    encoders:
+        Symfony\Component\Security\Core\User\User: bcrypt
+        AppBundle\Models\Administrator: bcrypt
+        AppBundle\Models\CampaignAdministrator: bcrypt
+        AppBundle\Models\Juror: bcrypt
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory:
-                users:
-                    admin:
-                        password: admin
-                        roles: 'ROLE_ADMIN'
-                    juror_admin:
-                        password: juroradmin
-                        roles: 'ROLE_JURORADMIN'
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        chain_provider:
+            chain:
+                providers: [administrator, campaign_admin, juror]
+        administrator:
+            id: security.administrator_provider
+        campaign_admin:
+            id: security.campaign_administrator_provider
+        juror:
+            id: security.juror_provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -22,23 +24,32 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        admin:
-            http_basic: ~
-            pattern: ^/admin/
-            logout:
-                path:   /admin/logout
-                target: /
-
-        juror_admin:
-            http_basic: ~
-            pattern: ^/juror-admin/
-            logout:
-                path:   /juror-admin/logout
-                target: /
-
         main:
             anonymous: ~
+            pattern: ^/
+            provider: chain_provider
+            form_login:
+                login_path: public.login
+                check_path: public.login
+            logout:
+                path: /logout
+            access_denied_url: public.login
+
+    role_hierarchy:
+        ROLE_JUROR: [ROLE_USER]
+        ROLE_CAMPAIGN_ADMIN: [ROLE_JUROR]
+        ROLE_ADMIN: [ROLE_CAMPAIGN_ADMIN]
 
     access_control:
-        - { path: ^/admin/, roles: ROLE_ADMIN }
-        - { path: ^/juror-admin/, roles: ROLE_JURORADMIN }
+        -
+            path: ^/login
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+        -
+            path: ^/juror
+            roles: ROLE_JUROR
+        -
+            path: ^/admin
+            roles: ROLE_ADMIN
+        -
+            path: ^/campaign-admin
+            roles: ROLE_CAMPAIGN_ADMIN

@@ -1,0 +1,35 @@
+{% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
+
+{% block body %}
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Création réalisations</h2>
+        </div>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    {{ form_start(realisationCreationForm) }}
+                        {{ form_label(realisationCreationForm.name) }}
+                        {{ form_widget(realisationCreationForm.name, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Nom de la réalisation'}}) }}
+
+                        {{ form_label(realisationCreationForm.identity.firstName) }}
+                        {{ form_widget(realisationCreationForm.identity.firstName, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Prénom'}}) }}
+
+                        {{ form_label(realisationCreationForm.identity.lastName) }}
+                        {{ form_widget(realisationCreationForm.identity.lastName, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Nom'}}) }}
+
+                        {{ form_label(realisationCreationForm.identity.email) }}
+                        {{ form_widget(realisationCreationForm.identity.email, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'email'}}) }}
+                        
+                        {{ form_label(realisationCreationForm.file) }}
+                        {{ form_widget(realisationCreationForm.file, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'file'}}) }}
+                        {{ form_errors(realisationCreationForm.file) }}
+
+                        {{ form_widget(realisationCreationForm.submit, {'attr': {'class': 'btn-admin-form', 'value': 'valider'}}) }}
+
+                    {{ form_end(realisationCreationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

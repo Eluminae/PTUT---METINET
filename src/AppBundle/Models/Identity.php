@@ -27,6 +27,14 @@ class Identity
         return $this->lastName;
     }
 
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
     public function getFirstName()
     {
         return $this->firstName;

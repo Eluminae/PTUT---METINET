@@ -6,21 +6,27 @@ use AppBundle\Models\UtcDate;
 
 class Campaign
 {
+    const filePath = 'campaignImages';
+
     private $id;
     private $endDate;
     private $beginningDate;
     private $name;
     private $description;
-    private $imageUrl;
+    private $imageName;
+    private $creator;
+    /** @var ArrayCollection */
+    private $jurors;
 
-    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageUrl)
+    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator)
     {
         $this->id = $id;
         $this->endDate = $endDate;
         $this->beginningDate = $beginningDate;
         $this->name = $name;
         $this->description = $description;
-        $this->imageUrl = $imageUrl;
+        $this->imageName = $imageName;
+        $this->creator = $creator;
     }
 
     public function getId()
@@ -48,8 +54,23 @@ class Campaign
         return $this->description;
     }
 
-    public function getImageUrl()
+    public function getImageName()
     {
-        return $this->imageUrl;
+        return $this->imageName;
+    }
+
+    public function getImagePath()
+    {
+        return sprintf('%s/%s', self::filePath, $this->imageName);
+    }
+
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    public function getJurors()
+    {
+        return $this->jurors;
     }
 }

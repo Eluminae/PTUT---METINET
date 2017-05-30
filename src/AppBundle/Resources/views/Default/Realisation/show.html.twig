@@ -1,0 +1,18 @@
+{% extends 'AppBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Left at</th>
+            <th>File</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            <td>{{ realisation.name }}</td>
+            <td>{{ realisation.leftAt }}</td>
+            <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
+            <td><a href="{{ path('public.realisation.delete', {'realisationId': realisation.id}) }}">Delete</a></td>
+        </tr>
+    </table>
+{% endblock %}

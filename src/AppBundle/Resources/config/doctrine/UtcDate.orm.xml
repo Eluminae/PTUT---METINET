@@ -4,8 +4,8 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="AppBundle\Models\UtcDate" table="utc_date">
-        <id name="id" type="string" columns="id" />
+    <entity name="AppBundle\Models\UtcDate" table="wc_utc_date">
+        <id name="id" type="string" column="id" />
         <field name="date" type="datetime" column="date" />
     </entity>
 </doctrine-mapping>

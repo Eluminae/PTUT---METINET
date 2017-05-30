@@ -1,0 +1,20 @@
+{% extends 'AppBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Campaign</th>
+            <th>Name</th>
+            <th>Left at</th>
+            <th>File</th>
+        </tr>
+        {% for realisation in realisations %}
+            <tr>
+                <td><a href="#">{{ realisation.campaign.name }}</a></td>
+                <td><a href="{{ path('public.realisation.show', {'realisationId': realisation.id}) }}">{{ realisation.name }}</a></td>
+                <td>{{ realisation.leftAt }}</td>
+                <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

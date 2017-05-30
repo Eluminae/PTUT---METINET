@@ -1,0 +1,47 @@
+{% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
+
+{% block body %}
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Juror list</h2>
+        </div>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    <div class="row no-margin">
+                        <p class="col-sm-12 wc-admin-subtitle">Gestion des jurés</p>
+                    </div>
+                    <div class="wc-admin-row">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>Nom</td>
+                                        <td>Prenom</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                {% for juror in jurors %}
+                                    <tr>
+                                        <td><a href="{{ path('admin.juror.show', {'jurorId': juror.id}) }}">{{ juror.email }}</a></td>
+                                        <td>{{ juror.lastname }}</td>
+                                        <td>{{ juror.firstname }}</td>
+                                        <td>
+                                            <a href="{{ path('admin.juror.delete', {'jurorId': juror.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('admin.juror.update', {'jurorId': juror.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Modifier</button></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
