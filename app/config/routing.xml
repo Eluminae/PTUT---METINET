@@ -83,6 +83,10 @@
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
+    <route id="admin.campaign.download" path="/admin/campaigns/download/{campaignId}">
+        <default key="_controller">AppBundle:Administration/Campaign:download</default>
+    </route>
+
     <route id="admin.juror.list" path="/admin/jurors">
         <default key="_controller">AppBundle:Administration/Juror:list</default>
     </route>
@@ -136,6 +140,10 @@
 
     <route id="admin.realisation.create" path="/admin/realisations/create/{campaignId}">
         <default key="_controller">AppBundle:Administration/Realisation:create</default>
+    </route>
+
+    <route id="admin.realisation.download" path="/admin/realisations/download/{realisationId}">
+        <default key="_controller">AppBundle:Administration/Realisation:download</default>
     </route>
 
     <!-- Realisation routes -->
