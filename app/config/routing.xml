@@ -28,7 +28,7 @@
     </route>
 
     <!-- Administrator's routes -->
-    <route id="admin.home" path="/admin">
+    <route id="public.admin.home" path="/admin">
         <default key="_controller">AppBundle:Administration/Default:index</default>
     </route>
 
@@ -82,6 +82,10 @@
 
     <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:delete</default>
+    </route>
+
+    <route id="admin.campaign.approve" path="/admin/campaigns/approve/{campaign}">
+        <default key="_controller">AppBundle:Administration/Campaign:approve</default>
     </route>
 
     <route id="admin.campaign.update" path="/admin/campaigns/update/{campaign}">

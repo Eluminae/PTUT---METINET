@@ -2,6 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Config\Definition\Exception\Exception;
+
+use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
@@ -34,9 +40,11 @@ class CampaignController extends Controller
 
     public function listAction(Request $request)
     {
-        $campaigns = $this->get('app.campaign.repository')->findByReview();
+        $campaignsApproved = $this->get('app.campaign.repository')->findByReview(true);
 
         return $this->render(
+            'AppBundle:Default:Campaign/list.html.twig', [
+                'campaigns' => $campaignsApproved
             'AppBundle:Default:Campaign/list.html.twig', [
                 'campaigns' => $campaigns
             ]
