@@ -5,7 +5,7 @@
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="AppBundle\Models\CampaignAdministrator" table="wc_campaign_administrator"
-        repository-class="AppBundle\Repositories\OrmCampaignAdministrator">
+        repository-class="AppBundle\Repositories\OrmCampaignAdministratorRepository">
         <id name="id" type="string" column="id"/>
         <field name="password" type="string" column="password"/>
         <field name="salt" type="string" column="salt"/>

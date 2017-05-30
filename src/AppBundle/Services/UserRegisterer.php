@@ -6,7 +6,7 @@ use AppBundle\Dtos\UserRegistration;
 use AppBundle\Models\Identity;
 use AppBundle\Models\Juror;
 use AppBundle\Repositories\OrmAdministratorRepository;
-use AppBundle\Repositories\OrmCampaignAdministrator;
+use AppBundle\Repositories\OrmCampaignAdministratorRepository;
 use AppBundle\Repositories\OrmCampaignRepository;
 use AppBundle\Repositories\OrmJurorRepository;
 use AppBundle\Services\UuidGenerator;
@@ -29,7 +29,7 @@ class UserRegisterer
     private $entityManager;
     /** @var OrmAdministratorRepository */
     private $administratorRepository;
-    /** @var OrmCampaignAdministrator */
+    /** @var OrmCampaignAdministratorRepository */
     private $campaignAdministratorRepository;
     /** @var OrmJurorRepository */
     private $jurorRepository;
@@ -45,7 +45,7 @@ class UserRegisterer
      * @param UuidGenerator              $uuidGenerator
      * @param EntityManagerInterface     $entityManager
      * @param OrmAdministratorRepository $administratorRepository
-     * @param OrmCampaignAdministrator   $campaignAdministratorRepository
+     * @param OrmCampaignAdministratorRepository   $campaignAdministratorRepository
      * @param OrmJurorRepository         $jurorRepository
      * @param TokenStorageInterface      $tokenStorage
      * @param SessionInterface           $session
@@ -56,7 +56,7 @@ class UserRegisterer
         UuidGenerator $uuidGenerator,
         EntityManagerInterface $entityManager,
         OrmAdministratorRepository $administratorRepository,
-        OrmCampaignAdministrator $campaignAdministratorRepository,
+        OrmCampaignAdministratorRepository $campaignAdministratorRepository,
         OrmJurorRepository $jurorRepository,
         TokenStorageInterface $tokenStorage,
         SessionInterface $session
@@ -177,6 +177,8 @@ class UserRegisterer
                 throw new \Exception('There is already one user with the email '.$newEmail);
             }
         }
+
+        return;
     }
 
     /**
