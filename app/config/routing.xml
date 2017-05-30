@@ -21,7 +21,7 @@
 
     <!-- Administrator's routes -->
     <route id="public.admin.home" path="/admin">
-        <default key="_controller">AppBundle:Administration/Administrator:index</default>
+        <default key="_controller">AppBundle:Administration/Default:index</default>
     </route>
 
     <!-- CampaignAdministrator campaignAdministrator's routes -->
