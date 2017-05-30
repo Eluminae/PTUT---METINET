@@ -34,7 +34,7 @@ class CampaignController extends Controller
 
     public function listAction(Request $request)
     {
-        $campaigns = $this->get('app.campaign.repository')->findAll();
+        $campaigns = $this->get('app.campaign.repository')->findByReview();
 
         return $this->render(
             'AppBundle:Default:Campaign/list.html.twig', [

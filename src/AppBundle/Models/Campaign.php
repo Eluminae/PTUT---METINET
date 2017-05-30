@@ -17,9 +17,17 @@ class Campaign
     private $creator;
     /** @var ArrayCollection */
     private $jurors;
+    private $review = false;
 
-    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator)
-    {
+    public function __construct(
+        string $id,
+        UtcDate $endDate,
+        UtcDate $beginningDate,
+        string $name,
+        string $description,
+        string $imageName,
+        Identity $creator
+    ) {
         $this->id = $id;
         $this->endDate = $endDate;
         $this->beginningDate = $beginningDate;
@@ -72,5 +80,10 @@ class Campaign
     public function getJurors()
     {
         return $this->jurors;
+    }
+
+    public function approveCampaign()
+    {
+        $this->review = true;
     }
 }
