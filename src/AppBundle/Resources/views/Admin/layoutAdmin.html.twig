@@ -4,27 +4,26 @@
     <header>
     </header>
 {% endblock %}
+
 {% block nav %}
     <nav class="navHome">
         <ul class="ulHome">
-
             <li>
-                <a href="">
+                <a href="{{ path('public.admin.home') }}">
                     <div class="navIcon">
                         <div class="logoGrey"></div>
                     </div>
                 </a>
-
             </li>
             <li>
-                <a href="{{ path('admin.campaign.list') }}">
+                <a href="{{ path('admin.campaign.list') }}" title="Gestion des campagnes">
                     <div class="navIcon">
                         <i class="fa fa-cogs fa-3x navI"></i>
                     </div>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="" title="Notation">
                     <div class="navIcon">
                         <i class="fa fa-check-square fa-3x navI"></i>
                     </div>
@@ -32,7 +31,7 @@
 
             </li>
             <li>
-                <a href="">
+                <a href="" title="Gestion des utilisateurs">
                     <div class="navIcon">
                         <i class="fa fa-users fa-3x navI"></i>
                     </div>
@@ -40,7 +39,7 @@
 
             </li>
             <li>
-                <a href="">
+                <a href="{{ path('user.profile.edit') }}" title="Voir et éditer son compte">
                     <div class="navIcon">
                         <i class="fa fa-user fa-3x navI"></i>
                     </div>
@@ -48,12 +47,11 @@
 
             </li>
             <li>
-                <a href="/logout">
+                <a href="/logout" title="Déconnexion">
                     <div class="navIcon">
                         <i class="fa fa-power-off fa-3x navI"></i>
                     </div>
                 </a>
-
             </li>
         </ul>
     </nav>
@@ -69,7 +67,6 @@
             {% endfor %}
         {% endfor %}
     {% endif %}
-
 {% endblock %}
 
 {% block footer %}
@@ -83,12 +80,8 @@
             </div>
             <div class="col-sm-offset-3 col-sm-3">
                 <ul>
-                    <li>
-                        Work Competition - 2017
-                    </li>
-                    <li>
-                        A propos
-                    </li>
+                    <li>Work Competition - 2017</li>
+                    <li>A propos</li>
                 </ul>
             </div>
         </footer>
