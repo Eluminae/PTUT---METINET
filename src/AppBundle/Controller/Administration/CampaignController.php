@@ -2,18 +2,17 @@
 
 namespace AppBundle\Controller\Administration;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use AppBundle\Dtos\AddJurorToCampaign;
-use AppBundle\Forms\AddJurorToCampaignType;
-
 use AppBundle\Dtos\CampaignCreation;
+use AppBundle\Forms\AddJurorToCampaignType;
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\UtcDate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 
 class CampaignController extends Controller
 {
@@ -101,4 +100,5 @@ class CampaignController extends Controller
     {
         // todo
     }
+
 }

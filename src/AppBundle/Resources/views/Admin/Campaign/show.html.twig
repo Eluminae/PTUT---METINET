@@ -33,6 +33,7 @@
                             <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
                             <a href="{{ path('admin.realisation.create', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
                             <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
+                            <a href="{{ path('juror.campaign.download', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Télécharger les réalisations</a>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -45,7 +46,7 @@
                                 {% for realisation in realisations %}
                                 <tr>
                                     <td><a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a></td>
-                                    <td><a href="{{ asset(realisation.filePath) }}">Télécharger</a></td>
+                                    <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
                                     <td>{{ realisation.candidates }}</td>
                                     <td>
                                         <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>

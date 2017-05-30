@@ -64,7 +64,7 @@ class RealisationController extends Controller
         return $this->render(
             'AppBundle:Default:Realisation/registration.html.twig', [
                 'realisationRegistrationForm' => $form->createView(),
-                'campaign' => $campaign
+                'campaign' => $campaign,
             ]
         );
     }
