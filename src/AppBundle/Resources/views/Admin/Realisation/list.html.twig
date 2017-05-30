@@ -1,4 +1,4 @@
-{% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
+{% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
     <div class="admin page-wrap">
@@ -23,12 +23,12 @@
 
                                 {% for realisation in realisations %}
                                     <tr>
-                                        <td><a href="{{ path('admin.campaign.show', {'campaignId': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
-                                        <td><a href="{{ path('admin.realisation.show', {'realisationId': realisation.id}) }}">{{ realisation.name }}</a></td>
+                                        <td><a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
+                                        <td><a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a></td>
                                         <td>{{ realisation.leftAt }}</td>
-                                        <td><a href="{{ path('admin.realisation.download', {'realisationId': realisation.id}) }}">Télécharger</a></td>
+                                        <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
                                         <td>
-                                            <a href="{{ path('admin.realisation.delete', {'realisationId': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                            <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
                                         </td>
                                     </tr>
                                 {% endfor %}

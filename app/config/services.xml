@@ -27,6 +27,12 @@
             <argument>AppBundle:Administrator</argument>
         </service>
 
+        <service id="app.mark.repository" alias="app.mark.orm.repository"/>
+        <service id="app.mark.orm.repository" class="AppBundle\Repositories\OrmMarkRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>AppBundle:Mark</argument>
+        </service>
+
         <service id="security.campaign_administrator_provider" alias="app.campaign_administrator.repository"/>
         <service id="app.campaign_administrator.repository" alias="app.campaign_administrator.orm.repository"/>
         <service id="app.campaign_administrator.orm.repository" class="AppBundle\Repositories\OrmCampaignAdministrator">
@@ -73,5 +79,9 @@
         </service>
 
         <service id="app.uuid.generator" class="AppBundle\Services\UuidGenerator"/>
+
+        <service id="app.realisation_mark.factory" class="AppBundle\Services\RealisationMarkFactory">
+            <argument type="service" id="app.uuid.generator"/>
+        </service>
     </services>
 </container>

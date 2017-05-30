@@ -24,13 +24,33 @@
                     </div>
                 </a>
             </li>
-            <li>
-                <a href="{{ path('public.login') }}">
-                    <div class="navIcon">
-                        <i class="fa fa-lock fa-3x navI"></i>
-                    </div>
-                </a>
-            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('admin.home') }}" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-cogs fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li>
+                    <a href="/logout" title="Déconnexion">
+                        <div class="navIcon">
+                            <i class="fa fa-power-off fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ path('public.login') }}">
+                        <div class="navIcon">
+                            <i class="fa fa-lock fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+
         </ul>
     </nav>
 {% endblock %}

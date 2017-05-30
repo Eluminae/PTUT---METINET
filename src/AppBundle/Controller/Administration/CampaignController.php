@@ -2,26 +2,30 @@
 
 namespace AppBundle\Controller\Administration;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use AppBundle\Dtos\AddJurorToCampaign;
-use AppBundle\Forms\AddJurorToCampaignType;
-
-use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Dtos\CampaignCreation;
+use AppBundle\Forms\AddJurorToCampaignType;
+use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\UtcDate;
-
-use ZipArchive;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 
 class CampaignController extends Controller
 {
-    public function showAction(Request $request, string $campaignId)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-
         if ($campaign === null) {
             throw new Exception("Pas de campage avec cet id");
         }
@@ -75,13 +79,16 @@ class CampaignController extends Controller
         );
     }
 
-    public function deleteAction(Request $request, string $campaignId)
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(Request $request, Campaign $campaign)
     {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-        if (null === $campaign) {
-            throw new \Exception(sprintf('Campaign %s not found.', $campaignId));
-        }
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();
@@ -94,28 +101,4 @@ class CampaignController extends Controller
         // todo
     }
 
-    public function downloadAction(Request $request, string $campaignId)
-    {
-        $campaign = $this->get('app.campaign.repository')->findOneById($campaignId);
-        if (null === $campaign) {
-            throw new \Exception(sprintf('Realisation %s not found.', $campaignId));
-        }
-
-        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
-
-        $files = array();
-        foreach ($realisations as $realisation) {
-            $files[] = $realisation->getFilePath();
-        }
-
-        $zip = new ZipArchive();
-        $zipName = 'realisationZipFiles/'.$campaign->getName().'_'.$campaign->getId().'.zip';
-        $zip->open($zipName, ZipArchive::CREATE);
-        foreach ($files as $file) {
-            $zip->addFromString(basename($file), file_get_contents($file));
-        }
-        $zip->close();
-
-        return $this->file($zipName);
-    }
 }

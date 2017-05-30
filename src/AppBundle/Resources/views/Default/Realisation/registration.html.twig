@@ -1,0 +1,31 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="page-wrap">
+        <div class="wc-title-banner">
+            <h2>Création réalisations</h2>
+        </div>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div>
+                    {{ form_start(realisationRegistrationForm) }}
+                        {{ form_label(realisationRegistrationForm.name) }}
+                        {{ form_widget(realisationRegistrationForm.name, {'attr': {'placeholder': 'Nom de la réalisation'}}) }}
+                        {{ form_label(realisationRegistrationForm.identity.firstName) }}
+                        {{ form_widget(realisationRegistrationForm.identity.firstName, {'attr': {'placeholder': 'Prénom'}}) }}
+                        {{ form_label(realisationRegistrationForm.identity.lastName) }}
+                        {{ form_widget(realisationRegistrationForm.identity.lastName, {'attr': {'placeholder': 'Nom'}}) }}
+                        {{ form_label(realisationRegistrationForm.identity.email) }}
+                        {{ form_widget(realisationRegistrationForm.identity.email, {'attr': {'placeholder': 'email'}}) }}
+                        {{ form_label(realisationRegistrationForm.file) }}
+                        {{ form_widget(realisationRegistrationForm.file, {'attr': {'placeholder': 'file'}}) }}
+                        {{ form_errors(realisationRegistrationForm.file) }}
+
+                        {{ form_widget(realisationRegistrationForm.submit, {'attr': {'value': 'valider'}}) }}
+                    {{ form_end(realisationRegistrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

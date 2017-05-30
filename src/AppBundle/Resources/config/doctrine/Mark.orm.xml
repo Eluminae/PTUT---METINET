@@ -6,20 +6,23 @@
 
     <entity name="AppBundle\Models\Mark" table="wc_mark">
         <id name="id" type="string" column="id" />
-        <field name="format" type="string" column="format" />
         <field name="value" type="string" column="value" />
 
+        <unique-constraints>
+            <unique-constraint columns="identity_id,realisation_id" name="identity_relation" />
+        </unique-constraints>
+
         <one-to-one field="date" target-entity="UtcDate" >
-            <cascade><cascade-remove /></cascade>
+            <cascade><persist /><cascade-remove /></cascade>
             <join-column name="date_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
-        <one-to-one field="juror" target-entity="Juror" >
+        <many-to-one field="identity" target-entity="Identity" >
             <cascade><cascade-remove /></cascade>
-            <join-column name="juror_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
-        <one-to-one field="realisation" target-entity="Realisation" >
+            <join-column name="identity_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+        </many-to-one>
+        <many-to-one field="realisation" target-entity="Realisation" >
             <cascade><cascade-remove /></cascade>
             <join-column name="realisation_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

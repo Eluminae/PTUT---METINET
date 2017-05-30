@@ -1,4 +1,4 @@
-{% extends 'AppBundle:Default:layout.html.twig' %}
+{% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
     <div class="col-sm-12 no-padding">
@@ -7,15 +7,13 @@
                 <h2>Compétitions</h2>
             </div>
             {% for campaign in campaigns %}
-
                 <div class="col-sm-3" >
                     <div class="wc-project-competitionPage">
-                        <a class="wc-img-competitionPage" href="{{ path('public.campaign.show', { 'campaignId': campaign.id }) }}">
+                        <a class="wc-img-competitionPage" href="{{ path('public.campaign.show', { 'campaign': campaign.id }) }}">
                             <img src="campaignImages/{{ campaign.imageName }}" />
                         </a>
                     <div class="wc-info-competitionPage">
-                        <a href="{{ path('public.campaign.show', { 'campaignId': campaign.id }) }}"><p class="wc-name-competitionPage">{{ campaign.name }}</p></a>
-                        <!--path('admin.campaign.show', {'campaignId': realisation.campaign.id-->
+                        <a href="{{ path('public.campaign.show', { 'campaign': campaign.id }) }}"><p class="wc-name-competitionPage">{{ campaign.name }}</p></a>
                         <p class="wc-category-competitionPage">{{ campaign.description }}</p>
                         <p class="wc-desc-competitionPage">{{ campaign.endDate }}</p>
                     </div>
