@@ -25,9 +25,9 @@
                                 </thead>
                                 {% for juror in jurors %}
                                     <tr>
-                                        <td><a href="{{ path('admin.juror.show', {'jurorId': juror.id}) }}">{{ juror.email }}</a></td>
-                                        <td>{{ juror.lastname }}</td>
-                                        <td>{{ juror.firstname }}</td>
+                                        <td><a href="{{ path('admin.juror.show', {'jurorId': juror.id}) }}">{{ juror.identity.email }}</a></td>
+                                        <td>{{ juror.identity.lastname }}</td>
+                                        <td>{{ juror.identity.firstname }}</td>
                                         <td>
                                             <a href="{{ path('admin.juror.delete', {'jurorId': juror.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
                                         </td>
