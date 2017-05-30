@@ -19,6 +19,14 @@
         <default key="_controller">AppBundle:User:login</default>
     </route>
 
+    <route id="user.profile.edit" path="/admin/profile/edit">
+        <default key="_controller">AppBundle:User:editProfile</default>
+    </route>
+
+    <route id="public.logout" path="/logout">
+        <default key="_controller">AppBundle:User:logout</default>
+    </route>
+
     <!-- Administrator's routes -->
     <route id="public.admin.home" path="/admin">
         <default key="_controller">AppBundle:Administration/Default:index</default>
@@ -37,7 +45,8 @@
         <default key="_controller">AppBundle:Administration/CampaignAdministrator:show</default>
     </route>
 
-    <route id="admin.campaign_administrator.delete" path="/admin/campaign-administrators/delete/{campaignAdministratorId}">
+    <route id="admin.campaign_administrator.delete"
+           path="/admin/campaign-administrators/delete/{campaignAdministratorId}">
         <default key="_controller">AppBundle:Administration/CampaignAdministrator:delete</default>
     </route>
 
@@ -59,10 +68,6 @@
     </route>
 
     <!-- Campaign administrator's routes -->
-    <route id="public.campaign_admin.home" path="/campaign-admin">
-        <default key="_controller">AppBundle:CampaignAdmin:index</default>
-    </route>
-
     <route id="admin.campaign.create" path="/admin/campaigns/create">
         <default key="_controller">AppBundle:Administration/Campaign:create</default>
     </route>

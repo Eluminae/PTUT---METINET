@@ -54,8 +54,8 @@ class OrmAdministratorRepository extends EntityRepository implements UserProvide
      *
      * @return UserInterface
      * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
-     *
      * @throws UnsupportedUserException if the account is not supported
+     * @throws \Exception
      */
     public function refreshUser(UserInterface $user)
     {

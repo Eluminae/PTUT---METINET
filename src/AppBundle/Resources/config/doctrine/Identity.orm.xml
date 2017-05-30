@@ -5,7 +5,7 @@
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="AppBundle\Models\Identity" table="wc_identity" repository-class="AppBundle\Repositories\OrmIdentityRepository">
-        <id name="id" type="string" columns="id" />
+        <id name="id" type="string" column="id" />
         <field name="lastName" type="string" column="last_name" />
         <field name="firstName" type="string" column="first_name" />
         <field name="email" type="string" column="email" />

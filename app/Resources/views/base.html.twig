@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr" xml:lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Anthony VISOCCHI, Corentin BOUIX, Eddie Barraco, Alan Ridard" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <title>{% block title %}Work Competition{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Eddie Barraco, Corentin Bouix, Alan Ridard, Anthony Visocchi"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>{% block title %}Work Competition{% endblock %}</title>
+    {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{ asset('css/normalize.css') }}" media="all"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" media="all"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome-4-7-0/css/font-awesome.min.css') }}" media="all"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome-4-7-0/css/font-awesome.min.css') }}"
+              media="all"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}" media="all"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/front.css') }}" media="all"/>
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="{{ asset('js/nav.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    </head>
-    <body>
-        {% block header %}{% endblock %}
-        {% block nav %}{% endblock %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-        {% block footer %}{% endblock %}
-    </body>
+    {% endblock %}
+</head>
+<body>
+{% block header %}{% endblock %}
+{% block nav %}{% endblock %}
+{% block body %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block javascripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ asset('js/nav.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</body>
 </html>
