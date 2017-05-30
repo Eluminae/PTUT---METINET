@@ -1,4 +1,4 @@
-{% extends 'AppBundle:Default:layout.html.twig' %}
+{% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
     <div class="admin page-wrap">
@@ -30,8 +30,8 @@
                             </table>
                             <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
                             <a href="{{ path('public.realisation.register', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Déposer une réalisation</a>
-                            <a href="{{ path('public.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
                             <a href="{{ path('juror.campaign.download', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Télécharger les réalisations</a>
+                            <a href="{{ path('public.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-{% extends 'AppBundle:Admin:layoutAdmin.html.twig' %}
+{% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
     <div class="admin page-wrap">
@@ -32,8 +32,8 @@
                             <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
                             <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
                             <a href="{{ path('admin.realisation.create', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
-                            <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
                             <a href="{{ path('juror.campaign.download', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Télécharger les réalisations</a>
+                            <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
