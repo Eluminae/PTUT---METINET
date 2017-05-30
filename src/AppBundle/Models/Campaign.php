@@ -2,7 +2,7 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\UtcDate;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Campaign
 {
