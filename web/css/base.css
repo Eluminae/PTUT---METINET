@@ -14,9 +14,9 @@
 /* ---------- BODY ---------- */
 
 body{
-  background: url('../img/background.jpg');
+ /* background: url('../img/background.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;*/
     font-family: 'Lato', sans-serif;
 }
 
@@ -162,6 +162,7 @@ footer > div > h3 {
 }
 .footer-container{
   width: 95.16666667%;
+  background : #535353;
 }
 
 .page-wrap{
@@ -176,7 +177,14 @@ footer > div > h3 {
   /* .push must be the same height as footer */
     height: 96px;
     margin-top: -96px;
+  top: auto;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 0;
 }
+
 
 ul > li {
   list-style:none;
