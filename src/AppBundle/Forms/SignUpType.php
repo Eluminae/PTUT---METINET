@@ -21,7 +21,6 @@ class SignUpType extends AbstractType
         $builder
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
-            ->add('password', RepeatedType::class)
-            ->add('signup', SubmitType::class, ['label' => 'S\'inscrire']);
+            ->add('password', RepeatedType::class);
     }
 }

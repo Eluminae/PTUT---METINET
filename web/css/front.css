@@ -40,7 +40,7 @@
 }
 
 .alert-danger {
-	background: rgb(234, 48, 48);
+	background: rgb(236, 79, 79);
 }
 
 .slogan {
@@ -346,11 +346,22 @@
 /* ---------- ADMIN-NOTATION ---------- */
 
 .btn-add {
-	/*  padding-right: 0;*/
+	background: rgb(155, 206, 220);
 }
-
+.btn-delete{
+	background: rgb(236, 79, 79) ;
+}
 .btn-modify {
 	background-color: rgb(155, 220, 155);
+}
+.btn-add:hover, btn-add:focus{
+	background: rgb(145, 196, 210);
+}
+.btn-delete:hover, btn-delete:focus{
+	background: rgb(226, 69, 69) ;
+}
+.btn-modify:hover, btn-modify:focus {
+	background-color: rgb(145, 210, 145);
 }
 
 .wc-container {

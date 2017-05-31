@@ -30,16 +30,16 @@
                                     <td>{{ juror.identity.lastname }}</td>
                                     <td>{{ juror.identity.firstname }}</td>
                                     <td>
-                                        <a href="{{ path('admin.juror.delete', {'jurorId': juror.id}) }}">
+                                        <a href="{{ path('admin.juror.update', {'jurorId': juror.id}) }}">
                                             <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Supprimer
+                                                Modifier
                                             </button>
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ path('admin.juror.update', {'jurorId': juror.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Modifier
+                                        <a href="{{ path('admin.juror.delete', {'jurorId': juror.id}) }}">
+                                            <button type="button" class="btn-admin-form btn-delete" name="button">
+                                                Supprimer
                                             </button>
                                         </a>
                                     </td>
