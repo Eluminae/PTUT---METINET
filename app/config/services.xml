@@ -35,7 +35,7 @@
 
         <service id="security.campaign_administrator_provider" alias="app.campaign_administrator.repository"/>
         <service id="app.campaign_administrator.repository" alias="app.campaign_administrator.orm.repository"/>
-        <service id="app.campaign_administrator.orm.repository" class="AppBundle\Repositories\OrmCampaignAdministrator">
+        <service id="app.campaign_administrator.orm.repository" class="AppBundle\Repositories\OrmCampaignAdministratorRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>AppBundle:CampaignAdministrator</argument>
         </service>

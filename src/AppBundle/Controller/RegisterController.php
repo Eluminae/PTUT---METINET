@@ -91,6 +91,8 @@ class RegisterController extends Controller
             $this->get('session')->set('_security_'.$provider, serialize($token));
 
             $this->addFlash('success', 'Inscription enregistré');
+
+            return $this->redirectToRoute('public.homepage');
         }
 
         return $this->render(
