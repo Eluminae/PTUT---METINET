@@ -15,6 +15,11 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class RegisterController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createInvitationForAdminsAction(Request $request)
     {
         // todo add for juror assignation from admin
@@ -101,6 +106,14 @@ class RegisterController extends Controller
         );
     }
 
+    /**
+     * @param Request       $request
+     * @param bool          $isAdmin
+     * @param Campaign|null $campaign
+     *
+     * @return \Symfony\Component\Form\Form
+     * @throws \LogicException
+     */
     private function invitationFormHandler(Request $request, bool $isAdmin, Campaign $campaign = null)
     {
         $invitation = new Invitation();

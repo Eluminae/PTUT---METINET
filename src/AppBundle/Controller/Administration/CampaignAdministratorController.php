@@ -4,16 +4,16 @@ namespace AppBundle\Controller\Administration;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Config\Definition\Exception\Exception;
-
-use AppBundle\Forms\CampaignCreationType;
-use AppBundle\Dtos\CampaignCreation;
-use AppBundle\Models\Campaign;
-use AppBundle\Models\UtcDate;
 
 class CampaignAdministratorController extends Controller
 {
+    /**
+     * @param Request $request
+     * @param string  $campaignAdministratorId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showAction(Request $request, string $campaignAdministratorId)
     {
         $campaignAdministrator = $this->get('app.campaign_administrator.repository')->findOneById(
@@ -32,6 +32,11 @@ class CampaignAdministratorController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction(Request $request)
     {
         $campaignAdministrators = $this->get('app.campaign_administrator.repository')->findAll();
@@ -44,6 +49,12 @@ class CampaignAdministratorController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
+     */
     public function createAction(Request $request)
     {
         $form = $this->createForm(CampaignAdministratorCreationType::class, new CampaignAdministratorCreation());
@@ -53,7 +64,7 @@ class CampaignAdministratorController extends Controller
             $campaignAdministratorCreation = $form->getData();
 
             $userId = $this->getUser()->getIdentity()->getId();
-            $campaignAdministrator = $this->get('app.campaignAdministrator.creator')->create(
+            $campaignAdministrator = $this->get('app.campaign.creator')->create(
                 $campaignAdministratorCreation,
                 $userId
             );
@@ -73,6 +84,13 @@ class CampaignAdministratorController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @param string  $campaignAdministratorId
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
+     */
     public function deleteAction(Request $request, string $campaignAdministratorId)
     {
         $campaignAdministrator = $this->get('app.campaign_administrator.repository')->findOneById(
@@ -89,6 +107,9 @@ class CampaignAdministratorController extends Controller
         return $this->redirectToRoute('admin.campaign_administrator.list');
     }
 
+    /**
+     * @param Request $request
+     */
     public function updateAction(Request $request)
     {
         // todo

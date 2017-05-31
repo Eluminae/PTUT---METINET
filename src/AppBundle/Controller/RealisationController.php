@@ -87,12 +87,13 @@ class RealisationController extends Controller
     }
 
     /**
-     * @param Request  $request
+     * @param Request     $request
      * @param Realisation $realisation
      *
      * @ParamConverter("realisation", class="AppBundle:Realisation")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \UnexpectedValueException
      */
     public function gradeAction(Request $request, Realisation $realisation)
     {

@@ -7,6 +7,56 @@
         </div>
         <div class="wc-container">
             <div class="col-sm-12">
+                {% if is_granted('ROLE_ADMIN') and campaignsNeedReview is not empty %}
+                <div class="wc-admin-block">
+                    <div class="row no-margin">
+                        <p class="col-sm-12 wc-admin-subtitle">Campagnes à approuver</p>
+                    </div>
+                    <div class="wc-admin-row">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>Créateur</td>
+                                    <td>Début</td>
+                                    <td>Fin</td>
+                                    <td>Action</td>
+                                </tr>
+                                </thead>
+                                {% for campaign in campaignsNeedReview %}
+                                    <tr>
+                                        <td>
+                                            <a href="{{ path('admin.campaign.show', {'campaign': campaign.id}) }}">{{ campaign.name }}</a>
+                                        </td>
+                                        <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                        <td>{{ campaign.beginningDate|date("d/m/y") }}</td>
+                                        <td>{{ campaign.endDate|date("d/m/y") }}</td>
+                                        <td><img class="wc-img-thumb"
+                                                 src="{{ asset('campaignImages/' ~ campaign.imageName) }}"/></td>
+                                        <td>
+                                            <a href="{{ path('admin.campaign.approve', {'campaign': campaign.id}) }}">
+                                                <button type="button" class="btn-admin-form btn-modify"
+                                                        name="button">
+                                                    Accepter
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}">
+                                                <button type="button" class="btn-admin-form btn-modify"
+                                                        name="button">
+                                                    Refuser
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
                 <div class="wc-admin-block">
                     <div class="row no-margin">
                         <p class="col-sm-12 wc-admin-subtitle">Gestion des campagnes</p>
@@ -29,7 +79,7 @@
                                     </td>
                                 </tr>
                                 </thead>
-                                {% for campaign in campaigns %}
+                                {% for campaign in campaignsApproved %}
                                     <tr>
                                         <td>
                                             <a href="{{ path('admin.campaign.show', {'campaign': campaign.id}) }}">{{ campaign.name }}</a>
@@ -37,7 +87,8 @@
                                         <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                                         <td>{{ campaign.beginningDate|date("d/m/y") }}</td>
                                         <td>{{ campaign.endDate|date("d/m/y") }}</td>
-                                        <td><img class="wc-img-thumb" src="{{ asset('campaignImages/' ~ campaign.imageName) }}"/></td>
+                                        <td><img class="wc-img-thumb"
+                                                 src="{{ asset('campaignImages/' ~ campaign.imageName) }}"/></td>
                                         <td>
                                             <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}">
                                                 <button type="button" class="btn-admin-form btn-modify" name="button">
