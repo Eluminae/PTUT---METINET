@@ -14,7 +14,7 @@ class CampaignCreator
     private $identityRepository;
 
     public function __construct(OrmIdentityRepository $identityRepository)
-    {   
+    {
         $this->identityRepository = $identityRepository;
     }
 

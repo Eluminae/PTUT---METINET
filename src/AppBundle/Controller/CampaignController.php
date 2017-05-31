@@ -27,6 +27,37 @@ class CampaignController extends Controller
         );
     }
 
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showResultAction(Request $request, Campaign $campaign)
+    {
+        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+
+        return $this->render(
+            'AppBundle:Default:Campaign/showResult.html.twig', [
+                'campaign' => $campaign,
+                'realisations' => $realisations
+            ]
+        );
+    }
+
+    public function listFinishedAction(Request $request)
+    {
+        $campaigns = $this->get('app.campaign.repository')->findFinished();
+
+        return $this->render(
+            'AppBundle:Default:Campaign/listFinished.html.twig', [
+                'campaigns' => $campaigns
+            ]
+        );
+    }
+
     public function listAction(Request $request)
     {
         $campaignsApproved = $this->get('app.campaign.repository')->findByReview(true);

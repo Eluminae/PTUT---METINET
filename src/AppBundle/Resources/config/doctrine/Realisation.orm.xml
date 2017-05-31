@@ -8,6 +8,7 @@
         <id name="id" type="string" column="id" />
         <field name="name" type="string" column="name" />
         <field name="fileName" type="string" column="fileName" />
+        <field name="passMark" type="float" column="pass_mark" />
 
         <one-to-one field="leftAt" target-entity="UtcDate" >
             <cascade>

@@ -133,6 +133,16 @@ class RealisationController extends Controller
             $em->persist($mark);
             $em->flush();
 
+            $marks = $this->get('app.mark.repository')->findByRealisation($realisation->getId());
+            $passMark = 0;
+            foreach ($marks as $mark) {
+                $passMark += $mark->getValue();
+            }
+            $passMark /= sizeof($marks);
+            $realisation->updatePassMark($passMark);
+
+            $em->flush();
+
             return $this->redirectToRoute("public.realisation.show", ['realisation' => $realisation->getId()], 302);
         }
 
