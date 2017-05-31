@@ -60,12 +60,12 @@ class CampaignController extends Controller
 
     public function listAction(Request $request)
     {
-        $campaignsApproved = $this->get('app.campaign.repository')->findByReview(true);
+        $campaignsApprovedActive = $this->get('app.campaign.repository')->findApprovedActive();
 
         return $this->render(
             'AppBundle:Default:Campaign/list.html.twig',
             [
-                'campaigns' => $campaignsApproved,
+                'campaigns' => $campaignsApprovedActive,
             ]
         );
     }
