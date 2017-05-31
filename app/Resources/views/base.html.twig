@@ -25,7 +25,17 @@
 <body>
 {% block header %}{% endblock %}
 {% block nav %}{% endblock %}
-{% block flashBag %}{% endblock %}
+{% block flashBag %}
+    {% if app.session.flashbag.peekAll|length > 0 %}
+        {% for type, messages in app.session.flashbag.all %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type ? type : '' }}">
+                    {{ message|trans({}, domain|default('messages')) }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
 
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}

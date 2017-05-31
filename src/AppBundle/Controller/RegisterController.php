@@ -23,8 +23,6 @@ class RegisterController extends Controller
      */
     public function createInvitationForAdminsAction(Request $request)
     {
-        // todo add for juror assignation from admin
-
         $form = $this->invitationFormHandler($request, true);
 
         return $this->render('@App/Admin/inviteUser.html.twig', ['form' => $form->createView()]);
@@ -37,6 +35,7 @@ class RegisterController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
      */
     public function createInvitationForJurorAction(Request $request, Campaign $campaign)
     {

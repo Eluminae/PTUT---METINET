@@ -3,7 +3,7 @@
 <p>
     Vous êtes invité à
     {% set link = path('public.register.invitation', {'invitationToken' : invitation.invitationToken  }) %}
-    {% if invitation.assignedCampaign is not empty %}
+    {% if invitation.assignedCampaigns is not empty %}
         rejoindre la camapgne : {{ campaign.name }}.
     {% elseif invitation.role == 'Administrator' %}
         collaborer en tant qu'administrateur.
