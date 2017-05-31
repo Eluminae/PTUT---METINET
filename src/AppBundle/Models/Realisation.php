@@ -17,6 +17,7 @@ class Realisation
     private $fileName;
     private $campaign;
     private $candidates;
+    private $passMark;
 
     public function __construct(string $id, UtcDate $leftAt, string $name, Campaign $campaign, array $candidates)
     {
@@ -25,6 +26,7 @@ class Realisation
         $this->name = $name;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
+        $this->passMark = $passMark;
     }
 
     public function getId()
@@ -55,6 +57,16 @@ class Realisation
     public function getCampaign()
     {
         return $this->campaign;
+    }
+
+    public function getPassMark()
+    {
+        return $this->passMark;
+    }
+
+    public function updatePassMark(float $passMark)
+    {
+        $this->passMark = $passMark;
     }
 
     public function getCandidates()

@@ -82,7 +82,7 @@ class RealisationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $realisationRegistration = $form->getData();
 
-            $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaignId);
+            $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaign->getId());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($realisation);

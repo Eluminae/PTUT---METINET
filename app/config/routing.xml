@@ -126,8 +126,16 @@
         <default key="_controller">AppBundle:Campaign:show</default>
     </route>
 
+    <route id="public.campaign.show_result" path="/campaigns/result/{campaign}">
+        <default key="_controller">AppBundle:Campaign:showResult</default>
+    </route>
+
     <route id="public.campaign.list" path="/campaigns">
         <default key="_controller">AppBundle:Campaign:list</default>
+    </route>
+
+    <route id="public.campaign.list_finished" path="/campaigns/finished">
+        <default key="_controller">AppBundle:Campaign:listFinished</default>
     </route>
 
     <route id="public.campaign.show" path="/campaigns/{campaign}">
