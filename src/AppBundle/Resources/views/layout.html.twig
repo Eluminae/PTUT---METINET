@@ -3,6 +3,7 @@
 {% block nav %}
     <nav class="navHome">
         <ul class="ulHome">
+            {% if not is_granted('ROLE_ADMIN') %}
             <li>
                 <a href="{{ path('public.homepage') }}">
                     <div class="navIcon">
@@ -24,11 +25,40 @@
                     </div>
                 </a>
             </li>
+            {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('public.homepage') }}">
+                        <div class="navIcon">
+                            <div class="logoGrey"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin.campaign.list') }}" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-cogs fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-check-sqaure fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ path('admin.home') }}" title="Admin">
                         <div class="navIcon">
-                            <i class="fa fa-cogs fa-3x navI"></i>
+                            <i class="fa fa-users fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-user fa-3x navI"></i>
                         </div>
                     </a>
                 </li>

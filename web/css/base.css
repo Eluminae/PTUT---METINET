@@ -165,6 +165,7 @@ footer > div > h3 {
 
 .footer-container {
 	width: 95.16666667%;
+	padding: 20px !important;
 }
 
 .page-wrap {
@@ -185,7 +186,7 @@ footer > div > h3 {
 	bottom: 0;
 	right: 0;
 	position: fixed;
-	z-index: 0;
+	z-index: -1;
 }
 
 ul > li {
