@@ -13,11 +13,9 @@
 
 /* ---------- BODY ---------- */
 
-body {
-	background: url('../img/background.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	font-family: 'Lato', sans-serif;
+
+body{
+    font-family: 'Lato', sans-serif;
 }
 
 .padding-60 {
@@ -133,15 +131,16 @@ body {
 	margin: 0 18px;
 }
 
+
 .logoGreyHover {
 	background: url('../img/logoWhite.png') !important;
 }
 
-.navIcon:hover .logoGrey {
-	background: url('../img/logoWhite.png');
-	background-size: cover;
-	background-repeat: no-repeat;
-	width: 43px;
+.navIcon:hover .logoGrey{
+    background: url('../img/logoWhite.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 43px;
 	height: 43px;
 	padding: 29px 29px;
 	margin: 0 18px;
@@ -181,6 +180,12 @@ footer > div > h3 {
 	/* .push must be the same height as footer */
 	height: 96px;
 	margin-top: -96px;
+	top: auto;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: fixed;
+	z-index: 0;
 }
 
 ul > li {
