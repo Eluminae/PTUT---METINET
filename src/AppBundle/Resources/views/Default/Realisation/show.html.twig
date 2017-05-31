@@ -1,4 +1,4 @@
-{% extends 'AppBundle::layout.html.twig' %}
+{% extends 'AppBundle::navbarFO.html.twig' %}
 
 {% block body %}
     <div class="page-wrap">
@@ -14,11 +14,13 @@
                             <table class="table table-striped">
                                 <tr>
                                     <th>Nom</th>
+                                    <th>Nom de la campagne</th>
                                     <th>Déposé à</th>
                                     <th>Fichier</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr>
+                                    <td>{{ realisation.name }}</td>
                                     <td><a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
                                     <td>{{ realisation.leftAt }}</td>
                                     <td><a href="{{ asset(realisation.filePath) }}">Télécharger</a></td>
