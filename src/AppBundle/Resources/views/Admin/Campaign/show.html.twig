@@ -1,63 +1,74 @@
-{% extends 'AppBundle::navbarBO.html.twig' %}
+{% extends 'AppBundle::layoutBO.html.twig' %}
 
-{% block body %}
-    <div class="admin index page-wrap">
-        <div class="wc-title-banner">
-            <h2>Campaign</h2>
-        </div>
-        <div class="wc-container">
-            <div class="col-sm-12">
-                <div class="wc-admin-block">
-                    <div class="wc-admin-row">
-                        <div class="">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <td>Nom de la campagne</td>
-                                        <td>Description</td>
-                                        <td>Début</td>
-                                        <td>Fin</td>
-                                        <td>Créateur</td>
-                                    </tr>
-                                </thead>
+{% block main %}
+    <div class="wc-title-banner">
+        <h2>Campaign</h2>
+    </div>
+    <div class="wc-container">
+        <div class="col-sm-12">
+            <div class="wc-admin-block">
+                <div class="wc-admin-row">
+                    <div class="">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td>Nom de la campagne</td>
+                                <td>Description</td>
+                                <td>Début</td>
+                                <td>Fin</td>
+                                <td>Créateur</td>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>{{ campaign.name }}</td>
+                                <td>{{ campaign.description }}</td>
+                                <td>{{ campaign.beginningDate }}</td>
+                                <td>{{ campaign.endDate }}</td>
+                                <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                            </tr>
+                        </table>
+                        <a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}"
+                           class="btn-admin-form btn-modify">Inviter un juré</a>
+                        <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}"
+                           class="btn-admin-form btn-modify">Supprimer</a>
+                        <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}"
+                           class="btn-admin-form btn-modify">Modifier</a>
+                        <a href="{{ path('admin.realisation.create', {'campaign': campaign.id}) }}"
+                           class="btn-admin-form btn-modify">Ajouter une réalisation</a>
+                        <a href="{{ path('juror.campaign.download', {'campaign': campaign.id}) }}"
+                           class="btn-admin-form btn-modify">Télécharger les réalisations</a>
+                        <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td>Nom de la réalisation</td>
+                                <td>Fichier</td>
+                                <td>Candidats</td>
+                                <td>Actions</td>
+                            </tr>
+                            </thead>
+                            {% for realisation in realisations %}
                                 <tr>
-                                    <td>{{ campaign.name }}</td>
-                                    <td>{{ campaign.description }}</td>
-                                    <td>{{ campaign.beginningDate }}</td>
-                                    <td>{{ campaign.endDate }}</td>
-                                    <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
-                                </tr>
-                            </table>
-                            <a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Inviter un juré</a>
-                            <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
-                            <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
-                            <a href="{{ path('admin.realisation.create', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
-                            <a href="{{ path('juror.campaign.download', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Télécharger les réalisations</a>
-                            <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <td>Nom de la réalisation</td>
-                                        <td>Fichier</td>
-                                        <td>Candidats</td>
-                                        <td>Actions</td>
-                                    </tr>
-                                </thead>
-                                {% for realisation in realisations %}
-                                <tr>
-                                    <td><a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a></td>
-                                    <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
+                                    <td>
+                                        <a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a>
+                                    </td>
                                     <td>{{ realisation.candidates }}</td>
                                     <td>
-                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}">
+                                            <button type="button" class="btn-admin-form btn-modify" name="button">
+                                                Supprimer
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
+                            {% endfor %}
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% endblock %}
+{% endblock %}

@@ -1,6 +1,6 @@
-{% extends 'AppBundle::navbarFO.html.twig' %}
+{% extends 'AppBundle::layoutFO.html.twig' %}
 
-{% block body %}
+{% block main %}
     <div class="page-wrap">
         <div class="wc-title-banner">
             <h2>Realisation</h2>
@@ -21,12 +21,22 @@
                                 </tr>
                                 <tr>
                                     <td>{{ realisation.name }}</td>
-                                    <td><a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
+                                    <td>
+                                        <a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a>
+                                    </td>
                                     <td>{{ realisation.leftAt }}</td>
                                     <td><a href="{{ asset(realisation.filePath) }}">Télécharger</a></td>
                                     <td>
-                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
-                                        <a href="{{ path('juror.mark.grade', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Noter</button></a>
+                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}">
+                                            <button type="button" class="btn-admin-form btn-modify" name="button">
+                                                Supprimer
+                                            </button>
+                                        </a>
+                                        <a href="{{ path('juror.mark.grade', {'realisation': realisation.id}) }}">
+                                            <button type="button" class="btn-admin-form btn-modify" name="button">
+                                                Noter
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
                             </table>

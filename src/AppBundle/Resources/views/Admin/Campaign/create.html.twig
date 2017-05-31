@@ -1,38 +1,36 @@
-{% extends 'AppBundle::navbarBO.html.twig' %}
+{% extends 'AppBundle::layoutBO.html.twig' %}
 
-{% block body %}
-    <div class="admin index page-wrap">
-        <p class="wc-admin-welcome"></p>
-        <div class="wc-container">
-            <div class="col-sm-12">
+{% block main %}
+    <p class="wc-admin-welcome"></p>
+    <div class="wc-container">
+        <div class="col-sm-12">
 
-                {{ form_start(campaignCreationForm, {'action': path('admin.campaign.create') }) }}
-                <div class="wc-admin-block">
-                    <p class="wc-admin-subtitle">Ajout d'une campagne</p>
+            {{ form_start(campaignCreationForm, {'action': path('admin.campaign.create') }) }}
+            <div class="wc-admin-block">
+                <p class="wc-admin-subtitle">Ajout d'une campagne</p>
 
-                    <div class="wc-admin-row">
-                        {{ form_label(campaignCreationForm.name) }}
-                        {{ form_widget(campaignCreationForm.name, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Nom'}}) }}
+                <div class="wc-admin-row">
+                    {{ form_label(campaignCreationForm.name) }}
+                    {{ form_widget(campaignCreationForm.name, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Nom'}}) }}
 
-                        {{ form_label(campaignCreationForm.description) }}
-                        {{ form_widget(campaignCreationForm.description, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'description'}}) }}
+                    {{ form_label(campaignCreationForm.description) }}
+                    {{ form_widget(campaignCreationForm.description, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'description'}}) }}
 
-                        {{ form_label(campaignCreationForm.image) }}
-                        {{ form_widget(campaignCreationForm.image, {'attr': {'class': 'wc-admin-inputForm'}}) }}
+                    {{ form_label(campaignCreationForm.image) }}
+                    {{ form_widget(campaignCreationForm.image, {'attr': {'class': 'wc-admin-inputForm'}}) }}
 
-                        {{ form_label(campaignCreationForm.beginningDate) }}
-                        {{ form_widget(campaignCreationForm.beginningDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'beginningDate'}}) }}
+                    {{ form_label(campaignCreationForm.beginningDate) }}
+                    {{ form_widget(campaignCreationForm.beginningDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'beginningDate'}}) }}
 
-                        {{ form_label(campaignCreationForm.endDate) }}
-                        {{ form_widget(campaignCreationForm.endDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'endDate'}}) }}
-                    </div>
-
-                    {{ form_widget(campaignCreationForm.submit, {'attr': {'class': 'btn-admin-form', 'value': 'valider'}}) }}
-
+                    {{ form_label(campaignCreationForm.endDate) }}
+                    {{ form_widget(campaignCreationForm.endDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'endDate'}}) }}
                 </div>
-                {{ form_end(campaignCreationForm) }}
+
+                {{ form_widget(campaignCreationForm.submit, {'attr': {'class': 'btn-admin-form', 'value': 'valider'}}) }}
 
             </div>
+            {{ form_end(campaignCreationForm) }}
+
         </div>
     </div>
 {% endblock %}

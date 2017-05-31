@@ -3,6 +3,7 @@
 {% block nav %}
     <nav class="navHome">
         <ul class="ulHome">
+            {% if is_granted('ROLE_ADMIN') %}
                 <li>
                     <a href="{{ path('public.homepage') }}">
                         <div class="navIcon">
@@ -11,29 +12,35 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ path('public.campaign.list') }}">
-                        <div class="navIcon">
-                            <i class="fa fa-book fa-3x navI"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('public.campaign.list_finished') }}">
-                        <div class="navIcon">
-                            <i class="fa fa-trophy fa-3x navI"></i>
-                        </div>
-                    </a>
-                </li>
-
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-                <li>
-                    <a href="{{ path('admin.home') }}" title="Admin">
+                    <a href="{{ path('admin.campaign.list') }}" title="Admin">
                         <div class="navIcon">
                             <i class="fa fa-cogs fa-3x navI"></i>
                         </div>
                     </a>
                 </li>
+                <li>
+                    <a href="" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-check-square fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin.home') }}" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-users fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-user fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li>
                     <a href="/logout" title="Déconnexion">
                         <div class="navIcon">
@@ -52,4 +59,20 @@
             {% endif %}
         </ul>
     </nav>
+{% endblock %}
+
+{% block body %}
+    <div class="admin index page-wrap">
+        {% if app.session.flashbag.peekAll|length > 0 %}
+            {% for type, messages in app.session.flashbag.all %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type ? type : '' }}">
+                        {{ message|trans({}, domain|default('messages')) }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% block main %}
+        {% endblock %}
+    </div>
 {% endblock %}

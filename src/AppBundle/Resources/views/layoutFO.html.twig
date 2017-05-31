@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    <nav class="navHome">
+        <ul class="ulHome">
+            <li>
+                <a href="{{ path('public.homepage') }}">
+                    <div class="navIcon">
+                        <div class="logoGrey"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('public.campaign.list') }}">
+                    <div class="navIcon">
+                        <i class="fa fa-book fa-3x navI"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('public.campaign.list_finished') }}">
+                    <div class="navIcon">
+                        <i class="fa fa-trophy fa-3x navI"></i>
+                    </div>
+                </a>
+            </li>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                <li>
+                    <a href="{{ path('admin.home') }}" title="Admin">
+                        <div class="navIcon">
+                            <i class="fa fa-cogs fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout" title="Déconnexion">
+                        <div class="navIcon">
+                            <i class="fa fa-power-off fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ path('public.login') }}">
+                        <div class="navIcon">
+                            <i class="fa fa-lock fa-3x navI"></i>
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    {% if app.session.flashbag.peekAll|length > 0 %}
+        {% for type, messages in app.session.flashbag.all %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type ? type : '' }}">
+                    {{ message|trans({}, domain|default('messages')) }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    {% block main %}
+    {% endblock %}
+{% endblock %}
+

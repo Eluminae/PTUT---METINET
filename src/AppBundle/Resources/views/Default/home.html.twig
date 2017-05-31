@@ -1,12 +1,11 @@
-{% extends 'AppBundle::navbarFO.html.twig' %}
+{% extends 'AppBundle::layoutFO.html.twig' %}
 
-{% block body %}
+{% block main %}
     <div class="col-sm-12 no-padding">
         <div class="home index page-wrap">
-            <img alt="Logo" class="logoSansFond" src="{{ asset('img/logoSansFond.png') }}" />
+            <img alt="Logo" class="logoSansFond" src="{{ asset('img/logoSansFond.png') }}"/>
             <h1 class="slogan">Participez à des concours<br/>dans de multiples disciplines</h1>
             <button class="wc-btn">Voir les concours</button>
         </div>
     </div>
 {% endblock %}
-

@@ -1,7 +1,6 @@
-{% extends 'AppBundle::navbarBO.html.twig' %}
+{% extends 'AppBundle::layoutBO.html.twig' %}
 
-{% block body %}
-<div class="admin page-wrap">
+{% block main %}
     <p class="wc-admin-welcome"></p>
     <div class="wc-container">
 
@@ -16,5 +15,4 @@
             {{ form_end(form) }}
         </div>
     </div>
-</div>
 {% endblock %}

@@ -1,41 +1,47 @@
-{% extends 'AppBundle::navbarBO.html.twig' %}
+{% extends 'AppBundle::layoutBO.html.twig' %}
 
-{% block body %}
-    <div class="admin index page-wrap">
-        <div class="wc-title-banner">
-            <h2>Campaign administrator list</h2>
-        </div>
+{% block main %}
+    <div class="wc-title-banner">
+        <h2>Campaign administrator list</h2>
+    </div>
 
-        <div class="wc-container">
-            <div class="col-sm-12">
-                <div class="wc-admin-block">
+    <div class="wc-container">
+        <div class="col-sm-12">
+            <div class="wc-admin-block">
 
-                    <table>
-                        <thead>
-                            <th>Id</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>Email</th>
-                        </thead>
-                        <tbody>
-                            {% for campaignAdministrator in campaignAdministrators %}
-                                <tr>
-                                    <td><a href="{{ path('admin.campaign_administrator.show', {'campaignAdministratorId': campaignAdministrator.id}) }}">{{ campaignAdministrator.id }}</a></td>
-                                    <td>{{ campaignAdministrator.identity.lastName }}</td>
-                                    <td>{{ campaignAdministrator.identity.firstName }}</td>
-                                    <td>{{ campaignAdministrator.identity.email }}</td>
-                                    <td>
-                                        <a href="{{ path('admin.campaign_administrator.delete', {'campaignAdministratorId': campaignAdministrator.id}) }}">Delete</a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <a class="col-md-4" href="{{ path('admin.juror.list') }}"><button type="button" class="btn-admin-form btn-modify">Jurés</button></a>
-                        <a class="col-md-4" href="{{ path('admin.administrator.list') }}"><button type="button" class="btn-admin-form btn-modify">Administrateurs</button></a>
-                        <a class="col-md-4" href="{{ path('admin.campaign_administrator.list') }}"><button type="button" class="btn-admin-form btn-modify">Administrateurs de campaigne</button></a>
-                    </div>
+                <table>
+                    <thead>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+                    </thead>
+                    <tbody>
+                    {% for campaignAdministrator in campaignAdministrators %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('admin.campaign_administrator.show', {'campaignAdministratorId': campaignAdministrator.id}) }}">{{ campaignAdministrator.id }}</a>
+                            </td>
+                            <td>{{ campaignAdministrator.identity.lastName }}</td>
+                            <td>{{ campaignAdministrator.identity.firstName }}</td>
+                            <td>{{ campaignAdministrator.identity.email }}</td>
+                            <td>
+                                <a href="{{ path('admin.campaign_administrator.delete', {'campaignAdministratorId': campaignAdministrator.id}) }}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row">
+                    <a class="col-md-4" href="{{ path('admin.juror.list') }}">
+                        <button type="button" class="btn-admin-form btn-modify">Jurés</button>
+                    </a>
+                    <a class="col-md-4" href="{{ path('admin.administrator.list') }}">
+                        <button type="button" class="btn-admin-form btn-modify">Administrateurs</button>
+                    </a>
+                    <a class="col-md-4" href="{{ path('admin.campaign_administrator.list') }}">
+                        <button type="button" class="btn-admin-form btn-modify">Administrateurs de campaigne</button>
+                    </a>
                 </div>
             </div>
         </div>

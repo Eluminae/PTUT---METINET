@@ -50,41 +50,7 @@ class CampaignAdministratorController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \LogicException
-     */
-    public function createAction(Request $request)
-    {
-        $form = $this->createForm(CampaignAdministratorCreationType::class, new CampaignAdministratorCreation());
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $campaignAdministratorCreation = $form->getData();
-
-            $userId = $this->getUser()->getIdentity()->getId();
-            $campaignAdministrator = $this->get('app.campaign.creator')->create(
-                $campaignAdministratorCreation,
-                $userId
-            );
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($campaignAdministrator);
-            $em->flush();
-
-            return $this->redirectToRoute('admin.campaign_administrator.list');
-        }
-
-        return $this->render(
-            'AppBundle:Admin:CampaignAdministrator/campaignAdministrator.html.twig',
-            [
-                'campaignAdministratorCreationForm' => $form->createView(),
-            ]
-        );
-    }
-
-    /**
+     * @todo To review
      * @param Request $request
      * @param string  $campaignAdministratorId
      *

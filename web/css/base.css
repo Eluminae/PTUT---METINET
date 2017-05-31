@@ -13,9 +13,8 @@
 
 /* ---------- BODY ---------- */
 
-
-body{
-    font-family: 'Lato', sans-serif;
+body {
+	font-family: 'Lato', sans-serif;
 }
 
 .padding-60 {
@@ -131,16 +130,15 @@ body{
 	margin: 0 18px;
 }
 
-
 .logoGreyHover {
 	background: url('../img/logoWhite.png') !important;
 }
 
-.navIcon:hover .logoGrey{
-    background: url('../img/logoWhite.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 43px;
+.navIcon:hover .logoGrey {
+	background: url('../img/logoWhite.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 43px;
 	height: 43px;
 	padding: 29px 29px;
 	margin: 0 18px;

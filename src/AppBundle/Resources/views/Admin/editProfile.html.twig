@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends '@App/layoutBO.html.twig' %}
 
-{% block body %}
+{% block main %}
     {{ app.user.identity.email }}
     {{ form(form) }}
 {% endblock %}

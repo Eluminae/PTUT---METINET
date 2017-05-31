@@ -9,7 +9,15 @@
         <default key="_controller">AppBundle:Default:home</default>
     </route>
 
-    <!-- Register invitation -->
+    <!-- Invitation system -->
+    <route id="admin.admins.invite" path="/admin/admins/invite">
+        <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>
+    </route>
+
+    <route id="admin.juror.invite" path="/admin/juror/invitation/{campaign}">
+        <default key="_controller">AppBundle:Register:createInvitationForJuror</default>
+    </route>
+
     <route id="public.register.invitation" path="/register/invitation/{invitationToken}">
         <default key="_controller">AppBundle:Register:registerFromInvitation</default>
     </route>
@@ -110,11 +118,6 @@
 
     <route id="admin.juror.update" path="/admin/jurors/update/{jurorId}">
         <default key="_controller">AppBundle:Administration/Juror:update</default>
-    </route>
-
-    <!-- Need to be sort -->
-    <route id="admin.juror.invite" path="/admin/juror/invitation/{campaign}">
-        <default key="_controller">AppBundle:Register:createInvitationForJuror</default>
     </route>
 
     <!-- <route id="public.realisation.list_for_campaign" path="/realisations/list-for-campaign/{campaign}"> -->
