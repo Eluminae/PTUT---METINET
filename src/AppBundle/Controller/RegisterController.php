@@ -120,7 +120,7 @@ class RegisterController extends Controller
         $invitation->setInvitationToken($this->get('app.uuid.generator')->generateUuid());
 
         if ($campaign) {
-            $invitation->addAssignedCampaigns($campaign);
+            $invitation->addAssignedCampaign($campaign);
         }
 
         $form = $this->createForm(InviteUserType::class, $invitation, ['isAdmin' => $isAdmin]);
