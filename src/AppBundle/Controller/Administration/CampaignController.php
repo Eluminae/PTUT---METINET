@@ -5,22 +5,10 @@ namespace AppBundle\Controller\Administration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use AppBundle\Dtos\AddJurorToCampaign;
 use AppBundle\Dtos\CampaignCreation;
-use AppBundle\Forms\AddJurorToCampaignType;
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
-use AppBundle\Models\UtcDate;
-
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use ZipArchive;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 
 class CampaignController extends Controller
 {
@@ -100,20 +88,14 @@ class CampaignController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param string  $campaignId
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Exception
-     */
-    public function deleteAction(Request $request, Campaign $campaign)
-    /**
      * @param Request  $request
      * @param Campaign $campaign
      *
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
      */
     public function deleteAction(Request $request, Campaign $campaign)
     {
@@ -136,7 +118,6 @@ class CampaignController extends Controller
     {
         // todo
     }
-
 
     /**
      * @param Campaign $campaign

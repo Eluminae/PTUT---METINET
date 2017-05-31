@@ -28,7 +28,7 @@
     </route>
 
     <!-- Administrator's routes -->
-    <route id="public.admin.home" path="/admin">
+    <route id="admin.home" path="/admin">
         <default key="_controller">AppBundle:Administration/Default:index</default>
     </route>
 
