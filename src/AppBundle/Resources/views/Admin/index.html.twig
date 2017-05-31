@@ -1,22 +1,23 @@
 {% extends 'AppBundle::navbarBO.html.twig' %}
 
 {% block body %}
-    <div class="admin index page-wrap">
-        <div class="wc-title-banner">
-            <h2>Bonjour, {{ app.user.identity.firstName ~ ' ' ~ app.user.identity.lastName }}</h2>
-        </div>
+    <div class="wc-title-banner">
+        <h2>Bonjour, {{ app.user.identity.firstName ~ ' ' ~ app.user.identity.lastName }}</h2>
+    </div>
 
-        <div class="wc-container">
-            <div class="col-sm-12">
-                <div class="wc-admin-block">
-                    <ul>
-                        <li><a href="{{ path('admin.realisation.list')}}">Liste des réalisations</a></li>
-                        <li><a href="{{ path('admin.juror.list')}}">Liste des jurés</a></li>
-                        <li><a href="{{ path('admin.administrator.list')}}">Liste des administrateurs</a></li>
-                        <li><a href="{{ path('admin.campaign_administrator.list')}}">Liste des administrateurs de campagne</a></li>
-                        <li><a href="{{ path('admin.admins.invite') }}">Inviter un admin (administrator ou capaign admin)</a> -> A mettre sur la vue de la liste des utilisateurs</li>
-                    </ul>
-                </div>
+    <div class="wc-container">
+        <div class="col-sm-12">
+            <div class="wc-admin-block">
+                <ul>
+                    <li><a href="{{ path('admin.realisation.list') }}">Liste des réalisations</a></li>
+                    <li><a href="{{ path('admin.juror.list') }}">Liste des jurés</a></li>
+                    <li><a href="{{ path('admin.administrator.list') }}">Liste des administrateurs</a></li>
+                    <li><a href="{{ path('admin.campaign_administrator.list') }}">Liste des administrateurs de
+                            campagne</a></li>
+                    <li><a href="{{ path('admin.admins.invite') }}">Inviter un admin (administrator ou capaign
+                            admin)</a> -> A mettre sur la vue de la liste des utilisateurs
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

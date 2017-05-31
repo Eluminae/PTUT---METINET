@@ -14,6 +14,11 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $this->addFlash('success', 'YOUUUUUHHOUUUUU');
+        $this->addFlash('success', 'YOUUUUUHHOUUUUU');
+        $this->addFlash('success', 'YOUUUUUHHOUUUUU');
+        $this->addFlash('success', 'YOUUUUUHHOUUUUU');
+        $this->addFlash('success', 'YOUUUUUHHOUUUUU');
         return $this->render('AppBundle:Admin:index.html.twig');
     }
 
