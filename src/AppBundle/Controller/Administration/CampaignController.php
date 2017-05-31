@@ -120,6 +120,7 @@ class CampaignController extends Controller
     }
 
     /**
+     * @param Request  $request
      * @param Campaign $campaign
      *
      * @ParamConverter("campaign", class="AppBundle:Campaign")
@@ -141,5 +142,54 @@ class CampaignController extends Controller
         $this->addFlash('success', 'La campagne a bien été approuvé');
 
         return $this->redirectToRoute('admin.campaign.list');
+    }
+
+    public function gradeAction(Request $request, Campaign $campaign)
+    {
+        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+
+        $identity = $this->get('security.token_storage')->getToken()->getUser()->getIdentity();
+
+        // $mark = $this
+        //     ->getDoctrine()
+        //     ->getRepository('AppBundle:Mark')
+        //     ->findBy([
+        //         'realisation' => $realisation->getId(),
+        //         'identity' => $identity
+        //     ])
+        // ;
+        // if ($mark) {
+        //     $this->addFlash('error', 'Vous avez déja noté cette réalisation.');
+
+        //     return $this->redirectToRoute("public.realisation.show", ['realisation' => $realisation->getId()], 302);
+        // }
+
+        $reaMarkDto = new RealisationMarkDto();
+        $reaMarkDto->realisation = $realisation;
+        $reaMarkDto->identity = $identity;
+
+        $form = $this->createForm(GradeCampaignType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reaMarkDto = $form->getData();
+
+            // $mark = $this
+            //     ->get('app.realisation_mark.factory')
+            //     ->create($reaMarkDto)
+            // ;
+
+            // $em = $this->getDoctrine()->getManager();
+            // $em->persist($mark);
+            // $em->flush();
+
+            return $this->redirectToRoute("public.campaign.show", ['campaign' => $campaign->getId()], 302);
+        }
+
+        return $this->render(
+            'AppBundle:Default:Realisation/grade.html.twig', [
+                'form' => $form->createView(),
+            ]
+        );
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Models\Notation" table="wc_notation"
+        repository-class="AppBundle\Repositories\OrmNotationRepository">
+        <id name="id" type="string" column="id"/>
+        <field name="markType" type="integer" column="mark_type"/>
+        <field name="markTypeNumber" type="integer" column="mark_type_number"/>
+    </entity>
+</doctrine-mapping>

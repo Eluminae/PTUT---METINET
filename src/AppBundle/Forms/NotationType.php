@@ -14,13 +14,13 @@ class NotationType extends AbstractType
     {
         $builder
             ->add('markType', ChoiceType::class, array(
-			    'choices' => array(
-			        'Noter classiquement' => '2',
-			        'Noter par classement' => '1'
-			    ),
-			    'expanded' => true,
-			    'multiple' => false
-			))
+                'choices' => array(
+                    'Noter classiquement' => '2',
+                    'Noter par classement' => '1'
+                ),
+                'expanded' => true,
+                'multiple' => false
+            ))
             ->add('markTypeNumber', TextType::class)
         ;
     }
