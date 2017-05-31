@@ -17,7 +17,7 @@ class Realisation
     private $fileName;
     private $campaign;
     private $candidates;
-    private $passMark;
+    private $averageMark;
 
     public function __construct(string $id, UtcDate $leftAt, string $name, Campaign $campaign, array $candidates)
     {
@@ -26,7 +26,7 @@ class Realisation
         $this->name = $name;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
-        $this->passMark = $passMark;
+        $this->averageMark = $averageMark;
     }
 
     public function getId()
@@ -59,14 +59,14 @@ class Realisation
         return $this->campaign;
     }
 
-    public function getPassMark()
+    public function getAverageMark()
     {
-        return $this->passMark;
+        return $this->averageMark;
     }
 
-    public function updatePassMark(float $passMark)
+    public function updateAverageMark(float $averageMark)
     {
-        $this->passMark = $passMark;
+        $this->averageMark = $averageMark;
     }
 
     public function getCandidates()

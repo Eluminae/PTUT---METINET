@@ -134,12 +134,12 @@ class RealisationController extends Controller
             $em->flush();
 
             $marks = $this->get('app.mark.repository')->findByRealisation($realisation->getId());
-            $passMark = 0;
+            $averageMark = 0;
             foreach ($marks as $mark) {
-                $passMark += $mark->getValue();
+                $averageMark += $mark->getValue();
             }
-            $passMark /= sizeof($marks);
-            $realisation->updatePassMark($passMark);
+            $averageMark /= sizeof($marks);
+            $realisation->updateAverageMark($averageMark);
 
             $em->flush();
 

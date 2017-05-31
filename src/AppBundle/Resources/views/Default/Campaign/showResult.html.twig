@@ -43,7 +43,7 @@
                                         <td><a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a></td>
                                         <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
                                         <td>{{ realisation.candidates }}</td>
-                                        <td>{{ realisation.passMark }}</td>
+                                        <td>{{ realisation.averageMark | round(2) }}</td>
                                     </tr>
                                 {% endfor %}
                             </table>
