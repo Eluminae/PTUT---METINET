@@ -55,18 +55,16 @@
 {% endblock %}
 
 {% block body %}
-    <div class="admin index page-wrap">
-        {% if app.session.flashbag.peekAll|length > 0 %}
-            {% for type, messages in app.session.flashbag.all %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ type ? type : '' }}">
-                        {{ message|trans({}, domain|default('messages')) }}
-                    </div>
-                {% endfor %}
+    {% if app.session.flashbag.peekAll|length > 0 %}
+        {% for type, messages in app.session.flashbag.all %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type ? type : '' }}">
+                    {{ message|trans({}, domain|default('messages')) }}
+                </div>
             {% endfor %}
-        {% endif %}
-        {% block main %}
-        {% endblock %}
-    </div>
+        {% endfor %}
+    {% endif %}
+    {% block main %}
+    {% endblock %}
 {% endblock %}
 
