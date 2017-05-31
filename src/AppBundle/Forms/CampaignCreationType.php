@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Forms\NotationType;
 
 class CampaignCreationType extends AbstractType
 {
@@ -21,6 +22,7 @@ class CampaignCreationType extends AbstractType
             ->add('endDate', DateType::class)
             ->add('beginningDate', DateType::class)
             ->add('description', TextareaType::class)
+            ->add('notation', NotationType::class)
             ->add('image', FileType::class)
             ->add('submit', SubmitType::class)
         ;

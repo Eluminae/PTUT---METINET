@@ -6,16 +6,20 @@ use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\Identity;
 use AppBundle\Models\UtcDate;
+use AppBundle\Models\Notation;
 use AppBundle\Repositories\OrmIdentityRepository;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CampaignCreator
 {
     private $identityRepository;
+    /** @var UuidGenerator */
+    private $uuidGenerator;
 
-    public function __construct(OrmIdentityRepository $identityRepository)
+    public function __construct(OrmIdentityRepository $identityRepository, UuidGenerator $uuidGenerator)
     {
         $this->identityRepository = $identityRepository;
+        $this->uuidGenerator = $uuidGenerator;
     }
 
     public function create(CampaignCreation $campaignCreation, $userId)
@@ -29,14 +33,21 @@ class CampaignCreator
 
         $user = $this->identityRepository->findOneById($userId);
 
+        $notation = new Notation(
+            $this->uuidGenerator->generateUuid(),
+            $campaignCreation->notation['markType'], 
+            $campaignCreation->notation['markTypeNumber']
+        );
+
         return new Campaign(
-            uniqid(),
-            new UtcDate(uniqid(), \DateTimeImmutable::createFromMutable($campaignCreation->endDate)),
-            new UtcDate(uniqid(), \DateTimeImmutable::createFromMutable($campaignCreation->beginningDate)),
+            $this->uuidGenerator->generateUuid(),
+            new UtcDate($this->uuidGenerator->generateUuid(),, \DateTimeImmutable::createFromMutable($campaignCreation->endDate)),
+            new UtcDate($this->uuidGenerator->generateUuid(),, \DateTimeImmutable::createFromMutable($campaignCreation->beginningDate)),
             $campaignCreation->name,
             $campaignCreation->description,
             $fileName,
-            $user
+            $user,
+            $notation
         );
     }
 }

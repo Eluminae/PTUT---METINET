@@ -15,6 +15,12 @@
 
                     {{ form_label(campaignCreationForm.description) }}
                     {{ form_widget(campaignCreationForm.description, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'description'}}) }}
+                        
+                    {{ form_label(campaignCreationForm.notation.markType) }}
+                    {{ form_widget(campaignCreationForm.notation.markType, {'attr': {'class': 'wc-admin-inputForm'}}) }}
+
+                    {{ form_label(campaignCreationForm.notation.markTypeNumber) }}
+                    {{ form_widget(campaignCreationForm.notation.markTypeNumber, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Notation sur combien ?'}}) }}
 
                     {{ form_label(campaignCreationForm.image) }}
                     {{ form_widget(campaignCreationForm.image, {'attr': {'class': 'wc-admin-inputForm'}}) }}

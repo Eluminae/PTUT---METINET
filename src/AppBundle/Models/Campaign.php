@@ -19,19 +19,14 @@ class Campaign
     private $description;
     private $imageName;
     private $creator;
+    private $notation;
+
     /** @var ArrayCollection */
     private $jurors;
     private $status;
 
-    public function __construct(
-        string $id,
-        UtcDate $endDate,
-        UtcDate $beginningDate,
-        string $name,
-        string $description,
-        string $imageName,
-        Identity $creator
-    ) {
+    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator, Notation $notation)
+    {
         $this->id = $id;
         $this->endDate = $endDate;
         $this->beginningDate = $beginningDate;
@@ -40,6 +35,7 @@ class Campaign
         $this->imageName = $imageName;
         $this->creator = $creator;
         $this->status = self::TO_BE_REVIEWED;
+        $this->notation = $notation;
     }
 
     public function getId()
@@ -85,6 +81,11 @@ class Campaign
     public function getJurors()
     {
         return $this->jurors;
+    }
+
+    public function getNotation()
+    {
+        return $this->notation;
     }
 
     public function approveCampaign()
