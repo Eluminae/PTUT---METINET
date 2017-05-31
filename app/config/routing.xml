@@ -84,6 +84,10 @@
         <default key="_controller">AppBundle:Administration/Campaign:delete</default>
     </route>
 
+    <route id="admin.campaign.approve" path="/admin/campaigns/approve/{campaign}">
+        <default key="_controller">AppBundle:Administration/Campaign:approve</default>
+    </route>
+
     <route id="admin.campaign.update" path="/admin/campaigns/update/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>

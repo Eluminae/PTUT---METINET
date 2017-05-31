@@ -2,23 +2,31 @@
 
 namespace AppBundle\Controller\Administration;
 
-use AppBundle\Forms\SignInType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends Controller
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction()
     {
         $administrators = $this->get('app.administrator.repository')->findAll();
 
         return $this->render(
-            'AppBundle:Admin:Administrator/list.html.twig', [
+            'AppBundle:Admin:Administrator/list.html.twig',
+            [
                 'administrators' => $administrators,
             ]
         );
     }
 
+    /**
+     * @param $administratorId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function showAction($administratorId)
     {
         $administrator = $this->get('app.administrator.repository')->findOneById($administratorId);
@@ -27,12 +35,19 @@ class AdministratorController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Admin:Administrator/show.html.twig', [
+            'AppBundle:Admin:Administrator/show.html.twig',
+            [
                 'administrator' => $administrator,
             ]
         );
     }
 
+    /**
+     * @param $administratorId
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
+     */
     public function deleteAction($administratorId)
     {
         $administrator = $this->get('app.administrator.repository')->findOneById($administratorId);

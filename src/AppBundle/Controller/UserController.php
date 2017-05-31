@@ -11,6 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loginAction(Request $request)
     {
         $form = $this->createForm(SignInType::class);
@@ -29,15 +34,30 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     */
     public function logoutAction(Request $request)
     {
     }
 
+    /**
+     * @param $name
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction($name)
     {
         return $this->render('', array('name' => $name));
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     * @throws \LogicException
+     */
     public function editProfileAction(Request $request)
     {
         // todo : This logic may be moved into a standalone service
