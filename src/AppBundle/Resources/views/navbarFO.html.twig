@@ -3,27 +3,27 @@
 {% block nav %}
     <nav class="navHome">
         <ul class="ulHome">
-                <li>
-                    <a href="{{ path('public.homepage') }}">
-                        <div class="navIcon">
-                            <div class="logoGrey"></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('public.campaign.list') }}">
-                        <div class="navIcon">
-                            <i class="fa fa-book fa-3x navI"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('public.campaign.list_finished') }}">
-                        <div class="navIcon">
-                            <i class="fa fa-trophy fa-3x navI"></i>
-                        </div>
-                    </a>
-                </li>
+            <li>
+                <a href="{{ path('public.homepage') }}">
+                    <div class="navIcon">
+                        <div class="logoGrey"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('public.campaign.list') }}">
+                    <div class="navIcon">
+                        <i class="fa fa-book fa-3x navI"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('public.campaign.list_finished') }}">
+                    <div class="navIcon">
+                        <i class="fa fa-trophy fa-3x navI"></i>
+                    </div>
+                </a>
+            </li>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 

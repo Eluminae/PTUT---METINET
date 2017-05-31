@@ -1,13 +1,11 @@
 {% extends 'AppBundle::navbarBO.html.twig' %}
 
 {% block body %}
-    <div class="admin page-wrap">
-        <div class="wc-title-banner">
-            <h2>Juror list</h2>
-        </div>
-        <div class="wc-container">
-            <h1>Créer un compte avec invitation pour {{ email }}</h1>
-            {{ form(form) }}
-        </div>
+    <div class="wc-title-banner">
+        <h2>Juror list</h2>
+    </div>
+    <div class="wc-container">
+        <h1>Créer un compte avec invitation pour {{ email }}</h1>
+        {{ form(form) }}
     </div>
 {% endblock %}

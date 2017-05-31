@@ -1,354 +1,372 @@
 /* ---------- INDEX.HTML ---------- */
-.index{
-  z-index: 1;
-  position: relative;
-  margin-bottom: 94px;
-}
-.home{
-  text-align: center;
-
-  /*height: 100vh;*/
-}
-.page-wrap{
-  text-align: center;
-  background: url('../img/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: calc(100vh - 94px );
-  /*height: 100vh;*/
-}
-.page-wrap-alert{
-  margin-left: 93px;
-}
-.alert-success{
-  margin-bottom: 0;
-  padding: 20px;
-  background: rgb(154, 221, 107);;
-  color: white;
-}
-.alert-warning{
-  margin-bottom: 0;
-  background: rgb(234, 120, 48);
-  padding: 20px;
-  color: white;
-}
-.alert-danger{
-  margin-bottom: 0;
-  background: rgb(234, 48, 48);
-  padding: 20px;
-  color: white;
-}
-.slogan{
-  font-weight: bold;
-  font-size: 50px;
-  text-shadow: 1px 1px 1px grey;
-  color: white;
+.index {
+	z-index: 1;
+	position: relative;
+	margin-bottom: 94px;
 }
 
-.logoSansFond{
-  width: 20%;
-  margin-top: 100px;
-margin-bottom: 50px;
+.home {
+	text-align: center;
+
+	/*height: 100vh;*/
+}
+
+.page-wrap {
+	text-align: center;
+	background: url('../img/background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: calc(100vh - 94px);
+	/*height: 100vh;*/
+}
+
+.page-wrap-alert {
+	margin-left: 93px;
+}
+
+.alert {
+	margin-bottom: 0;
+	padding: 20px;
+	color: #fff;
+}
+
+.alert-success {
+	background: rgb(154, 221, 107);;
+}
+
+.alert-warning {
+	background: rgb(234, 120, 48);
+}
+
+.alert-danger {
+	background: rgb(234, 48, 48);
+}
+
+.slogan {
+	font-weight: bold;
+	font-size: 50px;
+	text-shadow: 1px 1px 1px grey;
+	color: white;
+}
+
+.logoSansFond {
+	width: 20%;
+	margin-top: 100px;
+	margin-bottom: 50px;
 }
 
 .wc-btn {
-    padding: 10px 20px;
-    font-weight: bold;
-    background-color: #f36b21;
-    border-radius: 4px;
-    border: none;
-    color: white;
-    margin: 15px;
-    font-size: 18px;
-    border-bottom: 2px solid #c56f40;
+	padding: 10px 20px;
+	font-weight: bold;
+	background-color: #f36b21;
+	border-radius: 4px;
+	border: none;
+	color: white;
+	margin: 15px;
+	font-size: 18px;
+	border-bottom: 2px solid #c56f40;
 }
 
 .wc-btn:hover {
-  background-color: #f55c08;
+	background-color: #f55c08;
 
-  -webkit-transition: width 2s ease-in-out; /* Safari */
-  transition: width 2s ease-in-out;
+	-webkit-transition: width 2s ease-in-out; /* Safari */
+	transition: width 2s ease-in-out;
 }
 
 /* ---------- CONNEXION.HTML ---------- */
 
-.connexion{
-  height: 100vh;
+.connexion {
+	height: 100vh;
 }
 
-.wc-form-HomePage{
-  margin: 0 30%;
-  padding: 100px 0px;
-width: 40%;
+.wc-form-HomePage {
+	margin: 0 30%;
+	padding: 100px 0px;
+	width: 40%;
 }
 
-.wc-form-forgot{
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-top: 1px solid silver;
-  background: white;
-}
-.wc-form-forgot > a > p{
-  margin: 0;
-  text-decoration: none;
+.wc-form-forgot {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-top: 1px solid silver;
+	background: white;
 }
 
-.inputLogin{
-  padding: 10px 20px;
-  font-weight: bold;
-  background-color: rgba(0,0,0,0.02);
-  border-radius: 4px;
-  border: none;
-  margin: 15px;
-  font-size: 18px;
-  width: calc(100% - 30px);
+.wc-form-forgot > a > p {
+	margin: 0;
+	text-decoration: none;
 }
 
-.btnLogin{
-  padding: 10px 10px;
-  font-weight: bold;
-  border-radius: 4px;
-  border: none;
-  color:white;
-  margin: 15px;
-  font-size: 18px;
-  width: calc(100% - 30px);
-  background-color: #f36b21;
-  border-bottom: 2px solid #c56f40;
+.inputLogin {
+	padding: 10px 20px;
+	font-weight: bold;
+	background-color: rgba(0, 0, 0, 0.02);
+	border-radius: 4px;
+	border: none;
+	margin: 15px;
+	font-size: 18px;
+	width: calc(100% - 30px);
 }
 
-.formLogin{
-  width: 500px;
-  margin: 0 auto;
-  background: white;
+.btnLogin {
+	padding: 10px 10px;
+	font-weight: bold;
+	border-radius: 4px;
+	border: none;
+	color: white;
+	margin: 15px;
+	font-size: 18px;
+	width: calc(100% - 30px);
+	background-color: #f36b21;
+	border-bottom: 2px solid #c56f40;
 }
+
+.formLogin {
+	width: 500px;
+	margin: 0 auto;
+	background: white;
+}
+
 /* ---------- COMPETITIONS.HTML ---------- */
 
-.competitions{
-  height: 100vh;
+.competitions {
+	height: 100vh;
 }
 
-.wc-project-competitionPage{
-  width: 80%;
-margin: 10%;
-background: white;
+.wc-project-competitionPage {
+	width: 80%;
+	margin: 10%;
+	background: white;
 
 }
-.wc-img-competitionPage > img{
-  width: 100%;
+
+.wc-img-competitionPage > img {
+	width: 100%;
 
 }
-.wc-title-competition > h2{
-  margin: 0;
+
+.wc-title-competition > h2 {
+	margin: 0;
 }
 
-.wc-picture-competitionPage{
-width: 100%;
-height: 200px;
+.wc-picture-competitionPage {
+	width: 100%;
+	height: 200px;
 }
 
-.wc-info-competitionPage{
-  padding: 10px;
-}
-.wc-name-competitionPage{
-  font-weight: bold;
-}
-.wc-category-competitionPage{
-  font-weight: bold;
-  font-style: italic;
-}
-.wc-desc-competitionPage{
-  color: silver;
+.wc-info-competitionPage {
+	padding: 10px;
 }
 
+.wc-name-competitionPage {
+	font-weight: bold;
+}
+
+.wc-category-competitionPage {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.wc-desc-competitionPage {
+	color: silver;
+}
 
 /* ---------- RESULTATS.HTML ---------- */
 
-.results{
-  height: 100vh;
+.results {
+	height: 100vh;
 }
 
-.wc-project-resultsPage{
-  width: 80%;
-margin: 10%;
-background: white;
-height: 204px;
-}
-.wc-concour-resultsPage{
-float: left;
-width: 50%;
-
-}
-.wc-winners-resultsPage{
-display: inline-block;
-width: 50%;
+.wc-project-resultsPage {
+	width: 80%;
+	margin: 10%;
+	background: white;
+	height: 204px;
 }
 
+.wc-concour-resultsPage {
+	float: left;
+	width: 50%;
 
-.wc-picture-resultsPage{
-width: 100%;
-height: 164px;
-}
-
-.wc-info-resultsPage{
-  padding: 5px 10px;
-}
-.wc-name-resultsPage{
-  font-weight: bold;
-}
-.wc-win-resultsPage{
-  padding: 10px;
-  border-bottom: 1px solid silver;
-}
- .wc-win-resultsPage:nth-child(even){
-   background: rgba(0,0,0,0.04);
- }
-.wc-win-resultsPage > span{
-  padding: 10px;
-}
-.wc-plus-resultPage{
-  padding: 5px;
 }
 
-.btn-plus-resultsPage{
+.wc-winners-resultsPage {
+	display: inline-block;
+	width: 50%;
+}
 
-  border: none;
-  border-radius: 6px;
-  padding: 5px 10px;
-  float: right;
+.wc-picture-resultsPage {
+	width: 100%;
+	height: 164px;
+}
+
+.wc-info-resultsPage {
+	padding: 5px 10px;
+}
+
+.wc-name-resultsPage {
+	font-weight: bold;
+}
+
+.wc-win-resultsPage {
+	padding: 10px;
+	border-bottom: 1px solid silver;
+}
+
+.wc-win-resultsPage:nth-child(even) {
+	background: rgba(0, 0, 0, 0.04);
+}
+
+.wc-win-resultsPage > span {
+	padding: 10px;
+}
+
+.wc-plus-resultPage {
+	padding: 5px;
+}
+
+.btn-plus-resultsPage {
+
+	border: none;
+	border-radius: 6px;
+	padding: 5px 10px;
+	float: right;
 }
 
 /* ---------- MDPFORGOTTEN.HTML ---------- */
 
-.mdpForgotten{
-  height: 100vh;
-}
-.wc-container-mdpForm{
-  width: 80%;
-  background: rgba(255,255,255,0.5);
-  padding: 10px;
-  margin: 30px auto;
+.mdpForgotten {
+	height: 100vh;
 }
 
-.wc-form-reset{
-  width: 100%;
-padding: 14px;
-border: none;
-border-top: 1px solid silver;
+.wc-container-mdpForm {
+	width: 80%;
+	background: rgba(255, 255, 255, 0.5);
+	padding: 10px;
+	margin: 30px auto;
+}
+
+.wc-form-reset {
+	width: 100%;
+	padding: 14px;
+	border: none;
+	border-top: 1px solid silver;
 }
 
 /* ---------- MDPCHANGE.HTML ---------- */
 
-.mdpChange{
-  height: 100vh;
+.mdpChange {
+	height: 100vh;
 }
 
 /* ---------- aCOMPETITIONNAME.HTML ---------- */
 
-.aCompetitionName{
-  height: 100vh;
+.aCompetitionName {
+	height: 100vh;
 }
 
 /* ---------- INSCRIPTION.HTML ---------- */
 
-.inscription{
-  height: 100vh;
-}
-.wc-form-inscriptionPage{
-margin: 100px 30%;
-width: 40%;
-background: white;
+.inscription {
+	height: 100vh;
 }
 
-.wc-label{
-  padding: 0px 14px;
-color: silver;
+.wc-form-inscriptionPage {
+	margin: 100px 30%;
+	width: 40%;
+	background: white;
+}
+
+.wc-label {
+	padding: 0px 14px;
+	color: silver;
 }
 
 /* ---------- ADMIN-ACCUEIL.HTML ---------- */
 
-.admin{
- /* height: 100vh;*/
+.admin {
+	/* height: 100vh;*/
 }
 
-.wc-admin-welcome{
-  color: white;
-font-size: 26px;
-padding: 12px;
+.wc-admin-welcome {
+	color: white;
+	font-size: 26px;
+	padding: 12px;
 }
 
-.wc-admin-row{
-  width: 100%;
-padding: 10px;
-background-color: white;
-color: black;
-font-size: 20px;
-border: none;
+.wc-admin-row {
+	width: 100%;
+	padding: 10px;
+	background-color: white;
+	color: black;
+	font-size: 20px;
+	border: none;
 }
 
-.wc-admin-p{
-  height: 50px;
-border-bottom: 1px solid silver;
-line-height: 48px;
+.wc-admin-p {
+	height: 50px;
+	border-bottom: 1px solid silver;
+	line-height: 48px;
 }
 
-.wc-admin-subtitle{
-  padding: 10px;
-background: rgb(240,240,240);
-line-height: 28px;
-height: 50px;
-font-size: 22px;
+.wc-admin-subtitle {
+	padding: 10px;
+	background: rgb(240, 240, 240);
+	line-height: 28px;
+	height: 50px;
+	font-size: 22px;
 }
 
-.wc-admin-block{
-  padding: 5px;
+.wc-admin-block {
+	padding: 5px;
 }
 
-.wc-admin-seeAll{
-  padding: 10px;
-background: rgb(240,240,240);
-line-height: 28px;
-height: 50px;
-font-size: 20px;
-margin: 0;
-text-align: center;
+.wc-admin-seeAll {
+	padding: 10px;
+	background: rgb(240, 240, 240);
+	line-height: 28px;
+	height: 50px;
+	font-size: 20px;
+	margin: 0;
+	text-align: center;
 }
 
 /* ---------- ADMIN-PROFIL ---------- */
 
-.wc-admin-inputForm{
-  width: 100%;
-border: none;
-border-bottom: 1px solid silver;
-padding: 10px;
+.wc-admin-inputForm {
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid silver;
+	padding: 10px;
 }
 
 /* ---------- ADMIN-NOTATION ---------- */
 
-.btn-add{
-/*  padding-right: 0;*/
+.btn-add {
+	/*  padding-right: 0;*/
 }
 
-.btn-modify{
-  background-color: rgb(155,220,155);
+.btn-modify {
+	background-color: rgb(155, 220, 155);
 }
 
-.wc-container{
-  width: 100%;
-/*margin: 0 10%;*/
-background: rgba(255,255,255,0.3);
-height: 80vh;
-padding: 10px;
+.wc-container {
+	width: 100%;
+	/*margin: 0 10%;*/
+	background: rgba(255, 255, 255, 0.3);
+	height: 80vh;
+	padding: 10px;
 }
 
-.wc-container > div{
-  padding: 0;
+.wc-container > div {
+	padding: 0;
 }
 
 /* ---------- ---------- */
-.table-list-admininistrators{
-  margin: 15px;
-  width: calc(100% - 30px);
+.table-list-admininistrators {
+	margin: 15px;
+	width: calc(100% - 30px);
 }
 
