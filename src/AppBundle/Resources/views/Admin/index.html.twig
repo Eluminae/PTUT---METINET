@@ -1,6 +1,6 @@
-{% extends 'AppBundle::navbarBO.html.twig' %}
+{% extends 'AppBundle::layoutBO.html.twig' %}
 
-{% block body %}
+{% block main %}
     <div class="wc-title-banner">
         <h2>Bonjour, {{ app.user.identity.firstName ~ ' ' ~ app.user.identity.lastName }}</h2>
     </div>

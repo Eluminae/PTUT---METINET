@@ -1,6 +1,6 @@
-{% extends 'AppBundle::navbarFO.html.twig' %}
+{% extends 'AppBundle::layoutFO.html.twig' %}
 
-{% block body %}
+{% block main %}
     <div class="col-md-6">
         {{ form_start(realisationRegistrationForm, {'action': path('public.realisation.register', {'campaignId': campaign.id}) }) }}
         <div class="form-group">

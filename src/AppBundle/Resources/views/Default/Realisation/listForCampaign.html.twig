@@ -1,7 +1,6 @@
-{% extends 'AppBundle::navbarFO.html.twig' %}
+{% extends 'AppBundle::layoutFO.html.twig' %}
 
-
-{% block body %}
+{% block main %}
     <table>
         <tr>
             <th>Name</th>
@@ -10,7 +9,9 @@
         </tr>
         {% for realisation in realisations %}
             <tr>
-                <td><a href="{{ path('public.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a></td>
+                <td>
+                    <a href="{{ path('public.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a>
+                </td>
                 <td>{{ realisation.leftAt }}</td>
                 <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
             </tr>

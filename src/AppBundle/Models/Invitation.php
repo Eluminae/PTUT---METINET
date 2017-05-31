@@ -86,11 +86,11 @@ class Invitation
     }
 
     /**
-     * @param Campaign $assignedCampaigns
+     * @param Campaign $assignedCampaign
      */
-    public function addAssignedCampaigns(Campaign $assignedCampaigns)
+    public function addAssignedCampaign(Campaign $assignedCampaign)
     {
-        $this->assignedCampaigns[] = $assignedCampaigns;
+        $this->assignedCampaigns[] = $assignedCampaign;
     }
 
     /**
