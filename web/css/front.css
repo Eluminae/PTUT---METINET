@@ -2,15 +2,19 @@
 .index{
   z-index: 1;
   position: relative;
-margin-bottom: 94px;
+  margin-bottom: 94px;
+}
+.home{
+  text-align: center;
+
+  /*height: 100vh;*/
 }
 .page-wrap{
   text-align: center;
-
   background: url('../img/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-min-height: calc(100vh - 94px );
+  min-height: calc(100vh - 94px );
   /*height: 100vh;*/
 }
 .page-wrap-alert{
@@ -98,8 +102,7 @@ width: 40%;
   border: none;
   margin: 15px;
   font-size: 18px;
-  width: 
-(100% - 30px);
+  width: calc(100% - 30px);
 }
 
 .btnLogin{
@@ -266,7 +269,7 @@ color: silver;
 /* ---------- ADMIN-ACCUEIL.HTML ---------- */
 
 .admin{
-  height: 100vh;
+ /* height: 100vh;*/
 }
 
 .wc-admin-welcome{

@@ -1,11 +1,19 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
-    <div class="admin page-wrap">
+    <div class="admin index page-wrap">
         <div class="wc-title-banner">
             <h2>Login</h2>
         </div>
-  
+        {% if app.session.flashbag.peekAll|length > 0 %}
+            {% for type, messages in app.session.flashbag.all %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type ? type : '' }}">
+                        {{ message|trans({}, domain|default('messages')) }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
 
         <div class="wc-container">
             <div class="col-sm-12">
