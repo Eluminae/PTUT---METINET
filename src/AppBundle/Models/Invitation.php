@@ -2,6 +2,8 @@
 
 namespace AppBundle\Models;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Invitation
 {
     /** @var int */
@@ -16,7 +18,7 @@ class Invitation
     /** @var string */
     private $role;
 
-    /** @var ArrayCollection */
+    /** @var ArrayCollection[Campaign] */
     private $assignedCampaigns;
 
     /**
@@ -76,7 +78,7 @@ class Invitation
     }
 
     /**
-     * @return Campaign
+     * @return ArrayCollection[Campaign]
      */
     public function getAssignedCampaigns()
     {
@@ -84,11 +86,11 @@ class Invitation
     }
 
     /**
-     * @param Campaign $assignedCampaign
+     * @param Campaign $assignedCampaigns
      */
-    public function addAssignedCampaign(Campaign $assignedCampaign)
+    public function addAssignedCampaigns(Campaign $assignedCampaigns)
     {
-        $this->assignedCampaign[] = $assignedCampaign;
+        $this->assignedCampaigns[] = $assignedCampaigns;
     }
 
     /**

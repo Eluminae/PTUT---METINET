@@ -19,6 +19,7 @@ class RegisterController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
      */
     public function createInvitationForAdminsAction(Request $request)
     {
@@ -120,7 +121,7 @@ class RegisterController extends Controller
         $invitation->setInvitationToken($this->get('app.uuid.generator')->generateUuid());
 
         if ($campaign) {
-            $invitation->addAssignedCampaign($campaign);
+            $invitation->addAssignedCampaigns($campaign);
         }
 
         $form = $this->createForm(InviteUserType::class, $invitation, ['isAdmin' => $isAdmin]);
