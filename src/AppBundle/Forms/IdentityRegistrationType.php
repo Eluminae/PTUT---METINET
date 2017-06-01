@@ -15,6 +15,7 @@ class IdentityRegistrationType extends AbstractType
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
             ->add('email', EmailType::class)
+            ->add('officialGroup', TextType::class)
         ;
     }
 }

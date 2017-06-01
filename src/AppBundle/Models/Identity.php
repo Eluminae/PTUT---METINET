@@ -70,4 +70,12 @@ class Identity
     {
         return $this->officialGroup;
     }
+
+    /**
+     * @param string $officialGroup
+     */
+    public function setOfficialGroup(string $officialGroup)
+    {
+        $this->officialGroup = $officialGroup;
+    }
 }
