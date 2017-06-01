@@ -25,7 +25,7 @@
                                         <a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a>
                                     </td>
                                     <td>{{ realisation.leftAt }}</td>
-                                    <td><a href="{{ asset(realisation.filePath) }}">Télécharger</a></td>
+                                    <td><a href="{{ path('admin.realisation.download', {'realisation': realisation}) }}">Télécharger</a></td>
                                     <td>
                                         <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}">
                                             <button type="button" class="btn-admin-form btn-modify" name="button">

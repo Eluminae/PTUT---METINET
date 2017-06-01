@@ -27,7 +27,7 @@
                                 <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                             </tr>
                         </table>
-                        <a href="{{ path('juror.campaign.download', {'campaign': campaign.id}) }}"
+                        <a href="{{ path('admin.campaign.download', {'campaign': campaign.id}) }}"
                            class="btn-admin-form btn-modify">Télécharger les réalisations</a>
                         <table class="table table-striped">
                             <thead>

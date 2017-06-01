@@ -1,0 +1,12 @@
+<p>
+    Vous êtes invité à
+    {% if invitation.assignedCampaigns is not empty %}
+        rejoindre un campagne de concours.
+    {% elseif invitation.role == 'Administrator' %}
+        collaborer en tant qu'administrateur.
+    {% elseif invitation.role == 'CampaignAdministrator' %}
+        collaborer en tant qu'administrateur de campagne.
+    {% elseif invitation.role == 'Juror' %}
+        collaborer en tant que juré de campagne.
+    {% endif %}
+</p>

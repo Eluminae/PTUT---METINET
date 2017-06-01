@@ -23,7 +23,7 @@ class CampaignCreator
         $file = $campaignCreation->image;
         $fileName = sprintf('%s.%s', md5(uniqid()), $file->guessExtension());
         $file->move(
-            Campaign::filePath,
+            Campaign::FILE_PATH,
             $fileName
         );
 

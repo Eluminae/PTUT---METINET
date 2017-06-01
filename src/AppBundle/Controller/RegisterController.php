@@ -25,7 +25,10 @@ class RegisterController extends Controller
     {
         $form = $this->invitationFormHandler($request, true);
 
-        return $this->render('@App/Admin/inviteUser.html.twig', ['form' => $form->createView()]);
+        return $this->render(
+            '@App/Admin/Administrator/inviteUser.html.twig',
+            ['form' => $form->createView()]
+        );
     }
 
     /**
@@ -101,8 +104,8 @@ class RegisterController extends Controller
         }
 
         return $this->render(
-            '@App/Admin/Juror/registerFromInvitation.html.twig',
-            ['form' => $form->createView(), 'email' => $invitation->getEmail()]
+            '@App/Default/registerFromInvitation.html.twig',
+            ['form' => $form->createView(), 'invitation' => $invitation]
         );
     }
 
