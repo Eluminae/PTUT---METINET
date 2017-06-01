@@ -72,13 +72,6 @@ class RegisterController extends Controller
 
         $form = $this->createForm(SignUpType::class, $userRegistrationDto);
 
-        // todo : Handle assignations to multiples camapaigns invitations without juror account
-        // todo !!!!
-        //        if ($invitation->getAssignedCampaign()) {
-        //            /** @var Juror $userTypeEntity */
-        //            $userTypeEntity->addCampaign($invitation->getAssignedCampaign());
-        //        }
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -30,7 +30,8 @@ class RealisationController extends Controller
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign->getId());
 
         return $this->render(
-            'AppBundle:Default:Realisation/listForCampaign.html.twig', [
+            'AppBundle:Default:Realisation/listForCampaign.html.twig',
+            [
                 'realisations' => $realisations,
             ]
         );
@@ -43,6 +44,7 @@ class RealisationController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
      */
     public function registerAction(Request $request, Campaign $campaign)
     {
@@ -52,17 +54,23 @@ class RealisationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $realisationRegistration = $form->getData();
 
-            $realisation = $this->get('app.realisation.registerer')->create($realisationRegistration, $campaign->getId());
+            $realisation = $this->get('app.realisation.registerer')->create(
+                $realisationRegistration,
+                $campaign->getId()
+            );
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($realisation);
             $em->flush();
 
-            return $this->redirect("/");
+            $this->addFlash('success', 'Votre realisation a bien été prise en compte');
+
+            return $this->redirectToRoute('public.homepage');
         }
 
         return $this->render(
-            'AppBundle:Default:Realisation/registration.html.twig', [
+            'AppBundle:Default:Realisation/registration.html.twig',
+            [
                 'realisationRegistrationForm' => $form->createView(),
                 'campaign' => $campaign,
             ]
@@ -70,7 +78,7 @@ class RealisationController extends Controller
     }
 
     /**
-     * @param Request  $request
+     * @param Request     $request
      * @param Realisation $realisation
      *
      * @ParamConverter("realisation", class="AppBundle:Realisation")
@@ -80,7 +88,8 @@ class RealisationController extends Controller
     public function showAction(Request $request, Realisation $realisation)
     {
         return $this->render(
-            'AppBundle:Default:Realisation/show.html.twig', [
+            'AppBundle:Default:Realisation/show.html.twig',
+            [
                 'realisation' => $realisation,
             ]
         );
@@ -93,6 +102,7 @@ class RealisationController extends Controller
      * @ParamConverter("realisation", class="AppBundle:Realisation")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
      * @throws \UnexpectedValueException
      */
     public function gradeAction(Request $request, Realisation $realisation)
@@ -102,11 +112,12 @@ class RealisationController extends Controller
         $mark = $this
             ->getDoctrine()
             ->getRepository('AppBundle:Mark')
-            ->findBy([
-                'realisation' => $realisation->getId(),
-                'identity' => $identity
-            ])
-        ;
+            ->findBy(
+                [
+                    'realisation' => $realisation->getId(),
+                    'identity' => $identity,
+                ]
+            );
         if ($mark) {
             $this->addFlash('error', 'Vous avez déja noté cette réalisation.');
 
@@ -126,8 +137,7 @@ class RealisationController extends Controller
 
             $mark = $this
                 ->get('app.realisation_mark.factory')
-                ->create($reaMarkDto)
-            ;
+                ->create($reaMarkDto);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($mark);
@@ -147,7 +157,8 @@ class RealisationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Default:Realisation/grade.html.twig', [
+            'AppBundle:Default:Realisation/grade.html.twig',
+            [
                 'form' => $form->createView(),
             ]
         );

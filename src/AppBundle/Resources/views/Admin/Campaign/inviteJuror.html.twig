@@ -1,4 +1,4 @@
-{% extends 'AppBundle::layoutFO.html.twig' %}
+{% extends 'AppBundle::layoutBO.html.twig' %}
 
 {% block main %}
     <div class="wc-container">
@@ -8,8 +8,6 @@
                 {{ form_errors(form.email) }}
                 {{ form_label(form.email, '', {'label_attr': {'class': 'inputLogin'}}) }}
                 {{ form_widget(form.email) }}
-
-
                 {{ form_label(form.submit, '', {'label_attr': {'class': 'btnLogin'}}) }}
                 {{ form_widget(form.submit) }}
                 {{ form_end(form) }}
