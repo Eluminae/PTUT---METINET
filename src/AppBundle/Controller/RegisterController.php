@@ -6,7 +6,6 @@ use AppBundle\Dtos\UserRegistration;
 use AppBundle\Forms\InviteUserType;
 use AppBundle\Forms\SignUpType;
 use AppBundle\Models\Campaign;
-use AppBundle\Models\Juror;
 use AppBundle\Models\Invitation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -87,6 +86,10 @@ class RegisterController extends Controller
                 $provider,
                 $savedUser->getRoles()
             );
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($invitation);
+            $em->flush();
 
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_'.$provider, serialize($token));

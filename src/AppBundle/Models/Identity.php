@@ -56,11 +56,11 @@ class Identity
     }
 
     /**
-     * @param string $email
+     * @return string
      */
-    public function setEmail(string $email)
+    public function getOfficialGroup()
     {
-        $this->email = $email;
+        return $this->officialGroup;
     }
 
     /**
