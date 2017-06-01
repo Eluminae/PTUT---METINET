@@ -42,14 +42,14 @@ class UserRegisterer
     /**
      * UserRegisterer constructor.
      *
-     * @param PasswordEncoderInterface   $passwordEncoder
-     * @param UuidGenerator              $uuidGenerator
-     * @param EntityManagerInterface     $entityManager
-     * @param OrmAdministratorRepository $administratorRepository
-     * @param OrmCampaignAdministratorRepository   $campaignAdministratorRepository
-     * @param OrmJurorRepository         $jurorRepository
-     * @param TokenStorageInterface      $tokenStorage
-     * @param SessionInterface           $session
+     * @param PasswordEncoderInterface           $passwordEncoder
+     * @param UuidGenerator                      $uuidGenerator
+     * @param EntityManagerInterface             $entityManager
+     * @param OrmAdministratorRepository         $administratorRepository
+     * @param OrmCampaignAdministratorRepository $campaignAdministratorRepository
+     * @param OrmJurorRepository                 $jurorRepository
+     * @param TokenStorageInterface              $tokenStorage
+     * @param SessionInterface                   $session
      *
      */
     public function __construct(
@@ -85,7 +85,8 @@ class UserRegisterer
             $this->uuidGenerator->generateUuid(),
             $userRegistrationDto->lastName,
             $userRegistrationDto->firstName,
-            $userRegistrationDto->email
+            $userRegistrationDto->email,
+            $userRegistrationDto->officialGroup
         );
 
         $userObjectName = 'AppBundle\Models\\'.$userRegistrationDto->userObjectType;

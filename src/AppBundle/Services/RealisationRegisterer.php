@@ -26,7 +26,7 @@ class RealisationRegisterer
     {
         $campaign = $this->campaingRepository->findOneById($campaignId);
         if ($campaign === null) {
-            throw new Exception('PAS DE CAMPAGNE');
+            throw new Exception('There is no campaign');
         }
 
         $candidates = $this->createCandidates($realisationRegistration->candidates);
@@ -60,7 +60,8 @@ class RealisationRegisterer
                 $this->uuidGenerator->generateUuid(),
                 $candidateDto['lastName'],
                 $candidateDto['firstName'],
-                $candidateDto['email']
+                $candidateDto['email'],
+                $identity['officialGroup']
             );
         }
 
