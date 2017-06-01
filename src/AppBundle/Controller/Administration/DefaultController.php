@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Administration;
 
+use AppBundle\Models\Campaign;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -14,12 +15,18 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $campaigns = $this->get('app.campaign.repository')->findBy([], [], 4);
+        $campaignsApproved = $this->get('app.campaign.repository')->findBy(
+            [
+                'status' => Campaign::ACCEPTED
+            ],
+            [],
+            4
+        );
 
         return $this->render(
             'AppBundle:Admin:index.html.twig',
             [
-                'campaigns' => $campaigns,
+                'campaigns' => $campaignsApproved,
             ]
         );
     }
