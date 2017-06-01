@@ -9,4 +9,5 @@ class UserRegistration extends IdentityRegistration
     public $role;
     public $userObjectType;
     public $campaign;
+    public $officialGroup;
 }

@@ -20,6 +20,7 @@ class SignUpType extends AbstractType
         $builder
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
+            ->add('officialGroup', TextType::class)
             ->add(
                 'password',
                 RepeatedType::class,
