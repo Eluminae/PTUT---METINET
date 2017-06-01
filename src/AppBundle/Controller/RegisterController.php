@@ -88,6 +88,10 @@ class RegisterController extends Controller
                 $savedUser->getRoles()
             );
 
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($invitation);
+            $em->flush();
+
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_'.$provider, serialize($token));
 
