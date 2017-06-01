@@ -6,7 +6,6 @@ use AppBundle\Dtos\UserRegistration;
 use AppBundle\Forms\InviteUserType;
 use AppBundle\Forms\SignUpType;
 use AppBundle\Models\Campaign;
-use AppBundle\Models\Juror;
 use AppBundle\Models\Invitation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
