@@ -41,8 +41,8 @@ class CampaignCreator
 
         return new Campaign(
             $this->uuidGenerator->generateUuid(),
-            new UtcDate($this->uuidGenerator->generateUuid(),, \DateTimeImmutable::createFromMutable($campaignCreation->endDate)),
-            new UtcDate($this->uuidGenerator->generateUuid(),, \DateTimeImmutable::createFromMutable($campaignCreation->beginningDate)),
+            new UtcDate($this->uuidGenerator->generateUuid(), \DateTimeImmutable::createFromMutable($campaignCreation->endDate)),
+            new UtcDate($this->uuidGenerator->generateUuid(), \DateTimeImmutable::createFromMutable($campaignCreation->beginningDate)),
             $campaignCreation->name,
             $campaignCreation->description,
             $fileName,

@@ -2,6 +2,12 @@
 
 namespace AppBundle\Controller\Administration;
 
+use AppBundle\Dtos\AddJurorToCampaign;
+use AppBundle\Dtos\RealisationMarkDto;
+use AppBundle\Forms\AddJurorToCampaignType;
+use AppBundle\Forms\CampaignCreationType;
+use AppBundle\Forms\GradeCampaignType;
+use AppBundle\Models\UtcDate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -164,11 +170,22 @@ class CampaignController extends Controller
         //     return $this->redirectToRoute("public.realisation.show", ['realisation' => $realisation->getId()], 302);
         // }
 
-        $reaMarkDto = new RealisationMarkDto();
-        $reaMarkDto->realisation = $realisation;
-        $reaMarkDto->identity = $identity;
+        // $reaMarkDto = new RealisationMarkDto();
+        // $reaMarkDto->realisation = $realisation;
+        // $reaMarkDto->identity = $identity;
+        
+        $markDtoTable = [];
 
-        $form = $this->createForm(GradeCampaignType::class);
+        foreach ($realisations as $realisation) {
+            $markDtoTemp = new RealisationMarkDto();
+            $markDtoTemp->idRealisationisation = $realisation->getId();
+            $markDtoTemp->identity = $identity;
+            
+            $markDtoTable[] = $markDtoTemp;
+        }
+
+
+        $form = $this->createForm(GradeCampaignType::class, $markDtoTable);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -187,7 +204,7 @@ class CampaignController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Default:Realisation/grade.html.twig', [
+            'AppBundle:Default:Campaign/grade.html.twig', [
                 'form' => $form->createView(),
             ]
         );

@@ -88,6 +88,10 @@
         <default key="_controller">AppBundle:Administration/Campaign:show</default>
     </route>
 
+    <route id="admin.campaign.grade" path="/admin/campaigns/grade/{campaign}">
+        <default key="_controller">AppBundle:Administration/Campaign:grade</default>
+    </route>
+
     <route id="admin.campaign.delete" path="/admin/campaigns/delete/{campaign}">
         <default key="_controller">AppBundle:Administration/Campaign:delete</default>
     </route>
