@@ -34,7 +34,8 @@ class RealisationRegisterer
             new UtcDate($this->uuidGenerator->generateUuid(), new \DateTimeImmutable('now')),
             $realisationRegistration->name,
             $campaign,
-            $this->createCandidateFromIdentity($realisationRegistration->identity)
+            $this->createCandidateFromIdentity($realisationRegistration->identity),
+            $realisationRegistration->officialGroup
         );
 
         /** @var File $file */

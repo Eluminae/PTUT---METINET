@@ -24,7 +24,7 @@ class RealisationRegistrationType extends AbstractType
                 'constraints' => array(
                     new File([
                         'mimeTypes' => array(
-                            'application/pdf', 
+                            'application/pdf',
                             'application/x-pdf',
                             'image/bmp',
                             'image/jpeg',
@@ -40,6 +40,7 @@ class RealisationRegistrationType extends AbstractType
                 )
             ))
             ->add('name', TextType::class)
+            ->add('officialGroup', TextType::class)
             ->add('submit', SubmitType::class)
         ;
     }

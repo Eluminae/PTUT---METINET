@@ -17,6 +17,8 @@
                     {{ form_widget(realisationRegistrationForm.identity.lastName, {'attr': {'placeholder': 'Nom'}}) }}
                     {{ form_label(realisationRegistrationForm.identity.email) }}
                     {{ form_widget(realisationRegistrationForm.identity.email, {'attr': {'placeholder': 'email'}}) }}
+                    {{ form_label(realisationRegistrationForm.officialGroup) }}
+                    {{ form_widget(realisationRegistrationForm.officialGroup, {'attr': {'placeholder': 'Entité de rattachement'}}) }}
                     {{ form_label(realisationRegistrationForm.file) }}
                     {{ form_widget(realisationRegistrationForm.file, {'attr': {'placeholder': 'file'}}) }}
                     {{ form_errors(realisationRegistrationForm.file) }}
