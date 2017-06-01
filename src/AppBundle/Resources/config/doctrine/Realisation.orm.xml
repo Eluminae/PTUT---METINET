@@ -7,7 +7,8 @@
     <entity name="AppBundle\Models\Realisation" table="wc_realisation" repository-class="AppBundle\Repositories\OrmRealisationRepository">
         <id name="id" type="string" column="id" />
         <field name="name" type="string" column="name" />
-        <field name="fileName" type="string" column="fileName" />
+        <field name="fileName" type="string" column="file_name" />
+        <field name="officialGroup" type="string" column="official_group" />
         <field name="averageMark" type="float" column="average_mark" />
 
         <one-to-one field="leftAt" target-entity="UtcDate" >

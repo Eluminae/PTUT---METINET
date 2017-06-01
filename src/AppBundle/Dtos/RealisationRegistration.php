@@ -7,4 +7,5 @@ class RealisationRegistration
     public $identity;
     public $name;
     public $file;
+    public $officialGroup;
 }

@@ -18,14 +18,16 @@ class Realisation
     private $campaign;
     private $candidates;
     private $averageMark;
+    private $officialGroup;
 
-    public function __construct(string $id, UtcDate $leftAt, string $name, Campaign $campaign, array $candidates)
+    public function __construct(string $id, UtcDate $leftAt, string $name, Campaign $campaign, array $candidates, string $officialGroup)
     {
         $this->id = $id;
         $this->leftAt = $leftAt;
         $this->name = $name;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
+        $this->officialGroup = $officialGroup;
         $this->averageMark = $averageMark;
     }
 
@@ -67,6 +69,11 @@ class Realisation
     public function updateAverageMark(float $averageMark)
     {
         $this->averageMark = $averageMark;
+    }
+
+    public function getOfficialGroup()
+    {
+        return $this->officialGroup;
     }
 
     public function getCandidates()
