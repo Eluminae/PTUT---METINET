@@ -22,6 +22,7 @@
                     {{ form_label(campaignCreationForm.beginningDate) }}
                     {{ form_widget(campaignCreationForm.beginningDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'beginningDate'}}) }}
 
+                    {{ form_errors(campaignCreationForm.endDate) }}
                     {{ form_label(campaignCreationForm.endDate) }}
                     {{ form_widget(campaignCreationForm.endDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'endDate'}}) }}
                 </div>
