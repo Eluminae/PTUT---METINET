@@ -9,7 +9,7 @@ use AppBundle\Models\UtcDate;
 
 class Realisation
 {
-    const filePath = 'realisationFiles';
+    const FILE_PATH = 'realisationFiles';
 
     private $id;
     private $leftAt;
@@ -18,17 +18,15 @@ class Realisation
     private $campaign;
     private $candidates;
     private $averageMark;
-    private $officialGroup;
 
-    public function __construct(string $id, UtcDate $leftAt, string $name, Campaign $campaign, array $candidates, string $officialGroup)
+    public function __construct(string $id, UtcDate $leftAt, string $name, Campaign $campaign, array $candidates)
     {
         $this->id = $id;
         $this->leftAt = $leftAt;
         $this->name = $name;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
-        $this->officialGroup = $officialGroup;
-        $this->averageMark = $averageMark;
+        $this->averageMark = 0;
     }
 
     public function getId()
@@ -53,7 +51,7 @@ class Realisation
 
     public function getFilePath()
     {
-        return sprintf('%s/%s', self::filePath, $this->fileName);
+        return sprintf('%s/%s', self::FILE_PATH, $this->fileName);
     }
 
     public function getCampaign()
@@ -69,11 +67,6 @@ class Realisation
     public function updateAverageMark(float $averageMark)
     {
         $this->averageMark = $averageMark;
-    }
-
-    public function getOfficialGroup()
-    {
-        return $this->officialGroup;
     }
 
     public function getCandidates()

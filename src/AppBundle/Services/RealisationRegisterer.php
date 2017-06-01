@@ -34,15 +34,14 @@ class RealisationRegisterer
             new UtcDate($this->uuidGenerator->generateUuid(), new \DateTimeImmutable('now')),
             $realisationRegistration->name,
             $campaign,
-            $this->createCandidateFromIdentity($realisationRegistration->identity),
-            $realisationRegistration->officialGroup
+            $this->createCandidateFromIdentity($realisationRegistration->identity)
         );
 
         /** @var File $file */
         $file = $realisationRegistration->file;
         $fileName = sprintf('%s_%s.%s', $campaign->getName(), $realisation->getId(), $file->guessExtension());
         $file->move(
-            Realisation::filePath,
+            Realisation::FILE_PATH,
             $fileName
         );
 
@@ -59,7 +58,7 @@ class RealisationRegisterer
                 $identity['firstName'],
                 $identity['lastName'],
                 $identity['email']
-            )
+            ),
         ];
 
         return $candidates;

@@ -47,6 +47,11 @@ class CampaignController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listFinishedAction(Request $request)
     {
         $campaigns = $this->get('app.campaign.repository')->findFinished();
@@ -58,6 +63,11 @@ class CampaignController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction(Request $request)
     {
         $campaignsApprovedActive = $this->get('app.campaign.repository')->findApprovedActive();
