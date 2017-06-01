@@ -8,4 +8,5 @@ class RealisationRegistration
     public $name;
     public $file;
     public $officialGroup;
+    public $candidates;
 }

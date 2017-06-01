@@ -29,12 +29,14 @@ class RealisationRegisterer
             throw new Exception('PAS DE CAMPAGNE');
         }
 
+        $candidates = $this->createCandidates($realisationRegistration->candidates);
+
         $realisation = new Realisation(
             $this->uuidGenerator->generateUuid(),
             new UtcDate($this->uuidGenerator->generateUuid(), new \DateTimeImmutable('now')),
             $realisationRegistration->name,
             $campaign,
-            $this->createCandidateFromIdentity($realisationRegistration->identity)
+            $candidates
         );
 
         /** @var File $file */
@@ -50,16 +52,17 @@ class RealisationRegisterer
         return $realisation;
     }
 
-    private function createCandidateFromIdentity($identity)
+    private function createCandidates($candidatesDto)
     {
-        $candidates = [
-            new Identity(
+        $candidates = [];
+        foreach ($candidatesDto as $candidateDto) {
+            $candidates[] = new Identity(
                 $this->uuidGenerator->generateUuid(),
-                $identity['firstName'],
-                $identity['lastName'],
-                $identity['email']
-            ),
-        ];
+                $candidateDto['lastName'],
+                $candidateDto['firstName'],
+                $candidateDto['email']
+            );
+        }
 
         return $candidates;
     }

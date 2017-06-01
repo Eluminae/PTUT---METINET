@@ -21,11 +21,64 @@
                     {{ form_widget(realisationRegistrationForm.file, {'attr': {'placeholder': 'file'}}) }}
                     {{ form_errors(realisationRegistrationForm.file) }}
 
+                    <ul id="candidate-fields-list"
+                        data-prototype="{{ form_widget(realisationRegistrationForm.candidates.vars.prototype)|e }}">
+                        {% for candidate in realisationRegistrationForm.candidates %}
+                            <li>
+                                {{ form_errors(candidate) }}
+                                {{ form_widget(candidate) }}
+                            <li>
+                        {% endfor %}
+                    </ul>
+                    <a href="#" id="add-another-candidate">Ajouter un candidat</a>
+
                     {{ form_widget(realisationRegistrationForm.submit, {'attr': {'value': 'valider'}}) }}
                     {{ form_end(realisationRegistrationForm) }}
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var candidateCount = '{{ realisationRegistrationForm.candidates|length }}';
+
+        jQuery(document).ready(function() {
+            $collectionHolder = $('ul.candidates');
+
+            $collectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+            });
+
+            jQuery('#add-another-candidate').click(function(e) {
+                e.preventDefault();
+
+                var candidateList = jQuery('#candidate-fields-list');
+
+                var newWidget = candidateList.attr('data-prototype');
+                newWidget = newWidget.replace(/__name__/g, candidateCount);
+                candidateCount++;
+
+                var newLi = jQuery('<li></li>').html(newWidget);
+                newLi.appendTo(candidateList);
+
+                addTagFormDeleteLink(newLi);
+            });
+
+            if (0 === $collectionHolder.find('li').length) {
+                jQuery('#add-another-candidate').trigger('click');
+            }
+        });
+
+        function addTagFormDeleteLink($tagFormLi) {
+            var $removeFormA = $('<a href="#">Retirer ce candidat</a>');
+            $tagFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                e.preventDefault();
+
+                $tagFormLi.remove();
+            });
+        }
+    </script>
 
 {% endblock %}
