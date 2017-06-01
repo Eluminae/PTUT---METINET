@@ -19,5 +19,19 @@
         <many-to-one field="campaign" target-entity="Campaign" >
             <join-column name="campaign_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </many-to-one>
+        <many-to-many field="candidates" target-entity="AppBundle\Models\Identity">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove />
+            </cascade>
+            <join-table name="wc_candidate">
+                <join-columns>
+                    <join-column name="realisation_id" referenced-column-name="id"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="identity_id" referenced-column-name="id"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 </doctrine-mapping>

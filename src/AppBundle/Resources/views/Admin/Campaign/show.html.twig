@@ -55,7 +55,13 @@
                                     <td>
                                         <a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a>
                                     </td>
-                                    <td>{{ realisation.candidates }}</td>
+                                    <td>
+                                        <tr>
+                                            {% for candidate in realisation.candidates %}
+                                                <td>{{ candidate.lastName }} {{ candidate.firstName }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    </td>
                                     <td>
                                         <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}">
                                             <button type="button" class="btn-admin-form btn-modify" name="button">

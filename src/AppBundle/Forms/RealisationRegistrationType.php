@@ -2,6 +2,7 @@
 
 namespace AppBundle\Forms;
 
+use AppBundle\Forms\IdentityRegistrationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -9,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Count;
 
 class RealisationRegistrationType extends AbstractType
 {
@@ -40,6 +42,18 @@ class RealisationRegistrationType extends AbstractType
                 )
             ))
             ->add('name', TextType::class)
+            ->add('candidates', CollectionType::class, [
+                'entry_type'   => IdentityRegistrationType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'Vous devez indiquer au moins un candidat'
+                    ])
+                ]
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
