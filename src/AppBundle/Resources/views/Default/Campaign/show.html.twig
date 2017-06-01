@@ -27,9 +27,9 @@
                                 <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                             </tr>
                         </table>
-                        <a href="{{ path('admin.campaign.update', {'campaign': campaign}) }}"
+                        <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}"
                            class="btn-admin-form btn-modify">Modifier</a>
-                        <a href="{{ path('public.realisation.register', {'campaign': campaign}) }}"
+                        <a href="{{ path('public.realisation.register', {'campaign': campaign.id}) }}"
                            class="btn-admin-form btn-modify">Déposer une réalisation</a>
                         <a href="{{ path('admin.campaign.download', {'campaign': campaign.id}) }}"
                            class="btn-admin-form btn-modify">Télécharger les réalisations</a>
