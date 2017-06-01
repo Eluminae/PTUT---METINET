@@ -40,7 +40,6 @@ class RealisationRegistrationType extends AbstractType
                 )
             ))
             ->add('name', TextType::class)
-            ->add('officialGroup', TextType::class)
             ->add('submit', SubmitType::class)
         ;
     }

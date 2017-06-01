@@ -34,8 +34,7 @@ class RealisationRegisterer
             new UtcDate($this->uuidGenerator->generateUuid(), new \DateTimeImmutable('now')),
             $realisationRegistration->name,
             $campaign,
-            $this->createCandidateFromIdentity($realisationRegistration->identity),
-            $realisationRegistration->officialGroup
+            $this->createCandidateFromIdentity($realisationRegistration->identity)
         );
 
         /** @var File $file */
@@ -59,7 +58,7 @@ class RealisationRegisterer
                 $identity['firstName'],
                 $identity['lastName'],
                 $identity['email']
-            )
+            ),
         ];
 
         return $candidates;
