@@ -4,7 +4,7 @@ namespace AppBundle\Dtos;
 
 class RealisationMarkDto
 {
-    public $idRealisationisation;
+    public $realisation;
     public $value;
     public $identity;
 }

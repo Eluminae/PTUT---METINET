@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Dtos\CampaignCreation;
-use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -150,38 +149,46 @@ class CampaignController extends Controller
         return $this->redirectToRoute('admin.campaign.list');
     }
 
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function gradeAction(Request $request, Campaign $campaign)
     {
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         $identity = $this->get('security.token_storage')->getToken()->getUser()->getIdentity();
-
-        // $mark = $this
-        //     ->getDoctrine()
-        //     ->getRepository('AppBundle:Mark')
-        //     ->findBy([
-        //         'realisation' => $realisation->getId(),
-        //         'identity' => $identity
-        //     ])
-        // ;
-        // if ($mark) {
-        //     $this->addFlash('error', 'Vous avez déja noté cette réalisation.');
-
-        //     return $this->redirectToRoute("public.realisation.show", ['realisation' => $realisation->getId()], 302);
-        // }
-
-        // $reaMarkDto = new RealisationMarkDto();
-        // $reaMarkDto->realisation = $realisation;
-        // $reaMarkDto->identity = $identity;
         
-        $markDtoTable = [];
+        $mark = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Mark')
+            ->findBy([
+                'realisation' => $realisations[0]->getId(),
+                'identity' => $identity
+            ])
+        ;
+         if ($mark) {
+            $this->addFlash('error', 'Vous avez déja noté cette réalisation.');
+
+            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+        }
+
+        $reaMarkDto = new RealisationMarkDto();
+        $reaMarkDto->realisation = $realisation;
+        $reaMarkDto->identity = $identity;
+
+        $markDtoTable = ['realisations' => []];
 
         foreach ($realisations as $realisation) {
             $markDtoTemp = new RealisationMarkDto();
-            $markDtoTemp->idRealisationisation = $realisation->getId();
+            $markDtoTemp->realisation = $realisation;
             $markDtoTemp->identity = $identity;
             
-            $markDtoTable[] = $markDtoTemp;
+            $markDtoTable['realisations'][$realisation->getId()] = $markDtoTemp;
         }
 
 
@@ -189,18 +196,21 @@ class CampaignController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $reaMarkDto = $form->getData();
+            $reaMarkDtoTable = $form->getData()['realisations'];
 
-            // $mark = $this
-            //     ->get('app.realisation_mark.factory')
-            //     ->create($reaMarkDto)
-            // ;
+            foreach ($reaMarkDtoTable as $key => $reaMarkDto) {
+                $mark = $this
+                    ->get('app.realisation_mark.factory')
+                    ->create($reaMarkDto)
+                ;
 
-            // $em = $this->getDoctrine()->getManager();
-            // $em->persist($mark);
-            // $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($mark);
+            }
+             
+            $em->flush();
 
-            return $this->redirectToRoute("public.campaign.show", ['campaign' => $campaign->getId()], 302);
+            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
         }
 
         return $this->render(
