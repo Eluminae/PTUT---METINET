@@ -177,10 +177,6 @@ class CampaignController extends Controller
             return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
         }
 
-        $reaMarkDto = new RealisationMarkDto();
-        $reaMarkDto->realisation = $realisation;
-        $reaMarkDto->identity = $identity;
-
         $markDtoTable = ['realisations' => []];
 
         foreach ($realisations as $realisation) {
@@ -216,6 +212,7 @@ class CampaignController extends Controller
         return $this->render(
             'AppBundle:Default:Campaign/grade.html.twig', [
                 'form' => $form->createView(),
+                'notation' => $campaign->getNotation(),
             ]
         );
     }
