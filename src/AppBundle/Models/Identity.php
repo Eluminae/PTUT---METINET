@@ -8,13 +8,15 @@ class Identity
     private $lastName;
     private $firstName;
     private $email;
+    private $officialGroup;
 
-    public function __construct(string $id, string $lastName, string $firstName, string $email)
+    public function __construct(string $id, string $lastName, string $firstName, string $email, string $officialGroup)
     {
         $this->id = $id;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
         $this->email = $email;
+        $this->officialGroup = $officialGroup;
     }
 
     public function getId()
@@ -59,5 +61,13 @@ class Identity
     public function setEmail(string $email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOfficialGroup()
+    {
+        return $this->officialGroup;
     }
 }
