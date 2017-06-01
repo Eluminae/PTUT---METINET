@@ -39,7 +39,7 @@ class RealisationRegisterer
 
         /** @var File $file */
         $file = $realisationRegistration->file;
-        $fileName = sprintf('%s_%s.%s', $campaignId, $realisation->getId(), $file->guessExtension());
+        $fileName = sprintf('%s_%s.%s', $campaign->getName(), $realisation->getId(), $file->guessExtension());
         $file->move(
             Realisation::filePath,
             $fileName
