@@ -191,6 +191,10 @@ ul > li {
 	list-style: none;
 }
 
+.ulHome > li:nth-child(even) > a > div{
+	  background-color: rgba(0,0,0,0.04);
+  }
+
 /* ---------- THUMBNAILS --------- */
 
 .wc-img-thumb {

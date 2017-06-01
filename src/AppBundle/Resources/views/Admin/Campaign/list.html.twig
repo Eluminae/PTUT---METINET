@@ -71,7 +71,7 @@
                                 <td>Fin</td>
                                 <td>
                                     <a href="{{ path('admin.campaign.create') }}">
-                                        <button type="button" class="btn-admin-form btn-modify" name="button">
+                                        <button type="button" class="btn-admin-form btn-add" name="button">
                                             Ajouter
                                         </button>
                                     </a>
@@ -89,16 +89,16 @@
                                     <td><img class="wc-img-thumb"
                                              src="{{ asset('campaignImages/' ~ campaign.imageName) }}"/></td>
                                     <td>
-                                        <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}">
+                                        <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}">
                                             <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Supprimer
+                                                Modifier
                                             </button>
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Modifier
+                                        <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}">
+                                            <button type="button" class="btn-admin-form btn-delete" name="button">
+                                                Supprimer
                                             </button>
                                         </a>
                                     </td>
