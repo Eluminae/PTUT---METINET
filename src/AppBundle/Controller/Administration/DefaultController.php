@@ -8,12 +8,19 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request  $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:Admin:index.html.twig');
+        $campaigns = $this->get('app.campaign.repository')->findBy([], [], 4);
+
+        return $this->render(
+            'AppBundle:Admin:index.html.twig',
+            [
+                'campaigns' => $campaigns,
+            ]
+        );
     }
 }
