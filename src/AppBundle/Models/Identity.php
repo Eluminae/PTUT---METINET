@@ -64,14 +64,6 @@ class Identity
     }
 
     /**
-     * @return string
-     */
-    public function getOfficialGroup()
-    {
-        return $this->officialGroup;
-    }
-
-    /**
      * @param string $officialGroup
      */
     public function setOfficialGroup(string $officialGroup)
