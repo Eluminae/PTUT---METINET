@@ -1,0 +1,16 @@
+{% extends 'AppBundle::layoutFO.html.twig' %}
+
+{% block main %}
+    <div class="page-wrap">
+        <div class="wc-title-banner">
+            <h2></h2>
+        </div>
+        <div class="wc-container">
+            <h1>Créer un compte avec invitation pour {{ invitation.email }}</h1>
+            {% include 'AppBundle:Default/Includes:YouAreInvitedTo.html.twig' %}
+            <div class="col-sm-12">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

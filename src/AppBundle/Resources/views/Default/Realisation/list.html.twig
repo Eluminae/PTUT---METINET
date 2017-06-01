@@ -13,7 +13,7 @@
                 <td><a href="#">{{ realisation.campaign.name }}</a></td>
                 <td><a href="{{ path('public.realisation.show', {'realisationId': realisation.id}) }}">{{ realisation.name }}</a></td>
                 <td>{{ realisation.leftAt }}</td>
-                <td><a href="{{ asset(realisation.filePath) }}">Download</a></td>
+                <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
             </tr>
         {% endfor %}
     </table>

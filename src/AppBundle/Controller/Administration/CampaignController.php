@@ -43,8 +43,8 @@ class CampaignController extends Controller
      */
     public function listAction(Request $request)
     {
-        $campaignsNeedReview = $this->get('app.campaign.repository')->findByReview(false);
-        $campaignsApproved = $this->get('app.campaign.repository')->findByReview(true);
+        $campaignsNeedReview = $this->get('app.campaign.repository')->findByStatus(Campaign::TO_BE_REVIEWED);
+        $campaignsApproved = $this->get('app.campaign.repository')->findByStatus(Campaign::ACCEPTED);
 
         return $this->render(
             'AppBundle:Admin:Campaign/list.html.twig',

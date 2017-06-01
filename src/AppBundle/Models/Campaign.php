@@ -6,7 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Campaign
 {
-    const filePath = 'campaignImages';
+    const FILE_PATH = 'campaignImages';
+
+    const TO_BE_REVIEWED = 'to_be_reviewed';
+    const ACCEPTED = 'accepted';
+    const RESULTS_PUBLISHED = 'results_published';
 
     private $id;
     private $endDate;
@@ -17,7 +21,7 @@ class Campaign
     private $creator;
     /** @var ArrayCollection */
     private $jurors;
-    private $review = false;
+    private $status;
 
     public function __construct(
         string $id,
@@ -35,6 +39,7 @@ class Campaign
         $this->description = $description;
         $this->imageName = $imageName;
         $this->creator = $creator;
+        $this->status = self::TO_BE_REVIEWED;
     }
 
     public function getId()
@@ -69,7 +74,7 @@ class Campaign
 
     public function getImagePath()
     {
-        return sprintf('%s/%s', self::filePath, $this->imageName);
+        return sprintf('%s/%s', self::FILE_PATH, $this->imageName);
     }
 
     public function getCreator()
@@ -84,6 +89,11 @@ class Campaign
 
     public function approveCampaign()
     {
-        $this->review = true;
+        $this->status = self::ACCEPTED;
+    }
+
+    public function publishResults()
+    {
+        $this->status = self::RESULTS_PUBLISHED;
     }
 }

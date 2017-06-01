@@ -9,7 +9,7 @@ use AppBundle\Models\UtcDate;
 
 class Realisation
 {
-    const filePath = 'realisationFiles';
+    const FILE_PATH = 'realisationFiles';
 
     private $id;
     private $leftAt;
@@ -26,7 +26,7 @@ class Realisation
         $this->name = $name;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
-        $this->averageMark = $averageMark;
+        $this->averageMark = 0;
     }
 
     public function getId()
@@ -51,7 +51,7 @@ class Realisation
 
     public function getFilePath()
     {
-        return sprintf('%s/%s', self::filePath, $this->fileName);
+        return sprintf('%s/%s', self::FILE_PATH, $this->fileName);
     }
 
     public function getCampaign()

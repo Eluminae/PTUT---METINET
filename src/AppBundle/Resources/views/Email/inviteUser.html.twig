@@ -1,18 +1,5 @@
 <h1>Bonjour {{ invitation.email }},</h1>
-
-<p>
-    Vous êtes invité à
-    {% set link = path('public.register.invitation', {'invitationToken' : invitation.invitationToken  }) %}
-    {% if invitation.assignedCampaigns is not empty %}
-        rejoindre la camapgne : {{ campaign.name }}.
-    {% elseif invitation.role == 'Administrator' %}
-        collaborer en tant qu'administrateur.
-    {% elseif invitation.role == 'CampaignAdministrator' %}
-        collaborer en tant qu'administrateur de campagne.
-    {% elseif invitation.role == 'Juror' %}
-        collaborer en tant que juré de campagne.
-    {% endif %}
-</p>
-
+{% include 'AppBundle:Default/Includes:YouAreInvitedTo.html.twig' %}
 <p>Voici votre lien d'activation :</p>
+{% set link = path('public.register.invitation', {'invitationToken' : invitation.invitationToken  }) %}
 <a href="{{ link }}">{{ link }}</a>
