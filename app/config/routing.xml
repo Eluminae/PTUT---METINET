@@ -59,8 +59,8 @@
     </route>
 
     <!-- Administrator administrator's routes -->
-    <route id="admin.administrator.create" path="/admin/administrators/create">
-        <default key="_controller">AppBundle:Administration/Administrator:create</default>
+    <route id="admin.administrator.create" path="/admin/invite/administrator">
+        <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>
     </route>
 
     <route id="admin.administrator.list" path="/admin/administrators">
@@ -100,7 +100,7 @@
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
-    <route id="juror.campaign.download" path="/juror/campaigns/download/{campaign}">
+    <route id="admin.campaign.download" path="/juror/campaigns/download/{campaign}">
         <default key="_controller">AppBundle:Campaign:download</default>
     </route>
 
