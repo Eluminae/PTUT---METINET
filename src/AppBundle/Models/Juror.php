@@ -107,7 +107,7 @@ class Juror implements UserInterface
      */
     public function getUsername()
     {
-        $this->identity->getEmail();
+        return $this->identity->getEmail();
     }
 
     /**

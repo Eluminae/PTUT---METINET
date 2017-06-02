@@ -2,12 +2,13 @@
 
 namespace AppBundle\Repositories;
 
+use AppBundle\Models\Campaign;
+use AppBundle\Models\Juror;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use AppBundle\Models\Campaign;
 
 class OrmJurorRepository extends EntityRepository implements UserProviderInterface
 {
