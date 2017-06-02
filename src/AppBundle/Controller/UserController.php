@@ -68,9 +68,9 @@ class UserController extends Controller
         $currentUserIdentity = $this->getUser()->getIdentity();
 
         $userDto = new UserRegistration();
-        $userDto->email = $currentUserIdentity->getEmail();
         $userDto->firstName = $currentUserIdentity->getFirstName();
         $userDto->lastName = $currentUserIdentity->getLastName();
+        $userDto->officialGroup = $currentUserIdentity->getOfficialGroup();
 
         $form = $this->createForm(SignUpType::class, $userDto);
 
@@ -81,9 +81,9 @@ class UserController extends Controller
 
             $userRegisterer = $this->get('app.services.user_registerer');
 
-            $currentUserIdentity->setEmail($newUserData->email);
             $currentUserIdentity->setFirstName($newUserData->firstName);
             $currentUserIdentity->setLastName($newUserData->lastName);
+            $currentUserIdentity->getOfficialGroup($newUserData->officialGroup);
 
             if (null !== $newUserData->password) {
                 $password = $userRegisterer->encodePasswordFromPlain($newUserData->password);

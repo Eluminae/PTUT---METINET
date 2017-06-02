@@ -1,14 +1,13 @@
 {% extends '@App/layoutBO.html.twig' %}
 {% block main %}
     <div class="wc-title-banner">
-        <h2>Edit my profile</h2>
+        <h2>Editer mon profil</h2>
     </div>
     <div class="wc-container">
         <div class="col-sm-12">
             <div class="wc-admin-block">
-
-        {{ app.user.identity.email }}
-        {{ form(form) }}
+                {{ app.user.identity.email }}
+                {{ form(form) }}
             </div>
         </div>
     </div>
