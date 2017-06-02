@@ -13,11 +13,17 @@ bash:
 composer-add-github-token:
 	docker exec -it $(php_container_name) composer config --global github-oauth.github.com $(token)
 
+composer-install:
+	docker exec -it $(php_container_name) composer install
+
 composer-update:
 	docker exec -it $(php_container_name) composer update
 
-dump:
-	docker exec -i $(mysql_container_name) bash -c "mysqldump -p'operation-manager' -u operation-manager operation-manager" > operation-manager.sql
+mysql-import: $(path)
+	docker exec -i $(mysql_container_name) bash -c "mysql -pwork-competition -uwork-competition work-competition" < $(path)
+
+mysql-dump:
+	docker exec -i $(mysql_container_name) bash -c "mysqldump -p'work-competition' -u work-competition work-competition" > work-competition.sql
 
 command:
 	docker exec -it $(php_container_name) $(cmd)

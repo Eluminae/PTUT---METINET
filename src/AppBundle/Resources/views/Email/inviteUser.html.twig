@@ -1,0 +1,5 @@
+<h1>Bonjour {{ invitation.email }},</h1>
+{% include 'AppBundle:Default/Includes:YouAreInvitedTo.html.twig' %}
+<p>Voici votre lien d'activation :</p>
+{% set link = path('public.register.invitation', {'invitationToken' : invitation.invitationToken  }) %}
+<a href="{{ link }}">{{ link }}</a>

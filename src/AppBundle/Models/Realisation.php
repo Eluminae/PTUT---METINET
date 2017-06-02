@@ -4,26 +4,29 @@ namespace AppBundle\Models;
 
 use AppBundle\Dtos\RealisationRegistration;
 use AppBundle\Models\Campaign;
-use AppBundle\Models\File;
+use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Models\UtcDate;
 
 class Realisation
 {
+    const FILE_PATH = 'realisationFiles';
+
     private $id;
     private $leftAt;
     private $name;
-    private $file;
+    private $fileName;
     private $campaign;
     private $candidates;
+    private $averageMark;
 
-    public function __construct(string $id, UtcDate $leftAt, string $name, File $file, Campaign $campaign, array $candidates)
+    public function __construct(string $id, UtcDate $leftAt, string $name, Campaign $campaign, array $candidates)
     {
         $this->id = $id;
         $this->leftAt = $leftAt;
         $this->name = $name;
-        $this->file = $file;
         $this->campaign = $campaign;
         $this->candidates = $candidates;
+        $this->averageMark = 0;
     }
 
     public function getId()
@@ -41,9 +44,14 @@ class Realisation
         return $this->name;
     }
 
-    public function getFile()
+    public function getFileName()
     {
-        return $this->file;
+        return $this->fileName;
+    }
+
+    public function getFilePath()
+    {
+        return sprintf('%s/%s', self::FILE_PATH, $this->fileName);
     }
 
     public function getCampaign()
@@ -51,8 +59,23 @@ class Realisation
         return $this->campaign;
     }
 
+    public function getAverageMark()
+    {
+        return $this->averageMark;
+    }
+
+    public function updateAverageMark(float $averageMark)
+    {
+        $this->averageMark = $averageMark;
+    }
+
     public function getCandidates()
     {
         return $this->candidates;
+    }
+
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
     }
 }

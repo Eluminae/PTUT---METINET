@@ -1,0 +1,20 @@
+{% extends 'AppBundle::layoutFO.html.twig' %}
+
+{% block main %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Left at</th>
+            <th>File</th>
+        </tr>
+        {% for realisation in realisations %}
+            <tr>
+                <td>
+                    <a href="{{ path('public.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a>
+                </td>
+                <td>{{ realisation.leftAt }}</td>
+                <td><a href="{{ path(realisation.filePath) }}">Télécharger</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

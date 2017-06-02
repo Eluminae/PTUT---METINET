@@ -1,13 +1,53 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="fr" xml:lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Eddie Barraco, Corentin Bouix, Alan Ridard, Anthony Visocchi"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>{% block title %}Work Competition{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/normalize.css') }}" media="all"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" media="all"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome-4-7-0/css/font-awesome.min.css') }}"
+              media="all"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}" media="all"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/front.css') }}" media="all"/>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    {% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ asset('js/nav.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+</head>
+<body>
+{% block header %}{% endblock %}
+{% block nav %}{% endblock %}
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+{% block footer %}
+    <div class="wc-footer">
+        <div class="col-sm-1 footer-empty">
+        </div>
+        <footer class="col-sm-11 footer-container">
+            <div class="col-sm-6 padding-60">
+                <h3>Work Competition</h3>
+                <p>Propulsé par Eddie Barraco, Corentin Bouix, Alan Ridard, Anthony Visocchi</p>
+            </div>
+            <div class="col-sm-offset-3 col-sm-3">
+                <ul>
+                    <li>
+                        Work Competition - 2017
+                    </li>
+                    <li>
+                        A propos
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+{% endblock %}
+</body>
 </html>

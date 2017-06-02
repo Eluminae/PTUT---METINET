@@ -19,7 +19,8 @@ services:
       - MYSQL_DATABASE=work-competition
       - MYSQL_PASSWORD=work-competition
     volumes:
-      - /var/docker/mysql/work-competiton:/var/lib/mysql
+    #  - /var/docker/mysql/work-competiton:/var/lib/mysql
+      - /Users/corentinbouix/Sites/fac/mysql-wc
 
   adminer:
     image: clue/adminer

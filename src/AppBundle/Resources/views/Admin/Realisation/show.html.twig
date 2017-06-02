@@ -1,0 +1,37 @@
+{% extends 'AppBundle::layoutBO.html.twig' %}
+
+{% block main %}
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Realisation</h2>
+        </div>
+
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    <div class="wc-admin-row">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Déposé à</th>
+                                    <th>Fichier</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td><a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
+                                    <td>{{ realisation.leftAt }}</td>
+                                    <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
+                                    <td>
+                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                        <a href="{{ path('juror.mark.grade', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Noter</button></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

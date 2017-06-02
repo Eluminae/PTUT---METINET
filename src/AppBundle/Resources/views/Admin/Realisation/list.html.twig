@@ -1,0 +1,43 @@
+{% extends 'AppBundle::layoutBO.html.twig' %}
+
+{% block main %}
+    <div class="admin page-wrap">
+        <div class="wc-title-banner">
+            <h2>Realisation list</h2>
+        </div>
+
+        <div class="wc-container">
+            <div class="col-sm-12">
+                <div class="wc-admin-block">
+                    <div class="wc-admin-row">
+                        <div class="">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nom de la campagne</th>
+                                        <th>Nom de la réalisation</th>
+                                        <th>Date de dépôt</th>
+                                        <th>Lien de téléchargement</th>
+                                    </tr>
+                                </thead>
+
+                                {% for realisation in realisations %}
+                                    <tr>
+                                        <td><a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
+                                        <td><a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a></td>
+                                        <td>{{ realisation.leftAt }}</td>
+                                        <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
+                                        <td>
+                                            <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

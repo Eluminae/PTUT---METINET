@@ -1,0 +1,26 @@
+{% extends 'AppBundle::layoutFO.html.twig' %}
+
+{% block main %}
+    <div class="col-sm-12 no-padding">
+    <div class="competitions index page-wrap">
+        <div class="wc-title-banner">
+            <h2>Compétitions finies</h2>
+        </div>
+        {% for campaign in campaigns %}
+            <div class="col-sm-3">
+                <div class="wc-project-competitionPage">
+                    <a class="wc-img-competitionPage"
+                       href="{{ path('public.campaign.show_result', { 'campaign': campaign.id }) }}">
+                        <img src="{{ asset(campaign.imagePath) }}"/>
+                    </a>
+                    <div class="wc-info-competitionPage">
+                        <a href="{{ path('public.campaign.show_result', { 'campaign': campaign.id }) }}"><p
+                                    class="wc-name-competitionPage">{{ campaign.name }}</p></a>
+                        <p class="wc-category-competitionPage">{{ campaign.description }}</p>
+                        <p class="wc-desc-competitionPage">{{ campaign.endDate }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

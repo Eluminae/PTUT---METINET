@@ -2,25 +2,40 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\UtcDate;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Campaign
 {
+    const FILE_PATH = 'campaignImages';
+
+    const TO_BE_REVIEWED = 'to_be_reviewed';
+    const ACCEPTED = 'accepted';
+    const RESULTS_PUBLISHED = 'results_published';
+
     private $id;
     private $endDate;
     private $beginningDate;
     private $name;
     private $description;
-    private $imageUrl;
+    private $imageName;
+    private $creator;
+    private $notation;
 
-    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageUrl)
+    /** @var ArrayCollection */
+    private $jurors;
+    private $status;
+
+    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator, Notation $notation)
     {
         $this->id = $id;
         $this->endDate = $endDate;
         $this->beginningDate = $beginningDate;
         $this->name = $name;
         $this->description = $description;
-        $this->imageUrl = $imageUrl;
+        $this->imageName = $imageName;
+        $this->creator = $creator;
+        $this->status = self::TO_BE_REVIEWED;
+        $this->notation = $notation;
     }
 
     public function getId()
@@ -48,8 +63,43 @@ class Campaign
         return $this->description;
     }
 
-    public function getImageUrl()
+    public function getImageName()
     {
-        return $this->imageUrl;
+        return $this->imageName;
+    }
+
+    public function getImagePath()
+    {
+        return sprintf('%s/%s', self::FILE_PATH, $this->imageName);
+    }
+
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    public function getJurors()
+    {
+        return $this->jurors;
+    }
+
+    public function getNotation()
+    {
+        return $this->notation;
+    }
+
+    public function isClosed()
+    {
+        return $this->getEndDate()->getDate() < new \DateTime('now') && Campaign::ACCEPTED  === $this->status;
+    }
+
+    public function approveCampaign()
+    {
+        $this->status = self::ACCEPTED;
+    }
+
+    public function publishResults()
+    {
+        $this->status = self::RESULTS_PUBLISHED;
     }
 }

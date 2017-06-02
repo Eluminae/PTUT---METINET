@@ -1,0 +1,4 @@
+AppBundle\Dtos\CampaignCreation:
+  constraints:
+    - AppBundle\Validator\Constraints\CheckCampaignDate: ~
+

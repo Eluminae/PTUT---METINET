@@ -20,9 +20,9 @@ class File
         return $this->id;
     }
 
-    public function getName()
+    public function getFormat()
     {
-        return $this->name;
+        return $this->format;
     }
 
     public function getFileName()

@@ -4,21 +4,34 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="AppBundle\Models\Realisation" table="realisation">
-        <id name="id" type="string" columns="id" />
+    <entity name="AppBundle\Models\Realisation" table="wc_realisation" repository-class="AppBundle\Repositories\OrmRealisationRepository">
+        <id name="id" type="string" column="id" />
         <field name="name" type="string" column="name" />
-
+        <field name="fileName" type="string" column="file_name" />
+        <field name="averageMark" type="float" column="average_mark" />
         <one-to-one field="leftAt" target-entity="UtcDate" >
-            <cascade><cascade-remove /></cascade>
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove />
+            </cascade>
             <join-column name="left_at_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
-        <one-to-one field="campaign" target-entity="Campaign" >
-            <cascade><cascade-remove /></cascade>
+        <many-to-one field="campaign" target-entity="Campaign" >
             <join-column name="campaign_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
-        <one-to-one field="file" target-entity="File" >
-            <cascade><cascade-remove /></cascade>
-            <join-column name="file_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
+        </many-to-one>
+        <many-to-many field="candidates" target-entity="AppBundle\Models\Identity">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove />
+            </cascade>
+            <join-table name="wc_candidate">
+                <join-columns>
+                    <join-column name="realisation_id" referenced-column-name="id"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="identity_id" referenced-column-name="id"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 </doctrine-mapping>
