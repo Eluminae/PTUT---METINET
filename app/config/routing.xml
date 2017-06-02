@@ -104,7 +104,7 @@
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
-    <route id="admin.campaign.download" path="/juror/campaigns/download/{campaign}">
+    <route id="admin.campaign.download" path="/admin/campaigns/download/{campaign}">
         <default key="_controller">AppBundle:Campaign:download</default>
     </route>
 
@@ -122,6 +122,10 @@
 
     <route id="admin.juror.update" path="/admin/jurors/update/{jurorId}">
         <default key="_controller">AppBundle:Administration/Juror:update</default>
+    </route>
+
+    <route id="admin.user.list" path="/admin/users">
+        <default key="_controller">AppBundle:User:list</default>
     </route>
 
     <!-- <route id="public.realisation.list_for_campaign" path="/realisations/list-for-campaign/{campaign}"> -->
