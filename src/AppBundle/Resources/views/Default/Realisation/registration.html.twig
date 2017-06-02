@@ -11,20 +11,9 @@
                     {{ form_start(realisationRegistrationForm) }}
                     {{ form_label(realisationRegistrationForm.name) }}
                     {{ form_widget(realisationRegistrationForm.name, {'attr': {'placeholder': 'Nom de la réalisation'}}) }}
-                    {{ form_label(realisationRegistrationForm.identity.firstName) }}
-                    {{ form_widget(realisationRegistrationForm.identity.firstName, {'attr': {'placeholder': 'Prénom'}}) }}
-                    {{ form_label(realisationRegistrationForm.identity.lastName) }}
-                    {{ form_widget(realisationRegistrationForm.identity.lastName, {'attr': {'placeholder': 'Nom'}}) }}
-                    {{ form_label(realisationRegistrationForm.identity.email) }}
-                    {{ form_widget(realisationRegistrationForm.identity.email, {'attr': {'placeholder': 'E-mail'}}) }}
-                    {{ form_label(realisationRegistrationForm.identity.officialGroup) }}
-                    {{ form_widget(realisationRegistrationForm.identity.officialGroup, {'attr': {'placeholder': 'Entitié de rattachement'}}) }}
                     {{ form_label(realisationRegistrationForm.file) }}
                     {{ form_widget(realisationRegistrationForm.file, {'attr': {'placeholder': 'file'}}) }}
                     {{ form_errors(realisationRegistrationForm.file) }}
-
-                    {{ form_label(realisationRegistrationForm.identity.officialGroup) }}
-                    {{ form_widget(realisationRegistrationForm.identity.officialGroup, {'attr': {'placeholder': 'Entité de rattachement'}}) }}
 
                     <ul id="candidate-fields-list"
                         data-prototype="{{ form_widget(realisationRegistrationForm.candidates.vars.prototype)|e }}">

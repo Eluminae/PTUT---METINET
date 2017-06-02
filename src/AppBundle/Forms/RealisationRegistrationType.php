@@ -20,7 +20,6 @@ class RealisationRegistrationType extends AbstractType
             // ->add('identities', CollectionType::class, array(
             //     'entry_type' => IdentityRegistrationType::class
             // ))
-            ->add('identity', IdentityRegistrationType::class)
             ->add('file', FileType::class, array(
                 'required' => true,
                 'constraints' => array(
