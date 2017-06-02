@@ -153,9 +153,25 @@ class CampaignController extends Controller
             return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
         }
 
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $isOneOfTheJuror = false;
+        foreach ($campaign->getJurors() as $juror) {
+            if ($user->getIdentity() === $juror->getIdentity()) {
+                $isOneOfTheJuror = true;
+            }
+        }
+        if (
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            && !$isOneOfTheJuror
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à évaluer cette campagne');
+        }
+
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
-        $identity = $this->get('security.token_storage')->getToken()->getUser()->getIdentity();
+        $identity = $user->getIdentity();
 
         $mark = $this
             ->getDoctrine()
