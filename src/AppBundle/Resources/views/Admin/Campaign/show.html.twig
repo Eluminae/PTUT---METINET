@@ -29,10 +29,10 @@
                                 </tr>
                             </table>
                             <a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Inviter un juré</a>
-                            <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
                             <a href="{{ path('admin.realisation.create', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
                             <a href="{{ path('admin.campaign.download', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Télécharger les réalisations</a>
                             <a href="{{ path('admin.campaign.grade', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Noter les réalisations</a>
+                            <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}" class="btn-admin-form btn-delete">Supprimer</a>
                             <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
                             <table class="table table-striped">
                                 <thead>
