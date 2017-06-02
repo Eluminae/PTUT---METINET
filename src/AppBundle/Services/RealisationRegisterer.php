@@ -61,7 +61,7 @@ class RealisationRegisterer
                 $candidateDto['lastName'],
                 $candidateDto['firstName'],
                 $candidateDto['email'],
-                $identity['officialGroup']
+                $candidateDto['officialGroup']
             );
         }
 
