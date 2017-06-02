@@ -104,7 +104,7 @@
         <default key="_controller">AppBundle:Administration/Campaign:update</default>
     </route>
 
-    <route id="admin.campaign.download" path="/juror/campaigns/download/{campaign}">
+    <route id="admin.campaign.download" path="/admin/campaigns/download/{campaign}">
         <default key="_controller">AppBundle:Campaign:download</default>
     </route>
 
