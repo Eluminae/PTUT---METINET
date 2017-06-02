@@ -101,14 +101,6 @@ class RealisationController extends Controller
     }
 
     /**
-     * @param Request $request
-     */
-    public function updateAction(Request $request)
-    {
-        // todo
-    }
-
-    /**
      * @param Request     $request
      * @param Realisation $realisation
      *
