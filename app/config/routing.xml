@@ -124,6 +124,10 @@
         <default key="_controller">AppBundle:Administration/Juror:update</default>
     </route>
 
+    <route id="admin.user.list" path="/admin/users">
+        <default key="_controller">AppBundle:User:list</default>
+    </route>
+
     <!-- <route id="public.realisation.list_for_campaign" path="/realisations/list-for-campaign/{campaign}"> -->
     <!--     <default key="_controller">AppBundle:Realisation:listForCampaign</default> -->
     <!-- </route> -->
