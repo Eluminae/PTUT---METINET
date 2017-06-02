@@ -14,12 +14,12 @@
                     <div>
                         <table class="table table-striped">
                             <thead>
-                            <tr>
-                                <td>Nom</td>
-                                <td>Prénom</td>
-                                <td>Rôle</td>
-                                <td>Action</td>
-                            </tr>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>Prénom</td>
+                                    <td>Rôle</td>
+                                    <td>Action</td>
+                                </tr>
                             </thead>
                             {% for user in users %}
                                 <tr>
@@ -27,17 +27,15 @@
                                         {{ user.identity.lastname }}
                                     </td>
                                     <td>
-                                            {{ user.identity.firstname }}
+                                        {{ user.identity.firstname }}
                                     </td>
                                     <td>
-
                                         {{ user.roles.0 }}
                                     </td>
                                     <td>
-                                            <button type="button" class="btn-admin-form btn-modify"
-                                                    name="button">
-                                                modifier
-                                            </button>
+                                        <button type="button" class="btn-admin-form btn-modify" name="button">
+                                            modifier
+                                        </button>
                                     </td>
                                 </tr>
                             {% endfor %}
