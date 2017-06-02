@@ -90,7 +90,7 @@ class Campaign
 
     public function isClosed()
     {
-        return $this->getEndDate()->getDate() < new \DateTime('now') && Campaign::ACCEPTED  === $this->getStatus();
+        return $this->getEndDate()->getDate() < new \DateTime('now') && Campaign::ACCEPTED  === $this->status;
     }
 
     public function approveCampaign()
