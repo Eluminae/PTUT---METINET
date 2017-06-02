@@ -26,8 +26,15 @@
             </cascade>
             <join-column name="beginning_date_id" referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
         </one-to-one>
-        <many-to-one field="creator" target-entity="Identity">
-            <join-column name="creator_id" referenced-column-name="id" on-update="CASCADE"/>
+        <one-to-one field="notation" target-entity="Notation" >
+            <cascade>
+                <cascade-remove />
+                <cascade-persist />
+            </cascade>
+            <join-column name="notation_id"  referenced-column-name="id" on-delete="CASCADE" on-update="CASCADE"/>
+        </one-to-one>
+        <many-to-one field="creator" target-entity="Identity" >
+            <join-column name="creator_id"  referenced-column-name="id" on-update="CASCADE"/>
         </many-to-one>
 
         <many-to-many field="jurors" mapped-by="campaigns" target-entity="Juror"/>

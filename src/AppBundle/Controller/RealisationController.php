@@ -128,7 +128,6 @@ class RealisationController extends Controller
         $reaMarkDto->realisation = $realisation;
         $reaMarkDto->identity = $identity;
 
-        // todo dire si l'user a déja noté cette réa
         $form = $this->createForm(MarkType::class, $reaMarkDto);
 
         $form->handleRequest($request);

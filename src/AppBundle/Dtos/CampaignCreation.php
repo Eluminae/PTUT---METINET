@@ -10,4 +10,5 @@ class CampaignCreation
     public $description;
     public $image;
     public $creator;
+    public $notation;
 }

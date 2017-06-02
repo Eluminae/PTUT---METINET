@@ -2,11 +2,16 @@
 
 namespace AppBundle\Controller\Administration;
 
+use AppBundle\Dtos\AddJurorToCampaign;
+use AppBundle\Dtos\RealisationMarkDto;
+use AppBundle\Forms\AddJurorToCampaignType;
+use AppBundle\Forms\CampaignCreationType;
+use AppBundle\Forms\GradeCampaignType;
+use AppBundle\Models\UtcDate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Dtos\CampaignCreation;
-use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Models\Campaign;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -141,5 +146,80 @@ class CampaignController extends Controller
         $this->addFlash('success', 'La campagne a bien été approuvé');
 
         return $this->redirectToRoute('admin.campaign.list');
+    }
+
+    /**
+     * @param Request  $request
+     * @param Campaign $campaign
+     *
+     * @ParamConverter("campaign", class="AppBundle:Campaign")
+
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function gradeAction(Request $request, Campaign $campaign)
+    {
+        if (!$campaign->isClosed()) {
+            $this->addFlash('error', 'Vous ne pourrez évaluer cette campagne que lorsqu\'elle sera terminée.');
+
+            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+        }
+
+        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+
+        $identity = $this->get('security.token_storage')->getToken()->getUser()->getIdentity();
+
+        $mark = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Mark')
+            ->findBy(
+                [
+                    'realisation' => $realisations[0]->getId(),
+                    'identity' => $identity
+                ]
+            )
+        ;
+        if ($mark) {
+            $this->addFlash('error', 'Vous avez déja évalué cette campagne.');
+
+            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+        }
+
+        $markDtoTable = ['realisations' => []];
+        foreach ($realisations as $realisation) {
+            $markDtoTemp = new RealisationMarkDto();
+            $markDtoTemp->realisation = $realisation;
+            $markDtoTemp->identity = $identity;
+
+            $markDtoTable['realisations'][$realisation->getId()] = $markDtoTemp;
+        }
+
+        $form = $this->createForm(GradeCampaignType::class, $markDtoTable);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reaMarkDtoTable = $form->getData()['realisations'];
+
+            foreach ($reaMarkDtoTable as $key => $reaMarkDto) {
+                $mark = $this
+                    ->get('app.realisation_mark.factory')
+                    ->create($reaMarkDto)
+                ;
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($mark);
+            }
+
+            $em->flush();
+
+            $this->addFlash('success', 'Vous avez évalué cette campagne.');
+
+            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+        }
+
+        return $this->render(
+            'AppBundle:Default:Campaign/grade.html.twig', [
+                'form' => $form->createView(),
+                'notation' => $campaign->getNotation(),
+            ]
+        );
     }
 }

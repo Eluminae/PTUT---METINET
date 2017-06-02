@@ -1,0 +1,42 @@
+{% extends 'AppBundle::layoutBO.html.twig' %}
+
+{% block body %}
+    <div class="page-wrap">
+        <div class="wc-title-banner">
+            <h2>Noter les réalisations de la campagne</h2>
+        </div>
+        <div class="wc-container">
+            <div class="col-sm-12">
+                
+                {{ form_start(form) }}
+                <div class="wc-admin-block">
+                    <div class="wc-admin-row">
+                        {% for realisation in form.realisations %}
+
+                            {% if notation.markType is constant('NUMBER', notation) %}
+                                <div>
+                                    {{ form_label(realisation.value) }}
+                                    {{ form_widget(realisation.value) }} / {{ notation.markTypeNumber }}
+                                </div>
+                            {% elseif notation.markType is constant('RANKING', notation) %}
+                                <div class="ranking-block" draggable="true">
+                                    {{ form_label(realisation.value) }}
+                                    {{ form_widget(realisation.value) }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn-admin-form', 'value': 'valider'}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/grade.js') }}"></script>
+{% endblock %}
