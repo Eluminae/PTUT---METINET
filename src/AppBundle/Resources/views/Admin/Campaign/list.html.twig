@@ -89,13 +89,6 @@
                                     <td><img class="wc-img-thumb"
                                              src="{{ asset('campaignImages/' ~ campaign.imageName) }}"/></td>
                                     <td>
-                                        <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Modifier
-                                            </button>
-                                        </a>
-                                    </td>
-                                    <td>
                                         <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}">
                                             <button type="button" class="btn-admin-form btn-delete" name="button">
                                                 Supprimer
