@@ -9,24 +9,31 @@
             <div class="col-sm-12">
                 <div>
                     {{ form_start(realisationRegistrationForm) }}
-                    {{ form_label(realisationRegistrationForm.name) }}
-                    {{ form_widget(realisationRegistrationForm.name, {'attr': {'placeholder': 'Nom de la réalisation'}}) }}
-                    {{ form_label(realisationRegistrationForm.file) }}
-                    {{ form_widget(realisationRegistrationForm.file, {'attr': {'placeholder': 'file'}}) }}
-                    {{ form_errors(realisationRegistrationForm.file) }}
+                        {{ form_errors(realisationRegistrationForm) }}
 
-                    <ul id="candidate-fields-list"
-                        data-prototype="{{ form_widget(realisationRegistrationForm.candidates.vars.prototype)|e }}">
-                        {% for candidate in realisationRegistrationForm.candidates %}
-                            <li>
-                                {{ form_errors(candidate) }}
-                                {{ form_widget(candidate) }}
-                            <li>
-                        {% endfor %}
-                    </ul>
-                    <a href="#" id="add-another-candidate">Ajouter un candidat</a>
+                        {{ form_label(realisationRegistrationForm.name) }}
+                        {{ form_errors(realisationRegistrationForm.name) }}
+                        {{ form_widget(realisationRegistrationForm.name, {'attr': {'placeholder': 'Nom de la réalisation'}}) }}
 
-                    {{ form_widget(realisationRegistrationForm.submit, {'attr': {'value': 'Valider'}}) }}
+                        {{ form_label(realisationRegistrationForm.file) }}
+                        {{ form_errors(realisationRegistrationForm.file) }}
+                        {{ form_widget(realisationRegistrationForm.file, {'attr': {'placeholder': 'file'}}) }}
+
+                        {{ form_label(realisationRegistrationForm.candidates) }}
+                        {{ form_errors(realisationRegistrationForm.candidates) }}
+                        <ul id="candidate-fields-list"
+                            data-prototype="{{ form_widget(realisationRegistrationForm.candidates.vars.prototype)|e }}">
+                            {% for candidate in realisationRegistrationForm.candidates %}
+                                <li>
+                                    {{ form_label(candidate) }}
+                                    {{ form_errors(candidate) }}
+                                    {{ form_widget(candidate) }}
+                                <li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#" id="add-another-candidate">Ajouter un candidat</a>
+
+                        {{ form_widget(realisationRegistrationForm.submit, {'attr': {'value': 'Valider'}}) }}
                     {{ form_end(realisationRegistrationForm) }}
                 </div>
             </div>
