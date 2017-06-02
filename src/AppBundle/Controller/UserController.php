@@ -106,8 +106,8 @@ class UserController extends Controller
         $jurors = $this->get('app.juror.repository')->findAll();
         $administrators = $this->get('app.administrator.repository')->findAll();
 
-        $users = array_merge_recursive($campaignAdministrators, $jurors);
-        $users = array_merge_recursive($users, $administrators);
+        $users = array_merge($campaignAdministrators, $jurors);
+        $users = array_merge($users, $administrators);
 
         return $this->render('@App/Admin/listUsers.html.twig', [
             'users' => $users
