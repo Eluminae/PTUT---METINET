@@ -19,7 +19,6 @@ class MarkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('idRealisation', HiddenType::class)
             ->add('value', IntegerType::class)
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $markTypeDto = $event->getData();
@@ -40,6 +39,7 @@ class MarkType extends AbstractType
                         'attr' => [
                             'class' => 'mark⁻input',
                             'min' => 1,
+                            'disabled' => true,
                         ],
                     ]);
                 }

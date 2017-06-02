@@ -125,7 +125,6 @@ class CampaignController extends Controller
     }
 
     /**
-     * @param Request  $request
      * @param Campaign $campaign
      *
      * @ParamConverter("campaign", class="AppBundle:Campaign")
@@ -159,37 +158,42 @@ class CampaignController extends Controller
      */
     public function gradeAction(Request $request, Campaign $campaign)
     {
+        if (!$campaign->isClosed()) {
+            $this->addFlash('error', 'Vous ne pourrez évaluer cette campagne que lorsqu\'elle sera terminée.');
+
+            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+        }
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         $identity = $this->get('security.token_storage')->getToken()->getUser()->getIdentity();
-        
+
         $mark = $this
             ->getDoctrine()
             ->getRepository('AppBundle:Mark')
-            ->findBy([
-                'realisation' => $realisations[0]->getId(),
-                'identity' => $identity
-            ])
+            ->findBy(
+                [
+                    'realisation' => $realisations[0]->getId(),
+                    'identity' => $identity
+                ]
+            )
         ;
-         if ($mark) {
-            $this->addFlash('error', 'Vous avez déja noté cette réalisation.');
+        if ($mark) {
+            $this->addFlash('error', 'Vous avez déja évalué cette campagne.');
 
             return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
         }
 
         $markDtoTable = ['realisations' => []];
-
         foreach ($realisations as $realisation) {
             $markDtoTemp = new RealisationMarkDto();
             $markDtoTemp->realisation = $realisation;
             $markDtoTemp->identity = $identity;
-            
+
             $markDtoTable['realisations'][$realisation->getId()] = $markDtoTemp;
         }
 
-
         $form = $this->createForm(GradeCampaignType::class, $markDtoTable);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $reaMarkDtoTable = $form->getData()['realisations'];
@@ -203,8 +207,10 @@ class CampaignController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($mark);
             }
-             
+
             $em->flush();
+
+            $this->addFlash('success', 'Vous avez évalué cette campagne.');
 
             return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
         }

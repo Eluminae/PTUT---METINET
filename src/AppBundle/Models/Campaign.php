@@ -88,6 +88,11 @@ class Campaign
         return $this->notation;
     }
 
+    public function isClosed()
+    {
+        return $this->getEndDate()->getDate() < new \DateTime('now') && Campaign::ACCEPTED  === $this->getStatus();
+    }
+
     public function approveCampaign()
     {
         $this->status = self::ACCEPTED;

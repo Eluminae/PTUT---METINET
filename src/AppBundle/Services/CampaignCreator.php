@@ -35,7 +35,7 @@ class CampaignCreator
 
         $notation = new Notation(
             $this->uuidGenerator->generateUuid(),
-            $campaignCreation->notation['markType'], 
+            $campaignCreation->notation['markType'],
             $campaignCreation->notation['markTypeNumber']
         );
 

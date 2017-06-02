@@ -186,9 +186,4 @@
     <route id="public.juror.home" path="/juror">
         <default key="_controller">AppBundle:Juror:index</default>
     </route>
-
-    <!-- Mark routes -->
-    <route id="juror.mark.grade" path="/juror/realisations/grade/{realisation}">
-        <default key="_controller">AppBundle:Realisation:grade</default>
-    </route>
 </routes>
