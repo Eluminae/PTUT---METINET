@@ -1,0 +1,20 @@
+{% extends 'AppBundle::layoutFO.html.twig' %}
+
+{% block main %}
+    <div class="col-sm-12 no-padding">
+        <div class="home index page-wrap">
+            <div class="wc-title-banner">
+                <h2>Voir tous les administrateurs</h2>
+            </div>
+            <div class="wc-container">
+                <div class="col-sm-12">
+                    <div class="wc-admin-block">
+                        {% for user in users %}
+                            {{ user.id }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
