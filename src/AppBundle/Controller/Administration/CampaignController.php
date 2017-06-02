@@ -114,17 +114,6 @@ class CampaignController extends Controller
     }
 
     /**
-     * @param Request  $request
-     * @param Campaign $campaign
-     *
-     * @ParamConverter("campaign", class="AppBundle:Campaign")
-     */
-    public function updateAction(Request $request, Campaign $campaign)
-    {
-        // todo
-    }
-
-    /**
      * @param Campaign $campaign
      *
      * @ParamConverter("campaign", class="AppBundle:Campaign")
