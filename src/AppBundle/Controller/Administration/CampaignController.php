@@ -205,7 +205,7 @@ class CampaignController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Default:Campaign/grade.html.twig', [
+            'AppBundle:Admin:Campaign/grade.html.twig', [
                 'form' => $form->createView(),
                 'notation' => $campaign->getNotation(),
             ]
