@@ -187,16 +187,27 @@ class CampaignController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $reaMarkDtoTable = $form->getData()['realisations'];
 
+            $em = $this->getDoctrine()->getManager();
             foreach ($reaMarkDtoTable as $key => $reaMarkDto) {
                 $mark = $this
                     ->get('app.realisation_mark.factory')
                     ->create($reaMarkDto)
                 ;
 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($mark);
             }
 
+            $em->flush();
+
+            foreach ($this->get('app.realisation.repository')->findByCampaign($campaign) as $realisation) {
+                $marks = $this->get('app.mark.repository')->findByRealisation($realisation);
+                $averageMark = 0;
+                foreach ($marks as $mark) {
+                    $averageMark += $mark->getValue();
+                }
+                $averageMark /= sizeof($marks);
+                $realisation->updateAverageMark($averageMark);
+            }
             $em->flush();
 
             $this->addFlash('success', 'Vous avez évalué cette campagne.');

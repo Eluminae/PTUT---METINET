@@ -1,56 +1,64 @@
 {% extends 'AppBundle::layoutFO.html.twig' %}
 
 {% block main %}
-    <div class="wc-title-banner">
-        <h2>Resultat de la campagne</h2>
-    </div>
-    <div class="wc-container">
-        <div class="col-sm-12">
-            <div class="wc-admin-block">
-                <div class="wc-admin-row">
-                    <div class="row">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <td>Nom de la campagne</td>
-                                <td>Description</td>
-                                <td>Début</td>
-                                <td>Fin</td>
-                                <td>Créateur</td>
-                            </tr>
-                            </thead>
-                            <tr>
-                                <td>{{ campaign.name }}</td>
-                                <td>{{ campaign.description }}</td>
-                                <td>{{ campaign.beginningDate }}</td>
-                                <td>{{ campaign.endDate }}</td>
-                                <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
-                            </tr>
-                        </table>
-                        <a href="{{ path('admin.campaign.download', {'campaign': campaign.id}) }}"
-                           class="btn-admin-form btn-modify">Télécharger les réalisations</a>
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <td>Nom</td>
-                                <td>Fichier</td>
-                                <td>Candidats</td>
-                                <td>Moyenne</td>
-                            </tr>
-                            </thead>
-                            {% for realisation in realisations %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a>
-                                    </td>
-                                    <td>{{ realisation.candidates }}</td>
-                                    <td>{{ realisation.averageMark | round(2) }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
+    <div class="col-sm-12 no-padding">
+        <div class="home index page-wrap">
+            <div class="wc-title-banner">
+                <h2>Résultat de la campagne</h2>
+            </div>
+            <div class="wc-container">
+                <div class="col-sm-12">
+                    <div class="wc-admin-block">
+                        <div class="wc-admin-row">
+                            <div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <td>Nom de la campagne</td>
+                                            <td>Description</td>
+                                            <td>Début</td>
+                                            <td>Fin</td>
+                                            <td>Créateur</td>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td>{{ campaign.name }}</td>
+                                        <td>{{ campaign.description }}</td>
+                                        <td>{{ campaign.beginningDate }}</td>
+                                        <td>{{ campaign.endDate }}</td>
+                                        <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                    </tr>
+                                </table>
+                                <a href="{{ path('admin.campaign.download', {'campaign': campaign.id}) }}"
+                                   class="btn-admin-form btn-modify">Télécharger les réalisations</a>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <td>Nom</td>
+                                            <td>Fichier</td>
+                                            <td>Candidats</td>
+                                            <td>Moyenne</td>
+                                        </tr>
+                                    </thead>
+                                    {% for realisation in realisations %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}">{{ realisation.name }}</a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a>
+                                            </td>
+                                            <td>
+                                                {% for candidate in realisation.candidates %}
+                                                    {{ candidate.lastName }} {{ candidate.firstName }}
+                                                {% endfor %}
+                                            </td>
+                                            <td>{{ realisation.averageMark | round(2) }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

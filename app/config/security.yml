@@ -47,11 +47,8 @@ security:
             path: ^/login
             roles: IS_AUTHENTICATED_ANONYMOUSLY
         -
-            path: ^/juror
+            path: ^/admin/campaigns/grade
             roles: ROLE_JUROR
         -
             path: ^/admin
             roles: ROLE_ADMIN
-        -
-            path: ^/campaign-admin
-            roles: ROLE_CAMPAIGN_ADMIN
