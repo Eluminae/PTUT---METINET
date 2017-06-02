@@ -99,4 +99,18 @@ class UserController extends Controller
 
         return $this->render('@App/Admin/editProfile.html.twig', ['form' => $form->createView()]);
     }
+
+    public function listAction(Request $request)
+    {
+        $campaignAdministrators = $this->get('app.campaign_administrator.repository')->findAll();
+        $jurors = $this->get('app.juror.repository')->findAll();
+        $administrators = $this->get('app.administrator.repository')->findAll();
+
+        $users = array_merge_recursive($campaignAdministrators, $jurors);
+        $users = array_merge_recursive($users, $administrators);
+
+        return $this->render('@App/Admin/listUsers.html.twig', [
+            'users' => $users
+        ]);
+    }
 }
