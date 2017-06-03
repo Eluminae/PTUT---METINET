@@ -166,7 +166,7 @@ class CampaignController extends Controller
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
         if (
-            false === $this->get('app.user.authorization_checker')->isAllowedToEvaluateCampaign($user, $campaign)
+            false === $this->get('app.user.authorization_checker')->isAllowedToGradeCampaign($user, $campaign)
         ) {
             throw new AccessDeniedException('Vous n\'êtes pas authorisé à évaluer cette campagne');
         }

@@ -40,7 +40,7 @@ class UserAuthorizationChecker
         return false;
     }
 
-    public function isAllowedToEvaluateCampaign($user, Campaign $campaign)
+    public function isAllowedToGradeCampaign($user, Campaign $campaign)
     {
         if ($user instanceof Administrator) {
             return true;
