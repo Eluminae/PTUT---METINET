@@ -32,7 +32,7 @@ class CampaignController extends Controller
         if (
             false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaign)
         ) {
-            throw new AccessDeniedException('Vous n\'êtes pas authorisé à évaluer cette campagne');
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à administrer cette campagne');
         }
 
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
@@ -112,6 +112,13 @@ class CampaignController extends Controller
      */
     public function deleteAction(Request $request, Campaign $campaign)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToDeleteCampaign($user, $campaign)
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à supprimer cette campagne');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();
@@ -133,10 +140,6 @@ class CampaignController extends Controller
      */
     public function approveAction(Campaign $campaign)
     {
-        if (!in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
-            throw new AccessDeniedException("Sorry, you're not a administrator.");
-        }
-
         $campaign->approveCampaign();
         $this->getDoctrine()->getManager()->flush();
 

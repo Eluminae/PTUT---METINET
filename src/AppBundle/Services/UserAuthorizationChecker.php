@@ -55,4 +55,20 @@ class UserAuthorizationChecker
 
         return false;
     }
+
+    public function isAllowedToDeleteCampaign($user, Campaign $campaign)
+    {
+        if ($user instanceof Administrator) {
+            return true;
+        }
+
+        if (
+            $user instanceof CampaignAdministrator &&
+            $user === $campaign->getCreator()
+        ) {
+            return true;
+        }
+
+        return false;
+    }
 }

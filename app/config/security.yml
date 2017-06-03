@@ -50,6 +50,9 @@ security:
             path: ^/admin/campaigns/create
             roles: ROLE_CAMPAIGN_ADMIN
         -
+            path: ^/admin/campaigns/approve/
+            roles: ROLE_ADMIN
+        -
             path: ^/admin/campaigns/delete
             roles: ROLE_CAMPAIGN_ADMIN
         -
