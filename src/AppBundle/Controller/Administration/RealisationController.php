@@ -9,6 +9,7 @@ use AppBundle\Models\Realisation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class RealisationController extends Controller
 {
@@ -39,6 +40,13 @@ class RealisationController extends Controller
      */
     public function showAction(Request $request, Realisation $realisation)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à administrer cette réalisation');
+        }
+
         return $this->render(
             'AppBundle:Admin:Realisation/show.html.twig',
             [
@@ -110,6 +118,13 @@ class RealisationController extends Controller
      */
     public function downloadAction(Request $request, Realisation $realisation)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à récupérer cette réalisation');
+        }
+
         return $this->file($realisation->getFilePath());
     }
 }
