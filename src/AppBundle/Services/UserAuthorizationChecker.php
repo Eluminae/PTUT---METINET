@@ -33,7 +33,7 @@ class UserAuthorizationChecker
 
         if (
             $user instanceof CampaignAdministrator &&
-            $user === $campaign->getCreator()
+            $user->getIdentity() === $campaign->getCreator()
         ) {
             return true;
         }
@@ -43,10 +43,6 @@ class UserAuthorizationChecker
 
     public function isAllowedToGradeCampaign($user, Campaign $campaign)
     {
-        if ($user instanceof Administrator) {
-            return true;
-        }
-
         if (
             $user instanceof Juror &&
             $this->campaignAuthorizationChecker->isJuror($user, $campaign)
@@ -65,7 +61,7 @@ class UserAuthorizationChecker
 
         if (
             $user instanceof CampaignAdministrator &&
-            $user === $campaign->getCreator()
+            $user->getIdentity() === $campaign->getCreator()
         ) {
             return true;
         }

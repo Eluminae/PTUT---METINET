@@ -18,6 +18,7 @@
                                         <th>Nom de la réalisation</th>
                                         <th>Date de dépôt</th>
                                         <th>Lien de téléchargement</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -28,7 +29,9 @@
                                         <td>{{ realisation.leftAt }}</td>
                                         <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
                                         <td>
-                                            <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                                <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}

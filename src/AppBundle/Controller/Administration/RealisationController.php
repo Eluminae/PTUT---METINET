@@ -22,6 +22,15 @@ class RealisationController extends Controller
     {
         $realisations = $this->get('app.realisation.repository')->findAll();
 
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        foreach ($realisations as $key => $realisation) {
+            if (
+                false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
+            ) {
+                unset($realisations[$key]);
+            }
+        }
+
         return $this->render(
             'AppBundle:Admin:Realisation/list.html.twig',
             [

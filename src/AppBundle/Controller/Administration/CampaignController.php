@@ -59,6 +59,15 @@ class CampaignController extends Controller
         $campaignsNeedReview = $this->get('app.campaign.repository')->findByStatus(Campaign::TO_BE_REVIEWED);
         $campaignsApproved = $this->get('app.campaign.repository')->findByStatus(Campaign::ACCEPTED);
 
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        foreach ($campaignsApproved as $key => $campaignApproved) {
+            if (
+                false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaignApproved)
+            ) {
+                unset($campaignsApproved[$key]);
+            }
+        }
+
         return $this->render(
             'AppBundle:Admin:Campaign/list.html.twig',
             [
@@ -88,6 +97,8 @@ class CampaignController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($campaign);
             $em->flush();
+
+            $this->addFlash('success', 'La campagne a bien été crée. Elle doit maintenant êtra validée par un administrateur.');
 
             return $this->redirectToRoute('admin.campaign.list');
         }

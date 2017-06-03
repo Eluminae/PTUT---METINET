@@ -23,6 +23,15 @@ class DefaultController extends Controller
             4
         );
 
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        foreach ($campaignsApproved as $key => $campaignApproved) {
+            if (
+                false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaignApproved)
+            ) {
+                unset($campaignsApproved[$key]);
+            }
+        }
+
         return $this->render(
             'AppBundle:Admin:index.html.twig',
             [
