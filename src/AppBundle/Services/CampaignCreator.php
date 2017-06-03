@@ -47,7 +47,8 @@ class CampaignCreator
             $campaignCreation->description,
             $fileName,
             $user,
-            $notation
+            $notation,
+            $campaignCreation->publicResults
         );
     }
 }

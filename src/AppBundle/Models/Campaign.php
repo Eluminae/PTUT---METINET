@@ -20,12 +20,13 @@ class Campaign
     private $imageName;
     private $creator;
     private $notation;
+    private $publicResults;
 
     /** @var ArrayCollection */
     private $jurors;
     private $status;
 
-    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator, Notation $notation)
+    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator, Notation $notation, bool $publicResults)
     {
         $this->id = $id;
         $this->endDate = $endDate;
@@ -36,6 +37,7 @@ class Campaign
         $this->creator = $creator;
         $this->status = self::TO_BE_REVIEWED;
         $this->notation = $notation;
+        $this->publicResults = $publicResults;
     }
 
     public function getId()
@@ -96,6 +98,21 @@ class Campaign
     public function approveCampaign()
     {
         $this->status = self::ACCEPTED;
+    }
+
+
+    public function isResultsPublic()
+    {
+        return $this->publicResults;
+    }
+
+    public function isResultsPublished()
+    {
+        if ($this->RESULTS_PUBLISHED === $this->status) {
+            return true;
+        }
+
+        return false;
     }
 
     public function publishResults()

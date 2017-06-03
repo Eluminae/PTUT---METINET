@@ -228,7 +228,8 @@ class CampaignController extends Controller
 
             $em->flush();
 
-            foreach ($this->get('app.realisation.repository')->findByCampaign($campaign) as $realisation) {
+            $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+            foreach ($realisations as $realisation) {
                 $marks = $this->get('app.mark.repository')->findByRealisation($realisation);
                 $averageMark = 0;
                 foreach ($marks as $mark) {
@@ -236,6 +237,18 @@ class CampaignController extends Controller
                 }
                 $averageMark /= sizeof($marks);
                 $realisation->updateAverageMark($averageMark);
+            }
+            $em->flush();
+
+            $marks = 0;
+            foreach ($realisations as $realisation) {
+                $marks += count($this->get('app.mark.repository')->findByRealisation($realisation));
+            }
+            if (
+                $marks === count($realisations) * count($campaign->getJurors()) &&
+                $campaign->isResultsPublic()
+            ) {
+                $campaign->publishResults();
             }
             $em->flush();
 
