@@ -3,16 +3,17 @@
 namespace AppBundle\Controller\Administration;
 
 use AppBundle\Dtos\AddJurorToCampaign;
+use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Dtos\RealisationMarkDto;
 use AppBundle\Forms\AddJurorToCampaignType;
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Forms\GradeCampaignType;
+use AppBundle\Models\Campaign;
+use AppBundle\Models\Juror;
 use AppBundle\Models\UtcDate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Dtos\CampaignCreation;
-use AppBundle\Models\Campaign;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CampaignController extends Controller
@@ -27,6 +28,13 @@ class CampaignController extends Controller
      */
     public function showAction(Request $request, Campaign $campaign)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaign)
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à évaluer cette campagne');
+        }
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         $jurors = $campaign->getJurors();
@@ -147,27 +155,18 @@ class CampaignController extends Controller
      */
     public function gradeAction(Request $request, Campaign $campaign)
     {
-        if (!$campaign->isClosed()) {
+        if (false === $campaign->isClosed()) {
             $this->addFlash('error', 'Vous ne pourrez évaluer cette campagne que lorsqu\'elle sera terminée.');
 
             return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
         }
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
-
-        $isOneOfTheJuror = false;
-        foreach ($campaign->getJurors() as $juror) {
-            if ($user->getIdentity() === $juror->getIdentity()) {
-                $isOneOfTheJuror = true;
-            }
-        }
         if (
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
-            && !$isOneOfTheJuror
+            false === $this->get('app.user.authorization_checker')->isAllowedToEvaluateCampaign($user, $campaign)
         ) {
             throw new AccessDeniedException('Vous n\'êtes pas authorisé à évaluer cette campagne');
         }
-
 
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
