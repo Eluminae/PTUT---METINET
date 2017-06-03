@@ -47,7 +47,16 @@ security:
             path: ^/login
             roles: IS_AUTHENTICATED_ANONYMOUSLY
         -
-            path: ^/admin/campaigns/grade
+            path: ^/admin/campaigns/delete
+            roles: ROLE_CAMPAIGN_ADMIN
+        -
+            path: ^/admin/campaigns/
+            roles: ROLE_JUROR
+        -
+            path: ^/admin/realisations/delete
+            roles: ROLE_ADMIN
+        -
+            path: ^/admin/realisations/
             roles: ROLE_JUROR
         -
             path: ^/admin
