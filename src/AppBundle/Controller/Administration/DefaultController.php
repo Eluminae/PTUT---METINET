@@ -15,13 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $campaignsApproved = $this->get('app.campaign.repository')->findBy(
-            [
-                'status' => Campaign::ACCEPTED
-            ],
-            [],
-            4
-        );
+        $campaignsApproved = $this->get('app.campaign.repository')->findByStatus(Campaign::ACCEPTED);
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
         foreach ($campaignsApproved as $key => $campaignApproved) {
@@ -31,6 +25,8 @@ class DefaultController extends Controller
                 unset($campaignsApproved[$key]);
             }
         }
+
+        $campaignsApproved = array_splice($campaignsApproved, 0, 4);
 
         return $this->render(
             'AppBundle:Admin:index.html.twig',
