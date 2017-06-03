@@ -19,7 +19,7 @@
                             <div class="wc-admin-row">
                                 {% for campaign in campaigns %}
 
-                                    <p class="wc-admin-p">{{ campaign.name}}</p>
+                                    <a href="{{ path('admin.campaign.show', {'campaign': campaign.id}) }}"><p class="wc-admin-p">{{ campaign.name}}</p></a>
                                 {% endfor %}
                             </div>
                             <a href="{{ path('admin.campaign.list') }}"><p class="wc-admin-seeAll">Tout voir</p></a>
@@ -27,42 +27,29 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="wc-admin-block">
-                            <p class="wc-admin-subtitle">Notations</p>
+                            <p class="wc-admin-subtitle">Réalisation</p>
                             <button type="button" class="btn-admin-form" name="button">Ajouter</button>
                             <div class="wc-admin-row">
-                                <p class="wc-admin-p">Nom de campagne</p>
-                                <p class="wc-admin-p">Nom de campagne</p>
-                                <p class="wc-admin-p">Nom de campagne</p>
-                                <p class="wc-admin-p">Nom de campagne</p>
+                                {% for realisation in realisations %}
+                                    <a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}"><p class="wc-admin-p">{{ realisation.name}}</p></a>
+                                {% endfor %}
                             </div>
-                            <p class="wc-admin-seeAll">Tout voir</p>
+                            <a href="{{ path('admin.realisation.list') }}"><p class="wc-admin-seeAll">Tout voir</p></a>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="wc-admin-block">
                             <p class="wc-admin-subtitle">Gestion des utilisateurs</p>
-                            <button type="button" class="btn-admin-form" name="button">Ajouter</button>
+                            <a href="{{ path('admin.admins.invite') }}"><button type="button" class="btn-admin-form" name="button">Ajouter</button></a>
                             <div class="wc-admin-row">
-                                <p class="wc-admin-p">Nom de campagne</p>
-                                <p class="wc-admin-p">Nom de campagne</p>
-                                <p class="wc-admin-p">Nom de campagne</p>
-                                <p class="wc-admin-p">Nom de campagne</p>
+                                {% for user in users %}
+                                    <p class="wc-admin-p">{{ user.identity.lastName }} {{ user.identity.firstName }}</p>
+                                {% endfor %}
                             </div>
-                            <p class="wc-admin-seeAll">Tout voir</p>
+                            <a href="{{ path('admin.user.list') }}"><p class="wc-admin-seeAll">Tout voir</p></a>
                         </div>
                     </div>
                 </div>
-                <p>DEV WILL BE REMOVED</p>
-                <ul>
-                    <li><a href="{{ path('admin.realisation.list') }}">Liste des réalisations</a></li>
-                    <li><a href="{{ path('admin.juror.list') }}">Liste des jurés</a></li>
-                    <li><a href="{{ path('admin.administrator.list') }}">Liste des administrateurs</a></li>
-                    <li><a href="{{ path('admin.campaign_administrator.list') }}">Liste des administrateurs de
-                            campagne</a></li>
-                    <li><a href="{{ path('admin.admins.invite') }}">Inviter un admin (administrator ou capaign
-                            admin)</a> -> A mettre sur la vue de la liste des utilisateurs
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

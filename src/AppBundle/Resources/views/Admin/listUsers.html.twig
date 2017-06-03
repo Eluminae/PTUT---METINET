@@ -8,7 +8,7 @@
         <div class="col-sm-12">
             <div class="wc-admin-block">
                 <div class="row no-margin">
-                    <p class="col-sm-12 wc-admin-subtitle">Campagnes à approuver</p>
+                    <p class="col-sm-12 wc-admin-subtitle">Gestion des utilisateurs</p>
                 </div>
                 <div class="wc-admin-row">
                     <div>
@@ -19,6 +19,13 @@
                                     <td>Prénom</td>
                                     <td>Rôle</td>
                                     <td>Action</td>
+                                    <td>
+                                        <a href="{{ path('admin.admins.invite') }}">
+                                            <button type="button" class="btn-admin-form btn-add" name="button">
+                                                Inviter un utilisateur
+                                            </button>
+                                        </a>
+                                    </td>
                                 </tr>
                             </thead>
                             {% for user in users %}

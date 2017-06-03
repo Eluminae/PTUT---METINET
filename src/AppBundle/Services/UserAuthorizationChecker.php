@@ -68,4 +68,14 @@ class UserAuthorizationChecker
 
         return false;
     }
+
+    public function isAllowedToListUsers($user)
+    {
+        if ($user instanceof Administrator) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

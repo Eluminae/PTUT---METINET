@@ -24,7 +24,7 @@ class OrmCampaignRepository extends EntityRepository
         return $this
             ->getEntityManager()
             ->createQuery(
-                'SELECT c FROM AppBundle:Campaign c JOIN c.endDate ed JOIN c.beginningDate bd WHERE c.status = :status AND ed.date > CURRENT_DATE() AND bd.date < CURRENT_DATE()'
+                'SELECT c FROM AppBundle:Campaign c JOIN c.endDate ed JOIN c.beginningDate bd WHERE c.status = :status AND ed.date >= CURRENT_DATE() AND bd.date <= CURRENT_DATE()'
             )
             ->setParameter('status', Campaign::ACCEPTED)
             ->getResult()

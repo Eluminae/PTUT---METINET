@@ -15,6 +15,8 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $numberOfResults = 4;
+
         $campaignsApproved = $this->get('app.campaign.repository')->findByStatus(Campaign::ACCEPTED);
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
@@ -25,13 +27,32 @@ class DefaultController extends Controller
                 unset($campaignsApproved[$key]);
             }
         }
+        $campaignsApproved = array_splice($campaignsApproved, 0, $numberOfResults);
 
-        $campaignsApproved = array_splice($campaignsApproved, 0, 4);
+        $realisations = [];
+        foreach ($campaignsApproved as $campaign) {
+            $realisations += $this->get('app.realisation.repository')->findByCampaign($campaign);
+        }
+        $realisations = array_splice($realisations, 0, $numberOfResults);
+
+        $users = [];
+        if ($this->get('app.user.authorization_checker')->isAllowedToListUsers($user)) {
+            $campaignAdministrators = $this->get('app.campaign_administrator.repository')->findAll();
+            $jurors = $this->get('app.juror.repository')->findAll();
+            $administrators = $this->get('app.administrator.repository')->findAll();
+
+            $users = array_merge($campaignAdministrators, $jurors);
+            $users = array_merge($users, $administrators);
+
+            $users = array_splice($users, 0, $numberOfResults);
+        }
 
         return $this->render(
             'AppBundle:Admin:index.html.twig',
             [
                 'campaigns' => $campaignsApproved,
+                'realisations' => $realisations,
+                'users' => $users,
             ]
         );
     }
