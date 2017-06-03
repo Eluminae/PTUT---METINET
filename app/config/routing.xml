@@ -10,7 +10,7 @@
     </route>
 
     <!-- Invitation system -->
-    <route id="admin.admins.invite" path="/admin/admins/invite">
+    <route id="admin.admins.invite" path="/admin/users/invite">
         <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>
     </route>
 
@@ -168,6 +168,10 @@
 
     <route id="admin.realisation.download" path="/admin/realisations/download/{realisation}">
         <default key="_controller">AppBundle:Administration/Realisation:download</default>
+    </route>
+
+    <route id="public.realisation.download" path="/realisations/download/{realisation}">
+        <default key="_controller">AppBundle:Realisation:download</default>
     </route>
 
     <!-- Realisation routes -->

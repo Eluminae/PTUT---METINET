@@ -11,6 +11,7 @@ class Campaign
     const TO_BE_REVIEWED = 'to_be_reviewed';
     const ACCEPTED = 'accepted';
     const RESULTS_PUBLISHED = 'results_published';
+    const CLOSED = 'closed';
 
     private $id;
     private $endDate;
@@ -90,7 +91,7 @@ class Campaign
         return $this->notation;
     }
 
-    public function isClosed()
+    public function isOver()
     {
         return $this->getEndDate()->getDate() < new \DateTime('now') && Campaign::ACCEPTED  === $this->status;
     }
@@ -106,13 +107,31 @@ class Campaign
         return $this->publicResults;
     }
 
-    public function isResultsPublished()
+    public function isActive()
     {
-        if ($this->RESULTS_PUBLISHED === $this->status) {
+        if (
+            self::ACCEPTED === $this->status &&
+            !$this->isOver() &&
+            $this->getBeginningDate()->getDate() < new \DateTime('now')
+        ) {
             return true;
         }
 
         return false;
+    }
+
+    public function isResultsPublished()
+    {
+        if (self::RESULTS_PUBLISHED === $this->status) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function close()
+    {
+        $this->status = self::CLOSED;
     }
 
     public function publishResults()

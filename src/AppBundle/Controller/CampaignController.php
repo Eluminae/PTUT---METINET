@@ -19,6 +19,10 @@ class CampaignController extends Controller
      */
     public function showAction(Request $request, Campaign $campaign)
     {
+        if (false === $campaign->isActive()) {
+            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
+        }
+
         return $this->render(
             'AppBundle:Default:Campaign/show.html.twig',
             [
@@ -37,6 +41,13 @@ class CampaignController extends Controller
      */
     public function showResultAction(Request $request, Campaign $campaign)
     {
+        if ($campaign->isActive()) {
+            throw $this->createNotFoundException('Cette campagne n\'est pas terminée.');
+        }
+        if (false === $campaign->isResultsPublished()) {
+            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
+        }
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         return $this->render(
@@ -90,6 +101,10 @@ class CampaignController extends Controller
      */
     public function downloadAction(Request $request, Campaign $campaign)
     {
+        if (false === $campaign->isActive()) {
+            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
+        }
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         if (!is_dir('realisationZipFiles')) {

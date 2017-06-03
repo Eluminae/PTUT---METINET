@@ -41,7 +41,7 @@ class RegisterController extends Controller
      */
     public function createInvitationForJurorAction(Request $request, Campaign $campaign)
     {
-        if ($campaign->isClosed()) {
+        if ($campaign->isOver()) {
             $this->addFlash('error', 'Vous ne pouvez plus inviter de juré car la campagne est terminée.');
 
             return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);

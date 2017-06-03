@@ -169,7 +169,7 @@ class CampaignController extends Controller
      */
     public function gradeAction(Request $request, Campaign $campaign)
     {
-        if (false === $campaign->isClosed()) {
+        if (false === $campaign->isOver()) {
             $this->addFlash('error', 'Vous ne pourrez évaluer cette campagne que lorsqu\'elle sera terminée.');
 
             return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
@@ -244,11 +244,12 @@ class CampaignController extends Controller
             foreach ($realisations as $realisation) {
                 $marks += count($this->get('app.mark.repository')->findByRealisation($realisation));
             }
-            if (
-                $marks === count($realisations) * count($campaign->getJurors()) &&
-                $campaign->isResultsPublic()
-            ) {
-                $campaign->publishResults();
+            if ($marks === count($realisations) * count($campaign->getJurors())) {
+                if ($campaign->isResultsPublic()) {
+                    $campaign->publishResults();
+                } else {
+                    $campaign->close();
+                }
             }
             $em->flush();
 

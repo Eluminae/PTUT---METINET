@@ -27,6 +27,10 @@ class RealisationController extends Controller
      */
     public function listForCampaignAction(Request $request, Campaign $campaign)
     {
+        if (false === $realisation->getCampaign()->isResultsPublished()) {
+            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
+        }
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign->getId());
 
         return $this->render(
@@ -87,11 +91,32 @@ class RealisationController extends Controller
      */
     public function showAction(Request $request, Realisation $realisation)
     {
+        if (false === $realisation->getCampaign()->isResultsPublished()) {
+            throw $this->createNotFoundException('Cette réalisation n\'existe pas.');
+        }
+
         return $this->render(
             'AppBundle:Default:Realisation/show.html.twig',
             [
                 'realisation' => $realisation,
             ]
         );
+    }
+
+    /**
+     * @param Request     $request
+     * @param Realisation $realisation
+     *
+     * @ParamConverter("realisation", class="AppBundle:Realisation")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function downloadAction(Request $request, Realisation $realisation)
+    {
+        if (false === $realisation->getCampaign()->isResultsPublished()) {
+            throw $this->createNotFoundException('Cette réalisation n\'existe pas.');
+        }
+
+        return $this->file($realisation->getFilePath());
     }
 }
