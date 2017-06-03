@@ -11,6 +11,7 @@ use AppBundle\Repositories\OrmCampaignRepository;
 use AppBundle\Repositories\OrmJurorRepository;
 use AppBundle\Services\UuidGenerator;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -77,7 +78,7 @@ class UserRegisterer
      *
      * @return UserInterface
      */
-    public function signUp(UserRegistration $userRegistrationDto)
+    public function signUp(UserRegistration $userRegistrationDto, PersistentCollection $assignedCampaigns = null)
     {
         $password = $this->encodePasswordFromPlain($userRegistrationDto->password);
 
@@ -98,8 +99,10 @@ class UserRegisterer
             $userRegistrationDto->role
         );
 
-        if ($userDynamicObject instanceof Juror && $userRegistrationDto->campaign) {
-            $userDynamicObject->addCampaign($userRegistrationDto->campaign);
+        if ($userDynamicObject instanceof Juror && $assignedCampaigns) {
+            foreach ($assignedCampaigns as $assignedCampaign) {
+                $userDynamicObject->addCampaign($assignedCampaign);
+            }
         }
 
         $this->entityManager->persist($userDynamicObject);

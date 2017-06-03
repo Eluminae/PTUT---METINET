@@ -77,8 +77,9 @@ class RegisterController extends Controller
             $userSignUp = $form->getData();
 
             $userRegisterer->verifyEmail($userSignUp->email);
-            $savedUser = $userRegisterer->signUp($userSignUp);
+            $savedUser = $userRegisterer->signUp($userSignUp, $invitation->getAssignedCampaigns());
             $provider = $userRegisterer->determineDataFromRole($userRegistrationDto->role, 'provider');
+
 
             $token = new UsernamePasswordToken(
                 $savedUser,
