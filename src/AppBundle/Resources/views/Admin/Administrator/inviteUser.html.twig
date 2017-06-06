@@ -5,17 +5,17 @@
     <div class="wc-container">
 
         <div class="col-sm-12">
+            <div class="formLogin">
             {{ form_start(form) }}
-            {{ form_errors(form.email) }}
-            {{ form_label(form.email, '', {'label_attr': {'class': 'inputLogin'}}) }}
-            {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'inputLogin', 'placeholder': "Email"}}) }}
 
-            {{ form_errors(form.role) }}
-            {{ form_label(form.role, '', {'label_attr': {'class': 'inputLogin'}}) }}
-            {{ form_widget(form.role) }}
+                {{ form_errors(form.role) }}
+                {{ form_widget(form.role, {'attr': {'class': 'inputLogin', 'placeholder': "Role"}}) }}
 
-            <button type="submit" class="btnLogin">Inviter</button>
+                <button type="submit" class="btnLogin">Inviter</button>
             {{ form_end(form) }}
+            </div>
         </div>
     </div>
 {% endblock %}

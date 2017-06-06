@@ -17,28 +17,28 @@ class IdentityRegistrationType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Prenom',
                     'class' => 'wc-admin-inputForm',
-                ]
+                ],
             ])
             ->add('lastName', TextType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Nom',
                     'class' => 'wc-admin-inputForm',
-                ]
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Email',
                     'class' => 'wc-admin-inputForm',
-                ]
+                ],
             ])
             ->add('officialGroup', TextType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Entité de rattachement',
                     'class' => 'wc-admin-inputForm',
-                ]
+                ],
             ])
         ;
     }
