@@ -28,7 +28,6 @@ class SignUpType extends AbstractType
                     'type' => PasswordType::class,
                 ]
             )
-            ->add('signup', SubmitType::class, ['label' => 'S\'inscrire'])
         ;
     }
 }

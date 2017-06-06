@@ -27,8 +27,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="wc-admin-block">
-                            <p class="wc-admin-subtitle">Réalisation</p>
-                            <button type="button" class="btn-admin-form" name="button">Ajouter</button>
+                            <p class="wc-admin-subtitle">Réalisations</p>
                             <div class="wc-admin-row">
                                 {% for realisation in realisations %}
                                     <a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}"><p class="wc-admin-p">{{ realisation.name}}</p></a>
