@@ -162,8 +162,10 @@ footer > div > h3 {
 }
 
 .footer-container {
-	width: 95.16666667%;
-	padding: 20px !important;
+	/*width: 95.16666667%;
+	padding: 20px !important;*/
+	padding-left: 93px;
+	width: 100%;
 }
 
 .page-wrap {
