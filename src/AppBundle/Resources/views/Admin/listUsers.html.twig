@@ -19,16 +19,15 @@
                                     <th>Nom</th>
                                     <th>E-mail</th>
                                     <th>Rôle</th>
-
                                 </tr>
                             </thead>
                             {% for user in users %}
                                 <tr style="text-align: left;">
                                     <td class="col-md-3">
-                                        {{ user.identity.lastname }}
+                                        {{ user.identity.firstname }}
                                     </td>
                                     <td class="col-md-3">
-                                        {{ user.identity.firstname }}
+                                        {{ user.identity.lastname }}
                                     </td>
                                     <td class="col-md-3">
                                         {{ user.identity.email }}
