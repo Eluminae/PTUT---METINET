@@ -18,6 +18,7 @@ class RegisterController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function createInvitationForAdminsAction(Request $request)
@@ -37,10 +38,17 @@ class RegisterController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function createInvitationForJurorAction(Request $request, Campaign $campaign)
     {
+        if ($campaign->isOver()) {
+            $this->addFlash('error', 'Vous ne pouvez plus inviter de juré car la campagne est terminée.');
+
+            return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
+        }
+
         $form = $this->invitationFormHandler($request, false, $campaign);
 
         return $this->render('@App/Admin/Campaign/inviteJuror.html.twig', ['form' => $form->createView()]);
@@ -51,6 +59,7 @@ class RegisterController extends Controller
      * @param Invitation $invitation
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      * @throws \LogicException
      * @throws \InvalidArgumentException
@@ -77,7 +86,7 @@ class RegisterController extends Controller
             $userSignUp = $form->getData();
 
             $userRegisterer->verifyEmail($userSignUp->email);
-            $savedUser = $userRegisterer->signUp($userSignUp);
+            $savedUser = $userRegisterer->signUp($userSignUp, $invitation->getAssignedCampaigns());
             $provider = $userRegisterer->determineDataFromRole($userRegistrationDto->role, 'provider');
 
             $token = new UsernamePasswordToken(
@@ -111,6 +120,7 @@ class RegisterController extends Controller
      * @param Campaign|null $campaign
      *
      * @return \Symfony\Component\Form\Form
+     *
      * @throws \LogicException
      */
     private function invitationFormHandler(Request $request, bool $isAdmin, Campaign $campaign = null)

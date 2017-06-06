@@ -1,0 +1,55 @@
+{% extends 'AppBundle::layoutBO.html.twig' %}
+
+{% block main %}
+    <div class="wc-title-banner">
+        <h2>Voir tous les administrateurs</h2>
+    </div>
+    <div class="wc-container">
+        <div class="col-sm-12">
+            <div class="wc-admin-block">
+                <div class="row no-margin">
+                    <p class="col-sm-12 wc-admin-subtitle">Gestion des utilisateurs</p>
+                </div>
+                <div class="wc-admin-row">
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>Prénom</td>
+                                    <td>Rôle</td>
+                                    <td>Action</td>
+                                    <td>
+                                        <a href="{{ path('admin.admins.invite') }}">
+                                            <button type="button" class="btn-admin-form btn-add" name="button">
+                                                Inviter un utilisateur
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </thead>
+                            {% for user in users %}
+                                <tr>
+                                    <td>
+                                        {{ user.identity.lastname }}
+                                    </td>
+                                    <td>
+                                        {{ user.identity.firstname }}
+                                    </td>
+                                    <td>
+                                        {{ user.roles.0 }}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn-admin-form btn-modify" name="button">
+                                            modifier
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

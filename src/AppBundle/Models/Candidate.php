@@ -2,8 +2,6 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\Identity;
-
 class Candidate
 {
     private $id;

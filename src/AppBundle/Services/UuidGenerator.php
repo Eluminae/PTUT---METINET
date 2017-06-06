@@ -2,7 +2,6 @@
 
 namespace AppBundle\Services;
 
-
 use Ramsey\Uuid\Uuid;
 
 class UuidGenerator

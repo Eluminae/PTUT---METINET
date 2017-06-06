@@ -2,10 +2,6 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\Identity;
-use AppBundle\Models\Realisation;
-use AppBundle\Models\UtcDate;
-
 class Mark
 {
     private $id;

@@ -23,8 +23,9 @@
                                     <td>{{ realisation.leftAt }}</td>
                                     <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
                                     <td>
-                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
-                                        <a href="{{ path('juror.mark.grade', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Noter</button></a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}"><button type="button" class="btn-admin-form btn-modify" name="button">Supprimer</button></a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             </table>

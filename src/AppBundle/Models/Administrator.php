@@ -2,8 +2,6 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\Identity;
-use AppBundle\Models\Password;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class Administrator implements UserInterface

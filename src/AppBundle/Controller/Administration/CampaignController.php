@@ -2,17 +2,14 @@
 
 namespace AppBundle\Controller\Administration;
 
-use AppBundle\Dtos\AddJurorToCampaign;
+use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Dtos\RealisationMarkDto;
-use AppBundle\Forms\AddJurorToCampaignType;
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Forms\GradeCampaignType;
-use AppBundle\Models\UtcDate;
+use AppBundle\Models\Campaign;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Dtos\CampaignCreation;
-use AppBundle\Models\Campaign;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CampaignController extends Controller
@@ -23,10 +20,16 @@ class CampaignController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @ParamConverter("campaign", class="AppBundle:Campaign")
-     *
      */
     public function showAction(Request $request, Campaign $campaign)
     {
+        $user = $this->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaign)
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à administrer cette campagne');
+        }
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
         $jurors = $campaign->getJurors();
@@ -51,6 +54,15 @@ class CampaignController extends Controller
         $campaignsNeedReview = $this->get('app.campaign.repository')->findByStatus(Campaign::TO_BE_REVIEWED);
         $campaignsApproved = $this->get('app.campaign.repository')->findByStatus(Campaign::ACCEPTED);
 
+        $user = $this->getUser();
+        foreach ($campaignsApproved as $key => $campaignApproved) {
+            if (
+                false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaignApproved)
+            ) {
+                unset($campaignsApproved[$key]);
+            }
+        }
+
         return $this->render(
             'AppBundle:Admin:Campaign/list.html.twig',
             [
@@ -64,6 +76,7 @@ class CampaignController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function createAction(Request $request)
@@ -80,6 +93,8 @@ class CampaignController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($campaign);
             $em->flush();
+
+            $this->addFlash('success', 'La campagne a bien été crée. Elle doit maintenant êtra validée par un administrateur.');
 
             return $this->redirectToRoute('admin.campaign.list');
         }
@@ -99,11 +114,19 @@ class CampaignController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      * @throws \InvalidArgumentException
      */
     public function deleteAction(Request $request, Campaign $campaign)
     {
+        $user = $this->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToDeleteCampaign($user, $campaign)
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à supprimer cette campagne');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();
@@ -114,17 +137,6 @@ class CampaignController extends Controller
     }
 
     /**
-     * @param Request  $request
-     * @param Campaign $campaign
-     *
-     * @ParamConverter("campaign", class="AppBundle:Campaign")
-     */
-    public function updateAction(Request $request, Campaign $campaign)
-    {
-        // todo
-    }
-
-    /**
      * @param Campaign $campaign
      *
      * @ParamConverter("campaign", class="AppBundle:Campaign")
@@ -132,14 +144,11 @@ class CampaignController extends Controller
      * @throws \LogicException
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @throws \InvalidArgumentException
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function approveAction(Campaign $campaign)
     {
-        if (!in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
-            throw new AccessDeniedException("Sorry, you're not a administrator.");
-        }
-
         $campaign->approveCampaign();
         $this->getDoctrine()->getManager()->flush();
 
@@ -154,19 +163,27 @@ class CampaignController extends Controller
      *
      * @ParamConverter("campaign", class="AppBundle:Campaign")
 
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function gradeAction(Request $request, Campaign $campaign)
     {
-        if (!$campaign->isClosed()) {
+        if (false === $campaign->isOver()) {
             $this->addFlash('error', 'Vous ne pourrez évaluer cette campagne que lorsqu\'elle sera terminée.');
 
-            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+            return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
+        }
+
+        $user = $this->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToGradeCampaign($user, $campaign)
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à évaluer cette campagne');
         }
 
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
 
-        $identity = $this->get('security.token_storage')->getToken()->getUser()->getIdentity();
+        $identity = $user->getIdentity();
 
         $mark = $this
             ->getDoctrine()
@@ -174,14 +191,14 @@ class CampaignController extends Controller
             ->findBy(
                 [
                     'realisation' => $realisations[0]->getId(),
-                    'identity' => $identity
+                    'identity' => $identity,
                 ]
             )
         ;
         if ($mark) {
             $this->addFlash('error', 'Vous avez déja évalué cette campagne.');
 
-            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+            return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
         $markDtoTable = ['realisations' => []];
@@ -198,25 +215,50 @@ class CampaignController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $reaMarkDtoTable = $form->getData()['realisations'];
 
+            $em = $this->getDoctrine()->getManager();
             foreach ($reaMarkDtoTable as $key => $reaMarkDto) {
                 $mark = $this
                     ->get('app.realisation_mark.factory')
                     ->create($reaMarkDto)
                 ;
 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($mark);
             }
 
             $em->flush();
 
+            $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
+            foreach ($realisations as $realisation) {
+                $marks = $this->get('app.mark.repository')->findByRealisation($realisation);
+                $averageMark = 0;
+                foreach ($marks as $mark) {
+                    $averageMark += $mark->getValue();
+                }
+                $averageMark /= sizeof($marks);
+                $realisation->updateAverageMark($averageMark);
+            }
+            $em->flush();
+
+            $marks = 0;
+            foreach ($realisations as $realisation) {
+                $marks += count($this->get('app.mark.repository')->findByRealisation($realisation));
+            }
+            if ($marks === count($realisations) * count($campaign->getJurors())) {
+                if ($campaign->isResultsPublic()) {
+                    $campaign->publishResults();
+                } else {
+                    $campaign->close();
+                }
+            }
+            $em->flush();
+
             $this->addFlash('success', 'Vous avez évalué cette campagne.');
 
-            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+            return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
         return $this->render(
-            'AppBundle:Default:Campaign/grade.html.twig', [
+            'AppBundle:Admin:Campaign/grade.html.twig', [
                 'form' => $form->createView(),
                 'notation' => $campaign->getNotation(),
             ]

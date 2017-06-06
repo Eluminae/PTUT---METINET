@@ -10,7 +10,7 @@
     </route>
 
     <!-- Invitation system -->
-    <route id="admin.admins.invite" path="/admin/admins/invite">
+    <route id="admin.admins.invite" path="/admin/users/invite">
         <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>
     </route>
 
@@ -100,11 +100,7 @@
         <default key="_controller">AppBundle:Administration/Campaign:approve</default>
     </route>
 
-    <route id="admin.campaign.update" path="/admin/campaigns/update/{campaign}">
-        <default key="_controller">AppBundle:Administration/Campaign:update</default>
-    </route>
-
-    <route id="admin.campaign.download" path="/juror/campaigns/download/{campaign}">
+    <route id="admin.campaign.download" path="/admin/campaigns/download/{campaign}">
         <default key="_controller">AppBundle:Campaign:download</default>
     </route>
 
@@ -122,6 +118,10 @@
 
     <route id="admin.juror.update" path="/admin/jurors/update/{jurorId}">
         <default key="_controller">AppBundle:Administration/Juror:update</default>
+    </route>
+
+    <route id="admin.user.list" path="/admin/users">
+        <default key="_controller">AppBundle:User:list</default>
     </route>
 
     <!-- <route id="public.realisation.list_for_campaign" path="/realisations/list-for-campaign/{campaign}"> -->
@@ -168,6 +168,10 @@
 
     <route id="admin.realisation.download" path="/admin/realisations/download/{realisation}">
         <default key="_controller">AppBundle:Administration/Realisation:download</default>
+    </route>
+
+    <route id="public.realisation.download" path="/realisations/download/{realisation}">
+        <default key="_controller">AppBundle:Realisation:download</default>
     </route>
 
     <!-- Realisation routes -->

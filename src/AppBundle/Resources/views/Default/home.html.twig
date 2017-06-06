@@ -5,7 +5,7 @@
         <div class="home index page-wrap">
             <img alt="Logo" class="logoSansFond" src="{{ asset('img/logoSansFond.png') }}"/>
             <h1 class="slogan">Participez à des concours<br/>dans de multiples disciplines</h1>
-            <button class="wc-btn">Voir les concours</button>
+            <a href="{{ path('public.campaign.list') }}"><button class="wc-btn">Voir les concours</button></a>
         </div>
     </div>
 {% endblock %}

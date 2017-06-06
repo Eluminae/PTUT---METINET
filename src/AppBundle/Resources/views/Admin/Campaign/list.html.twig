@@ -69,12 +69,16 @@
                                 <td>Créateur</td>
                                 <td>Début</td>
                                 <td>Fin</td>
+                                <td>Fichier</td>
+                                <td>Action</td>
                                 <td>
-                                    <a href="{{ path('admin.campaign.create') }}">
-                                        <button type="button" class="btn-admin-form btn-add" name="button">
-                                            Ajouter
-                                        </button>
-                                    </a>
+                                    {% if is_granted('ROLE_CAMPAIGN_ADMIN') %}
+                                        <a href="{{ path('admin.campaign.create') }}">
+                                            <button type="button" class="btn-admin-form btn-add" name="button">
+                                                Ajouter
+                                            </button>
+                                        </a>
+                                    {% endif %}
                                 </td>
                             </tr>
                             </thead>
@@ -89,18 +93,20 @@
                                     <td><img class="wc-img-thumb"
                                              src="{{ asset('campaignImages/' ~ campaign.imageName) }}"/></td>
                                     <td>
-                                        <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Modifier
-                                            </button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-delete" name="button">
-                                                Supprimer
-                                            </button>
-                                        </a>
+                                        {% if is_granted('ROLE_JUROR') and not is_granted('ROLE_CAMPAIGN_ADMIN') %}
+                                            <a href="{{ path('admin.campaign.grade', {'campaign': campaign.id}) }}">
+                                                <button type="button" class="btn-admin-form btn" name="button">
+                                                    Évaluer
+                                                </button>
+                                            </a>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_CAMPAIGN_ADMIN') %}
+                                            <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}">
+                                                <button type="button" class="btn-admin-form btn-delete" name="button">
+                                                    Supprimer
+                                                </button>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

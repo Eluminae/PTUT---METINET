@@ -3,12 +3,8 @@
 namespace AppBundle\Services;
 
 use AppBundle\Dtos\RealisationMarkDto;
-use AppBundle\Models\Campaign;
-use AppBundle\Models\Juror;
 use AppBundle\Models\Mark;
-use AppBundle\Models\Realisation;
 use AppBundle\Models\UtcDate;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 class RealisationMarkFactory
 {

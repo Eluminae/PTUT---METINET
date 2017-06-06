@@ -2,7 +2,6 @@
 
 namespace AppBundle\Dtos;
 
-
 class UserRegistration extends IdentityRegistration
 {
     public $password;

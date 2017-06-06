@@ -11,6 +11,7 @@ class Campaign
     const TO_BE_REVIEWED = 'to_be_reviewed';
     const ACCEPTED = 'accepted';
     const RESULTS_PUBLISHED = 'results_published';
+    const CLOSED = 'closed';
 
     private $id;
     private $endDate;
@@ -20,12 +21,13 @@ class Campaign
     private $imageName;
     private $creator;
     private $notation;
+    private $publicResults;
 
     /** @var ArrayCollection */
     private $jurors;
     private $status;
 
-    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator, Notation $notation)
+    public function __construct(string $id, UtcDate $endDate, UtcDate $beginningDate, string $name, string $description, string $imageName, Identity $creator, Notation $notation, bool $publicResults)
     {
         $this->id = $id;
         $this->endDate = $endDate;
@@ -36,6 +38,7 @@ class Campaign
         $this->creator = $creator;
         $this->status = self::TO_BE_REVIEWED;
         $this->notation = $notation;
+        $this->publicResults = $publicResults;
     }
 
     public function getId()
@@ -88,14 +91,46 @@ class Campaign
         return $this->notation;
     }
 
-    public function isClosed()
+    public function isOver()
     {
-        return $this->getEndDate()->getDate() < new \DateTime('now') && Campaign::ACCEPTED  === $this->status;
+        return $this->getEndDate()->getDate() < new \DateTime('now') && self::ACCEPTED === $this->status;
     }
 
     public function approveCampaign()
     {
         $this->status = self::ACCEPTED;
+    }
+
+    public function isResultsPublic()
+    {
+        return $this->publicResults;
+    }
+
+    public function isActive()
+    {
+        if (
+            self::ACCEPTED === $this->status &&
+            !$this->isOver() &&
+            $this->getBeginningDate()->getDate() < new \DateTime('now')
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isResultsPublished()
+    {
+        if (self::RESULTS_PUBLISHED === $this->status) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function close()
+    {
+        $this->status = self::CLOSED;
     }
 
     public function publishResults()
