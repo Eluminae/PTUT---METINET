@@ -11,22 +11,19 @@
                     {{ form_start(realisationRegistrationForm) }}
                         {{ form_errors(realisationRegistrationForm) }}
 
-                        {{ form_label(realisationRegistrationForm.name) }}
-                        {{ form_errors(realisationRegistrationForm.name) }}
+                        {{ form_label(realisationRegistrationForm.name, 'Nom') }}
                         {{ form_widget(realisationRegistrationForm.name, {'attr': {'placeholder': 'Nom de la réalisation', 'class': 'wc-admin-inputForm'}}) }}
 
-                        {{ form_label(realisationRegistrationForm.file) }}
+                        {{ form_label(realisationRegistrationForm.file, 'Fichier') }}
                         {{ form_errors(realisationRegistrationForm.file) }}
                         {{ form_widget(realisationRegistrationForm.file, {'attr': {'placeholder': 'file', 'class': 'wc-admin-inputForm'}}) }}
 
-                        {{ form_label(realisationRegistrationForm.candidates) }}
+                        {{ form_label(realisationRegistrationForm.candidates, 'Candidats') }}
                         {{ form_errors(realisationRegistrationForm.candidates) }}
-                        <ul id="candidate-fields-list"
-                            data-prototype="{{ form_widget(realisationRegistrationForm.candidates.vars.prototype)|e }}">
-                        </ul>
+                        {{ form_widget(realisationRegistrationForm.candidates) }}
                         <a href="#" id="add-another-candidate" class="wc-btn btn-add" style="display: block;">Ajouter un candidat</a>
 
-                        {{ form_widget(realisationRegistrationForm.submit, {'attr': {'value': 'Valider', 'class': 'btnLogin'}}) }}
+                        <button type="submit" class="btnLogin">Déposer la réalisation</button>
                     {{ form_end(realisationRegistrationForm) }}
                 </div>
             </div>
@@ -37,28 +34,28 @@
         var candidateCount = '{{ realisationRegistrationForm.candidates|length }}';
 
         jQuery(document).ready(function() {
-            $collectionHolder = $('ul.candidates');
+            $collectionHolder = $('div.candidates');
 
-            $collectionHolder.find('li').each(function() {
+            $collectionHolder.find('div').each(function() {
                 addTagFormDeleteLink($(this));
             });
 
             jQuery('#add-another-candidate').click(function(e) {
                 e.preventDefault();
 
-                var candidateList = jQuery('#candidate-fields-list');
+                var candidateList = jQuery('#realisation_registration_candidates');
 
                 var newWidget = candidateList.attr('data-prototype');
                 newWidget = newWidget.replace(/__name__/g, candidateCount);
                 candidateCount++;
 
-                var newLi = jQuery('<li></li>').html(newWidget);
+                var newLi = jQuery('<div></div>').html(newWidget);
                 newLi.appendTo(candidateList);
 
                 addTagFormDeleteLink(newLi);
             });
 
-            if (0 === $collectionHolder.find('li').length) {
+            if (0 === $collectionHolder.find('div').length) {
                 jQuery('#add-another-candidate').trigger('click');
             }
         });
