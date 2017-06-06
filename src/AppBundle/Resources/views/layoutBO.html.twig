@@ -4,7 +4,7 @@
     <nav class="navHome">
         <ul class="ulHome">
             <li>
-                <a href="{{ path('public.homepage') }}" title="Accueil administration">
+                <a href="{{ path('public.homepage') }}" title="Accueil public">
                     <div class="navIcon">
                         <div class="logoGrey"></div>
                     </div>
@@ -14,14 +14,14 @@
                 <div class="menu-delimitation"></div>
             </li>
             <li>
-                <a href="{{ path('admin.home') }}">
+                <a href="{{ path('admin.home') }}" title="Accueil administration">
                     <div class="navIcon">
                         <div class="fa fa-home fa-3x navI"></div>
                     </div>
                 </a>
             </li>
             <li>
-                <a href="{{ path('admin.campaign.list') }}" title="Admin">
+                <a href="{{ path('admin.campaign.list') }}" title="Gestion des campagnes">
                     <div class="navIcon">
                         <i class="fa fa-th-list fa-3x navI"></i>
                     </div>
