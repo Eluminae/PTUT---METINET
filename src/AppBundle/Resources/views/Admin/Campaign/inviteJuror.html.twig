@@ -1,16 +1,21 @@
 {% extends 'AppBundle::layoutBO.html.twig' %}
 
 {% block main %}
+    <div class="wc-title-banner">
+        <h2>Realisation</h2>
+    </div>
+
     <div class="wc-container">
         <div class="col-sm-12">
-            <div class="col-sm-12">
-                {{ form_start(form) }}
-                {{ form_errors(form.email) }}
-                {{ form_label(form.email, '', {'label_attr': {'class': 'inputLogin'}}) }}
-                {{ form_widget(form.email) }}
-                {{ form_label(form.submit, '', {'label_attr': {'class': 'btnLogin'}}) }}
-                {{ form_widget(form.submit) }}
-                {{ form_end(form) }}
+            <div class="wc-admin-block">
+                 <div class="formLogin">
+                     {{ form_start(form) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'placeholder' : 'Mail', 'class': 'inputLogin'}}) }}
+
+                        <button type="submit" class="btnLogin">Inviter</button>
+                     {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>

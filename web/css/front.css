@@ -28,6 +28,7 @@
 	margin-bottom: 0;
 	padding: 20px;
 	color: #fff;
+	padding-left: 110px;
 	text-align: left;
 }
 
@@ -163,6 +164,7 @@
 
 .wc-info-competitionPage {
 	padding: 10px;
+	text-align: left;
 }
 
 .wc-name-competitionPage {
@@ -351,28 +353,38 @@
 
 .btn-add {
 	background: rgb(155, 206, 220);
+	border-color:  rgb(145, 196, 210);
 }
 .btn-delete{
 	background: rgb(236, 79, 79) ;
+	border-color:  rgb(226, 69, 69) ;
+
 }
 .btn-modify {
 	background-color: rgb(155, 220, 155);
+	border-color:  rgb(145, 210, 145);
 }
 .btn-add:hover, btn-add:focus{
 	background: rgb(145, 196, 210);
+	text-decoration: none;
+	color: white;
 }
 .btn-delete:hover, btn-delete:focus{
 	background: rgb(226, 69, 69) ;
+	text-decoration: none;
+	color: white;
 }
 .btn-modify:hover, btn-modify:focus {
 	background-color: rgb(145, 210, 145);
+	text-decoration: none;
+	color: white;
 }
 
 .wc-container {
 	width: 100%;
 	/*margin: 0 10%;*/
 	background: rgba(255, 255, 255, 0.3);
-	height: 80vh;
+	min-height: 80vh;
 	padding: 10px;
 }
 
@@ -391,4 +403,8 @@
   height: 1px;
   background: silver;
   margin: 2px 10% 2px 10%;
+}
+
+#candidate-fields-list{
+	padding-left: 0;
 }
