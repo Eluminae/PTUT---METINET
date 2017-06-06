@@ -13,6 +13,21 @@
                 </div>
                 <div class="wc-admin-row">
                     <div class="row">
+                        <div class="">
+                            <a class="col-md-3" href="{{ path('admin.user.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Tous</button>
+                            </a>
+                            <a class="col-md-3" href="{{ path('admin.juror.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Jurés</button>
+                            </a>
+                            <a class="col-md-3" href="{{ path('admin.administrator.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Administrateurs</button>
+                            </a>
+                            <a class="col-md-3" href="{{ path('admin.campaign_administrator.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Administrateurs de campagne
+                                </button>
+                            </a>
+                        </div>
                         <table class="table table-striped table-list-admininistrators">
                             <thead>
                             <th>Prénom</th>
@@ -38,21 +53,6 @@
                             {% endfor %}
                             </tbody>
                         </table>
-                        <div>
-                            <a class="col-md-3" href="{{ path('admin.user.list') }}">
-                                <button type="button" class="btn-admin-form btn-modify">Tous</button>
-                            </a>
-                            <a class="col-md-3" href="{{ path('admin.juror.list') }}">
-                                <button type="button" class="btn-admin-form btn-modify">Jurés</button>
-                            </a>
-                            <a class="col-md-3" href="{{ path('admin.administrator.list') }}">
-                                <button type="button" class="btn-admin-form btn-modify">Administrateurs</button>
-                            </a>
-                            <a class="col-md-3" href="{{ path('admin.campaign_administrator.list') }}">
-                                <button type="button" class="btn-admin-form btn-modify">Administrateurs de campagne
-                                </button>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>

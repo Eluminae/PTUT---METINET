@@ -12,11 +12,6 @@
                 </div>
                 <div class="wc-admin-row">
                     <div>
-                        <a href="{{ path('admin.admins.invite') }}">
-                            <button type="button" class="btn-admin-form btn-add" name="button" style="margin-bottom: 10px;">
-                                Inviter un utilisateur
-                            </button>
-                        </a>
                         <div class="row">
                             <a class="col-md-3" href="{{ path('admin.user.list') }}">
                                 <button type="button" class="btn-admin-form btn-modify">Tous</button>
@@ -32,6 +27,11 @@
                                 </button>
                             </a>
                         </div>
+                        <a href="{{ path('admin.admins.invite') }}">
+                            <button type="button" class="btn-admin-form btn-add" name="button" style="margin-bottom: 10px;">
+                                Inviter un utilisateur
+                            </button>
+                        </a>
                         <table class="table table-striped">
                             <thead>
                                 <tr style="text-align: left;">
