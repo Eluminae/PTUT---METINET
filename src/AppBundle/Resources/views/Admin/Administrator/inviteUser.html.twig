@@ -10,8 +10,11 @@
             {{ form_label(form.email, '', {'label_attr': {'class': 'inputLogin'}}) }}
             {{ form_widget(form.email) }}
 
-            {{ form_label(form.submit, '', {'label_attr': {'class': 'btnLogin'}}) }}
-            {{ form_widget(form.submit) }}
+            {{ form_errors(form.role) }}
+            {{ form_label(form.role, '', {'label_attr': {'class': 'inputLogin'}}) }}
+            {{ form_widget(form.role) }}
+
+            <button type="submit" class="btnLogin">Inviter</button>
             {{ form_end(form) }}
         </div>
     </div>
