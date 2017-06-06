@@ -101,7 +101,7 @@
     </route>
 
     <route id="admin.campaign.download" path="/admin/campaigns/download/{campaign}">
-        <default key="_controller">AppBundle:Campaign:download</default>
+        <default key="_controller">AppBundle:Administration/Campaign:download</default>
     </route>
 
     <route id="admin.juror.list" path="/admin/jurors">

@@ -1,16 +1,15 @@
 {% extends 'AppBundle::layoutBO.html.twig' %}
 
 {% block main %}
-    <div class="admin page-wrap">
         <div class="wc-title-banner">
-            <h2>Realisation</h2>
+            <h2>Réalisation</h2>
         </div>
 
         <div class="wc-container">
             <div class="col-sm-12">
                 <div class="wc-admin-block">
                     <div class="wc-admin-row">
-                        <div class="row">
+                        <div class="">
                             <table class="table table-striped">
                                 <tr>
                                     <th>Nom</th>
@@ -18,7 +17,7 @@
                                     <th>Fichier</th>
                                     <th>Action</th>
                                 </tr>
-                                <tr>
+                                <tr style="text-align: left;">
                                     <td><a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a></td>
                                     <td>{{ realisation.leftAt }}</td>
                                     <td><a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
@@ -34,5 +33,4 @@
                 </div>
             </div>
         </div>
-    </div>
 {% endblock %}

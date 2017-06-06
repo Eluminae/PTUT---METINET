@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Models\Campaign;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use ZipArchive;
 
 class CampaignController extends Controller
 {
@@ -89,39 +88,5 @@ class CampaignController extends Controller
                 'campaigns' => $campaignsApprovedActive,
             ]
         );
-    }
-
-    /**
-     * @param Request  $request
-     * @param Campaign $campaign
-     *
-     * @ParamConverter("campaign", class="AppBundle:Campaign")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function downloadAction(Request $request, Campaign $campaign)
-    {
-        if (false === $campaign->isActive()) {
-            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
-        }
-
-        $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
-
-        if (!is_dir('realisationZipFiles')) {
-            mkdir('realisationZipFiles', 0775, true);
-        }
-
-        if (!empty($realisations)) {
-            $zip = new ZipArchive();
-            $zipName = 'realisationZipFiles/'.$campaign->getName().'_'.$campaign->getId().'.zip';
-            $zip->open($zipName, ZipArchive::CREATE);
-            foreach ($realisations as $realisation) {
-                $file = $realisation->getFilePath();
-                $zip->addFromString(basename($file), file_get_contents($file));
-            }
-            $zip->close();
-        }
-
-        return $this->file($zipName);
     }
 }

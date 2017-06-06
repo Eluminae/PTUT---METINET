@@ -2,7 +2,7 @@
 
 {% block main %}
     <div class="wc-title-banner">
-        <h2>Juror list</h2>
+        <h2>Gestion des utilisateurs</h2>
     </div>
     <div class="wc-container">
         <div class="col-sm-12">
@@ -14,29 +14,21 @@
                     <div class="">
                         <table class="table table-striped">
                             <thead>
-                            <tr>
-                                <td>Email</td>
-                                <td>Nom</td>
-                                <td>Prenom</td>
-                                <td>
-                                </td>
+                            <tr style="text-align: left;">
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             {% for juror in jurors %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('admin.juror.show', {'jurorId': juror.id}) }}">{{ juror.identity.email }}</a>
+                                <tr style="text-align: left;">
+                                    <td class="col-md-3">{{ juror.identity.firstname }}</td>
+                                    <td class="col-md-3">{{ juror.identity.lastname }}</td>
+                                    <td class="col-md-3">
+                                        {{ juror.identity.email }}
                                     </td>
-                                    <td>{{ juror.identity.lastname }}</td>
-                                    <td>{{ juror.identity.firstname }}</td>
-                                    <td>
-                                        <a href="{{ path('admin.juror.update', {'jurorId': juror.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Modifier
-                                            </button>
-                                        </a>
-                                    </td>
-                                    <td>
+                                    <td class="col-md-3">
                                         <a href="{{ path('admin.juror.delete', {'jurorId': juror.id}) }}">
                                             <button type="button" class="btn-admin-form btn-delete" name="button">
                                                 Supprimer
@@ -47,14 +39,17 @@
                             {% endfor %}
                         </table>
                         <div class="row">
-                            <a class="col-md-4" href="{{ path('admin.juror.list') }}">
+                            <a class="col-md-3" href="{{ path('admin.user.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Tous</button>
+                            </a>
+                            <a class="col-md-3" href="{{ path('admin.juror.list') }}">
                                 <button type="button" class="btn-admin-form btn-modify">Jurés</button>
                             </a>
-                            <a class="col-md-4" href="{{ path('admin.administrator.list') }}">
+                            <a class="col-md-3" href="{{ path('admin.administrator.list') }}">
                                 <button type="button" class="btn-admin-form btn-modify">Administrateurs</button>
                             </a>
-                            <a class="col-md-4" href="{{ path('admin.campaign_administrator.list') }}">
-                                <button type="button" class="btn-admin-form btn-modify">Administrateurs de campaigne
+                            <a class="col-md-3" href="{{ path('admin.campaign_administrator.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Administrateurs de campagne
                                 </button>
                             </a>
                         </div>
