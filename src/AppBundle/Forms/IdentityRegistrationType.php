@@ -15,7 +15,7 @@ class IdentityRegistrationType extends AbstractType
             ->add('firstName', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Prenom',
+                    'placeholder' => 'Prénom',
                     'class' => 'wc-admin-inputForm',
                 ],
             ])
@@ -29,7 +29,7 @@ class IdentityRegistrationType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Email',
+                    'placeholder' => 'E-mail',
                     'class' => 'wc-admin-inputForm',
                 ],
             ])
