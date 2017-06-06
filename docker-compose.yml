@@ -18,6 +18,8 @@ services:
       - MYSQL_USER=work-competition
       - MYSQL_DATABASE=work-competition
       - MYSQL_PASSWORD=work-competition
+    ports:
+      - 3310:3306
     volumes:
     #  - /var/docker/mysql/work-competiton:/var/lib/mysql
       - /Users/corentinbouix/Sites/fac/mysql-wc
