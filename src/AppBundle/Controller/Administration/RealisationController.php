@@ -22,7 +22,7 @@ class RealisationController extends Controller
     {
         $realisations = $this->get('app.realisation.repository')->findAll();
 
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         foreach ($realisations as $key => $realisation) {
             if (
                 false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
@@ -49,7 +49,7 @@ class RealisationController extends Controller
      */
     public function showAction(Request $request, Realisation $realisation)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         if (
             false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
         ) {
@@ -129,7 +129,7 @@ class RealisationController extends Controller
      */
     public function downloadAction(Request $request, Realisation $realisation)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         if (
             false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
         ) {

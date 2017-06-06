@@ -19,7 +19,7 @@ class DefaultController extends Controller
 
         $campaignsApproved = $this->get('app.campaign.repository')->findByStatus(Campaign::ACCEPTED);
 
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         foreach ($campaignsApproved as $key => $campaignApproved) {
             if (
                 false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaignApproved)

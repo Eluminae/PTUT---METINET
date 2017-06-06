@@ -23,7 +23,7 @@ class CampaignController extends Controller
      */
     public function showAction(Request $request, Campaign $campaign)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         if (
             false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaign)
         ) {
@@ -54,7 +54,7 @@ class CampaignController extends Controller
         $campaignsNeedReview = $this->get('app.campaign.repository')->findByStatus(Campaign::TO_BE_REVIEWED);
         $campaignsApproved = $this->get('app.campaign.repository')->findByStatus(Campaign::ACCEPTED);
 
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         foreach ($campaignsApproved as $key => $campaignApproved) {
             if (
                 false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaignApproved)
@@ -120,7 +120,7 @@ class CampaignController extends Controller
      */
     public function deleteAction(Request $request, Campaign $campaign)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         if (
             false === $this->get('app.user.authorization_checker')->isAllowedToDeleteCampaign($user, $campaign)
         ) {
@@ -174,7 +174,7 @@ class CampaignController extends Controller
             return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         if (
             false === $this->get('app.user.authorization_checker')->isAllowedToGradeCampaign($user, $campaign)
         ) {

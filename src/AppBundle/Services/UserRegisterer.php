@@ -95,7 +95,7 @@ class UserRegisterer
             $userRegistrationDto->role
         );
 
-        if ($userDynamicObject instanceof Juror && $assignedCampaigns) {
+        if ($assignedCampaigns && $userDynamicObject instanceof Juror) {
             foreach ($assignedCampaigns as $assignedCampaign) {
                 $userDynamicObject->addCampaign($assignedCampaign);
             }
