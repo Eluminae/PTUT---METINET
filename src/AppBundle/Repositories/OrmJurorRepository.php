@@ -66,14 +66,13 @@ class OrmJurorRepository extends EntityRepository implements UserProviderInterfa
      * @param UserInterface $user
      *
      * @return UserInterface
-     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      *
-     * @throws UnsupportedUserException if the account is not supported
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @throws UnsupportedUserException                                             if the account is not supported
      */
     public function refreshUser(UserInterface $user)
     {
         if (!$this->supportsClass(get_class($user))) {
-
             throw new UnsupportedUserException();
         }
 
@@ -86,10 +85,11 @@ class OrmJurorRepository extends EntityRepository implements UserProviderInterfa
      * @param string $class
      *
      * @return bool
+     *
      * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
      */
     public function supportsClass($class)
     {
-        return (Juror::class === $class);
+        return Juror::class === $class;
     }
 }

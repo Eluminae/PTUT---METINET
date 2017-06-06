@@ -7,9 +7,7 @@ use AppBundle\Models\Identity;
 use AppBundle\Models\Juror;
 use AppBundle\Repositories\OrmAdministratorRepository;
 use AppBundle\Repositories\OrmCampaignAdministratorRepository;
-use AppBundle\Repositories\OrmCampaignRepository;
 use AppBundle\Repositories\OrmJurorRepository;
-use AppBundle\Services\UuidGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
@@ -19,7 +17,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserRegisterer
 {
@@ -51,7 +48,6 @@ class UserRegisterer
      * @param OrmJurorRepository                 $jurorRepository
      * @param TokenStorageInterface              $tokenStorage
      * @param SessionInterface                   $session
-     *
      */
     public function __construct(
         PasswordEncoderInterface $passwordEncoder,
@@ -113,13 +109,13 @@ class UserRegisterer
 
     /**
      * @param string $role
-     *
      * @param string $type
      *
      * @return string
+     *
      * @throws \Exception
      */
-    public function determineDataFromRole(string $role, string $type) : string
+    public function determineDataFromRole(string $role, string $type): string
     {
         if ($type === 'object') {
             switch ($role) {
@@ -161,8 +157,8 @@ class UserRegisterer
      * @param string $oldEmail
      *
      * @throws \Exception
-     * @internal param string $email
      *
+     * @internal param string $email
      */
     public function verifyEmail(string $newEmail, string $oldEmail = null)
     {
@@ -243,6 +239,7 @@ class UserRegisterer
      * @param UserInterface $user
      *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function determineProviderForUser(UserInterface $user)
@@ -261,6 +258,6 @@ class UserRegisterer
             }
         }
 
-        throw new \Exception("Sorry, there is no user provider found for this user.");
+        throw new \Exception('Sorry, there is no user provider found for this user.');
     }
 }

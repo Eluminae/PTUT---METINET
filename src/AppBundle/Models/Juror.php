@@ -2,9 +2,6 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\campaigns;
-use AppBundle\Models\Identity;
-use AppBundle\Models\Password;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 

@@ -4,15 +4,10 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
-use AppBundle\Dtos\RealisationMarkDto;
 use AppBundle\Dtos\RealisationRegistration;
-use AppBundle\Forms\MarkType;
 use AppBundle\Forms\RealisationRegistrationType;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\Realisation;
-use AppBundle\Models\UtcDate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class RealisationController extends Controller
@@ -48,6 +43,7 @@ class RealisationController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function registerAction(Request $request, Campaign $campaign)

@@ -93,14 +93,13 @@ class Campaign
 
     public function isOver()
     {
-        return $this->getEndDate()->getDate() < new \DateTime('now') && Campaign::ACCEPTED  === $this->status;
+        return $this->getEndDate()->getDate() < new \DateTime('now') && self::ACCEPTED === $this->status;
     }
 
     public function approveCampaign()
     {
         $this->status = self::ACCEPTED;
     }
-
 
     public function isResultsPublic()
     {

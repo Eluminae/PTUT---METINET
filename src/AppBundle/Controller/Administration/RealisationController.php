@@ -71,6 +71,7 @@ class RealisationController extends Controller
      * @ParamConverter("realisation", class="AppBundle:Realisation")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function deleteAction(Request $request, Realisation $realisation)
@@ -89,6 +90,7 @@ class RealisationController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function createAction(Request $request, Campaign $campaign)

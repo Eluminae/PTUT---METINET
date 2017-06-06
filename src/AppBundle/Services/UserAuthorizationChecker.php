@@ -6,8 +6,6 @@ use AppBundle\Models\Administrator;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\CampaignAdministrator;
 use AppBundle\Models\Juror;
-use AppBundle\Models\Realisation;
-use AppBundle\Services\CampaignAuthorizationChecker;
 
 class UserAuthorizationChecker
 {
@@ -77,5 +75,4 @@ class UserAuthorizationChecker
 
         return false;
     }
-
 }

@@ -21,7 +21,7 @@ class CampaignAdministratorController extends Controller
         );
 
         if ($campaignAdministrator === null) {
-            throw new Exception("Pas de campage avec cet id");
+            throw new Exception('Pas de campage avec cet id');
         }
 
         return $this->render(
@@ -51,10 +51,12 @@ class CampaignAdministratorController extends Controller
 
     /**
      * @todo To review
+     *
      * @param Request $request
      * @param string  $campaignAdministratorId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws \Exception
      */
     public function deleteAction(Request $request, string $campaignAdministratorId)

@@ -2,15 +2,11 @@
 
 namespace AppBundle\Controller\Administration;
 
-use AppBundle\Dtos\AddJurorToCampaign;
 use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Dtos\RealisationMarkDto;
-use AppBundle\Forms\AddJurorToCampaignType;
 use AppBundle\Forms\CampaignCreationType;
 use AppBundle\Forms\GradeCampaignType;
 use AppBundle\Models\Campaign;
-use AppBundle\Models\Juror;
-use AppBundle\Models\UtcDate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +20,6 @@ class CampaignController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @ParamConverter("campaign", class="AppBundle:Campaign")
-     *
      */
     public function showAction(Request $request, Campaign $campaign)
     {
@@ -81,6 +76,7 @@ class CampaignController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function createAction(Request $request)
@@ -118,6 +114,7 @@ class CampaignController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      * @throws \InvalidArgumentException
      */
@@ -147,6 +144,7 @@ class CampaignController extends Controller
      * @throws \LogicException
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @throws \InvalidArgumentException
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function approveAction(Campaign $campaign)
@@ -165,6 +163,7 @@ class CampaignController extends Controller
      *
      * @ParamConverter("campaign", class="AppBundle:Campaign")
 
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function gradeAction(Request $request, Campaign $campaign)
@@ -172,7 +171,7 @@ class CampaignController extends Controller
         if (false === $campaign->isOver()) {
             $this->addFlash('error', 'Vous ne pourrez évaluer cette campagne que lorsqu\'elle sera terminée.');
 
-            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+            return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
@@ -192,14 +191,14 @@ class CampaignController extends Controller
             ->findBy(
                 [
                     'realisation' => $realisations[0]->getId(),
-                    'identity' => $identity
+                    'identity' => $identity,
                 ]
             )
         ;
         if ($mark) {
             $this->addFlash('error', 'Vous avez déja évalué cette campagne.');
 
-            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+            return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
         $markDtoTable = ['realisations' => []];
@@ -255,7 +254,7 @@ class CampaignController extends Controller
 
             $this->addFlash('success', 'Vous avez évalué cette campagne.');
 
-            return $this->redirectToRoute("admin.campaign.show", ['campaign' => $campaign->getId()], 302);
+            return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
         return $this->render(

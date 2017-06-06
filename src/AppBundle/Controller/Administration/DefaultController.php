@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @param Request  $request
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

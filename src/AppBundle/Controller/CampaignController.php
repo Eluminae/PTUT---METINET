@@ -53,7 +53,7 @@ class CampaignController extends Controller
         return $this->render(
             'AppBundle:Default:Campaign/showResult.html.twig', [
                 'campaign' => $campaign,
-                'realisations' => $realisations
+                'realisations' => $realisations,
             ]
         );
     }
@@ -69,7 +69,7 @@ class CampaignController extends Controller
 
         return $this->render(
             'AppBundle:Default:Campaign/listFinished.html.twig', [
-                'campaigns' => $campaigns
+                'campaigns' => $campaigns,
             ]
         );
     }

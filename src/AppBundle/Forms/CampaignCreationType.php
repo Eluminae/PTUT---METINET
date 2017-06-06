@@ -3,7 +3,6 @@
 namespace AppBundle\Forms;
 
 use AppBundle\Dtos\CampaignCreation;
-use AppBundle\Forms\NotationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -21,7 +20,7 @@ class CampaignCreationType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('publicResults', ChoiceType::class, [
-                'choices'  => array(
+                'choices' => array(
                     'Oui' => true,
                     'Non' => false,
                 ),

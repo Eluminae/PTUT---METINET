@@ -55,6 +55,7 @@ class UserController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      * @throws \LogicException
      */
@@ -110,7 +111,7 @@ class UserController extends Controller
         $users = array_merge($users, $administrators);
 
         return $this->render('@App/Admin/listUsers.html.twig', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 }
