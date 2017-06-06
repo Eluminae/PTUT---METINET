@@ -409,6 +409,9 @@
 	padding-left: 0;
 }
 
+.about-container {
+	padding: 15px !important;
+}
 .formLogin .flex {
   display: flex;
 }

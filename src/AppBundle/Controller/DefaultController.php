@@ -16,4 +16,9 @@ class DefaultController extends Controller
     {
         return $this->render('AppBundle:Default:home.html.twig');
     }
+
+    public function aboutAction(Request $request)
+    {
+        return $this->render('AppBundle:Default:about.html.twig');
+    }
 }
