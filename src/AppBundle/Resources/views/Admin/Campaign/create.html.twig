@@ -13,9 +13,12 @@
                     {{ form_label(campaignCreationForm.name) }}
                     {{ form_widget(campaignCreationForm.name, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Nom'}}) }}
 
+                    {{ form_label(campaignCreationForm.publicResults, 'Les résultats setont-ils public ?') }}
+                    {{ form_widget(campaignCreationForm.publicResults, {'attr': {'class': 'wc-admin-inputForm'}}) }}
+
                     {{ form_label(campaignCreationForm.description) }}
                     {{ form_widget(campaignCreationForm.description, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'description'}}) }}
-                        
+
                     {{ form_label(campaignCreationForm.notation.markType) }}
                     {{ form_widget(campaignCreationForm.notation.markType, {'attr': {'class': 'wc-admin-inputForm'}}) }}
 

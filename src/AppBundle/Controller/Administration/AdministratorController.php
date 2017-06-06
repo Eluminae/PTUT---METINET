@@ -25,6 +25,7 @@ class AdministratorController extends Controller
      * @param $administratorId
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      */
     public function showAction($administratorId)
@@ -46,6 +47,7 @@ class AdministratorController extends Controller
      * @param $administratorId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws \Exception
      */
     public function deleteAction($administratorId)

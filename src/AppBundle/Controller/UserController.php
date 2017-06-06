@@ -55,6 +55,7 @@ class UserController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      * @throws \LogicException
      */
@@ -67,9 +68,9 @@ class UserController extends Controller
         $currentUserIdentity = $this->getUser()->getIdentity();
 
         $userDto = new UserRegistration();
-        $userDto->email = $currentUserIdentity->getEmail();
         $userDto->firstName = $currentUserIdentity->getFirstName();
         $userDto->lastName = $currentUserIdentity->getLastName();
+        $userDto->officialGroup = $currentUserIdentity->getOfficialGroup();
 
         $form = $this->createForm(SignUpType::class, $userDto);
 
@@ -80,9 +81,9 @@ class UserController extends Controller
 
             $userRegisterer = $this->get('app.services.user_registerer');
 
-            $currentUserIdentity->setEmail($newUserData->email);
             $currentUserIdentity->setFirstName($newUserData->firstName);
             $currentUserIdentity->setLastName($newUserData->lastName);
+            $currentUserIdentity->getOfficialGroup($newUserData->officialGroup);
 
             if (null !== $newUserData->password) {
                 $password = $userRegisterer->encodePasswordFromPlain($newUserData->password);
@@ -98,5 +99,18 @@ class UserController extends Controller
         }
 
         return $this->render('@App/Admin/editProfile.html.twig', ['form' => $form->createView()]);
+    }
+
+    public function listAction(Request $request)
+    {
+        $campaignAdministrators = $this->get('app.campaign_administrator.repository')->findAll();
+        $jurors = $this->get('app.juror.repository')->findAll();
+        $administrators = $this->get('app.administrator.repository')->findAll();
+
+        $users = array_merge($administrators, $campaignAdministrators, $jurors);
+
+        return $this->render('@App/Admin/listUsers.html.twig', [
+            'users' => $users,
+        ]);
     }
 }

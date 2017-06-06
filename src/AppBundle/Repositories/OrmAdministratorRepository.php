@@ -53,14 +53,14 @@ class OrmAdministratorRepository extends EntityRepository implements UserProvide
      * @param UserInterface $user
      *
      * @return UserInterface
+     *
      * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
-     * @throws UnsupportedUserException if the account is not supported
+     * @throws UnsupportedUserException                                             if the account is not supported
      * @throws \Exception
      */
     public function refreshUser(UserInterface $user)
     {
         if (!$this->supportsClass(get_class($user))) {
-
             throw new UnsupportedUserException();
         }
 
@@ -73,10 +73,11 @@ class OrmAdministratorRepository extends EntityRepository implements UserProvide
      * @param string $class
      *
      * @return bool
+     *
      * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
      */
     public function supportsClass($class)
     {
-        return (Administrator::class === $class);
+        return Administrator::class === $class;
     }
 }

@@ -4,11 +4,9 @@ namespace AppBundle\Services;
 
 use AppBundle\Dtos\CampaignCreation;
 use AppBundle\Models\Campaign;
-use AppBundle\Models\Identity;
 use AppBundle\Models\UtcDate;
 use AppBundle\Models\Notation;
 use AppBundle\Repositories\OrmIdentityRepository;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CampaignCreator
 {
@@ -47,7 +45,8 @@ class CampaignCreator
             $campaignCreation->description,
             $fileName,
             $user,
-            $notation
+            $notation,
+            $campaignCreation->publicResults
         );
     }
 }

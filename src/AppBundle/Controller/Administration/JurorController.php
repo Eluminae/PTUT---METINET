@@ -25,6 +25,7 @@ class JurorController extends Controller
      * @param $jurorId
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      */
     public function showAction($jurorId)
@@ -46,6 +47,7 @@ class JurorController extends Controller
      * @param $jurorId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws \Exception
      */
     public function deleteAction($jurorId)
@@ -62,9 +64,6 @@ class JurorController extends Controller
         return $this->redirectToRoute('admin.juror.list');
     }
 
-    /**
-     *
-     */
     public function updateAction()
     {
     }

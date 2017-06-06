@@ -28,12 +28,16 @@
                                     <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
                                 </tr>
                             </table>
-                            <a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Inviter un juré</a>
-                            <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Supprimer</a>
-                            <a href="{{ path('admin.campaign.update', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Modifier</a>
-                            <a href="{{ path('admin.realisation.create', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Ajouter une réalisation</a>
+                            {% if is_granted('ROLE_CAMPAIGN_ADMIN') %}
+                                <a href="{{ path('admin.juror.invite', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Inviter un juré</a>
+                            {% endif %}
                             <a href="{{ path('admin.campaign.download', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Télécharger les réalisations</a>
-                            <a href="{{ path('admin.campaign.grade', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Noter les réalisations</a>
+                            {% if is_granted('ROLE_JUROR') and not is_granted('ROLE_CAMPAIGN_ADMIN') %}
+                                <a href="{{ path('admin.campaign.grade', {'campaign': campaign.id}) }}" class="btn-admin-form btn-modify">Noter les réalisations</a>
+                            {% endif %}
+                            {% if is_granted('ROLE_CAMPAIGN_ADMIN') %}
+                                <a href="{{ path('admin.campaign.delete', {'campaign': campaign.id}) }}" class="btn-admin-form btn-delete">Supprimer</a>
+                            {% endif %}
                             <a href="{{ path('admin.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
                             <table class="table table-striped">
                                 <thead>
@@ -53,18 +57,18 @@
                                         <a href="{{ path('admin.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a>
                                     </td>
                                     <td>
-                                        <tr>
-                                            {% for candidate in realisation.candidates %}
-                                                <td>{{ candidate.lastName }} {{ candidate.firstName }}</td>
-                                            {% endfor %}
-                                        </tr>
+                                        {% for candidate in realisation.candidates %}
+                                            {{ candidate.lastName }} {{ candidate.firstName }}
+                                        {% endfor %}
                                     </td>
                                     <td>
-                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Supprimer
-                                            </button>
-                                        </a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}">
+                                                <button type="button" class="btn-admin-form btn-modify" name="button">
+                                                    Supprimer
+                                                </button>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

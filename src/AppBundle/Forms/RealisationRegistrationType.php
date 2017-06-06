@@ -2,7 +2,6 @@
 
 namespace AppBundle\Forms;
 
-use AppBundle\Forms\IdentityRegistrationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -34,24 +33,24 @@ class RealisationRegistrationType extends AbstractType
                             'image/x-compressed',
                             'image/x-zip-compressed',
                             'image/zip',
-                            'image/x-zip'
+                            'image/x-zip',
                         ),
                         'mimeTypesMessage' => 'Bad file extension',
-                    ])
-                )
+                    ]),
+                ),
             ))
             ->add('name', TextType::class)
             ->add('candidates', CollectionType::class, [
-                'entry_type'   => IdentityRegistrationType::class,
+                'entry_type' => IdentityRegistrationType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
                 'constraints' => [
                     new Count([
                         'min' => 1,
-                        'minMessage' => 'Vous devez indiquer au moins un candidat'
-                    ])
-                ]
+                        'minMessage' => 'Vous devez indiquer au moins un candidat',
+                    ]),
+                ],
             ])
             ->add('submit', SubmitType::class)
         ;

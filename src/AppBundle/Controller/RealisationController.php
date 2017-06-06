@@ -4,15 +4,10 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
-use AppBundle\Dtos\RealisationMarkDto;
 use AppBundle\Dtos\RealisationRegistration;
-use AppBundle\Forms\MarkType;
 use AppBundle\Forms\RealisationRegistrationType;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\Realisation;
-use AppBundle\Models\UtcDate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class RealisationController extends Controller
@@ -27,6 +22,10 @@ class RealisationController extends Controller
      */
     public function listForCampaignAction(Request $request, Campaign $campaign)
     {
+        if (false === $realisation->getCampaign()->isResultsPublished()) {
+            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
+        }
+
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign->getId());
 
         return $this->render(
@@ -44,6 +43,7 @@ class RealisationController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function registerAction(Request $request, Campaign $campaign)
@@ -87,6 +87,10 @@ class RealisationController extends Controller
      */
     public function showAction(Request $request, Realisation $realisation)
     {
+        if (false === $realisation->getCampaign()->isResultsPublished()) {
+            throw $this->createNotFoundException('Cette réalisation n\'existe pas.');
+        }
+
         return $this->render(
             'AppBundle:Default:Realisation/show.html.twig',
             [
@@ -102,64 +106,13 @@ class RealisationController extends Controller
      * @ParamConverter("realisation", class="AppBundle:Realisation")
      *
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \LogicException
-     * @throws \UnexpectedValueException
      */
-    public function gradeAction(Request $request, Realisation $realisation)
+    public function downloadAction(Request $request, Realisation $realisation)
     {
-        $identity = $this->get('security.token_storage')->getToken()->getUser()->getIdentity();
-
-        $mark = $this
-            ->getDoctrine()
-            ->getRepository('AppBundle:Mark')
-            ->findBy(
-                [
-                    'realisation' => $realisation->getId(),
-                    'identity' => $identity,
-                ]
-            );
-        if ($mark) {
-            $this->addFlash('error', 'Vous avez déja noté cette réalisation.');
-
-            return $this->redirectToRoute("public.realisation.show", ['realisation' => $realisation->getId()], 302);
+        if (false === $realisation->getCampaign()->isResultsPublished()) {
+            throw $this->createNotFoundException('Cette réalisation n\'existe pas.');
         }
 
-        $reaMarkDto = new RealisationMarkDto();
-        $reaMarkDto->realisation = $realisation;
-        $reaMarkDto->identity = $identity;
-
-        $form = $this->createForm(MarkType::class, $reaMarkDto);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reaMarkDto = $form->getData();
-
-            $mark = $this
-                ->get('app.realisation_mark.factory')
-                ->create($reaMarkDto);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($mark);
-            $em->flush();
-
-            $marks = $this->get('app.mark.repository')->findByRealisation($realisation->getId());
-            $averageMark = 0;
-            foreach ($marks as $mark) {
-                $averageMark += $mark->getValue();
-            }
-            $averageMark /= sizeof($marks);
-            $realisation->updateAverageMark($averageMark);
-
-            $em->flush();
-
-            return $this->redirectToRoute("public.realisation.show", ['realisation' => $realisation->getId()], 302);
-        }
-
-        return $this->render(
-            'AppBundle:Default:Realisation/grade.html.twig',
-            [
-                'form' => $form->createView(),
-            ]
-        );
+        return $this->file($realisation->getFilePath());
     }
 }

@@ -2,9 +2,6 @@
 
 namespace AppBundle\Models;
 
-use AppBundle\Models\campaigns;
-use AppBundle\Models\Identity;
-use AppBundle\Models\Password;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -107,7 +104,7 @@ class Juror implements UserInterface
      */
     public function getUsername()
     {
-        $this->identity->getEmail();
+        return $this->identity->getEmail();
     }
 
     /**

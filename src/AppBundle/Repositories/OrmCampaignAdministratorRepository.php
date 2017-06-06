@@ -2,7 +2,6 @@
 
 namespace AppBundle\Repositories;
 
-
 use AppBundle\Models\CampaignAdministrator;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -54,14 +53,13 @@ class OrmCampaignAdministratorRepository extends EntityRepository implements Use
      * @param UserInterface $user
      *
      * @return UserInterface
-     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      *
-     * @throws UnsupportedUserException if the account is not supported
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @throws UnsupportedUserException                                             if the account is not supported
      */
     public function refreshUser(UserInterface $user)
     {
         if (!$this->supportsClass(get_class($user))) {
-
             throw new UnsupportedUserException();
         }
 
@@ -74,10 +72,11 @@ class OrmCampaignAdministratorRepository extends EntityRepository implements Use
      * @param string $class
      *
      * @return bool
+     *
      * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
      */
     public function supportsClass($class)
     {
-        return (CampaignAdministrator::class === $class);
+        return CampaignAdministrator::class === $class;
     }
 }

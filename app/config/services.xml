@@ -84,5 +84,13 @@
         <service id="app.realisation_mark.factory" class="AppBundle\Services\RealisationMarkFactory">
             <argument type="service" id="app.uuid.generator"/>
         </service>
+
+        <!-- User Authorization checkers -->
+
+        <service id="app.campaign.authorization_checker" class="AppBundle\Services\CampaignAuthorizationChecker"/>
+
+        <service id="app.user.authorization_checker" class="AppBundle\Services\UserAuthorizationChecker">
+            <argument type="service" id="app.campaign.authorization_checker"/>
+        </service>
     </services>
 </container>

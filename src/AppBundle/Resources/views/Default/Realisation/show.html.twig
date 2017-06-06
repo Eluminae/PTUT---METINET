@@ -17,27 +17,14 @@
                                     <th>Nom de la campagne</th>
                                     <th>Déposé à</th>
                                     <th>Fichier</th>
-                                    <th>Action</th>
                                 </tr>
                                 <tr>
                                     <td>{{ realisation.name }}</td>
                                     <td>
-                                        <a href="{{ path('admin.campaign.show', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a>
+                                        <a href="{{ path('public.campaign.show_result', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a>
                                     </td>
                                     <td>{{ realisation.leftAt }}</td>
-                                    <td><a href="{{ path('admin.realisation.download', {'realisation': realisation}) }}">Télécharger</a></td>
-                                    <td>
-                                        <a href="{{ path('admin.realisation.delete', {'realisation': realisation.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Supprimer
-                                            </button>
-                                        </a>
-                                        <a href="{{ path('juror.mark.grade', {'realisation': realisation.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
-                                                Noter
-                                            </button>
-                                        </a>
-                                    </td>
+                                    <td><a href="{{ path('public.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
                                 </tr>
                             </table>
                         </div>

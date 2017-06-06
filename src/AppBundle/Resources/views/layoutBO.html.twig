@@ -3,53 +3,46 @@
 {% block nav %}
     <nav class="navHome">
         <ul class="ulHome">
+            <li>
+                <a href="{{ path('public.homepage') }}" title="Accueil administration">
+                    <div class="navIcon">
+                        <div class="logoGrey"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <div class="menu-delimitation"></div>
+            </li>
+            <li>
+                <a href="{{ path('admin.home') }}">
+                    <div class="navIcon">
+                        <div class="fa fa-home fa-3x navI"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin.campaign.list') }}" title="Admin">
+                    <div class="navIcon">
+                        <i class="fa fa-th-list fa-3x navI"></i>
+                    </div>
+                </a>
+            </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li>
-                    <a href="{{ path('public.homepage') }}" title="Accueil administration">
-                        <div class="navIcon">
-                            <div class="logoGrey"></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <div class="menu-delimitation"></div>
-                </li>
-                <li>
-                    <a href="{{ path('admin.home') }}">
-                        <div class="navIcon">
-                            <div class="fa fa-home fa-3x navI"></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('admin.campaign.list') }}" title="Admin">
-                        <div class="navIcon">
-                            <i class="fa fa-th-list fa-3x navI"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('admin.campaign.list') }}" title="Gestion des compétitions">
-                        <div class="navIcon">
-                            <i class="fa fa-check-square fa-3x navI"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('admin.home') }}" title="Gestion des utilisateurs">
+                    <a href="{{ path('admin.user.list') }}" title="Gestion des utilisateurs">
                         <div class="navIcon">
                             <i class="fa fa-users fa-3x navI"></i>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ path('user.profile.edit') }}" title="Editer le profil">
-                        <div class="navIcon">
-                            <i class="fa fa-user fa-3x navI"></i>
-                        </div>
-                    </a>
-                </li>
-            {% endif %}
+            {% endif  %}
+            <li>
+                <a href="{{ path('user.profile.edit') }}" title="Editer le profil">
+                    <div class="navIcon">
+                        <i class="fa fa-user fa-3x navI"></i>
+                    </div>
+                </a>
+            </li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li>
                     <a href="/logout" title="Déconnexion">
@@ -73,15 +66,6 @@
 
 {% block body %}
     <div class="admin index page-wrap">
-        {% if app.session.flashbag.peekAll|length > 0 %}
-            {% for type, messages in app.session.flashbag.all %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ type ? type : '' }}">
-                        {{ message|trans({}, domain|default('messages')) }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        {% endif %}
         {% block main %}
         {% endblock %}
     </div>

@@ -9,6 +9,7 @@ use AppBundle\Models\Realisation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class RealisationController extends Controller
 {
@@ -20,6 +21,15 @@ class RealisationController extends Controller
     public function listAction(Request $request)
     {
         $realisations = $this->get('app.realisation.repository')->findAll();
+
+        $user = $this->getUser();
+        foreach ($realisations as $key => $realisation) {
+            if (
+                false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
+            ) {
+                unset($realisations[$key]);
+            }
+        }
 
         return $this->render(
             'AppBundle:Admin:Realisation/list.html.twig',
@@ -39,6 +49,13 @@ class RealisationController extends Controller
      */
     public function showAction(Request $request, Realisation $realisation)
     {
+        $user = $this->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à administrer cette réalisation');
+        }
+
         return $this->render(
             'AppBundle:Admin:Realisation/show.html.twig',
             [
@@ -54,6 +71,7 @@ class RealisationController extends Controller
      * @ParamConverter("realisation", class="AppBundle:Realisation")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function deleteAction(Request $request, Realisation $realisation)
@@ -72,6 +90,7 @@ class RealisationController extends Controller
      * @ParamConverter("campaign", class="AppBundle:Campaign")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \LogicException
      */
     public function createAction(Request $request, Campaign $campaign)
@@ -101,14 +120,6 @@ class RealisationController extends Controller
     }
 
     /**
-     * @param Request $request
-     */
-    public function updateAction(Request $request)
-    {
-        // todo
-    }
-
-    /**
      * @param Request     $request
      * @param Realisation $realisation
      *
@@ -118,6 +129,13 @@ class RealisationController extends Controller
      */
     public function downloadAction(Request $request, Realisation $realisation)
     {
+        $user = $this->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $realisation->getCampaign())
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à récupérer cette réalisation');
+        }
+
         return $this->file($realisation->getFilePath());
     }
 }
