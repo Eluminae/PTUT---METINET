@@ -10,24 +10,22 @@
             <div class="col-sm-12">
                 <div class="wc-admin-block">
                     <div class="wc-admin-row">
-                        <div class="row">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Nom de la campagne</th>
-                                    <th>Déposé à</th>
-                                    <th>Fichier</th>
-                                </tr>
-                                <tr>
-                                    <td>{{ realisation.name }}</td>
-                                    <td>
-                                        <a href="{{ path('public.campaign.show_result', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a>
-                                    </td>
-                                    <td>{{ realisation.leftAt }}</td>
-                                    <td><a href="{{ path('public.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
-                                </tr>
-                            </table>
-                        </div>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Nom de la campagne</th>
+                                <th>Déposé à</th>
+                                <th>Fichier</th>
+                            </tr>
+                            <tr>
+                                <td>{{ realisation.name }}</td>
+                                <td>
+                                    <a href="{{ path('public.campaign.show_result', {'campaign': realisation.campaign.id}) }}">{{ realisation.campaign.name }}</a>
+                                </td>
+                                <td>{{ realisation.leftAt }}</td>
+                                <td><a href="{{ path('public.realisation.download', {'realisation': realisation.id}) }}">Télécharger</a></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

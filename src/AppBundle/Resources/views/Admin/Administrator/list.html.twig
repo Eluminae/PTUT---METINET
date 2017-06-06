@@ -2,34 +2,34 @@
 
 {% block main %}
     <div class="wc-title-banner">
-        <h2>Les des administrateurs</h2>
+        <h2>Gestion des utilisateurs</h2>
     </div>
 
     <div class="wc-container">
         <div class="col-sm-12">
             <div class="wc-admin-block">
+                <div class="row no-margin">
+                    <p class="col-sm-12 wc-admin-subtitle">Gestion des admins</p>
+                </div>
                 <div class="wc-admin-row">
                     <div class="row">
                         <table class="table table-striped table-list-admininistrators">
                             <thead>
-                            <th>Id</th>
-                            <th>Nom</th>
                             <th>Prenom</th>
+                            <th>Nom</th>
                             <th>Email</th>
+                            <th>Action</th>
                             </thead>
                             <tbody>
                             {% for administrator in administrators %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('admin.administrator.show', {'administratorId': administrator.id}) }}">{{ administrator.id }}</a>
-                                    </td>
-                                    <td>{{ administrator.identity.lastName }}</td>
-                                    <td>{{ administrator.identity.firstName }}</td>
-                                    <td>{{ administrator.identity.email }}</td>
+                                <tr style="text-align: left;">
+                                    <td class="col-md-3">{{ administrator.identity.firstName }}</td>
+                                    <td class="col-md-3">{{ administrator.identity.lastName }}</td>
+                                    <td class="col-md-3">{{ administrator.identity.email }}</td>
 
-                                    <td>
+                                    <td class="col-md-3">
                                         <a href="{{ path('admin.administrator.delete', {'administratorId': administrator.id}) }}">
-                                            <button type="button" class="btn-admin-form btn-modify" name="button">
+                                            <button type="button" class="btn-admin-form btn-delete" name="button">
                                                 Supprimer
                                             </button>
                                         </a>
@@ -38,15 +38,18 @@
                             {% endfor %}
                             </tbody>
                         </table>
-                        <div class="">
-                            <a class="col-md-4" href="{{ path('admin.juror.list') }}">
+                        <div>
+                            <a class="col-md-3" href="{{ path('admin.user.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Tous</button>
+                            </a>
+                            <a class="col-md-3" href="{{ path('admin.juror.list') }}">
                                 <button type="button" class="btn-admin-form btn-modify">Jurés</button>
                             </a>
-                            <a class="col-md-4" href="{{ path('admin.administrator.list') }}">
+                            <a class="col-md-3" href="{{ path('admin.administrator.list') }}">
                                 <button type="button" class="btn-admin-form btn-modify">Administrateurs</button>
                             </a>
-                            <a class="col-md-4" href="{{ path('admin.campaign_administrator.list') }}">
-                                <button type="button" class="btn-admin-form btn-modify">Administrateurs de campaigne
+                            <a class="col-md-3" href="{{ path('admin.campaign_administrator.list') }}">
+                                <button type="button" class="btn-admin-form btn-modify">Administrateurs de campagne
                                 </button>
                             </a>
                         </div>
