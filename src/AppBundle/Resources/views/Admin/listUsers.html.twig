@@ -19,13 +19,6 @@
                                     <td>Prénom</td>
                                     <td>Rôle</td>
                                     <td>Action</td>
-                                    <td>
-                                        <a href="{{ path('admin.admins.invite') }}">
-                                            <button type="button" class="btn-admin-form btn-add" name="button">
-                                                Inviter un utilisateur
-                                            </button>
-                                        </a>
-                                    </td>
                                 </tr>
                             </thead>
                             {% for user in users %}
@@ -47,6 +40,11 @@
                                 </tr>
                             {% endfor %}
                         </table>
+                        <a href="{{ path('admin.admins.invite') }}">
+                            <button type="button" class="btn-admin-form btn-add" name="button">
+                                Inviter un utilisateur
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
