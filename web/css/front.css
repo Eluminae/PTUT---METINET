@@ -408,3 +408,15 @@
 #candidate-fields-list{
 	padding-left: 0;
 }
+
+.formLogin .flex {
+  display: flex;
+}
+
+.formLogin .flex > * {
+  align-self: center;
+}
+
+.formLogin label {
+  width: 30%;
+}

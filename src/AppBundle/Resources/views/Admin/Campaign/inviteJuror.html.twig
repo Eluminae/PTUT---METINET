@@ -10,8 +10,12 @@
             <div class="wc-admin-block">
                  <div class="formLogin">
                      {{ form_start(form) }}
-                        {{ form_errors(form.email) }}
-                        {{ form_widget(form.email, {'attr': {'placeholder' : 'Mail', 'class': 'inputLogin'}}) }}
+
+                     {{ form_errors(form.email) }}
+                        <div class="flex">
+                            {{ form_label(form.email, 'E-mail') }}
+                            {{ form_widget(form.email, {'attr': {'placeholder' : 'E-mail', 'class': 'inputLogin'}}) }}
+                        </div>
 
                         <button type="submit" class="btnLogin">Inviter</button>
                      {{ form_end(form) }}

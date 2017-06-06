@@ -12,18 +12,33 @@
                         {{ form_errors(form)}}
 
                         {{ form_errors(form.firstName)}}
+                        <div class="flex">
+                        {{ form_label(form.firstName, 'Prénom') }}
                         {{ form_widget(form.firstName, {'attr': {'class': 'inputLogin', 'placeholder': "Prénom"}}) }}
+                        </div>
 
                         {{ form_errors(form.lastName)}}
-                        {{ form_widget(form.lastName, {'attr': {'class': 'inputLogin', 'placeholder': "Nom"}}) }}
+                        <div class="flex">
+                            {{ form_label(form.lastName, 'Nom') }}
+                            {{ form_widget(form.lastName, {'attr': {'class': 'inputLogin', 'placeholder': "Nom"}}) }}
+                        </div>
 
                         {{ form_errors(form.officialGroup)}}
-                        {{ form_widget(form.officialGroup, {'attr': {'class': 'inputLogin', 'placeholder': "Entité de ratachement"}}) }}
+                        <div class="flex">
+                            {{ form_label(form.officialGroup, 'Entité de rattachement') }}
+                            {{ form_widget(form.officialGroup, {'attr': {'class': 'inputLogin', 'placeholder': "Entité de ratachement"}}) }}
+                        </div>
 
 
                         {{ form_errors(form.password.first)}}
-                        {{ form_widget(form.password.first, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe"}}) }}
-                        {{ form_widget(form.password.second, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe repété"}}) }}
+                        <div class="flex">
+                            {{ form_label(form.password.first, 'Mot de passe') }}
+                            {{ form_widget(form.password.first, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe"}}) }}
+                        </div>
+                        <div class="flex">
+                            {{ form_label(form.password.second, 'Répéter') }}
+                            {{ form_widget(form.password.second, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe repété"}}) }}
+                        </div>
 
                         <button type="submit" class="btnLogin">Editer</button>
 
