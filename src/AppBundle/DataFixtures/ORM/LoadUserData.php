@@ -5,7 +5,6 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Models\Administrator;
 use AppBundle\Models\Campaign;
 use AppBundle\Models\CampaignAdministrator;
-use AppBundle\Models\Candidate;
 use AppBundle\Models\Juror;
 use AppBundle\Models\Identity;
 use AppBundle\Models\Mark;
@@ -13,6 +12,7 @@ use AppBundle\Models\Notation;
 use AppBundle\Models\Realisation;
 use AppBundle\Models\UtcDate;
 use AppBundle\Services\UuidGenerator;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -115,6 +115,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
                 for ($w = 0, $wMax = random_int(1, 15); $w < $wMax; $w++) {
                     $realisation = $this->createRealisation($campaign);
+                    $realisation->setFileName('real.png');
                     $manager->persist($realisation);
                 }
 
@@ -132,22 +133,24 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
                 $campaign->approveCampaign();
 
-
+                $jurorCollection = new ArrayCollection();
 
                 for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
-                    $manager->persist($this->createJurorWithCampaign($campaign));
+                    $juror = $this->createJurorWithCampaign($campaign);
+                    $jurorCollection->set($z, $juror);
+                    $manager->persist($juror);
                 }
 
                 for ($w = 0, $wMax = random_int(1, 15); $w < $wMax; $w++) {
                     $realisation = $this->createRealisation($campaign);
-                    // create mark
-                    $this->createMark($campaign, $jur)
-                    $manager->
+                    $realisation->setFileName('real.png');
+                    $this->createMark(
+                        $campaign,
+                        $this->pickAJuror($jurorCollection),
+                        $realisation
+                    );
                     $manager->persist($realisation);
                 }
-
-
-                // @todo CREATE MARKS !!!
 
                 $campaign->publishResults();
 
@@ -223,14 +226,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         return $role;
     }
 
-    private function createCandidate()
-    {
-        return new Candidate(
-            $this->uuidGenerator->generateUuid(),
-            $this->createIdentity()
-        );
-    }
-
     /**
      * @return Identity
      */
@@ -273,7 +268,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             ),
             $this->fakerGenerator->realText(50),
             $this->fakerGenerator->realText(250),
-            $this->uuidGenerator->generateUuid(),
+            'real.png',
             $identity,
             $notation,
             $publicResults
@@ -286,12 +281,12 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     {
         $candidates = [];
         for ($i = 0, $iMax = random_int(1, 5); $i < $iMax; $i++) {
-            $candidates[] = $this->createCandidate();
+            $candidates[] = $this->createIdentity();
         }
 
         return new Realisation(
             $this->uuidGenerator->generateUuid(),
-            $this->getDateTimeBeforeClosing($campaign->getEndDate()->getDate()),
+            $this->getDateTimeBeforeOrAfterClosing($campaign->getEndDate()->getDate()),
             $this->fakerGenerator->realText(50),
             $campaign,
             $candidates
@@ -317,7 +312,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         );
     }
 
-    private function createMark(Campaign $campaign, Identity $jurorIdentity, Realisation $realisation) {
+    private function createMark(Campaign $campaign, Identity $jurorIdentity, Realisation $realisation)
+    {
         $notation = $campaign->getNotation();
 
         if ($notation === Notation::RANKING) {
@@ -328,7 +324,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
         return new Mark(
             $this->uuidGenerator->generateUuid(),
-            $this->getDateTimeBeforeOfAfterClosing($campaign->getEndDate()->getDate(), false),
+            $this->getDateTimeBeforeOrAfterClosing($campaign->getEndDate()->getDate(), false),
             $value,
             $jurorIdentity,
             $realisation
@@ -362,14 +358,28 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         return $dates;
     }
 
-    private function getDateTimeBeforeOfAfterClosing(\DateTimeImmutable $dateTimeBeforeClosing, bool $before = true)
-    {
+    private function getDateTimeBeforeOrAfterClosing(
+        \DateTimeImmutable $dateTimeBeforeOrAfterClosing,
+        bool $before = true
+    ) {
         $oneDayInterval = new \DateInterval('P1D');
 
         if ($before) {
-            return $dateTimeBeforeClosing->sub($oneDayInterval);
+            $dateTime = $dateTimeBeforeOrAfterClosing->sub($oneDayInterval);
+        } else {
+            $dateTime = $dateTimeBeforeOrAfterClosing->add($oneDayInterval);
         }
 
-        return $dateTimeBeforeClosing->add($oneDayInterval);
+        return new UtcDate(
+            $this->uuidGenerator->generateUuid(),
+            $dateTime
+        );
     }
+
+    private function pickAJuror(ArrayCollection $jurorCollection)
+    {
+        return $jurorCollection->get(random_int(0, $jurorCollection->count() - 1))->getIdentity();
+    }
+
+//    @todo create marks !
 }
