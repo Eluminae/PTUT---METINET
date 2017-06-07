@@ -101,7 +101,7 @@ class Campaign
         $this->status = self::ACCEPTED;
     }
 
-    public function isResultsPublic()
+    public function isPublicResults()
     {
         return $this->publicResults;
     }

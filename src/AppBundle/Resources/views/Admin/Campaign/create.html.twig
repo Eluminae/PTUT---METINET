@@ -11,36 +11,45 @@
             <div class="formLogin" style="text-align: left;padding-left: 4px;">
 
                 {{ form_start(campaignCreationForm, {'action': path('admin.campaign.create') }) }}
+                    {{ form_errors(campaignCreationForm) }}
 
-                        {{ form_label(campaignCreationForm.name) }}
-                        {{ form_widget(campaignCreationForm.name, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Nom'}}) }}
+                    {{ form_errors(campaignCreationForm.name) }}
+                    {{ form_label(campaignCreationForm.name, 'Nom') }}
+                    {{ form_widget(campaignCreationForm.name, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Nom'}}) }}
 
-                        {{ form_label(campaignCreationForm.publicResults, 'Les résultats setont-ils public ?') }}
-                        {{ form_widget(campaignCreationForm.publicResults, {'attr': {'class': 'wc-admin-inputForm'}}) }}
+                    {{ form_errors(campaignCreationForm.publicResults) }}
+                    {{ form_label(campaignCreationForm.publicResults, 'Les résultats seront-ils public ?') }}
+                    {{ form_widget(campaignCreationForm.publicResults, {'attr': {'class': 'wc-admin-inputForm'}}) }}
 
-                        {{ form_label(campaignCreationForm.description) }}
-                        {{ form_widget(campaignCreationForm.description, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'description'}}) }}
+                    {{ form_errors(campaignCreationForm.description) }}
+                    {{ form_label(campaignCreationForm.description) }}
+                    {{ form_widget(campaignCreationForm.description, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'description'}}) }}
 
-                        {{ form_label(campaignCreationForm.notation.markType) }}
+                    <div class="mark-type-switcher">
+                        {{ form_errors(campaignCreationForm.notation.markType) }}
+                        {{ form_label(campaignCreationForm.notation.markType, 'Type de notation') }}
                         {{ form_widget(campaignCreationForm.notation.markType, {'attr': {'class': 'wc-admin-inputForm'}}) }}
 
-                        {{ form_label(campaignCreationForm.notation.markTypeNumber) }}
-                        {{ form_widget(campaignCreationForm.notation.markTypeNumber, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Notation sur combien ?'}}) }}
+                        <div class="mark-type-number">
+                            {{ form_errors(campaignCreationForm.notation.markTypeNumber) }}
+                            {{ form_label(campaignCreationForm.notation.markTypeNumber, 'Echelle de notation') }}
+                            {{ form_widget(campaignCreationForm.notation.markTypeNumber, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'Notation sur combien ?'}}) }}
+                        </div>
+                    </div>
 
-                        {{ form_label(campaignCreationForm.image) }}
-                        {{ form_widget(campaignCreationForm.image, {'attr': {'class': 'wc-admin-inputForm'}}) }}
+                    {{ form_errors(campaignCreationForm.image) }}
+                    {{ form_label(campaignCreationForm.image, 'Image') }}
+                    {{ form_widget(campaignCreationForm.image, {'attr': {'class': 'wc-admin-inputForm'}}) }}
 
-                        {{ form_label(campaignCreationForm.beginningDate) }}
-                        {{ form_widget(campaignCreationForm.beginningDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'beginningDate'}}) }}
+                    {{ form_errors(campaignCreationForm.beginningDate) }}
+                    {{ form_label(campaignCreationForm.beginningDate, 'Date de début') }}
+                    {{ form_widget(campaignCreationForm.beginningDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'beginningDate'}}) }}
 
-                        {{ form_errors(campaignCreationForm.endDate) }}
-                        {{ form_label(campaignCreationForm.endDate) }}
-                        {{ form_widget(campaignCreationForm.endDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'endDate'}}) }}
+                    {{ form_errors(campaignCreationForm.endDate) }}
+                    {{ form_label(campaignCreationForm.endDate, 'Date de fin') }}
+                    {{ form_widget(campaignCreationForm.endDate, {'attr': {'class': 'wc-admin-inputForm', 'placeholder': 'endDate'}}) }}
 
-
-                    {{ form_widget(campaignCreationForm.submit, {'attr': {'class': 'btnLogin', 'value': 'valider'}}) }}
-
-
+                    <button type="submit" class="btnLogin">Créer</button>
                 {{ form_end(campaignCreationForm) }}
             </div>
            </div>
@@ -48,4 +57,8 @@
 
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/notationTypeSwitcher.js') }}"></script>
 {% endblock %}

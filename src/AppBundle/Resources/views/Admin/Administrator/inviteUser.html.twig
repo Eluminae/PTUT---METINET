@@ -8,10 +8,16 @@
             <div class="formLogin">
             {{ form_start(form) }}
                 {{ form_errors(form.email) }}
-                {{ form_widget(form.email, {'attr': {'class': 'inputLogin', 'placeholder': "Email"}}) }}
+                <div class="flex">
+                    {{ form_label(form.email, 'E-mail') }}
+                    {{ form_widget(form.email, {'attr': {'class': 'inputLogin', 'placeholder': "E-mail"}}) }}
+                </div>
 
                 {{ form_errors(form.role) }}
-                {{ form_widget(form.role, {'attr': {'class': 'inputLogin', 'placeholder': "Role"}}) }}
+                <div class="flex">
+                    {{ form_label(form.role, 'Type d\'utilisateur') }}
+                    {{ form_widget(form.role, {'attr': {'class': 'inputLogin'}}) }}
+                </div>
 
                 <button type="submit" class="btnLogin">Inviter</button>
             {{ form_end(form) }}

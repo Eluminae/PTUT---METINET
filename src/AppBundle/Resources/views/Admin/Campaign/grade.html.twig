@@ -20,7 +20,7 @@
                             {% elseif notation.markType is constant('RANKING', notation) %}
                                 <div class="ranking-block" draggable="true">
                                     {{ form_label(realisation.value) }}
-                                    {{ form_widget(realisation.value) }}
+                                    {{ form_widget(realisation.value, {'attr': {'hidden': true}}) }}
                                 </div>
                             {% endif %}
                         {% endfor %}

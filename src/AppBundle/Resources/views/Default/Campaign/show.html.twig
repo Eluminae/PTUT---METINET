@@ -9,29 +9,45 @@
             <div class="wc-container">
                 <div class="col-sm-12">
                     <div class="wc-admin-block">
-                        <div class="wc-admin-row">
-                            <div>
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <td>Nom de la campagne</td>
-                                            <td>Description</td>
-                                            <td>Début</td>
-                                            <td>Fin</td>
-                                            <td>Créateur</td>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>{{ campaign.name }}</td>
-                                        <td>{{ campaign.description }}</td>
-                                        <td>{{ campaign.beginningDate }}</td>
-                                        <td>{{ campaign.endDate }}</td>
-                                        <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
-                                    </tr>
-                                </table>
+                        <div class="campaignIndividual">
+                            <img src="{{ asset(campaign.imagePath) }}"/>
+                            <table class="table table-striped" style="margin-bottom: 5px;">
+                                <thead>
+                                <tr>
+                                    <td>Début</td>
+                                    <td>Fin</td>
+                                    <td>Créateur</td>
+                                </tr>
+                                </thead>
+                                <tr>
+                                    <td>{{ campaign.beginningDate | date('d/m/y') }}</td>
+                                    <td>{{ campaign.endDate | date('d/m/y')}}</td>
+                                    <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                </tr>
+                            </table>
+                            <div class="campaignIndividualDiv">
+                                <h4 class="campaignIndividualLabel">Nom de la campagne : </h4>
+                                <p>{{ campaign.name }}</p>
+                            </div>
+                            <div class="campaignIndividualDiv">
+                                <h4 class="campaignIndividualLabel">Description : </h4>
+                                <p>{{ campaign.description }}</p>
+                            </div>
+                            <div class="campaignIndividualDiv">
+                                <h4 class="campaignIndividualLabel">Détails : </h4>
+                                <p>
+                                    {% if campaign.publishResults %}
+                                        Les résultats de la campagne seront publiés sur le site.
+                                    {% else %}
+                                        Les résultats de la campagne ne seront pas publiés sur le site. Le résultat de votre participation vous sera communiqué par e-mail.
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="campaignIndividualBtn">
                                 <a href="{{ path('public.realisation.register', {'campaign': campaign.id}) }}"
-                                   class="btn-admin-form btn-modify">Déposer une réalisation</a>
-                                <a href="{{ path('public.campaign.list') }}" class="btn-admin-form btn-modify">Retour liste</a>
+                                   class="btn-admin-form btnLogin">Déposer une réalisation</a>
+                                <a href="{{ path('public.campaign.list') }}" class="btn-admin-form btnLogin">Retour
+                                    liste</a>
                             </div>
                         </div>
                     </div>

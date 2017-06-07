@@ -9,6 +9,10 @@
         <default key="_controller">AppBundle:Default:home</default>
     </route>
 
+    <route id="public.about" path="/about">
+        <default key="_controller">AppBundle:Default:about</default>
+    </route>
+
     <!-- Invitation system -->
     <route id="admin.admins.invite" path="/admin/users/invite">
         <default key="_controller">AppBundle:Register:createInvitationForAdmins</default>

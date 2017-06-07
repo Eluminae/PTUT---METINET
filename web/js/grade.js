@@ -1,25 +1,25 @@
 function prepareInputField() {
-	var inputs = $('.ranking-block input');
+    var inputs = $('.ranking-block input');
 
-	inputs.each(function(index, value) {
-		$(this).val(inputs.size()-index);
-	});
+    inputs.each(function(index, value) {
+        $(this).val(inputs.size()-index);
+    });
 }
 
 $.event.props.push('dataTransfer');
 
 $( document ).ready(function() {
-	prepareInputField();
+    prepareInputField();
 
-	var i, $this;
+    var i, $this;
 
     $('.ranking-block').on({
-    	// on commence le drag
+        // on commence le drag
         dragstart: function(e) {
-        	$this = $(this);
-        	i = $this.index();
-        	$(this).css('opacity', '0.5');
- 
+            $this = $(this);
+            i = $this.index();
+            $(this).css('opacity', '0.5');
+
             // on garde le texte en mémoire
             e.dataTransfer.setData('html', $this.html());
         },

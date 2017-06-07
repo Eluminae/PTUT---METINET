@@ -12,17 +12,15 @@
                     <div class="col-sm-4">
                         <div class="wc-admin-block">
                             <p class="wc-admin-subtitle">Campagnes</p>
-
                             <a href="{{ path('admin.campaign.create') }}">
                                     <button type="button" class="btn-admin-form btn-add" name="button">Ajouter</button>
                             </a>
                             <div class="wc-admin-row">
                                 {% for campaign in campaigns %}
-
                                     <a href="{{ path('admin.campaign.show', {'campaign': campaign.id}) }}"><p class="wc-admin-p">{{ campaign.name}}</p></a>
                                 {% endfor %}
                             </div>
-                            <a href="{{ path('admin.campaign.list') }}"><p class="wc-admin-seeAll">Tout voir</p></a>
+                            <a href="{{ path('admin.campaign.list') }}"><p class="wc-admin-seeAll">Voir plus</p></a>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -33,7 +31,7 @@
                                     <a href="{{ path('admin.realisation.show', {'realisation': realisation.id}) }}"><p class="wc-admin-p">{{ realisation.name}}</p></a>
                                 {% endfor %}
                             </div>
-                            <a href="{{ path('admin.realisation.list') }}"><p class="wc-admin-seeAll">Tout voir</p></a>
+                            <a href="{{ path('admin.realisation.list') }}"><p class="wc-admin-seeAll">Voir plus</p></a>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -45,7 +43,7 @@
                                     <p class="wc-admin-p">{{ user.identity.lastName }} {{ user.identity.firstName }}</p>
                                 {% endfor %}
                             </div>
-                            <a href="{{ path('admin.user.list') }}"><p class="wc-admin-seeAll">Tout voir</p></a>
+                            <a href="{{ path('admin.user.list') }}"><p class="wc-admin-seeAll">Voir plus</p></a>
                         </div>
                     </div>
                 </div>

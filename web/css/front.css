@@ -1,8 +1,8 @@
 /* ---------- INDEX.HTML ---------- */
 .index {
 	z-index: 1;
-	position: relative;
-	margin-bottom: 94px;
+	/*position: relative;*/
+	/*margin-bottom: 94px;*/
 }
 
 .home {
@@ -13,10 +13,11 @@
 
 .page-wrap {
 	text-align: center;
-	background: url('../img/background.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	min-height: calc(100vh - 94px);
+	background: url('../img/background.jpg') no-repeat center fixed;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  	background-size: cover;
+
+	min-height: 100vh;
 	/*height: 100vh;*/
 }
 
@@ -128,12 +129,49 @@
 	background-color: #f36b21;
 	border-bottom: 2px solid #c56f40;
 }
+.btnLogin:hover, .btnLogin:focus{
+	color: white;
+	text-decoration: none;
+}
 
 .formLogin {
 	width: 500px;
 	margin: 0 auto;
 	background: white;
 }
+.campaignIndividual {
+	width: 800px;
+	margin: 0 auto;
+	background: white;
+	padding: 5px;
+	text-align: left;
+}
+
+.campaignIndividual > img {
+	display: block;
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}
+
+.campaignIndividualBtn {
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+	margin: 10px;
+	text-align: center;
+
+}
+.campaignIndividualDiv{
+	background: #eee;
+	margin-bottom: 5px;
+	padding: 1px 10px;
+}
+
+.campaignIndividualLabel{
+	color: darkgrey;
+}
+
 
 /* ---------- COMPETITIONS.HTML ---------- */
 
@@ -384,7 +422,7 @@
 	width: 100%;
 	/*margin: 0 10%;*/
 	background: rgba(255, 255, 255, 0.3);
-	min-height: 80vh;
+	height: 100vh;
 	padding: 10px;
 }
 
@@ -407,4 +445,24 @@
 
 #candidate-fields-list{
 	padding-left: 0;
+}
+
+.about-container {
+	padding: 15px !important;
+}
+.formLogin .flex {
+  display: flex;
+}
+
+.formLogin .flex > * {
+  align-self: center;
+}
+
+.formLogin .flex > input:disabled {
+  background-color: #DDD;
+}
+
+.formLogin .flex > label {
+  width: 30%;
+  color: #999;
 }

@@ -4,32 +4,46 @@
         <h2>Editer mon profil</h2>
     </div>
     <div class="wc-container">
-        <div class="col-sm-12">
-            <div class="wc-admin-block">
-                <div class="formLogin">
-                   {{ app.user.identity.email }}
-                    {{ form_start(form) }}
-                        {{ form_errors(form)}}
-
-                        {{ form_errors(form.firstName)}}
-                        {{ form_widget(form.firstName, {'attr': {'class': 'inputLogin', 'placeholder': "Prénom"}}) }}
-
-                        {{ form_errors(form.lastName)}}
-                        {{ form_widget(form.lastName, {'attr': {'class': 'inputLogin', 'placeholder': "Nom"}}) }}
-
-                        {{ form_errors(form.officialGroup)}}
-                        {{ form_widget(form.officialGroup, {'attr': {'class': 'inputLogin', 'placeholder': "Entité de ratachement"}}) }}
-
-
-                        {{ form_errors(form.password.first)}}
-                        {{ form_widget(form.password.first, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe"}}) }}
-                        {{ form_widget(form.password.second, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe repété"}}) }}
-
-                        <button type="submit" class="btnLogin">Editer</button>
-
-                    {{ form_end(form) }}
-                </div>
+        <div class="formLogin">
+            <div class="flex">
+                <label>Email</label>
+                <input type="text" class="inputLogin" disabled value="{{ app.user.identity.email }}" />
             </div>
+            {{ form_start(form) }}
+                {{ form_errors(form)}}
+
+                {{ form_errors(form.firstName)}}
+                <div class="flex">
+                    {{ form_label(form.firstName, 'Prénom') }}
+                    {{ form_widget(form.firstName, {'attr': {'class': 'inputLogin', 'placeholder': "Prénom"}}) }}
+                </div>
+
+                {{ form_errors(form.lastName)}}
+                <div class="flex">
+                    {{ form_label(form.lastName, 'Nom') }}
+                    {{ form_widget(form.lastName, {'attr': {'class': 'inputLogin', 'placeholder': "Nom"}}) }}
+                </div>
+
+                {{ form_errors(form.officialGroup)}}
+                <div class="flex">
+                    {{ form_label(form.officialGroup, 'Entité de rattachement') }}
+                    {{ form_widget(form.officialGroup, {'attr': {'class': 'inputLogin', 'placeholder': "Entité de ratachement"}}) }}
+                </div>
+
+
+                {{ form_errors(form.password.first)}}
+                <div class="flex">
+                    {{ form_label(form.password.first, 'Mot de passe') }}
+                    {{ form_widget(form.password.first, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe"}}) }}
+                </div>
+                <div class="flex">
+                    {{ form_label(form.password.second, 'Répéter') }}
+                    {{ form_widget(form.password.second, {'attr': {'class': 'inputLogin', 'placeholder': "Mot de passe repété"}}) }}
+                </div>
+
+                <button type="submit" class="btnLogin">Editer</button>
+
+            {{ form_end(form) }}
         </div>
-    </div>
+    </div
 {% endblock %}

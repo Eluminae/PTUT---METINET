@@ -202,22 +202,22 @@ class CampaignController extends Controller
             return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
-        $markDtoTable = ['realisations' => []];
+        $markDtos = ['realisations' => []];
         foreach ($realisations as $realisation) {
             $markDtoTemp = new RealisationMarkDto();
             $markDtoTemp->realisation = $realisation;
             $markDtoTemp->identity = $identity;
 
-            $markDtoTable['realisations'][$realisation->getId()] = $markDtoTemp;
+            $markDtos['realisations'][$realisation->getId()] = $markDtoTemp;
         }
 
-        $form = $this->createForm(GradeCampaignType::class, $markDtoTable);
+        $form = $this->createForm(GradeCampaignType::class, $markDtos);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $reaMarkDtoTable = $form->getData()['realisations'];
+            $reaMarkDtos = $form->getData()['realisations'];
 
             $em = $this->getDoctrine()->getManager();
-            foreach ($reaMarkDtoTable as $key => $reaMarkDto) {
+            foreach ($reaMarkDtos as $reaMarkDto) {
                 $mark = $this
                     ->get('app.realisation_mark.factory')
                     ->create($reaMarkDto)
@@ -245,7 +245,7 @@ class CampaignController extends Controller
                 $marks += count($this->get('app.mark.repository')->findByRealisation($realisation));
             }
             if ($marks === count($realisations) * count($campaign->getJurors())) {
-                if ($campaign->isResultsPublic()) {
+                if ($campaign->isPublicResults()) {
                     $campaign->publishResults();
                 } else {
                     $campaign->close();
@@ -276,8 +276,11 @@ class CampaignController extends Controller
      */
     public function downloadAction(Request $request, Campaign $campaign)
     {
-        if (false === $campaign->isActive()) {
-            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
+        $user = $this->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaign)
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à administrer cette campagne');
         }
 
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);

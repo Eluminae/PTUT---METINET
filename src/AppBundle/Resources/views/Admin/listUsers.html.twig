@@ -12,38 +12,6 @@
                 </div>
                 <div class="wc-admin-row">
                     <div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr style="text-align: left;">
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
-                                    <th>E-mail</th>
-                                    <th>Rôle</th>
-
-                                </tr>
-                            </thead>
-                            {% for user in users %}
-                                <tr style="text-align: left;">
-                                    <td class="col-md-3">
-                                        {{ user.identity.lastname }}
-                                    </td>
-                                    <td class="col-md-3">
-                                        {{ user.identity.firstname }}
-                                    </td>
-                                    <td class="col-md-3">
-                                        {{ user.identity.email }}
-                                    </td>
-                                    <td class="col-md-3">
-                                        {{ user.roles.0 }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                        <a href="{{ path('admin.admins.invite') }}">
-                            <button type="button" class="btn-admin-form btn-add" name="button" style="margin-bottom: 10px;">
-                                Inviter un utilisateur
-                            </button>
-                        </a>
                         <div class="row">
                             <a class="col-md-3" href="{{ path('admin.user.list') }}">
                                 <button type="button" class="btn-admin-form btn-modify">Tous</button>
@@ -59,6 +27,37 @@
                                 </button>
                             </a>
                         </div>
+                        <a href="{{ path('admin.admins.invite') }}">
+                            <button type="button" class="btn-admin-form btn-add" name="button" style="margin-bottom: 10px;">
+                                Inviter un utilisateur
+                            </button>
+                        </a>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr style="text-align: left;">
+                                    <th>Prénom</th>
+                                    <th>Nom</th>
+                                    <th>E-mail</th>
+                                    <th>Rôle</th>
+                                </tr>
+                            </thead>
+                            {% for user in users %}
+                                <tr style="text-align: left;">
+                                    <td class="col-md-3">
+                                        {{ user.identity.firstname }}
+                                    </td>
+                                    <td class="col-md-3">
+                                        {{ user.identity.lastname }}
+                                    </td>
+                                    <td class="col-md-3">
+                                        {{ user.identity.email }}
+                                    </td>
+                                    <td class="col-md-3">
+                                        {{ user.roles.0 }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
                     </div>
                 </div>
             </div>

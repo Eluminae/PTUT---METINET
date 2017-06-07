@@ -3,7 +3,7 @@
 {% block body %}
     <div class="admin page-wrap">
         <div class="wc-title-banner">
-            <h2>Campaign</h2>
+            <h2>Campagne</h2>
         </div>
         <div class="wc-container">
             <div class="col-sm-12">
@@ -18,14 +18,20 @@
                                         <td>Début</td>
                                         <td>Fin</td>
                                         <td>Créateur</td>
+                                        <td>Juge(s)</td>
                                     </tr>
                                 </thead>
                                 <tr>
                                     <td>{{ campaign.name }}</td>
                                     <td>{{ campaign.description }}</td>
-                                    <td>{{ campaign.beginningDate }}</td>
-                                    <td>{{ campaign.endDate }}</td>
+                                    <td>{{ campaign.beginningDate | date('d/m/y') }}</td>
+                                    <td>{{ campaign.endDate | date('d/m/y') }}</td>
                                     <td>{{ campaign.creator.firstName }} {{ campaign.creator.lastName }}</td>
+                                    <td>
+                                        {% for juror in jurors %}
+                                            <p>{{ juror.identity.firstName ~ ' ' ~ juror.identity.lastName }}</p>
+                                        {% endfor %}
+                                    </td>
                                 </tr>
                             </table>
                             {% if is_granted('ROLE_CAMPAIGN_ADMIN') %}

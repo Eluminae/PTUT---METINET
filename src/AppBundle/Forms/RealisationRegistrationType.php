@@ -5,7 +5,6 @@ namespace AppBundle\Forms;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
@@ -42,6 +41,9 @@ class RealisationRegistrationType extends AbstractType
             ->add('name', TextType::class)
             ->add('candidates', CollectionType::class, [
                 'entry_type' => IdentityRegistrationType::class,
+                'entry_options' => array(
+                    'label' => false,
+                ),
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
@@ -52,7 +54,6 @@ class RealisationRegistrationType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('submit', SubmitType::class)
         ;
     }
 }
