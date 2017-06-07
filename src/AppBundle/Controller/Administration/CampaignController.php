@@ -276,8 +276,11 @@ class CampaignController extends Controller
      */
     public function downloadAction(Request $request, Campaign $campaign)
     {
-        if (false === $campaign->isActive()) {
-            throw $this->createNotFoundException('Cette campagne n\'existe pas.');
+        $user = $this->getUser();
+        if (
+            false === $this->get('app.user.authorization_checker')->isAllowedToShowCampaign($user, $campaign)
+        ) {
+            throw new AccessDeniedException('Vous n\'êtes pas authorisé à administrer cette campagne');
         }
 
         $realisations = $this->get('app.realisation.repository')->findByCampaign($campaign);
