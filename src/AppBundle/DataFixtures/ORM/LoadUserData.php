@@ -98,8 +98,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     $manager->persist($this->createJurorWithCampaign($campaign));
                 }
 
-                // for each campaign -> Assign a random number of juror
-
                 $manager->persist($campaign);
             }
 
@@ -109,7 +107,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     $campaignAdministrator->getIdentity(),
                     $this->createNotation(),
                     true,
-                    self::DT_FUTUR
+                    self::DT_ACTIVE
                 );
 
                 for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
@@ -117,6 +115,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                 }
 
                 $campaign->approveCampaign();
+
+                // @todo CREATE MARKS !!!
 
                 $manager->persist($campaign);
             }
@@ -129,6 +129,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     true,
                     self::DT_PAST
                 );
+
+                $campaign->publishResults();
 
                 for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
                     $manager->persist($this->createJurorWithCampaign($campaign));
@@ -151,10 +153,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                 );
 
                 for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
-                    /** @var Juror $juror */
-                    $juror = $this->createUser('Juror');
-                    $juror->addCampaign($campaign);
+                    $manager->persist($this->createJurorWithCampaign($campaign));
                 }
+
+                $campaign->close();
 
                 // @todo CREATE MARKS !!!
 
