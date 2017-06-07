@@ -245,7 +245,7 @@ class CampaignController extends Controller
                 $marks += count($this->get('app.mark.repository')->findByRealisation($realisation));
             }
             if ($marks === count($realisations) * count($campaign->getJurors())) {
-                if ($campaign->isResultsPublic()) {
+                if ($campaign->isPublicResults()) {
                     $campaign->publishResults();
                 } else {
                     $campaign->close();
