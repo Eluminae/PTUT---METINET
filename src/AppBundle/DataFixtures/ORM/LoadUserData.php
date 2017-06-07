@@ -144,11 +144,13 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                 for ($w = 0, $wMax = random_int(1, 15); $w < $wMax; $w++) {
                     $realisation = $this->createRealisation($campaign);
                     $realisation->setFileName('real.png');
-                    $this->createMark(
+                    $realisation->updateAverageMark($this->getMarkForType($campaign));
+                    $mark = $this->createMark(
                         $campaign,
                         $this->pickAJuror($jurorCollection),
                         $realisation
                     );
+                    $manager->persist($mark);
                     $manager->persist($realisation);
                 }
 
@@ -314,21 +316,22 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
     private function createMark(Campaign $campaign, Identity $jurorIdentity, Realisation $realisation)
     {
-        $notation = $campaign->getNotation();
-
-        if ($notation === Notation::RANKING) {
-            $value = random_int(1, 100);
-        } else {
-            $value = random_int(0, $notation->getMarkTypeNumber());
-        }
-
         return new Mark(
             $this->uuidGenerator->generateUuid(),
             $this->getDateTimeBeforeOrAfterClosing($campaign->getEndDate()->getDate(), false),
-            $value,
+            $this->getMarkForType($campaign),
             $jurorIdentity,
             $realisation
         );
+    }
+
+    private function getMarkForType(Campaign $campaign)
+    {
+        if ($campaign->getNotation()->getMarkType() === Notation::RANKING) {
+            return random_int(0, 100);
+        }
+
+        return random_int(0, $campaign->getNotation()->getMarkTypeNumber());
     }
 
     private function getRandomDateTimePeriod(string $state)
