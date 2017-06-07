@@ -41,6 +41,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
     /**
      * LoadUserData constructor.
+     *
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
      */
@@ -60,7 +61,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     }
 
     /**
-     * Load data fixtures with the passed EntityManager
+     * Load data fixtures with the passed EntityManager.
      *
      * @param ObjectManager $manager
      */
@@ -71,19 +72,19 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $this->password = $this->container->get('app.services.user_registerer')->encodePasswordFromPlain('admin');
 
         // Create User Administrator
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $administrator = $this->createUser('Administrator');
 
             $manager->persist($administrator);
         }
 
         // Create User CampaignAdmin
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             /** @var CampaignAdministrator $campaignAdministrator */
             $campaignAdministrator = $this->createUser('CampaignAdministrator');
 
             // Create Campaigns TO BE REVIEWED for the user with Jurors
-            for ($y = 0, $yMax = random_int(1, 4); $y < $yMax; $y++) {
+            for ($y = 0, $yMax = random_int(1, 4); $y < $yMax; ++$y) {
                 $campaign = $this->createCampaign(
                     $campaignAdministrator->getIdentity(),
                     $this->createNotation(),
@@ -91,7 +92,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     self::DT_ACTIVE
                 );
 
-                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
+                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; ++$z) {
                     $manager->persist($this->createJurorWithCampaign($campaign));
                 }
 
@@ -99,7 +100,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             }
 
             // Create Campaigns ACCEPTED for the user with Realisations
-            for ($y = 0, $yMax = random_int(1, 4); $y < $yMax; $y++) {
+            for ($y = 0, $yMax = random_int(1, 4); $y < $yMax; ++$y) {
                 $campaign = $this->createCampaign(
                     $campaignAdministrator->getIdentity(),
                     $this->createNotation(),
@@ -107,13 +108,13 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     self::DT_ACTIVE
                 );
 
-                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
+                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; ++$z) {
                     $manager->persist($this->createJurorWithCampaign($campaign));
                 }
 
                 $campaign->approveCampaign();
 
-                for ($w = 0, $wMax = random_int(1, 15); $w < $wMax; $w++) {
+                for ($w = 0, $wMax = random_int(1, 15); $w < $wMax; ++$w) {
                     $realisation = $this->createRealisation($campaign);
                     $realisation->setFileName('real.png');
                     $manager->persist($realisation);
@@ -123,7 +124,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             }
 
             // Create Campaigns RESULTS_PUBLISHED for the user with Realisations and Marks
-            for ($y = 0, $yMax = random_int(1, 4); $y < $yMax; $y++) {
+            for ($y = 0, $yMax = random_int(1, 4); $y < $yMax; ++$y) {
                 $campaign = $this->createCampaign(
                     $campaignAdministrator->getIdentity(),
                     $this->createNotation(),
@@ -135,13 +136,13 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
                 $jurorCollection = new ArrayCollection();
 
-                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
+                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; ++$z) {
                     $juror = $this->createJurorWithCampaign($campaign);
                     $jurorCollection->set($z, $juror);
                     $manager->persist($juror);
                 }
 
-                for ($w = 0, $wMax = random_int(1, 15); $w < $wMax; $w++) {
+                for ($w = 0, $wMax = random_int(1, 15); $w < $wMax; ++$w) {
                     $realisation = $this->createRealisation($campaign);
                     $realisation->setFileName('real.png');
                     $realisation->updateAverageMark($this->getMarkForType($campaign));
@@ -160,7 +161,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             }
 
             // Create Campaigns CLOSED for the user
-            for ($y = 0, $yMax = random_int(1, 5); $y < $yMax; $y++) {
+            for ($y = 0, $yMax = random_int(1, 5); $y < $yMax; ++$y) {
                 $campaign = $this->createCampaign(
                     $campaignAdministrator->getIdentity(),
                     $this->createNotation(),
@@ -168,7 +169,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     self::DT_PAST
                 );
 
-                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; $z++) {
+                for ($z = 0, $zMax = random_int(1, 5); $z < $zMax; ++$z) {
                     $manager->persist($this->createJurorWithCampaign($campaign));
                 }
 
@@ -282,7 +283,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     private function createRealisation(Campaign $campaign)
     {
         $candidates = [];
-        for ($i = 0, $iMax = random_int(1, 5); $i < $iMax; $i++) {
+        for ($i = 0, $iMax = random_int(1, 5); $i < $iMax; ++$i) {
             $candidates[] = $this->createIdentity();
         }
 

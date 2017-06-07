@@ -2,8 +2,6 @@
 
 namespace AppBundle\Models;
 
-
-
 class Realisation
 {
     const FILE_PATH = 'realisationFiles';
