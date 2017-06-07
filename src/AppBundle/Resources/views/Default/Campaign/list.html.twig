@@ -6,8 +6,8 @@
         <div class="wc-title-banner">
             <h2>Compétitions</h2>
         </div>
-        {% for campaign in campaigns %}
-            <div class="col-sm-3">
+        <div class="finished-campaigns">
+            {% for campaign in campaigns %}
                 <div class="wc-project-competitionPage">
                     <a class="wc-img-competitionPage"
                        href="{{ path('public.campaign.show', { 'campaign': campaign.id }) }}">
@@ -15,12 +15,12 @@
                     </a>
                     <div class="wc-info-competitionPage">
                         <a href="{{ path('public.campaign.show', { 'campaign': campaign.id }) }}"><p
-                                    class="wc-name-competitionPage">{{ campaign.name }}</p></a>
+                           class="wc-name-competitionPage">{{ campaign.name }}</p></a>
                         <p class="wc-category-competitionPage">{{ campaign.description }}</p>
                         <p class="wc-desc-competitionPage">{{ campaign.endDate | date('d/m/y') }}</p>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -180,8 +180,8 @@
 }
 
 .wc-project-competitionPage {
-	width: 80%;
-	margin: 10%;
+	width: 20em;
+	margin: 5em;
 	background: white;
 
 }
@@ -465,4 +465,10 @@
 .formLogin .flex > label {
   width: 30%;
   color: #999;
+}
+
+.finished-campaigns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
