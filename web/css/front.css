@@ -1,7 +1,7 @@
 /* ---------- INDEX.HTML ---------- */
 .index {
 	z-index: 1;
-	position: relative;
+	/*position: relative;*/
 	/*margin-bottom: 94px;*/
 }
 
@@ -13,10 +13,11 @@
 
 .page-wrap {
 	text-align: center;
-	background: url('../img/background.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	min-height: calc(100vh - 94px);
+	background: url('../img/background.jpg') no-repeat center fixed;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  	background-size: cover;
+
+	min-height: 100vh;
 	/*height: 100vh;*/
 }
 
@@ -384,7 +385,7 @@
 	width: 100%;
 	/*margin: 0 10%;*/
 	background: rgba(255, 255, 255, 0.3);
-	min-height: 80vh;
+	height: 100vh;
 	padding: 10px;
 }
 
