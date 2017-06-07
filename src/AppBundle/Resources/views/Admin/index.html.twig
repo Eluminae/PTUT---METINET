@@ -12,13 +12,11 @@
                     <div class="col-sm-4">
                         <div class="wc-admin-block">
                             <p class="wc-admin-subtitle">Campagnes</p>
-
                             <a href="{{ path('admin.campaign.create') }}">
                                     <button type="button" class="btn-admin-form btn-add" name="button">Ajouter</button>
                             </a>
                             <div class="wc-admin-row">
                                 {% for campaign in campaigns %}
-
                                     <a href="{{ path('admin.campaign.show', {'campaign': campaign.id}) }}"><p class="wc-admin-p">{{ campaign.name}}</p></a>
                                 {% endfor %}
                             </div>
