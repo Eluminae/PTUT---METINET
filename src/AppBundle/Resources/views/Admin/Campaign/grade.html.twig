@@ -11,7 +11,6 @@
                 <div class="wc-admin-block">
                     <div class="wc-admin-row">
                         {% for realisation in form.realisations %}
-
                             {% if notation.markType is constant('NUMBER', notation) %}
                                 <div>
                                     {{ form_label(realisation.value) }}
@@ -25,7 +24,7 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    {{ form_widget(form.submit, {'attr': {'class': 'btn-admin-form', 'value': 'valider'}}) }}
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn-admin-form'}}) }}
                 </div>
                 {{ form_end(form) }}
             </div>
