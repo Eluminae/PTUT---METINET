@@ -128,12 +128,49 @@
 	background-color: #f36b21;
 	border-bottom: 2px solid #c56f40;
 }
+.btnLogin:hover, .btnLogin:focus{
+	color: white;
+	text-decoration: none;
+}
 
 .formLogin {
 	width: 500px;
 	margin: 0 auto;
 	background: white;
 }
+.campaignIndividual {
+	width: 800px;
+	margin: 0 auto;
+	background: white;
+	padding: 5px;
+	text-align: left;
+}
+
+.campaignIndividual > img {
+	display: block;
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}
+
+.campaignIndividualBtn {
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+	margin: 10px;
+	text-align: center;
+
+}
+.campaignIndividualDiv{
+	background: #eee;
+	margin-bottom: 5px;
+	padding: 1px 10px;
+}
+
+.campaignIndividualLabel{
+	color: darkgrey;
+}
+
 
 /* ---------- COMPETITIONS.HTML ---------- */
 
