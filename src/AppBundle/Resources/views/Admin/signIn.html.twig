@@ -9,9 +9,12 @@
             <div class="wc-container">
                 <div class="col-sm-12">
                     <div class="wc-admin-block">
-                        {{ error }}
-
                         <form action="{{ path('public.login') }}" method="post" class="formLogin">
+                            {% if error != null%}
+                                <div class="alert alert-danger">
+                                    Les données de connexion ne sont pas valides
+                                </div>
+                            {% endif %}
                             <input type="text" class="inputLogin" placeholder="Adresse E-mail" id="username"
                                    name="_username"
                                    value="{{ lastUsername }}"/>
