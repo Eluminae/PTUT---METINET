@@ -166,18 +166,6 @@ body {
     display: block;
 }
 
-.wc-footer, .page-wrap:after {
-    /* .push must be the same height as footer */
-    height: 96px;
-    margin-top: -96px;
-    top: auto;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: fixed;
-    z-index: -1;
-}
-
 ul > li {
     list-style: none;
 }
