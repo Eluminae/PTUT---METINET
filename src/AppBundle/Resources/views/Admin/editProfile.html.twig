@@ -7,14 +7,17 @@
         <div class="col-sm-12">
             <div class="wc-admin-block">
                 <div class="formLogin">
-                   {{ app.user.identity.email }}
+                    <div class="flex">
+                        <label>Email</label>
+                        <input type="text" class="inputLogin" disabled value="{{ app.user.identity.email }}" />
+                    </div>
                     {{ form_start(form) }}
                         {{ form_errors(form)}}
 
                         {{ form_errors(form.firstName)}}
                         <div class="flex">
-                        {{ form_label(form.firstName, 'Prénom') }}
-                        {{ form_widget(form.firstName, {'attr': {'class': 'inputLogin', 'placeholder': "Prénom"}}) }}
+                            {{ form_label(form.firstName, 'Prénom') }}
+                            {{ form_widget(form.firstName, {'attr': {'class': 'inputLogin', 'placeholder': "Prénom"}}) }}
                         </div>
 
                         {{ form_errors(form.lastName)}}
