@@ -202,22 +202,22 @@ class CampaignController extends Controller
             return $this->redirectToRoute('admin.campaign.show', ['campaign' => $campaign->getId()], 302);
         }
 
-        $markDtoTable = ['realisations' => []];
+        $markDtos = ['realisations' => []];
         foreach ($realisations as $realisation) {
             $markDtoTemp = new RealisationMarkDto();
             $markDtoTemp->realisation = $realisation;
             $markDtoTemp->identity = $identity;
 
-            $markDtoTable['realisations'][$realisation->getId()] = $markDtoTemp;
+            $markDtos['realisations'][$realisation->getId()] = $markDtoTemp;
         }
 
-        $form = $this->createForm(GradeCampaignType::class, $markDtoTable);
+        $form = $this->createForm(GradeCampaignType::class, $markDtos);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $reaMarkDtoTable = $form->getData()['realisations'];
+            $reaMarkDtos = $form->getData()['realisations'];
 
             $em = $this->getDoctrine()->getManager();
-            foreach ($reaMarkDtoTable as $key => $reaMarkDto) {
+            foreach ($reaMarkDtos as $reaMarkDto) {
                 $mark = $this
                     ->get('app.realisation_mark.factory')
                     ->create($reaMarkDto)
