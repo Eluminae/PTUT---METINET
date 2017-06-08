@@ -13,11 +13,11 @@
 
 ### Camapign Administrator
 - campaign-admin@admin.fr
-- campaignadmin
+- admin
 
 ### Juror
 - juror@admin.fr
-- juror
+- admin
 
 ## Docker install commands
 
