@@ -180,7 +180,7 @@
 }
 
 .wc-project-competitionPage {
-	width: 20em;
+	width: 16em;
 	margin: 5em;
 	background: white;
 
@@ -467,8 +467,9 @@
   color: #999;
 }
 
-.finished-campaigns {
+.campaign-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: flex-start;
 }
