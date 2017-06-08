@@ -351,9 +351,9 @@
 }
 
 .wc-admin-p {
-	height: 50px;
+	padding: 5px;
 	border-bottom: 1px solid silver;
-	line-height: 48px;
+	line-height: 30px;
 }
 
 .wc-admin-subtitle {
