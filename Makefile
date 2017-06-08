@@ -14,7 +14,7 @@ composer-add-github-token:
 	docker exec -it $(php_container_name) composer config --global github-oauth.github.com $(token)
 
 composer-install:
-	docker exec -it $(php_container_name) composer install
+	docker exec -i $(php_container_name) composer install
 
 composer-update:
 	docker exec -it $(php_container_name) composer update

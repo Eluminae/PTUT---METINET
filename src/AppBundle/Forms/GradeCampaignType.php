@@ -15,7 +15,7 @@ class GradeCampaignType extends AbstractType
             ->add('realisations', CollectionType::class, array(
                 'entry_type' => MarkType::class,
             ))
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, ['label' => 'Valider les notes'])
         ;
     }
 }

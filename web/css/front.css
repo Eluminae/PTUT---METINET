@@ -180,8 +180,8 @@
 }
 
 .wc-project-competitionPage {
-	width: 80%;
-	margin: 10%;
+	width: 16em;
+	margin: 5em;
 	background: white;
 
 }
@@ -351,9 +351,9 @@
 }
 
 .wc-admin-p {
-	height: 50px;
+	padding: 5px;
 	border-bottom: 1px solid silver;
-	line-height: 48px;
+	line-height: 30px;
 }
 
 .wc-admin-subtitle {
@@ -465,4 +465,11 @@
 .formLogin .flex > label {
   width: 30%;
   color: #999;
+}
+
+.campaign-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
 }
