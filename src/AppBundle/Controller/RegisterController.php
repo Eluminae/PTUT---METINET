@@ -144,14 +144,23 @@ class RegisterController extends Controller
             $email = $form->getData()->getEmail();
             $identityRepository = $this->getDoctrine()->getRepository('AppBundle:Identity');
             $invitationRepository = $this->getDoctrine()->getRepository('AppBundle:Invitation');
+            $em = $this->getDoctrine()->getManager();
 
-            if ($identityRepository->findOneByEmail($email)) {
-                // todo : Do a route which redirect to the right dashboard (/admin, /juror, etc)
-                $this->addFlash('error', 'Cette adresse e-mail est déjà utilisé');
-                $this->redirectToRoute('public.homepage');
+            if ($identity = $identityRepository->findOneByEmail($email)) {
+                if ('ROLE_JUROR' === $invitation->getRole()) {
+                    $juror = $this->get('app.juror.repository')->findOneByIdentity($identity);
+                    if ($juror) {
+                        $this->addFlash('success', 'Cette campagne est assigné à ce juré');
+                        $juror->addCampaign($campaign);
+                        $em->flush();
+                    }
+                } else {
+                    $this->addFlash('error', 'Cette adresse e-mail est déjà utilisé');
+                }
+
+                return $form;
             }
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);
             $em->flush();
 
